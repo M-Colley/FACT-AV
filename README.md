@@ -1,8 +1,8 @@
 # FACT-AV: Introducing the Framework for Calibration of Trust in Automated Vehicles
 
-![Confusion Matrix](./confusion_matrix.jpg | width=100)
+![Confusion Matrix](./confusion_matrix.jpg =250x250)
 
-![Label distribution](./all.labels.jpg | width=100)
+![Label distribution](./all.labels.jpg =250x250)
 
 This is the current source-code for the multilayer perceptron experiment.
 
