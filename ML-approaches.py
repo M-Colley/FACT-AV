@@ -3,33 +3,22 @@
 from pickle import TRUE
 import numpy as np
 import seaborn as sns
-import matplotlib.pyplot as plt
-from matplotlib import colormaps
+from math import sqrt
 
-from mpl_toolkits.mplot3d import Axes3D
 import sympy as sympy
 import pandas as pd
-import itertools
 import shap
 
+import matplotlib.pyplot as plt
 
-import sklearn
-from sklearn import metrics
+
 from sklearn.cluster import DBSCAN
 
 from sklearn.preprocessing import StandardScaler
 
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.neighbors import kneighbors_graph
-
-import time
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
-
-
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-from math import sqrt
 
 
 from sklearn.model_selection import train_test_split
@@ -37,7 +26,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
 from sklearn.inspection import permutation_importance
-from sklearn.metrics import make_scorer, mean_absolute_error
+from sklearn.metrics import make_scorer, mean_absolute_error, mean_squared_error
+
 
 # read data
 
@@ -56,10 +46,30 @@ df.dropna(inplace=True)
 #print(df.head())
 
 
+# Rename the 'SCENARIO' column to 'Scenario'
+df.rename(columns={'SCENARIO': 'Scenario'}, inplace=True)
+df.rename(columns={'INTRODUCTION': 'Introduction'}, inplace=True)
+
+# Scenario
+# cross-country, highway, city, and walking speed zone
+df['Scenario'] = df['Scenario'].replace({
+    "Spielstrasse": "walking speed zone",
+    "Ueberland": "cross-country",
+    "3Spurig": "highway",
+    "NeueMitte": "city"
+})
+
+# Introduction
+df['Introduction'] = df['Introduction'].replace({
+    "ambigious": "ambiguous",
+    "boasting": "boasting"
+})
+
+
 # Gender
 df['Gender'] = df['Gender'].replace({
-    "A1": "F",
-    "A2": "M",
+    "A1": "Female",
+    "A2": "Male",
     "A3": "non-binary",
     "A4": "Prefer not to tell"
 })
@@ -117,8 +127,8 @@ x_values_flat = x_values.ravel()
 x_values = df['mIoU'].dropna().to_numpy()
 x_values = x_values.reshape(-1, 1)
 
-# New dimension based on the 'SCENARIO' column
-x_scenario = df['SCENARIO'].dropna().to_numpy()
+# New dimension based on the 'Scenario' column
+x_scenario = df['Scenario'].dropna().to_numpy()
 x_scenario = x_scenario.reshape(-1, 1)
 
 # # New dimension based on the 'GENDER' column
@@ -149,8 +159,8 @@ x_drivingfreq = x_drivingfreq.reshape(-1, 1)
 x_distance = df['Distance'].dropna().to_numpy()
 x_distance = x_distance.reshape(-1, 1)
 
-# New dimension based on the 'INTRODUCTION' column
-x_intro = df['INTRODUCTION'].dropna().to_numpy()
+# New dimension based on the 'Introduction' column
+x_intro = df['Introduction'].dropna().to_numpy()
 x_intro = x_intro.reshape(-1, 1)
 
 # Adding new dimension to x_values
@@ -229,7 +239,7 @@ for k, col in zip(unique_labels, colors):
 plt.title(f"Estimated number of clusters from DBSCAN: {n_clusters_}")
 #plt.show()
 
-#plt.savefig(f'dbscan_clusters_{n_clusters_}.png', bbox_inches='tight', pad_inches=0)
+plt.savefig(f'dbscan_clusters_{n_clusters_}.png', bbox_inches='tight', pad_inches=0)
 
 
 # knn_graph = kneighbors_graph(features, 20, include_self=False)
@@ -275,20 +285,17 @@ plt.title(f"Estimated number of clusters from DBSCAN: {n_clusters_}")
 df_original_catboost = df.copy(deep=True)
 df_original_xgboost = df.copy(deep=True)
 df_original = df.copy(deep=True)
+#df_tabpfn = df.copy(deep=True)
 
 
-# Identify numerical and categorical features
-#numerical_features = ['mIoU', 'License']
-#categorical_features = ['SCENARIO', 'INTRODUCTION'] #, 'Gender', 'Age', 'Education', 'Job', 'DrivingFrequency', 'Distance']
-
-print(df.columns)
+#print(df.columns)
 
 # Initialize OneHotEncoder
 encoder = OneHotEncoder(sparse_output=False, drop='first')
 
 # Separate numerical and categorical features
 numerical_features = ['mIoU', 'License', 'Age']
-categorical_features = ['SCENARIO', 'INTRODUCTION', 'Gender',  'Education', 'Job', 'DrivingFrequency', 'Distance']
+categorical_features = ['Scenario', 'Introduction', 'Gender',  'Education', 'Job', 'DrivingFrequency', 'Distance']
 
 # Fit and transform categorical data
 categorical_data = df[categorical_features]
@@ -301,8 +308,8 @@ one_hot_df = pd.DataFrame(one_hot_encoded, columns=encoder.get_feature_names_out
 df.drop(categorical_features, axis=1, inplace=True)
 df = pd.concat([df, one_hot_df], axis=1)
 
-print("Data types after one-hot encoding:")
-print(df.dtypes)
+#print("Data types after one-hot encoding:")
+#print(df.dtypes)
 
 # Prepare Features and Target variable
 #X = df.drop(['trust'], axis=1)
@@ -322,36 +329,19 @@ mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = sqrt(mse)
 
-
-print(f"Mean Absolute Error: {mae}")
+print("#######################################")
+print(f"Mean Absolute Error RandomForestRegressor: {mae}")
 print(f"Mean Squared Error: {mse}")
 print(f"Root Mean Squared Error: {rmse}")
 
 
-#feature_names = [f"feature {i}" for i in range(X_train.shape[1])]
 feature_names = X_train.columns.tolist()
-#forest = RandomForestClassifier(random_state=0)
-#forest.fit(x_values, y_values)
 
 
-#start_time = time.time()
+
 importances = forest.feature_importances_
 std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
 
-
-# TODO permutation, look at in thermal comfot or VEmotion
-#permutation_importances = forest.
-
-#elapsed_time = time.time() - start_time
-
-#print(f"Elapsed time to compute the importances: {elapsed_time:.3f} seconds")
-
-# fig, ax = plt.subplots()
-# forest_importances.plot.bar(yerr=std, ax=ax)
-# ax.set_title("Feature importances using MDI")
-# ax.set_ylabel("Mean decrease in impurity")
-# fig.tight_layout()
-# plt.show()
 
 
 
@@ -362,14 +352,48 @@ sns.set(style="whitegrid")
 forest_importances = pd.Series(importances, index=feature_names)
 
 
+
 # Create the plot
 plt.figure(figsize=(12, 8))  # Optional: Set figure size
-sns.barplot(x=forest_importances.index, y=forest_importances.values, yerr=std, palette="muted")
+# Create the bar plot and capture the axes object
+ax = sns.barplot(x=forest_importances.index, y=forest_importances.values,
+                 hue=forest_importances.index, palette="muted", legend=False)
+
+#sns.plot_errorbars("se")
+# Add error bars using Matplotlib
+# Note: We use ax.errorbar, and adjust the positions so the error bars align with the bars
+error_positions = range(len(forest_importances.values))  # positions for the error bars
+plt.errorbar(x=error_positions, y=forest_importances.values, yerr=std, fmt='none', c='black', capsize=0)
+
+# Iterate over the patches
+for i, p in enumerate(ax.patches):
+    # Annotate each bar with its height
+    ax.annotate(f"{p.get_height():.2f}", 
+                (p.get_x() + p.get_width() / 2., p.get_height() + 0.019),
+                ha='center', va='baseline')
+
+
+# THIS IS THE MATPLOTLIB version
+# Create the bar plot
+#bars = plt.bar(forest_importances.index, forest_importances.values, yerr=std, color='skyblue', capsize=0)
+
+# Iterate over the bars to add annotations
+#for bar in bars:
+#    # Annotate each bar with its height
+#    height = bar.get_height()
+#    plt.annotate(f"{height:.2f}", 
+#                 (bar.get_x() + bar.get_width() / 2., height+0.019),
+#                 ha='center', va='baseline', xytext=(0, 3),
+#                 textcoords='offset points')
+
+
+#sns.barplot(x=forest_importances.index, y=forest_importances.values, yerr=std, palette="muted")
 
 # Add labels and title
 plt.xlabel('')
 plt.ylabel('Importance')
 plt.title('Feature Importances using Mean Decrease in Impurity')
+plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
 
 # Add Metrics to the plot
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
@@ -410,8 +434,8 @@ mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = sqrt(mse)
 
-
-print(f"Mean Absolute Error: {mae}")
+print("#######################################")
+print(f"Mean Absolute Error Permutation: {mae}")
 print(f"Mean Squared Error: {mse}")
 print(f"Root Mean Squared Error: {rmse}")
 
@@ -434,12 +458,13 @@ importance_data = importance_data.sort_values(by='Importance', ascending=False)
 plt.figure(figsize=(12, 8))  # Set figure size
 
 # Create barplot using Seaborn
-sns.barplot(x='Importance', y='Feature', data=importance_data, palette="muted", xerr=importance_data['Std'])
+sns.barplot(x='Importance', y='Feature', data=importance_data, hue=forest_importances.index, palette="muted", legend=False) #, xerr=importance_data['Std'])
 
 # Add labels and title
 plt.xlabel('Importance')
 plt.ylabel('Features')
 plt.title('Permutation Importances using Mean Decrease in Impurity')
+plt.xticks(rotation=45) 
 
 # Optional: Rotate x labels for better visibility
 plt.xticks(rotation=90)
@@ -475,7 +500,7 @@ plt.tight_layout()
 
 # Save the plot in high resolution
 plt.savefig('enhanced_shap_summary_plot.png', dpi=300, bbox_inches='tight')
-plt.show()  # Display the plot}
+#plt.show()  # Display the plot
 
 
 
@@ -492,13 +517,8 @@ plt.show()  # Display the plot}
 # try other version that can handle categorical data natively
 from catboost import CatBoostRegressor
 numerical_features = ['mIoU', 'License', 'Age']
-categorical_features = ['SCENARIO', 'INTRODUCTION', 'Gender', 'Education', 'Job', 'DrivingFrequency', 'Distance']
+categorical_features = ['Scenario', 'Introduction', 'Gender', 'Education', 'Job', 'DrivingFrequency', 'Distance']
 target_column = 'trust'
-
-
-
-
-
 
 
 
@@ -523,32 +543,54 @@ mse = mean_squared_error(y_test, y_pred)
 rmse = sqrt(mse)
 
 # Output the metrics
-print(f"Mean Absolute Error: {mae}")
+print("#######################################")
+print(f"Mean Absolute Error Catboost: {mae}")
 print(f"Mean Squared Error: {mse}")
 print(f"Root Mean Squared Error: {rmse}")
 
 # Get feature importances
 importances = model.get_feature_importance()
 
+
+
 # Map feature importances to feature names
 feature_names = X_train.columns.tolist()
 forest_importances = pd.Series(importances, index=feature_names)
+
 
 # Apply a Seaborn style
 sns.set(style="whitegrid")
 
 # Create the plot
-plt.figure(figsize=(12, 8))
-sns.barplot(x=forest_importances.index, y=forest_importances.values, palette="muted")
+plt.figure(figsize=(12, 8))  # Optional: Set figure size
+# Create the bar plot and capture the axes object
+ax = sns.barplot(x=forest_importances.index, y=forest_importances.values,
+                 hue=forest_importances.index, palette="muted", legend=False)
+
+#sns.plot_errorbars("se")
+# Add error bars using Matplotlib
+# Note: We use ax.errorbar, and adjust the positions so the error bars align with the bars
+#error_positions = range(len(forest_importances.values))  # positions for the error bars
+#plt.errorbar(x=error_positions, y=forest_importances.values, yerr=forest_importances.std, fmt='none', c='black', capsize=0)
+
+# Iterate over the patches
+for i, p in enumerate(ax.patches):
+    # Annotate each bar with its height
+    ax.annotate(f"{p.get_height():.2f}", 
+                (p.get_x() + p.get_width() / 2., p.get_height() + 0.019),
+                ha='center', va='baseline')
+
+
 
 # Add labels and title
 plt.xlabel('')
 plt.ylabel('Importance')
 plt.title('Feature Importances using catboost')
+plt.xticks(rotation=45) 
 
 # Add Metrics to the plot
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
-plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
+plt.text(0.75, 0.8, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
 # Optional: Rotate x labels for better visibility
 plt.xticks(rotation=90)
@@ -598,7 +640,8 @@ mse = mean_squared_error(y_test, y_pred)
 rmse = sqrt(mse)
 
 # Output the metrics
-print(f"Mean Absolute Error: {mae}")
+print("#######################################")
+print(f"Mean Absolute Error XGBoost: {mae}")
 print(f"Mean Squared Error: {mse}")
 print(f"Root Mean Squared Error: {rmse}")
 
@@ -615,12 +658,22 @@ sns.set(style="whitegrid")
 
 # Create the plot
 plt.figure(figsize=(12, 8))
-sns.barplot(x=forest_importances.index, y=forest_importances.values, palette="muted")
+
+ax = sns.barplot(x=forest_importances.index, y=forest_importances.values,
+                 hue=forest_importances.index, palette="muted", legend=False)
+
+# Iterate over the patches
+for i, p in enumerate(ax.patches):
+    # Annotate each bar with its height
+    ax.annotate(f"{p.get_height():.2f}", 
+                (p.get_x() + p.get_width() / 2., p.get_height()),
+                ha='center', va='baseline')
 
 # Add labels and title
 plt.xlabel('')
 plt.ylabel('Importance')
 plt.title('Feature Importances using XGBoost')
+plt.xticks(rotation=45) 
 
 # Add Metrics to the plot
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
@@ -634,3 +687,7 @@ sns.despine()
 # Show the plot
 plt.tight_layout()
 plt.savefig('feature_importance_xgboost.png', bbox_inches='tight', pad_inches=0)
+
+
+
+
