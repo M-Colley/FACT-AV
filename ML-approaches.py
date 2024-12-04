@@ -730,7 +730,7 @@ plt.savefig('feature_importance_lightgbm.png', bbox_inches='tight', pad_inches=0
 
 
 
-explainer = shap.TreeExplainer(model, allow_int=True)
+explainer = shap.TreeExplainer(model)
 explanation = explainer(X_test)
 
 shap_values = explanation.values
