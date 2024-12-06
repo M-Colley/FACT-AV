@@ -12,7 +12,6 @@ import pandas as pd
 import itertools
 import shap
 
-
 import sklearn
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
@@ -39,10 +38,18 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import make_scorer, mean_absolute_error
 
-# read data
+from pathlib import Path
 
+
+
+
+# Construct the folder path in an OS-agnostic way
+folder_path = Path("results") / "ML-Approaches"
+folder_path.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+# read data
 # Specify the file path
-file_path = "all_combined_prepared_with_demographics.xlsx"
+file_path = Path("data") / "all_combined_prepared_with_demographics.xlsx"
 
 # Specify the sheet name (optional)
 sheet_name = "Sheet1"
@@ -229,7 +236,13 @@ for k, col in zip(unique_labels, colors):
 plt.title(f"Estimated number of clusters from DBSCAN: {n_clusters_}")
 #plt.show()
 
-plt.savefig(f'dbscan_clusters_{n_clusters_}.png', bbox_inches='tight', pad_inches=0)
+
+
+
+
+
+file_path = folder_path / f'dbscan_clusters_{n_clusters_}.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 # knn_graph = kneighbors_graph(features, 20, include_self=False)
@@ -352,6 +365,33 @@ std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
 # fig.tight_layout()
 # plt.show()
 
+# Define the mapping of old labels to new labels
+label_replacements = {
+    'SCENARIO_NeueMitte': 'Scenario: City',
+    'SCENARIO_Ueberland': 'Scenario: Cross-Country',
+    'SCENARIO_Spielstrasse': 'Scenario: Walking Speed Zone',
+    'INTRODUCTION_boasting': 'Introduction: boasting',
+    'INTRODUCTION_ambiguous': 'Introduction: ambiguous',
+    'Gender_M': 'Gender: Male',
+    'Gender_non-binary': 'Gender: non-binary',
+    'Education_High School': 'Education: High School',
+    'Education_Vocational training': 'Education: Vocational training',
+    'Job_Jobseeker': 'Job: Jobseeker',
+    'Job_Other': 'Job: Other',
+    'Job_Self-employed': 'Job: Self-employed',
+    'Job_Student (college)': 'Job: Student (college)',
+    'License': 'Driving License (years)',
+    'DrivingFrequency_1-3 times a month': 'Driving Frequency: 1-3/month',
+    'DrivingFrequency_3-4 times a week': 'Driving Frequency: 3-4/week',
+    'DrivingFrequency_Daily': 'Driving Frequency: Daily',
+    'DrivingFrequency_less than 1 time a month': 'Driving Frequency: <1/month',
+    'DrivingFrequency_On working days': 'Driving Frequency: Working days',
+    'Distance_25.000 - 32.999km': 'Distance: 25.000 - 32.999km',
+    'Distance_7.000 - 14.999km': 'Distance: 7.000 - 14.999km',
+    'Distance_less than 7.000km': 'Distance: <7.000km',
+    'Distance_33.000 or more km': 'Distance: >=30.000km',
+}
+
 
 
 # Apply a Seaborn style
@@ -359,6 +399,8 @@ sns.set(style="whitegrid")
 
 # Prepare the data
 forest_importances = pd.Series(importances, index=feature_names)
+# Replace the labels using the mapping
+forest_importances.index = forest_importances.index.to_series().replace(label_replacements)
 
 
 # Create the plot
@@ -378,18 +420,17 @@ metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
 
-# Optional: Rotate x labels for better visibility
-plt.xticks(rotation=90)
+# Rotate and reduce font size of x labels
+plt.xticks(rotation=45, ha='right', fontsize=10)
+
+# Ensure labels do not overlap
+plt.tight_layout()  # Auto-adjust layout
+plt.subplots_adjust(bottom=0.2)
 
 sns.despine()
 
-# Show the plot
-plt.tight_layout()
-#plt.show()
-
-
-
-plt.savefig(f'feature_importance_random_classifier.png', bbox_inches='tight', pad_inches=0)
+file_path = folder_path / 'feature_importance_random_classifier.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -461,8 +502,12 @@ plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes,
 plt.tight_layout()  # Adjust the plot to ensure everything fits without overlapping
 # plt.show()  # Display the plot
 
-# Save the plot as a file
-plt.savefig('perm_importances_random_regressor.png', bbox_inches='tight', pad_inches=0)
+
+
+
+file_path = folder_path / 'perm_importances_random_regressor.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+
 
 
 
@@ -559,7 +604,9 @@ sns.despine()
 
 # Show the plot
 plt.tight_layout()
-plt.savefig('feature_importance_catboost.png', bbox_inches='tight', pad_inches=0)
+
+file_path = folder_path / 'feature_importance_catboost.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 print("AT EXPLAINER")
@@ -653,7 +700,9 @@ sns.despine()
 
 # Show the plot
 plt.tight_layout()
-plt.savefig('feature_importance_xgboost.png', bbox_inches='tight', pad_inches=0)
+
+file_path = folder_path / 'feature_importance_xgboost.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -724,7 +773,8 @@ sns.despine()
 
 # Show the plot
 plt.tight_layout()
-plt.savefig('feature_importance_lightgbm.png', bbox_inches='tight', pad_inches=0)
+file_path = folder_path / 'feature_importance_lightgbm.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -747,5 +797,5 @@ shap.plots.beeswarm(explanation, show = False)
 plt.tight_layout()
 
 # Save the plot in high resolution
-plt.savefig('enhanced_shap_summary_plot_lgboost.png', dpi=300, bbox_inches='tight')
-
+file_path = folder_path / 'enhanced_shap_summary_plot_lgboost.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)

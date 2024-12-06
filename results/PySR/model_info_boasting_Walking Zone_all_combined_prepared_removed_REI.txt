@@ -1,0 +1,30 @@
+SYMPY
+4.347772 - 0.128759*sin(x0)
+
+LATEX
+4.35 - \sin{\left(x_{0} \right)} 0.129
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.36$ & $1$ & $0.691$ & $0.0$ \\
+$y = \log{\left(x_{0} \right)}$ & $2$ & $0.689$ & $0.00238$ \\
+$y = e^{x_{0}^{0.0892}}$ & $4$ & $0.688$ & $0.000683$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.688$ & $0.00130$ \\
+$y = 4.35 - \sin{\left(x_{0} \right)} 0.129$ & $6$ & $0.682$ & $0.00837$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(0.903 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.677$ & $0.00698$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(1.02 x_{0} - \tan{\left(0.903 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.677$ & $0.000432$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \sin{\left(x_{0} \right)} - \tan{\left(0.903 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.676$ & $0.000699$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

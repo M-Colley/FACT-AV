@@ -1,0 +1,29 @@
+SYMPY
+sqrt(log((x0 + tan(0.6874103*x0))**4))
+
+LATEX
+\sqrt{\log{\left(\left(x_{0} + \tan{\left(0.687 x_{0} \right)}\right)^{4} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.16$ & $1$ & $0.931$ & $0.0$ \\
+$y = e^{x_{0}^{0.0816}}$ & $4$ & $0.930$ & $0.000259$ \\
+$y = 3.77 - x_{0} \left(-0.00505\right)$ & $5$ & $0.930$ & $6.78 \cdot 10^{-5}$ \\
+$y = x_{0}^{4} \cdot 2.77 \cdot 10^{-9} + 4.06$ & $6$ & $0.930$ & $3.49 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(x_{0}^{4} \cdot 2.77 \cdot 10^{-9} \right)} + 4.06 \end{dmath*} \end{minipage} & $7$ & $0.930$ & $1.10 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000218$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \tan{\left(0.687 x_{0} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.929$ & $0.000315$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

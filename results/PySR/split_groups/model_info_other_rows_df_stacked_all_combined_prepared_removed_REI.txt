@@ -1,0 +1,31 @@
+SYMPY
+x0**0.31170818
+
+LATEX
+x_{0}^{0.312}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.86$ & $1$ & $0.854$ & $0.0$ \\
+$y = x_{0}^{0.312}$ & $3$ & $0.835$ & $0.0109$ \\
+$y = 0.441 \sqrt{x_{0}}$ & $4$ & $0.832$ & $0.00450$ \\
+$y = 1.80 - x_{0} \left(-0.0269\right)$ & $5$ & $0.831$ & $0.000136$ \\
+$y = 2.83 - x_{0}^{2} \left(-0.000175\right)$ & $6$ & $0.831$ & $3.14 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.440 \sqrt{x_{0} + \cos^{2}{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.831$ & $1.02 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.442 \sqrt{x_{0} + \sin{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.830$ & $0.00160$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.189 x_{0} + \cos^{2}{\left(2.22 x_{0} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.828$ & $0.00293$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.194 x_{0} + \sin{\left(\left(x_{0} - 0.0467\right)^{2} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.826$ & $0.00153$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,30 @@
+SYMPY
+log(x0)
+
+LATEX
+\log{\left(x_{0} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.33$ & $1$ & $0.552$ & $0.0$ \\
+$y = \log{\left(x_{0} \right)}$ & $2$ & $0.546$ & $0.0105$ \\
+$y = \log{\left(x_{0} - 0.751 \right)}$ & $4$ & $0.546$ & $8.61 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.545$ & $0.00155$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $6$ & $0.544$ & $0.00138$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} + 2.23 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.540$ & $0.00822$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(\cos^{2}{\left(x_{0} \right)} + 4.09 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.536$ & $0.00673$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1.51}{\cos^{2}{\left(x_{0} \right)} - 0.646} \right)} \end{dmath*} \end{minipage} & $9$ & $0.535$ & $0.00185$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

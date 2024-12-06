@@ -1,0 +1,31 @@
+SYMPY
+3.9062958 + 0.006828614/sin(x0**3)
+
+LATEX
+3.91 + \frac{0.00683}{\sin{\left(x_{0}^{3} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.88$ & $1$ & $1.04$ & $0.0$ \\
+$y = x_{0}^{0.313}$ & $3$ & $1.04$ & $0.000279$ \\
+$y = \log{\left(x_{0} \right)}^{0.924}$ & $4$ & $1.04$ & $0.00147$ \\
+$y = 4.57 - \frac{52.5}{x_{0}}$ & $5$ & $1.04$ & $0.000309$ \\
+$y = \cos{\left(x_{0} \cdot 0.0804 \right)} + 2.98$ & $6$ & $1.04$ & $0.00165$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 + \frac{0.00683}{\sin{\left(x_{0}^{3} \right)}} \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00411$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.87 - \frac{0.0106}{\sin{\left(x_{0} \left(-0.0900\right) \right)}} \end{dmath*} \end{minipage} & $8$ & $1.03$ & $0.00378$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.89 - \frac{0.00958}{\sin{\left(\tan{\left(x_{0} \left(-0.0900\right) \right)} \right)}} \end{dmath*} \end{minipage} & $9$ & $1.03$ & $0.00111$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(- \frac{0.00959}{\sin{\left(\tan{\left(x_{0} \left(-0.0901\right) \right)} \right)}} \right)} + 3.89 \end{dmath*} \end{minipage} & $10$ & $1.03$ & $0.000253$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

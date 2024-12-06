@@ -1,0 +1,30 @@
+SYMPY
+log(x0 + 1/(cos(x0)**2 - 0.61817867))
+
+LATEX
+\log{\left(x_{0} + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.618} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.27$ & $1$ & $0.618$ & $0.0$ \\
+$y = x_{0}^{0.334}$ & $3$ & $0.615$ & $0.00275$ \\
+$y = \log{\left(x_{0} \right)}^{0.989}$ & $4$ & $0.613$ & $0.00203$ \\
+$y = x_{0}^{0.280} + 0.901$ & $5$ & $0.613$ & $1.20 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} - 0.905 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.612$ & $0.00107$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.618} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00476$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1}{\cos^{6}{\left(x_{0} \right)} - 0.233} \right)} \end{dmath*} \end{minipage} & $9$ & $0.608$ & $0.00275$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - 4.11 + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.633} \right)} \end{dmath*} \end{minipage} & $10$ & $0.606$ & $0.00182$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

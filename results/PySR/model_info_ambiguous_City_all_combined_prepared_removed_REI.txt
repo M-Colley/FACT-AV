@@ -1,0 +1,30 @@
+SYMPY
+4.5807343 - cos(cos(x0/0.031859834))
+
+LATEX
+4.58 - \cos{\left(\cos{\left(\frac{x_{0}}{0.0319} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.89$ & $1$ & $1.15$ & $0.0$ \\
+$y = x_{0}^{0.313}$ & $3$ & $1.15$ & $0.00203$ \\
+$y = \log{\left(x_{0} \right)} - 0.444$ & $4$ & $1.15$ & $0.000229$ \\
+$y = x_{0} \cdot 0.0128 - -2.91$ & $5$ & $1.15$ & $0.000134$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.81 - \cos^{2}{\left(\frac{x_{0}}{-23.2} \right)} \end{dmath*} \end{minipage} & $6$ & $1.15$ & $0.000716$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.58 - \cos{\left(\cos{\left(\frac{x_{0}}{0.0319} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $1.13$ & $0.0132$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.63 - \cos{\left(\cos{\left(\tan{\left(\frac{x_{0}}{5.24} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $1.13$ & $0.00387$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.63 - \cos{\left(\cos{\left(\tan{\left(\frac{0.0272 - x_{0}}{5.24} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $1.13$ & $0.000370$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,29 @@
+SYMPY
+3.90342722165647*(0.00430740446704549*tan(14.989502476678*x0) + 1)**(1/4)
+
+LATEX
+3.90 \sqrt[4]{0.00431 \tan{\left(15.0 x_{0} \right)} + 1}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.90$ & $1$ & $1.18$ & $0.0$ \\
+$y = e^{x_{0}^{0.0709}}$ & $4$ & $1.18$ & $0.000311$ \\
+$y = x_{0}^{0.198} + 1.53$ & $5$ & $1.18$ & $3.83 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.89 \sqrt[4]{0.00438 \tan{\left(x_{0} \right)} + 1} \end{dmath*} \end{minipage} & $6$ & $1.18$ & $0.000781$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0705}} \end{dmath*} \end{minipage} & $7$ & $1.18$ & $0.000705$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.90 \sqrt[4]{0.00431 \tan{\left(15.0 x_{0} \right)} + 1} \end{dmath*} \end{minipage} & $8$ & $1.17$ & $0.00271$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{0.0667} \right)}\right)^{0.0716}} \end{dmath*} \end{minipage} & $9$ & $1.17$ & $0.000934$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

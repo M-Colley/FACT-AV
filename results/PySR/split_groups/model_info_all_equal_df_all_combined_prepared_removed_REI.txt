@@ -1,0 +1,29 @@
+SYMPY
+x0*0.003675035 + 3.9135537
+
+LATEX
+x_{0} \cdot 0.00367 + 3.91
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.20$ & $1$ & $0.918$ & $0.0$ \\
+$y = e^{x_{0}^{0.0831}}$ & $4$ & $0.917$ & $5.82 \cdot 10^{-5}$ \\
+$y = x_{0} \cdot 0.00367 + 3.91$ & $5$ & $0.917$ & $0.000278$ \\
+$y = x_{0}^{2} \cdot 2.39 \cdot 10^{-5} + 4.05$ & $6$ & $0.917$ & $2.18 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \sin{\left(x_{0} \right)}\right) 0.00378 + 3.91 \end{dmath*} \end{minipage} & $8$ & $0.917$ & $2.11 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right) 0.00364 + 3.91 \end{dmath*} \end{minipage} & $9$ & $0.917$ & $0.000133$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.00379 \left(x_{0} + \tan{\left(\frac{x_{0}}{-1.22} \right)}\right) + 3.90 \end{dmath*} \end{minipage} & $10$ & $0.917$ & $0.000275$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

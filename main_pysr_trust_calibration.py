@@ -13,12 +13,16 @@ import warnings
 # Filter out Pandas warnings
 warnings.filterwarnings("ignore")
 
+from pathlib import Path
+
+results_path = Path("results") / "PySR"
+results_path.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+
 # read data
-
 # Specify the file path
-file_path = "all_combined_prepared.xlsx"
-file_path_removed_DEI = "all_combined_prepared_removed_REI.xlsx"
-
+file_path = Path("data") / "all_combined_prepared.xlsx"
+file_path_removed_DEI = Path("data") / "all_combined_prepared_removed_REI.xlsx"
 # Specify the sheet name (optional)
 sheet_name = "Sheet1"
 
@@ -80,7 +84,8 @@ def custom_function(df, intro, scenario, name_without_extension):
     print("")
 
     # Create or open a text file for writing
-    with open(f'model_info_{intro}_{scenario}_{name_without_extension}.txt', 'w') as f:
+    file_path = results_path / f'model_info_{intro}_{scenario}_{name_without_extension}.txt'
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -106,7 +111,8 @@ def custom_function(df, intro, scenario, name_without_extension):
     
     sns.despine()
     
-    plt.savefig(f'relationship_pysr_{intro}_{scenario}_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
+    file_path = results_path_more_predictors / f'relationship_pysr_{intro}_{scenario}_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 # List of file paths
 file_paths = [file_path, file_path_removed_DEI]
@@ -116,9 +122,9 @@ dfs = {}
 
 # Loop through the list of file paths to read each Excel file into a DataFrame
 for path in file_paths:
-    # Extract the name without the '.xlsx' extension
-    name_without_extension = path[:-5]
 
+    # Extract the name without the '.xlsx' extension using pathlib
+    name_without_extension = path.stem
 
     # Read the Excel file into a DataFrame
     df = pd.read_excel(path, sheet_name=sheet_name)
@@ -138,12 +144,6 @@ for path in file_paths:
     # Loop through all combinations and call your function
     for intro, scenario in all_combinations:
         custom_function(df, intro, scenario, name_without_extension)
-
-
-
-
-
-
 
 
 
@@ -173,22 +173,14 @@ for path in file_paths:
     print("#### y values ####")
     print(y_values[:5])
 
-    #print(x_values_flat[:1000])
-
     print("#######################################")
-
-
-
     # here, the magic happens
     model.fit(x_values, y_values)
-
-    #print(model)
 
 
     print("SYMPY")
     print(model.sympy())
 
-    print("")
     print("")
     print("")
     print("")
@@ -198,8 +190,6 @@ for path in file_paths:
     print("")
     print("")
     print("")
-    print("")
-
 
 
 
@@ -239,7 +229,5 @@ for path in file_paths:
     # Remove top and right spines for aesthetics
     sns.despine()
 
-    # Display the plot
-    #plt.show()
-
-    plt.savefig(f'relationship_pysr_all_data_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
+    file_path = results_path / f'relationship_pysr_all_data_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)

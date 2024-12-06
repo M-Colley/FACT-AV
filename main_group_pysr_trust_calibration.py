@@ -13,11 +13,19 @@ import warnings
 # Filter out Pandas warnings
 warnings.filterwarnings("ignore")
 
-# read data
+from pathlib import Path
 
+results_path_split_groups = Path("results") / "PySR" / "split_groups"
+results_path_split_groups.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+results_path_split_groups_personalized = Path("results") / "PySR" / "split_groups_personalized"
+results_path_split_groups_personalized.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+# read data
 # Specify the file path
-file_path = "all_combined_prepared.xlsx"
-file_path_removed_DEI = "all_combined_prepared_removed_REI.xlsx"
+file_path = Path("data") / "all_combined_prepared.xlsx"
+file_path_removed_DEI = Path("data") / "all_combined_prepared_removed_REI.xlsx"
+
 
 # Specify the sheet name (optional)
 sheet_name = "Sheet1"
@@ -58,8 +66,10 @@ dfs = {}
 # Loop through the list of file paths to read each Excel file into a DataFrame
 for path in file_paths:
     # Extract the name without the '.xlsx' extension
-    name_without_extension = path[:-5]
-
+    #name_without_extension = path[:-5]
+    
+    # Extract the name without the '.xlsx' extension using pathlib
+    name_without_extension = path.stem
 
 
     # Read the Excel file into a DataFrame
@@ -202,7 +212,8 @@ for path in file_paths:
     print("")
 
     # Create or open a text file for writing
-    with open(f'split_groups/model_info_other_rows_df_stacked_{name_without_extension}.txt', 'w') as f:
+    file_path = results_path_split_groups / f'model_info_other_rows_df_stacked_{name_without_extension}.txt'
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -231,10 +242,8 @@ for path in file_paths:
 
     sns.despine()
 
-    plt.savefig(f'split_groups/relationship_pysr_other_rows_df_stacked_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
-
-
-
+    file_path = results_path_split_groups / f'relationship_pysr_other_rows_df_stacked_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -265,7 +274,8 @@ for path in file_paths:
     print("")
 
     # Create or open a text file for writing
-    with open(f'split_groups/model_info_all_equal_df_{name_without_extension}.txt', 'w') as f:
+    file_path = results_path_split_groups / f'model_info_all_equal_df_{name_without_extension}.txt'
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -293,7 +303,8 @@ for path in file_paths:
 
     sns.despine()
 
-    plt.savefig(f'split_groups/relationship_pysr_all_equal_df_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
+    file_path = results_path_split_groups / f'relationship_pysr_all_equal_df_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -330,7 +341,8 @@ for path in file_paths:
     print("")
 
     # Create or open a text file for writing
-    with open(f'split_groups/model_info_other_rows_df_{name_without_extension}.txt', 'w') as f:
+    file_path = results_path_split_groups / f'model_info_other_rows_df_{name_without_extension}.txt'
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -345,11 +357,7 @@ for path in file_paths:
     fig, ax = plt.subplots(figsize=(10, 6))
 
     sns.scatterplot(x=x_values.ravel(), y=y_values['trust'], hue=other_rows_df['intro_scenario_combo'], palette='viridis', alpha=0.3, s=50, edgecolor=None)
-    #sns.scatterplot(x=x_values.ravel(), y=y_values['trust'], color='grey', alpha=0.5, s=50, edgecolor=None)
     sns.lineplot(x=x_values.ravel(), y=model.predict(x_values), color='black', lw=2)
-
-    # Move the legend outside the plot
-    #ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
 
     ax.set_xlabel('mIoU')
     ax.set_ylabel('Trust')
@@ -357,24 +365,8 @@ for path in file_paths:
 
     sns.despine()
 
-    plt.savefig(f'split_groups/relationship_pysr_other_rows_df_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    file_path = results_path_split_groups / f'relationship_pysr_other_rows_df_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
@@ -457,7 +449,8 @@ def custom_function(df, id):
 
     sns.despine()
     
-    plt.savefig(f'split_groups_personalized/relationship_pysr_{id}.png', bbox_inches='tight', pad_inches=0)
+    file_path = results_path_split_groups_personalized / f'relationship_pysr_{id}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 unique_prolifics = other_rows_df['ProlificID'].unique()

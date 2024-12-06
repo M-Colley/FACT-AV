@@ -1,0 +1,29 @@
+SYMPY
+5.052518 - tan((cos(5.3501596*x0) + 0.10168907)**2)
+
+LATEX
+5.05 - \tan{\left(\left(\cos{\left(5.35 x_{0} \right)} + 0.102\right)^{2} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.40$ & $1$ & $0.615$ & $0.0$ \\
+$y = 4.84 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.569$ & $0.0258$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos{\left(x_{0} \right)} \right)} + 3.74 \end{dmath*} \end{minipage} & $5$ & $0.555$ & $0.0255$ \\
+$y = 4.87 - \cos^{2}{\left(x_{0} \cdot 5.35 \right)}$ & $6$ & $0.335$ & $0.504$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.02 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 5.35 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.303$ & $0.102$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.84 - \left(\cos{\left(x_{0} \cdot 5.35 \right)} + 0.168\right)^{4} \end{dmath*} \end{minipage} & $9$ & $0.230$ & $0.138$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.05 - \tan{\left(\left(\cos{\left(5.35 x_{0} \right)} + 0.102\right)^{2} \right)} \end{dmath*} \end{minipage} & $10$ & $0.176$ & $0.265$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

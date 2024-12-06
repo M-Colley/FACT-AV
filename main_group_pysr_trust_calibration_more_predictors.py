@@ -15,7 +15,13 @@ import warnings
 # Filter out Pandas warnings
 warnings.filterwarnings("ignore")
 
+from pathlib import Path
 
+results_path_split_groups = Path("results") / "PySR" / "split_groups"
+results_path_split_groups.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+results_path_more_predictors = Path("results") / "PySR" / "more_predictors"
+results_path_more_predictors.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 
 #### ATTENTION: PySR only supports numeric data, categorical data is NOT supported
 # requires encoding:
@@ -67,9 +73,9 @@ dfs = {}
 
 # Loop through the list of file paths to read each Excel file into a DataFrame
 for path in file_paths:
-    # Extract the name without the '.xlsx' extension
-    name_without_extension = path[:-5]
-
+    
+    # Extract the name without the '.xlsx' extension using pathlib
+    name_without_extension = path.stem
 
 
     # Read the Excel file into a DataFrame
@@ -165,12 +171,8 @@ for path in file_paths:
     other_rows_df = df[~df.isin(all_equal_df)].dropna()
 
     print("other_rows_df")
-    print(other_rows_df.shape)
-    print(other_rows_df[:5])
-
-
-
-
+    #print(other_rows_df.shape)
+    #print(other_rows_df[:5])
 
 
 
@@ -263,8 +265,8 @@ for path in file_paths:
     print("")
     print("")
 
-    # Create or open a text file for writing
-    with open(f'split_groups/model_info_other_rows_df_stacked_MULTIPLE_{name_without_extension}.txt', 'w') as f:
+    file_path = results_path_split_groups / f'model_info_other_rows_df_stacked_MULTIPLE_{name_without_extension}.txt'
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -293,4 +295,5 @@ for path in file_paths:
 
     sns.despine()
 
-    plt.savefig(f'more_predictors/relationship_pysr_other_rows_df_stacked_MULTIPLE_{name_without_extension}.png')
+    file_path = results_path_more_predictors / f'relationship_pysr_other_rows_df_stacked_MULTIPLE_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)

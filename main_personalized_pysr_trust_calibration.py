@@ -12,11 +12,16 @@ import warnings
 # Filter out Pandas warnings
 warnings.filterwarnings("ignore")
 
-# read data
+from pathlib import Path
 
+results_path_personalized = Path("results") / "PySR" / "personalized_plots"
+results_path_personalized.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+
+# read data
 # Specify the file path
-file_path = "all_combined_prepared.xlsx"
-file_path_removed_DEI = "all_combined_prepared_removed_REI.xlsx"
+file_path = Path("data") / "all_combined_prepared.xlsx"
+file_path_removed_DEI = Path("data") / "all_combined_prepared_removed_REI.xlsx"
 
 # Specify the sheet name (optional)
 sheet_name = "Sheet1"
@@ -51,7 +56,8 @@ def custom_function(df, id, name_without_extension):
     print("")
 
     # Create or open a text file for writing
-    with open(f'personalized_plots/model_info_{id}.txt', 'w') as f:
+    file_path = results_path_personalized / f"model_info_{id}.txt"
+    with file_path.open('w') as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")
@@ -78,8 +84,8 @@ def custom_function(df, id, name_without_extension):
     ax.set_ylim(1, 6) 
 
     sns.despine()
-    
-    plt.savefig(f'personalized_plots/relationship_pysr_{id}_{name_without_extension}.png', bbox_inches='tight', pad_inches=0)
+    file_path = results_path_personalized / f'personalized_plots/relationship_pysr_{id}_{name_without_extension}.png'
+    plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 # look at https://de.wikipedia.org/wiki/Polynominterpolation
@@ -118,9 +124,8 @@ dfs = {}
 
 # Loop through the list of file paths to read each Excel file into a DataFrame
 for path in file_paths:
-    # Extract the name without the '.xlsx' extension
-    name_without_extension = path[:-5]
-
+    # Extract the name without the '.xlsx' extension using pathlib
+    name_without_extension = path.stem
 
     # Read the Excel file into a DataFrame
     df = pd.read_excel(path, sheet_name=sheet_name)
