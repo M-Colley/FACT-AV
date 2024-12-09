@@ -1,11 +1,10 @@
 openpyxl>=3.1.3
-numpy==1.26.4
-pysr>=1.0.0
+pysr>=1.1.0
 seaborn>=0.13.2
 matplotlib>=3.9.3
 pandas>=2.2.3
 bottleneck>=1.3.8
-scikit-learn>=1.5.2
+scikit-learn>=1.6.0
 shap>=0.46.0
 catboost>=1.2.7
 xgboost>=2.1.3
