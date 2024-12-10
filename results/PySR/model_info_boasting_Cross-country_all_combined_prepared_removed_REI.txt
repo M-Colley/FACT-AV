@@ -1,5 +1,5 @@
 SYMPY
-x0**0.3215048
+x0**0.32152656
 
 LATEX
 x_{0}^{0.322}
@@ -20,11 +20,11 @@ $y = 4.03$ & $1$ & $0.913$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.903$ & $0.00522$ \\
 $y = \log{\left(x_{0} - 19.9 \right)}$ & $4$ & $0.903$ & $0.000238$ \\
 $y = 5.39 - \frac{104.}{x_{0}}$ & $5$ & $0.903$ & $0.000209$ \\
-$y = \cos^{2}{\left(x_{0} \cdot 0.0378 \right)} + 3.13$ & $6$ & $0.901$ & $0.00193$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \left(-0.0382\right) \right)} \right)} + 3.13 \end{dmath*} \end{minipage} & $7$ & $0.901$ & $0.000249$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 21.2 \right)} \end{dmath*} \end{minipage} & $8$ & $0.901$ & $0.000187$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{0.924} \right)} - 20.3 \right)} \end{dmath*} \end{minipage} & $9$ & $0.900$ & $0.00127$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\left(- x_{0} - 0.0189\right)^{3} \right)} - 20.3 \right)} \end{dmath*} \end{minipage} & $10$ & $0.899$ & $0.000427$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.16 - \cos^{2}{\left(x_{0} \left(-0.0591\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.902$ & $0.00104$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $7$ & $0.901$ & $0.000726$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 21.2 \right)} \end{dmath*} \end{minipage} & $8$ & $0.901$ & $0.000602$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\left(x_{0} - 0.577\right)^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.899$ & $0.00180$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\left(x_{0} - 0.577\right)^{3} \right)} - 21.2 \right)} \end{dmath*} \end{minipage} & $10$ & $0.899$ & $0.000161$ \\
 \bottomrule
 \end{tabular}
 \end{center}

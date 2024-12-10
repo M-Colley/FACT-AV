@@ -1,8 +1,8 @@
 SYMPY
-5.052518 - tan((cos(5.3501596*x0) + 0.10168907)**2)
+cos(tan(x0*9.212438))**2*2.1649911 + 3.0464067
 
 LATEX
-5.05 - \tan{\left(\left(\cos{\left(5.35 x_{0} \right)} + 0.102\right)^{2} \right)}
+\cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} 2.17 + 3.05
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,10 +19,10 @@ Equation & Complexity & Loss & Score \\
 $y = 4.40$ & $1$ & $0.615$ & $0.0$ \\
 $y = 4.84 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.569$ & $0.0258$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos{\left(x_{0} \right)} \right)} + 3.74 \end{dmath*} \end{minipage} & $5$ & $0.555$ & $0.0255$ \\
-$y = 4.87 - \cos^{2}{\left(x_{0} \cdot 5.35 \right)}$ & $6$ & $0.335$ & $0.504$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.02 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 5.35 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.303$ & $0.102$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.84 - \left(\cos{\left(x_{0} \cdot 5.35 \right)} + 0.168\right)^{4} \end{dmath*} \end{minipage} & $9$ & $0.230$ & $0.138$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.05 - \tan{\left(\left(\cos{\left(5.35 x_{0} \right)} + 0.102\right)^{2} \right)} \end{dmath*} \end{minipage} & $10$ & $0.176$ & $0.265$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-5.37\right) \right)} + 3.90 \end{dmath*} \end{minipage} & $6$ & $0.339$ & $0.491$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} + 3.79 \end{dmath*} \end{minipage} & $7$ & $0.283$ & $0.183$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} \right)} + 3.57 \end{dmath*} \end{minipage} & $8$ & $0.210$ & $0.297$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} 2.17 + 3.05 \end{dmath*} \end{minipage} & $9$ & $0.146$ & $0.362$ \\
 \bottomrule
 \end{tabular}
 \end{center}

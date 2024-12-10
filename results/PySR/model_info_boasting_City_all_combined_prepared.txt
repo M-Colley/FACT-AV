@@ -1,8 +1,8 @@
 SYMPY
-x0*0.050640963
+x0*0.050651155
 
 LATEX
-x_{0} \cdot 0.0506
+x_{0} \cdot 0.0507
 
 LATEX TABLE
 \usepackage{breqn}
@@ -17,12 +17,12 @@ LATEX TABLE
 Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.89$ & $1$ & $1.08$ & $0.0$ \\
-$y = x_{0} \cdot 0.0506$ & $3$ & $1.04$ & $0.0217$ \\
+$y = x_{0} \cdot 0.0507$ & $3$ & $1.04$ & $0.0217$ \\
 $y = x_{0} \cdot 0.0401 + 0.815$ & $5$ & $1.03$ & $0.00167$ \\
-$y = x_{0}^{4} \cdot 2.23 \cdot 10^{-8} + 3.09$ & $6$ & $1.03$ & $0.00267$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(- x_{0} + \tan{\left(\tan{\left(x_{0} \right)} \right)}\right) \left(-0.0509\right) \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00240$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{x_{0}}{-0.702} \right)}\right) 0.0510 \end{dmath*} \end{minipage} & $8$ & $1.01$ & $0.0178$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(\frac{x_{0}}{0.588} \right)} \right)}\right) 0.0510 \end{dmath*} \end{minipage} & $9$ & $1.01$ & $0.00339$ \\
+$y = x_{0}^{4} \cdot 2.24 \cdot 10^{-8} + 3.09$ & $6$ & $1.03$ & $0.00267$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\tan{\left(x_{0} \right)} \right)}\right) 0.0509 \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00240$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.0509 \left(x_{0} + \tan{\left(x_{0} \left(-1.42\right) \right)}\right) \end{dmath*} \end{minipage} & $8$ & $1.01$ & $0.0158$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\tan{\left(x_{0} \cdot 0.253 \right)} \right)}\right) 0.0510 \end{dmath*} \end{minipage} & $9$ & $1.01$ & $0.00445$ \\
 \bottomrule
 \end{tabular}
 \end{center}

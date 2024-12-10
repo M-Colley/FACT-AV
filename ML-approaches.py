@@ -525,8 +525,8 @@ shap.summary_plot(shap_values, X_test, plot_type="bar", cmap=plt.get_cmap('coolw
 plt.tight_layout()
 
 # Save the plot in high resolution
-plt.savefig('enhanced_shap_summary_plot.png', dpi=300, bbox_inches='tight')
-#plt.show()  # Display the plot
+file_path = folder_path / 'enhanced_shap_summary_plot.png'
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 

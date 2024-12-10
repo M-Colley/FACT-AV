@@ -1,8 +1,8 @@
 SYMPY
-log(x0 + 1/(cos(x0)**2 - 0.61817867))
+log(0.93455034*x0 + 0.93455034*tan(1.72719217259997*x0))
 
 LATEX
-\log{\left(x_{0} + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.618} \right)}
+\log{\left(0.935 x_{0} + 0.935 \tan{\left(1.73 x_{0} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.27$ & $1$ & $0.618$ & $0.0$ \\
 $y = x_{0}^{0.334}$ & $3$ & $0.615$ & $0.00275$ \\
 $y = \log{\left(x_{0} \right)}^{0.989}$ & $4$ & $0.613$ & $0.00203$ \\
-$y = x_{0}^{0.280} + 0.901$ & $5$ & $0.613$ & $1.20 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} - 0.905 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.612$ & $0.00107$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.618} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00476$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1}{\cos^{6}{\left(x_{0} \right)} - 0.233} \right)} \end{dmath*} \end{minipage} & $9$ & $0.608$ & $0.00275$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - 4.11 + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.633} \right)} \end{dmath*} \end{minipage} & $10$ & $0.606$ & $0.00182$ \\
+$y = x_{0}^{0.279} + 0.913$ & $5$ & $0.613$ & $1.18 \cdot 10^{-5}$ \\
+$y = 0.216 \sqrt{x_{0}} + 2.38$ & $6$ & $0.613$ & $3.26 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(1.73 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.610$ & $0.00492$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\frac{0.926}{\cos^{2}{\left(x_{0} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.610$ & $0.000895$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(0.935 x_{0} + 0.935 \tan{\left(1.73 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.606$ & $0.00606$ \\
 \bottomrule
 \end{tabular}
 \end{center}

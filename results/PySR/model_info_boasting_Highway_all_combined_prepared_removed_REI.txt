@@ -1,8 +1,8 @@
 SYMPY
-3.90342722165647*(0.00430740446704549*tan(14.989502476678*x0) + 1)**(1/4)
+3.9104111 + tan(tan(x0**2))*(-0.03308065)
 
 LATEX
-3.90 \sqrt[4]{0.00431 \tan{\left(15.0 x_{0} \right)} + 1}
+3.91 + \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \left(-0.0331\right)
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,11 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.90$ & $1$ & $1.18$ & $0.0$ \\
 $y = e^{x_{0}^{0.0709}}$ & $4$ & $1.18$ & $0.000311$ \\
-$y = x_{0}^{0.198} + 1.53$ & $5$ & $1.18$ & $3.83 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.89 \sqrt[4]{0.00438 \tan{\left(x_{0} \right)} + 1} \end{dmath*} \end{minipage} & $6$ & $1.18$ & $0.000781$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0705}} \end{dmath*} \end{minipage} & $7$ & $1.18$ & $0.000705$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.90 \sqrt[4]{0.00431 \tan{\left(15.0 x_{0} \right)} + 1} \end{dmath*} \end{minipage} & $8$ & $1.17$ & $0.00271$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{0.0667} \right)}\right)^{0.0716}} \end{dmath*} \end{minipage} & $9$ & $1.17$ & $0.000934$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.37\right) - \frac{36.0}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $1.18$ & $4.06 \cdot 10^{-5}$ \\
+$y = \tan{\left(x_{0} \right)} 0.00397 + 3.89$ & $6$ & $1.18$ & $0.000709$ \\
+$y = \tan{\left(x_{0}^{3} \right)} 0.0166 + 3.87$ & $7$ & $1.18$ & $0.00162$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 + \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \left(-0.0331\right) \end{dmath*} \end{minipage} & $8$ & $1.17$ & $0.00488$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \left(-0.0338\right) \right)} + 3.91 \end{dmath*} \end{minipage} & $9$ & $1.17$ & $6.75 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 + \tan{\left(\tan{\left(x_{0}^{2} - 0.00121 \right)} \right)} \left(-0.0400\right) \end{dmath*} \end{minipage} & $10$ & $1.17$ & $0.000820$ \\
 \bottomrule
 \end{tabular}
 \end{center}

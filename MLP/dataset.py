@@ -6,8 +6,8 @@ import torch
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-folder_path = Path("results") / "MLP"
-folder_path.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+results_folder = Path(__file__).parent.parent / "results" / "MLP"
+results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 
 def encode_scenario(scenario):
     classes = ['3Spurig', 'Spielstrasse', 'Ueberland', 'NeueMitte']
@@ -145,9 +145,9 @@ class TrustDataset(Dataset):
         # Set the tick locations
         plt.yticks([])
         
-        file_path = folder_path / f"{self.split}.labels.pdf"
+        file_path = results_folder / f"{self.split}.labels.pdf"
         plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-        file_path = folder_path / f"{self.split}.labels.jpg"
+        file_path = results_folder / f"{self.split}.labels.jpg"
         plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
         plt.close()
         

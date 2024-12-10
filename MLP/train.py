@@ -107,7 +107,7 @@ for epoch in tqdm(range(epochs)):
         
         # Display the plot
         plt.legend(loc='best')
-        plt.savefig(f"epoch{epoch}.jpg")
+        plt.savefig(f"epochs/epoch{epoch}.jpg")
         #plt.show()
         plt.close()
         

@@ -111,7 +111,7 @@ def custom_function(df, intro, scenario, name_without_extension):
     
     sns.despine()
     
-    file_path = results_path_more_predictors / f'relationship_pysr_{intro}_{scenario}_{name_without_extension}.png'
+    file_path = results_path / f'relationship_pysr_{intro}_{scenario}_{name_without_extension}.png'
     plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 # List of file paths

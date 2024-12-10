@@ -10,15 +10,23 @@ from torchmetrics.classification import MulticlassAccuracy, MulticlassF1Score
 from pathlib import Path
 
 
-folder_path = Path("results") / "MLP"
-folder_path.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+results_folder = Path(__file__).parent.parent / "results" / "MLP"
+results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 
+# Get the parent directory and construct the path to the data folder
+data_folder = Path(__file__).parent.parent / "data"
 
-test_dataset = TrustDataset("all_combined_prepared_with_demographics.xlsx", split="test")
+# Construct the full file path
+file_path = data_folder / "all_combined_prepared_with_demographics.xlsx"
+
+test_dataset = TrustDataset(file_path, split="test")
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=0, pin_memory=True)
 
 model = Model(input_size=34).cuda()
-model.load_state_dict(torch.load("test_f1_0.74157.pt", map_location="cuda:0"))
+
+file_path = results_folder / "test_f1_0.74157.pt"
+model.load_state_dict(torch.load(file_path, map_location="cuda:0"))
+
 criterion = torch.nn.CrossEntropyLoss().cuda()
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4)
 f1score = MulticlassF1Score(num_classes=5).cuda()
@@ -60,8 +68,8 @@ fig, ax = plt.subplots(figsize=(10,10))
 ax.set_title("Trust Estimation")
 disp.plot(ax=ax, cmap=plt.cm.Blues)
 
-file_path = folder_path / "confusion_matrix.pdf"
+file_path = results_folder / "confusion_matrix.pdf"
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
-file_path = folder_path / "confusion_matrix.jpg"
+file_path = results_folder / "confusion_matrix.jpg"
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)

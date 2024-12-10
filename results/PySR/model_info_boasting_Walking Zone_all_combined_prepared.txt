@@ -1,8 +1,8 @@
 SYMPY
-log(x0 + tan(7.10446915868237*x0))
+log(x0 + tan(0.574279*x0))
 
 LATEX
-\log{\left(x_{0} + \tan{\left(7.10 x_{0} \right)} \right)}
+\log{\left(x_{0} + \tan{\left(0.574 x_{0} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,10 @@ Equation & Complexity & Loss & Score \\
 $y = 4.38$ & $1$ & $0.635$ & $0.0$ \\
 $y = \log{\left(x_{0} \right)}$ & $2$ & $0.635$ & $0.000874$ \\
 $y = e^{x_{0}^{0.0899}}$ & $4$ & $0.633$ & $0.00165$ \\
-$y = x_{0} \cdot 0.00956 + 3.65$ & $5$ & $0.632$ & $0.000269$ \\
-$y = \cos{\left(\frac{x_{0}}{22.8} \right)} + 5.33$ & $6$ & $0.632$ & $0.000726$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(7.10 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.628$ & $0.00607$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(0.573 x_{0} \right)} \right)} + 0.0474 \end{dmath*} \end{minipage} & $9$ & $0.627$ & $0.000782$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(0.573 x_{0} \right)} \right)} + 0.0491 \end{dmath*} \end{minipage} & $10$ & $0.627$ & $4.75 \cdot 10^{-6}$ \\
+$y = x_{0} \cdot 0.00953 + 3.65$ & $5$ & $0.632$ & $0.000270$ \\
+$y = x_{0}^{3} \cdot 5.51 \cdot 10^{-7} + 4.13$ & $6$ & $0.632$ & $0.000206$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(0.574 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.629$ & $0.00567$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 1.01 \log{\left(x_{0} + \tan{\left(0.573 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.627$ & $0.00125$ \\
 \bottomrule
 \end{tabular}
 \end{center}

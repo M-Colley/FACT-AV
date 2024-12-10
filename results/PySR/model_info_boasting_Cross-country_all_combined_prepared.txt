@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.05$ & $1$ & $0.901$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.892$ & $0.00540$ \\
 $y = \log{\left(x_{0} - 19.2 \right)}$ & $4$ & $0.891$ & $0.000252$ \\
-$y = 5.43 - \frac{105.}{x_{0}}$ & $5$ & $0.891$ & $0.000240$ \\
-$y = \cos^{2}{\left(\frac{256.}{x_{0}} \right)} + 3.14$ & $6$ & $0.889$ & $0.00249$ \\
-$y = 4.13 - \cos^{4}{\left(\frac{x_{0}}{17.7} \right)}$ & $7$ & $0.889$ & $0.000227$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.13 - \tanh{\left(\cos^{4}{\left(\frac{x_{0}}{17.7} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.889$ & $3.26 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.67 - \cos{\left(\cos^{4}{\left(\cos^{2}{\left(\frac{x_{0}}{17.5} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.889$ & $6.14 \cdot 10^{-5}$ \\
+$y = 5.43 - \frac{106.}{x_{0}}$ & $5$ & $0.891$ & $0.000240$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $7$ & $0.890$ & $0.000729$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 20.5 \right)} \end{dmath*} \end{minipage} & $8$ & $0.890$ & $0.000284$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.889$ & $0.000705$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(0.261 x_{0}^{3} \right)} - 20.5 \right)} \end{dmath*} \end{minipage} & $10$ & $0.889$ & $0.000111$ \\
 \bottomrule
 \end{tabular}
 \end{center}

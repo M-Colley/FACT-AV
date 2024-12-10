@@ -1,8 +1,8 @@
 SYMPY
-sqrt(log((x0 + tan(0.6874103*x0))**4))
+sqrt(log((-x0 - tan(0.29529843*x0))**4))
 
 LATEX
-\sqrt{\log{\left(\left(x_{0} + \tan{\left(0.687 x_{0} \right)}\right)^{4} \right)}}
+\sqrt{\log{\left(\left(- x_{0} - \tan{\left(0.295 x_{0} \right)}\right)^{4} \right)}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,11 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.16$ & $1$ & $0.931$ & $0.0$ \\
 $y = e^{x_{0}^{0.0816}}$ & $4$ & $0.930$ & $0.000259$ \\
-$y = 3.77 - x_{0} \left(-0.00505\right)$ & $5$ & $0.930$ & $6.78 \cdot 10^{-5}$ \\
-$y = x_{0}^{4} \cdot 2.77 \cdot 10^{-9} + 4.06$ & $6$ & $0.930$ & $3.49 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(x_{0}^{4} \cdot 2.77 \cdot 10^{-9} \right)} + 4.06 \end{dmath*} \end{minipage} & $7$ & $0.930$ & $1.10 \cdot 10^{-6}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000218$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \tan{\left(0.687 x_{0} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.929$ & $0.000315$ \\
+$y = x_{0} \cdot 0.00504 + 3.77$ & $5$ & $0.930$ & $6.78 \cdot 10^{-5}$ \\
+$y = x_{0}^{3} \cdot 2.89 \cdot 10^{-7} + 4.02$ & $6$ & $0.930$ & $2.46 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(x_{0}^{3} \cdot 2.84 \cdot 10^{-7} \right)} + 4.03 \end{dmath*} \end{minipage} & $7$ & $0.930$ & $1.18 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000228$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(- x_{0} - \tan{\left(0.295 x_{0} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.929$ & $0.000316$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(- x_{0} + \tan{\left(\tan{\left(6.21 x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.929$ & $3.29 \cdot 10^{-5}$ \\
 \bottomrule
 \end{tabular}
 \end{center}

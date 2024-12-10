@@ -1,8 +1,8 @@
 SYMPY
-log(49.52323 - tan(tan(x0**2)))
+3.9132638 - 0.008749692/cos(x0 - 1*0.23559736)
 
 LATEX
-\log{\left(49.5 - \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \right)}
+3.91 - \frac{0.00875}{\cos{\left(x_{0} - 0.236 \right)}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,12 +18,11 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.89$ & $1$ & $1.20$ & $0.0$ \\
 $y = e^{x_{0}^{0.0708}}$ & $4$ & $1.20$ & $0.000444$ \\
-$y = x_{0} \cdot 0.00784 - -3.29$ & $5$ & $1.20$ & $0.000242$ \\
-$y = 5.16 \cdot 10^{-5} x_{0}^{2} + 3.59$ & $6$ & $1.20$ & $3.66 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(49.5 - \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $1.20$ & $0.00329$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(49.5 - \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $1.20$ & $1.46 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.900} - \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.00103$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\log{\left(x_{0} \right)}^{2.66} - \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $1.20$ & $0.000450$ \\
+$y = x_{0} \cdot 0.00785 + 3.29$ & $5$ & $1.20$ & $0.000242$ \\
+$y = 4.48 \cdot 10^{-7} x_{0}^{3} + 3.69$ & $6$ & $1.20$ & $6.85 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0704}} \end{dmath*} \end{minipage} & $7$ & $1.20$ & $0.000996$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 - \frac{0.00875}{\cos{\left(x_{0} - 0.236 \right)}} \end{dmath*} \end{minipage} & $8$ & $1.20$ & $0.00243$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{0.749} \right)}\right)^{0.0719}} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.000601$ \\
 \bottomrule
 \end{tabular}
 \end{center}
