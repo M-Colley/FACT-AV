@@ -1,8 +1,8 @@
 SYMPY
-3.9132638 - 0.008749692/cos(x0 - 1*0.23559736)
+3.96550551632449*sqrt(1 - 0.0635920584711172*cos(x0**3)**2)
 
 LATEX
-3.91 - \frac{0.00875}{\cos{\left(x_{0} - 0.236 \right)}}
+3.97 \sqrt{1 - 0.0636 \cos^{2}{\left(x_{0}^{3} \right)}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,11 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.89$ & $1$ & $1.20$ & $0.0$ \\
 $y = e^{x_{0}^{0.0708}}$ & $4$ & $1.20$ & $0.000444$ \\
-$y = x_{0} \cdot 0.00785 + 3.29$ & $5$ & $1.20$ & $0.000242$ \\
-$y = 4.48 \cdot 10^{-7} x_{0}^{3} + 3.69$ & $6$ & $1.20$ & $6.85 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0704}} \end{dmath*} \end{minipage} & $7$ & $1.20$ & $0.000996$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 - \frac{0.00875}{\cos{\left(x_{0} - 0.236 \right)}} \end{dmath*} \end{minipage} & $8$ & $1.20$ & $0.00243$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{0.749} \right)}\right)^{0.0719}} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.000601$ \\
+$y = 3.29 - x_{0} \left(-0.00782\right)$ & $5$ & $1.20$ & $0.000242$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.97 \sqrt{1 - 0.0636 \cos^{2}{\left(x_{0}^{3} \right)}} \end{dmath*} \end{minipage} & $6$ & $1.20$ & $0.00150$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.95 \sqrt{1 - 0.0642 \cos^{6}{\left(x_{0}^{3} \right)}} \end{dmath*} \end{minipage} & $7$ & $1.20$ & $0.000505$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.82 \sqrt{0.0686 \cos^{2}{\left(\tan{\left(x_{0} + 0.365 \right)} \right)} + 1} \end{dmath*} \end{minipage} & $8$ & $1.20$ & $0.00102$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.82 \sqrt{0.0687 \cos^{2}{\left(\tan{\left(\tan{\left(x_{0} + 0.512 \right)} \right)} \right)} + 1} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.000464$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.79 \sqrt{0.0698 \tan{\left(\cos^{2}{\left(\tan{\left(\tan{\left(x_{0} + 0.514 \right)} \right)} \right)} \right)} + 1} \end{dmath*} \end{minipage} & $10$ & $1.20$ & $0.000649$ \\
 \bottomrule
 \end{tabular}
 \end{center}

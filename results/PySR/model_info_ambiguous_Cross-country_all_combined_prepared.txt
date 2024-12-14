@@ -1,8 +1,8 @@
 SYMPY
-sqrt(x0**0.61839604 - sin(5.98198107660106*x0))
+(x0 + tan(x0*2.5704143))**0.30978602
 
 LATEX
-\sqrt{x_{0}^{0.618} - \sin{\left(5.98 x_{0} \right)}}
+\left(x_{0} + \tan{\left(x_{0} \cdot 2.57 \right)}\right)^{0.310}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 3.82$ & $1$ & $1.08$ & $0.0$ \\
 $y = x_{0}^{0.309}$ & $3$ & $1.08$ & $0.00256$ \\
 $y = \log{\left(x_{0} \right)} - 0.513$ & $4$ & $1.08$ & $0.000168$ \\
-$y = 4.88 - \frac{80.9}{x_{0}}$ & $5$ & $1.08$ & $0.000239$ \\
+$y = 4.89 - \frac{81.0}{x_{0}}$ & $5$ & $1.08$ & $0.000239$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \sin{\left(x_{0} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $6$ & $1.08$ & $0.000719$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $7$ & $1.08$ & $0.000978$ \\
-$y = x_{0}^{0.310} + \sin{\left(x_{0} \right)} 0.0789$ & $8$ & $1.08$ & $0.00111$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0}^{0.618} - \sin{\left(5.98 x_{0} \right)}} \end{dmath*} \end{minipage} & $9$ & $1.07$ & $0.00400$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $7$ & $1.08$ & $0.000979$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 2.57 \right)}\right)^{0.310} \end{dmath*} \end{minipage} & $8$ & $1.07$ & $0.00378$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 2.57 \right)} + 0.945\right)^{0.309} \end{dmath*} \end{minipage} & $10$ & $1.07$ & $1.42 \cdot 10^{-5}$ \\
 \bottomrule
 \end{tabular}
 \end{center}

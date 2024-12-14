@@ -1,8 +1,8 @@
 SYMPY
-0.15008898*sin(x0*(-4.17681)) + 3.892992
+cos(cos(x0/0.009009164)**2) + 3.0362597
 
 LATEX
-0.150 \sin{\left(x_{0} \left(-4.18\right) \right)} + 3.89
+\cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.00901} \right)} \right)} + 3.04
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,12 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 3.88$ & $1$ & $1.04$ & $0.0$ \\
 $y = x_{0}^{0.313}$ & $3$ & $1.04$ & $0.000279$ \\
 $y = \log{\left(x_{0} \right)}^{0.924}$ & $4$ & $1.04$ & $0.00147$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.57\right) - \frac{52.4}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $1.04$ & $0.000309$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(x_{0} \left(-0.0595\right) \right)} + 2.94 \end{dmath*} \end{minipage} & $6$ & $1.04$ & $0.00255$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.99 + \cos^{2}{\left(x_{0}^{3} \right)} \left(-0.194\right) \end{dmath*} \end{minipage} & $7$ & $1.04$ & $0.000356$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.150 \sin{\left(x_{0} \left(-4.18\right) \right)} + 3.89 \end{dmath*} \end{minipage} & $8$ & $1.03$ & $0.00711$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\sin{\left(x_{0} \left(-4.18\right) \right)} \right)} 0.188 + 3.89 \end{dmath*} \end{minipage} & $9$ & $1.03$ & $0.000229$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \sin{\left(4.18 x_{0} \right)} \cos^{2}{\left(\log{\left(x_{0} \right)} \right)} + 3.90 \end{dmath*} \end{minipage} & $10$ & $1.03$ & $0.00216$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.57\right) - \frac{52.2}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $1.04$ & $0.000309$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-0.0396\right) \right)} + 2.93 \end{dmath*} \end{minipage} & $6$ & $1.04$ & $0.00229$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.00901} \right)} \right)} + 3.04 \end{dmath*} \end{minipage} & $7$ & $1.02$ & $0.0129$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\sin{\left(\frac{x_{0}}{0.00901} \right)} \right)} \right)} + 3.06 \end{dmath*} \end{minipage} & $8$ & $1.02$ & $0.000733$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\sin{\left(\frac{x_{0}}{0.00901} \right)} + 0.0894 \right)} \right)} + 3.05 \end{dmath*} \end{minipage} & $10$ & $1.02$ & $0.000621$ \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -1,8 +1,8 @@
 SYMPY
-cos(tan(x0*9.212438))**2*2.1649911 + 3.0464067
+4.294524 - sin(15.1686779458724*(0.506714191052836*x0 + 1)**4)
 
 LATEX
-\cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} 2.17 + 3.05
+4.29 - \sin{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,10 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.40$ & $1$ & $0.615$ & $0.0$ \\
 $y = 4.84 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.569$ & $0.0258$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos{\left(x_{0} \right)} \right)} + 3.74 \end{dmath*} \end{minipage} & $5$ & $0.555$ & $0.0255$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-5.37\right) \right)} + 3.90 \end{dmath*} \end{minipage} & $6$ & $0.339$ & $0.491$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} + 3.79 \end{dmath*} \end{minipage} & $7$ & $0.283$ & $0.183$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} \right)} + 3.57 \end{dmath*} \end{minipage} & $8$ & $0.210$ & $0.297$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \cdot 9.21 \right)} \right)} 2.17 + 3.05 \end{dmath*} \end{minipage} & $9$ & $0.146$ & $0.362$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 5.37 \right)} + 3.88$ & $6$ & $0.338$ & $0.497$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.29 - \sin{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $7$ & $0.251$ & $0.295$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.29 - \sin^{3}{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $8$ & $0.234$ & $0.0718$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \sin^{3}{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $9$ & $0.226$ & $0.0355$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.87 - \tan^{2}{\left(\sin^{4}{\left(\left(x_{0} - 12.9\right)^{3} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.188$ & $0.185$ \\
 \bottomrule
 \end{tabular}
 \end{center}

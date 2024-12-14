@@ -1,8 +1,8 @@
 SYMPY
-(x0 + 0.3487158/cos(x0))**0.32532537
+log(x0 - Abs(tan(x0) - 15.33571))
 
 LATEX
-\left(x_{0} + \frac{0.349}{\cos{\left(x_{0} \right)}}\right)^{0.325}
+\log{\left(x_{0} - \left|{\tan{\left(x_{0} \right)} - 15.3}\right| \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -20,10 +20,11 @@ $y = 4.08$ & $1$ & $0.711$ & $0.0$ \\
 $y = x_{0}^{0.324}$ & $3$ & $0.708$ & $0.00208$ \\
 $y = \log{\left(x_{0} \right)}^{0.959}$ & $4$ & $0.707$ & $0.00149$ \\
 $y = x_{0} \cdot 0.0114 + 3.21$ & $5$ & $0.707$ & $5.18 \cdot 10^{-5}$ \\
-$y = x_{0}^{3} \cdot 6.47 \cdot 10^{-7} + 3.79$ & $6$ & $0.707$ & $8.35 \cdot 10^{-5}$ \\
+$y = x_{0}^{3} \cdot 6.49 \cdot 10^{-7} + 3.79$ & $6$ & $0.707$ & $8.35 \cdot 10^{-5}$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.942} + \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.707$ & $0.000560$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \frac{0.349}{\cos{\left(x_{0} \right)}}\right)^{0.325} \end{dmath*} \end{minipage} & $8$ & $0.703$ & $0.00447$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\left(x_{0} + \tan{\left(x_{0} + 0.0660 \right)}\right)^{0.945} \right)} \end{dmath*} \end{minipage} & $9$ & $0.702$ & $0.00189$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \left|{\tan{\left(x_{0} \right)} - 15.3}\right| \right)} \end{dmath*} \end{minipage} & $8$ & $0.704$ & $0.00406$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\left(x_{0} + \tan{\left(x_{0} + 0.0660 \right)}\right)^{0.945} \right)} \end{dmath*} \end{minipage} & $9$ & $0.702$ & $0.00230$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.943} + \tan{\left(\frac{1}{\sin{\left(x_{0}^{2} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.701$ & $0.00153$ \\
 \bottomrule
 \end{tabular}
 \end{center}

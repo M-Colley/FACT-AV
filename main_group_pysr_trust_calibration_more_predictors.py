@@ -32,8 +32,8 @@ results_path_more_predictors.mkdir(parents=True, exist_ok=True)  # Ensure the fo
 # read data
 
 # Specify the file path
-file_path = "all_combined_prepared_with_demographics.xlsx"
-#file_path_removed_DEI = "all_combined_prepared_removed_REI.xlsx"
+file_path = Path("data") / "all_combined_prepared_with_demographics.xlsx"
+#file_path_removed_DEI = Path("data") / "all_combined_prepared_removed_REI.xlsx"
 
 # Specify the sheet name (optional)
 sheet_name = "Sheet1"

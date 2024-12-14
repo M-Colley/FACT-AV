@@ -1,8 +1,8 @@
 SYMPY
-log(x0 - tan(3.54899134117093*x0))
+log(x0 - tan(3.5883381*x0))
 
 LATEX
-\log{\left(x_{0} - \tan{\left(3.55 x_{0} \right)} \right)}
+\log{\left(x_{0} - \tan{\left(3.59 x_{0} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,13 +18,13 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.33$ & $1$ & $0.552$ & $0.0$ \\
 $y = \log{\left(x_{0} \right)}$ & $2$ & $0.546$ & $0.0105$ \\
-$y = \log{\left(x_{0} - 0.748 \right)}$ & $4$ & $0.546$ & $8.61 \cdot 10^{-5}$ \\
+$y = \log{\left(x_{0} - 0.751 \right)}$ & $4$ & $0.546$ & $8.61 \cdot 10^{-5}$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.545$ & $0.00155$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $6$ & $0.544$ & $0.00138$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(3.55 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.537$ & $0.0140$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \frac{1}{\cos^{2}{\left(x_{0} \right)} - 0.624} \right)} \end{dmath*} \end{minipage} & $8$ & $0.536$ & $0.00102$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - 1.62 \tan{\left(3.55 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.535$ & $0.00241$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - 1.63 \tan{\left(3.55 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.535$ & $1.35 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(3.59 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.535$ & $0.0172$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(3.59 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.535$ & $2.24 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(3.59 x_{0} + 0.00565 \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.535$ & $6.42 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \cos^{2}{\left(x_{0} \right)} - \tan{\left(3.59 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.535$ & $0.000607$ \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -1,8 +1,8 @@
 SYMPY
-log(0.93455034*x0 + 0.93455034*tan(1.72719217259997*x0))
+log(x0 - exp(3*cos(1.2444278*x0)))
 
 LATEX
-\log{\left(0.935 x_{0} + 0.935 \tan{\left(1.73 x_{0} \right)} \right)}
+\log{\left(x_{0} - e^{3 \cos{\left(1.24 x_{0} \right)}} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.27$ & $1$ & $0.618$ & $0.0$ \\
 $y = x_{0}^{0.334}$ & $3$ & $0.615$ & $0.00275$ \\
 $y = \log{\left(x_{0} \right)}^{0.989}$ & $4$ & $0.613$ & $0.00203$ \\
-$y = x_{0}^{0.279} + 0.913$ & $5$ & $0.613$ & $1.18 \cdot 10^{-5}$ \\
-$y = 0.216 \sqrt{x_{0}} + 2.38$ & $6$ & $0.613$ & $3.26 \cdot 10^{-7}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(1.73 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.610$ & $0.00492$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\frac{0.926}{\cos^{2}{\left(x_{0} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.610$ & $0.000895$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(0.935 x_{0} + 0.935 \tan{\left(1.73 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.606$ & $0.00606$ \\
+$y = x_{0}^{0.221} \cdot 1.64$ & $5$ & $0.613$ & $1.19 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.28 + \cos{\left(x_{0} \right)} \left(-0.105\right) \end{dmath*} \end{minipage} & $6$ & $0.613$ & $0.000194$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(0.874 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.611$ & $0.00314$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(\cos^{2}{\left(x_{0} \right)} + 0.953 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00343$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - e^{3 \cos{\left(1.24 x_{0} \right)}} \right)} \end{dmath*} \end{minipage} & $9$ & $0.605$ & $0.00699$ \\
 \bottomrule
 \end{tabular}
 \end{center}

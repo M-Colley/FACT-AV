@@ -1,8 +1,8 @@
 SYMPY
-4.3477945 + sin(x0)*(-0.12876399)
+4.34948686628664*sqrt(1 - 0.0528596097396157*sin(x0))
 
 LATEX
-4.35 + \sin{\left(x_{0} \right)} \left(-0.129\right)
+4.35 \sqrt{1 - 0.0529 \sin{\left(x_{0} \right)}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,12 +18,13 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.36$ & $1$ & $0.691$ & $0.0$ \\
 $y = \log{\left(x_{0} \right)}$ & $2$ & $0.689$ & $0.00238$ \\
-$y = e^{x_{0}^{0.0892}}$ & $4$ & $0.688$ & $0.000683$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.688$ & $0.00130$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.35 + \sin{\left(x_{0} \right)} \left(-0.129\right) \end{dmath*} \end{minipage} & $6$ & $0.682$ & $0.00837$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(1.74 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.679$ & $0.00408$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\tan{\left(3.13 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.676$ & $0.00395$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + 1.13 \tan{\left(\tan{\left(3.13 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.676$ & $0.000104$ \\
+$y = e^{x_{0}^{0.0893}}$ & $4$ & $0.688$ & $0.000683$ \\
+$y = 4.35 \sqrt{1 - 0.0529 \sin{\left(x_{0} \right)}}$ & $5$ & $0.682$ & $0.00947$ \\
+$y = 4.35 - \sin{\left(x_{0} \right)} 0.129$ & $6$ & $0.682$ & $0.000195$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.35 \sqrt{1 - 0.0528 \tanh{\left(\frac{1}{\sin{\left(x_{0} \right)}} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.680$ & $0.00317$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.35 \sqrt{1 - 0.0529 \tanh{\left(\frac{1}{\tanh{\left(\sin{\left(x_{0} \right)} \right)}} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.680$ & $0.000189$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.36 \sqrt{1 - 0.0526 \tanh{\left(\frac{1}{\sin{\left(x_{0} - 0.423 \right)}} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.677$ & $0.00344$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(2 x_{0} - \sin{\left(x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.676$ & $0.00138$ \\
 \bottomrule
 \end{tabular}
 \end{center}

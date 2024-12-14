@@ -19,12 +19,12 @@ Equation & Complexity & Loss & Score \\
 $y = 3.86$ & $1$ & $0.854$ & $0.0$ \\
 $y = x_{0}^{0.312}$ & $3$ & $0.835$ & $0.0109$ \\
 $y = 0.441 \sqrt{x_{0}}$ & $4$ & $0.832$ & $0.00450$ \\
-$y = x_{0} \cdot 0.0269 + 1.80$ & $5$ & $0.831$ & $0.000136$ \\
-$y = x_{0}^{2} \cdot 0.000175 + 2.83$ & $6$ & $0.831$ & $3.07 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.440 \sqrt{x_{0} + \cos^{2}{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.831$ & $1.08 \cdot 10^{-5}$ \\
+$y = x_{0} \cdot 0.0269 - -1.80$ & $5$ & $0.831$ & $0.000136$ \\
+$y = x_{0}^{2} \cdot 0.000175 + 2.83$ & $6$ & $0.831$ & $3.14 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.440 \sqrt{x_{0} + \cos^{2}{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.831$ & $1.02 \cdot 10^{-5}$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.442 \sqrt{x_{0} + \sin{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.830$ & $0.00160$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.439 \sqrt{x_{0} - \tan{\left(0.859 x_{0} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.827$ & $0.00381$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.444 \sqrt{x_{0} - \frac{1}{\tan{\left(x_{0}^{1.41} \right)}}} \end{dmath*} \end{minipage} & $10$ & $0.826$ & $0.000956$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.188 x_{0} + \cos^{2}{\left(2.18 x_{0} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.827$ & $0.00381$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.185 x_{0} + \tan{\left(\cos^{2}{\left(2.18 x_{0} \right)} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.826$ & $0.00118$ \\
 \bottomrule
 \end{tabular}
 \end{center}

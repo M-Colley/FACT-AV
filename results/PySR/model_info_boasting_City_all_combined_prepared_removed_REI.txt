@@ -1,8 +1,8 @@
 SYMPY
-cos(cos(x0/0.67312133)**2) - 1*(-3.271556)
+(x0 + tan(x0/0.053371314))**0.32642058
 
 LATEX
-\cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.673} \right)} \right)} - -3.27
+\left(x_{0} + \tan{\left(\frac{x_{0}}{0.0534} \right)}\right)^{0.326}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -20,10 +20,10 @@ $y = 4.06$ & $1$ & $0.886$ & $0.0$ \\
 $y = x_{0}^{0.323}$ & $3$ & $0.866$ & $0.0116$ \\
 $y = 0.463 \sqrt{x_{0}}$ & $4$ & $0.863$ & $0.00399$ \\
 $y = x_{0} \cdot 0.0277 + 1.93$ & $5$ & $0.862$ & $0.000362$ \\
-$y = \cos{\left(\frac{x_{0}}{-20.5} \right)} - -4.84$ & $6$ & $0.860$ & $0.00231$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.673} \right)} \right)} - -3.27 \end{dmath*} \end{minipage} & $7$ & $0.841$ & $0.0226$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\left(x_{0} - 0.447\right)^{3} \right)} \right)} - -3.27 \end{dmath*} \end{minipage} & $8$ & $0.832$ & $0.0109$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.470 \sqrt{x_{0} + \tan{\left(\tan{\left(0.625 x_{0} \right)} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.829$ & $0.00167$ \\
+$y = \cos{\left(x_{0} \cdot 0.0482 \right)} + 4.87$ & $6$ & $0.860$ & $0.00213$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{2} \right)}\right)^{0.324} \end{dmath*} \end{minipage} & $7$ & $0.859$ & $0.00153$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{x_{0}}{0.0534} \right)}\right)^{0.326} \end{dmath*} \end{minipage} & $8$ & $0.830$ & $0.0340$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.379 \sqrt{x_{0}} + \cos^{2}{\left(\sin{\left(18.7 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.824$ & $0.00367$ \\
 \bottomrule
 \end{tabular}
 \end{center}

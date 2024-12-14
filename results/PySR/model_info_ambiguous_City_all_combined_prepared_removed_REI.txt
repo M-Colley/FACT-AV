@@ -1,8 +1,8 @@
 SYMPY
-(x0 - tan(x0*0.4890122))**0.31366038
+(x0 + tan(x0*0.66518855))**0.31229508
 
 LATEX
-\left(x_{0} - \tan{\left(x_{0} \cdot 0.489 \right)}\right)^{0.314}
+\left(x_{0} + \tan{\left(x_{0} \cdot 0.665 \right)}\right)^{0.312}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,13 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.89$ & $1$ & $1.15$ & $0.0$ \\
 $y = x_{0}^{0.313}$ & $3$ & $1.15$ & $0.00203$ \\
-$y = \log{\left(x_{0} \right)} - 0.444$ & $4$ & $1.15$ & $0.000229$ \\
-$y = x_{0} \cdot 0.0129 + 2.91$ & $5$ & $1.15$ & $0.000135$ \\
+$y = \log{\left(0.641 x_{0} \right)}$ & $4$ & $1.15$ & $0.000229$ \\
+$y = x_{0} \cdot 0.0128 - -2.91$ & $5$ & $1.15$ & $0.000135$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos{\left(x_{0} \right)}\right)^{0.313} \end{dmath*} \end{minipage} & $6$ & $1.15$ & $0.000477$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{0.315} \end{dmath*} \end{minipage} & $7$ & $1.15$ & $0.00166$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(x_{0} \cdot 0.489 \right)}\right)^{0.314} \end{dmath*} \end{minipage} & $8$ & $1.14$ & $0.00461$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \frac{1}{0.336 - \cos^{2}{\left(x_{0} \right)}}\right)^{0.313} \end{dmath*} \end{minipage} & $9$ & $1.14$ & $0.00138$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \frac{1}{0.327 - \sin{\left(\cos^{2}{\left(x_{0} \right)} \right)}}\right)^{0.313} \end{dmath*} \end{minipage} & $10$ & $1.14$ & $2.72 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 0.665 \right)}\right)^{0.312} \end{dmath*} \end{minipage} & $8$ & $1.14$ & $0.00475$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(0.648 x_{0} - \tan{\left(3.78 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.14$ & $0.00257$ \\
 \bottomrule
 \end{tabular}
 \end{center}
