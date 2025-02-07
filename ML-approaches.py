@@ -454,7 +454,7 @@ importance_data = pd.DataFrame({
 
 # Sort by importance
 importance_data = importance_data.sort_values(by='Importance', ascending=False)
-importance_data.index = importance_data.index.to_series().replace(label_replacements)
+importance_data['Feature'] = importance_data['Feature'].replace(label_replacements)
 
 
 # Start plotting
@@ -487,6 +487,8 @@ file_path = folder_path / 'perm_importances_random_regressor.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
+# Rename the columns in X_test using label_replacements
+X_test_renamed = X_test.rename(columns=label_replacements)
 
 explainer = shap.TreeExplainer(forest)
 shap_values = explainer.shap_values(X_test)
@@ -494,9 +496,8 @@ shap_values = explainer.shap_values(X_test)
 # Increase the figure size for better readability
 plt.figure(figsize=(10, 8))
 # Generate the SHAP summary plot with a specified color palette
-shap.summary_plot(shap_values, X_test, plot_type="bar", cmap=plt.get_cmap('coolwarm'), show=False)
-
-# Adjust layout to fit and prevent label cut-off
+shap.summary_plot(shap_values, X_test_renamed, plot_type="bar", cmap=plt.get_cmap('coolwarm'), show=False)
+#shap.summary_plot(shap_values, X_test, plot_type="bar", cmap=plt.get_cmap('coolwarm'), show=False)
 plt.tight_layout()
 
 # Save the plot in high resolution
@@ -577,31 +578,16 @@ file_path = folder_path / 'feature_importance_catboost.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
-print("AT EXPLAINER")
-
-
 explainercat = shap.TreeExplainer(model)
 shap_values_cat_test = explainercat.shap_values(X_test)
 shap_values_cat_train = explainercat.shap_values(X_train)
 
-#fig = plt.subplots(figsize=(6,6),dpi=150)
-#ax_3= shap.plots._waterfall.waterfall_legacy(explainercat.expected_value, shap_values_cat_test[5], feature_names = X_test.columns,max_display = 20)
-
-#fig = plt.subplots(figsize=(6,6),dpi=200)
-#ax_2= shap.decision_plot(explainercat.expected_value, shap_values_cat_test[15], X_test.iloc[[15]], link= "logit")
-
-#shap.initjs()
-#shap.force_plot(explainercat.expected_value, shap_values_cat_test[:50], X_test.iloc[:50],link= "logit")
-
-
 
 ########## XGBoost IMPORTANCE ##################
-print("AT XGBoost")
-
-# try it with XGBoost
+#print("AT XGBoost")
 import xgboost as xgb
 
-# Convert categorical columns to 'category' type
+
 for feature in categorical_features:
     df_original_xgboost[feature] = df_original_xgboost[feature].astype('category')
 
@@ -746,13 +732,16 @@ plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 explainer = shap.TreeExplainer(model)
 explanation = explainer(X_test)
 
+# Update the feature names using the label_replacements dictionary
+explanation.feature_names = [
+    label_replacements.get(feat, feat) for feat in explanation.feature_names
+]
+
 shap_values = explanation.values
 # make sure the SHAP values add up to marginal predictions
 np.abs(shap_values.sum(axis=1) + explanation.base_values - y_pred).max()
 
 
-
-# Increase the figure size for better readability
 plt.figure(figsize=(10, 8))
 # Generate the SHAP summary plot with a specified color palette
 shap.plots.beeswarm(explanation, show = False)
