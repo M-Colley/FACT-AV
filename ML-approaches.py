@@ -12,35 +12,26 @@ import pandas as pd
 import itertools
 import shap
 
-import sklearn
-from sklearn import metrics
-from sklearn.cluster import DBSCAN
-
-from sklearn.preprocessing import StandardScaler
-
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.neighbors import kneighbors_graph
+from math import sqrt
 
 import time
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import RandomForestRegressor
-
-
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-from math import sqrt
-
-
+import sklearn
+from sklearn import metrics
+from sklearn.cluster import DBSCAN, AgglomerativeClustering
+from sklearn.neighbors import kneighbors_graph
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, make_scorer, r2_score
 from sklearn.model_selection import train_test_split
-
-from sklearn.preprocessing import OneHotEncoder
-
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.inspection import permutation_importance
-from sklearn.metrics import make_scorer, mean_absolute_error
 
 from pathlib import Path
 
+from tabpfn import TabPFNRegressor
 
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "2"  # or any number that fits your system
 
 
 # Construct the folder path in an OS-agnostic way
@@ -192,7 +183,6 @@ db = DBSCAN(eps=0.3, min_samples=10).fit(features_scaled)
 labels = db.labels_
 
 
-
 # Number of clusters in labels, ignoring noise if present.
 n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
 n_noise_ = list(labels).count(-1)
@@ -234,12 +224,6 @@ for k, col in zip(unique_labels, colors):
     )
 
 plt.title(f"Estimated number of clusters from DBSCAN: {n_clusters_}")
-#plt.show()
-
-
-
-
-
 
 file_path = folder_path / f'dbscan_clusters_{n_clusters_}.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
@@ -279,18 +263,12 @@ plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
-
-
-
 ################### Multiple Features
-
-
 df_original_catboost = df.copy(deep=True)
 df_original_xgboost = df.copy(deep=True)
 df_original = df.copy(deep=True)
 df_original_lgbm = df.copy(deep=True)
-
-
+df_original_tabpfn = df.copy(deep=True)
 
 
 print(df.columns)
@@ -300,7 +278,43 @@ encoder = OneHotEncoder(sparse_output=False, drop='first')
 
 # Separate numerical and categorical features
 numerical_features = ['mIoU', 'License', 'Age']
-categorical_features = ['SCENARIO', 'INTRODUCTION', 'Gender',  'Education', 'Job', 'DrivingFrequency', 'Distance']
+categorical_features = ['SCENARIO', 'INTRODUCTION', 'Gender', 'Education', 'Job', 'DrivingFrequency', 'Distance']
+target_column = 'trust'
+
+
+# Define the mapping of old labels to new labels
+label_replacements = {
+    'SCENARIO': 'Scenario',
+    'SCENARIO_NeueMitte': 'Scenario: City',
+    'SCENARIO_Ueberland': 'Scenario: Cross-Country',
+    'SCENARIO_Spielstrasse': 'Scenario: Walking Speed Zone',
+    'INTRODUCTION_boasting': 'Introduction: boasting',
+    'INTRODUCTION_ambiguous': 'Introduction: ambiguous',
+    'INTRODUCTION': 'Introduction',
+    'Gender_M': 'Gender: Male',
+    'Gender_non-binary': 'Gender: non-binary',
+    'Education_High School': 'Education: High School',
+    'Education_Vocational training': 'Education: Vocational training',
+    'Job_Jobseeker': 'Job: Jobseeker',
+    'Job_Other': 'Job: Other',
+    'Job_Self-employed': 'Job: Self-employed',
+    'Job_Student (college)': 'Job: Student (college)',
+    'License': 'Driving License (years)',
+    'DrivingFrequency': 'Driving Frequency',
+    'DrivingFrequency_1-3 times a month': 'Driving Frequency: 1-3/month',
+    'DrivingFrequency_3-4 times a week': 'Driving Frequency: 3-4/week',
+    'DrivingFrequency_Daily': 'Driving Frequency: Daily',
+    'DrivingFrequency_less than 1 time a month': 'Driving Frequency: <1/month',
+    'DrivingFrequency_On working days': 'Driving Frequency: Working days',
+    'Distance': 'Distance',
+    'Distance_25.000 - 32.999km': 'Distance: 25.000 - 32.999km',
+    'Distance_7.000 - 14.999km': 'Distance: 7.000 - 14.999km',
+    'Distance_less than 7.000km': 'Distance: <7.000km',
+    'Distance_33.000 or more km': 'Distance: >=30.000km',
+}
+
+
+
 
 # Fit and transform categorical data
 categorical_data = df[categorical_features]
@@ -319,7 +333,7 @@ print(df.dtypes)
 # Prepare Features and Target variable
 #X = df.drop(['trust'], axis=1)
 X = df[numerical_features + list(one_hot_df.columns)]
-y = df['trust']
+y = df[target_column]
 
 # Train-Test Split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -365,34 +379,6 @@ std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
 # fig.tight_layout()
 # plt.show()
 
-# Define the mapping of old labels to new labels
-label_replacements = {
-    'SCENARIO_NeueMitte': 'Scenario: City',
-    'SCENARIO_Ueberland': 'Scenario: Cross-Country',
-    'SCENARIO_Spielstrasse': 'Scenario: Walking Speed Zone',
-    'INTRODUCTION_boasting': 'Introduction: boasting',
-    'INTRODUCTION_ambiguous': 'Introduction: ambiguous',
-    'Gender_M': 'Gender: Male',
-    'Gender_non-binary': 'Gender: non-binary',
-    'Education_High School': 'Education: High School',
-    'Education_Vocational training': 'Education: Vocational training',
-    'Job_Jobseeker': 'Job: Jobseeker',
-    'Job_Other': 'Job: Other',
-    'Job_Self-employed': 'Job: Self-employed',
-    'Job_Student (college)': 'Job: Student (college)',
-    'License': 'Driving License (years)',
-    'DrivingFrequency_1-3 times a month': 'Driving Frequency: 1-3/month',
-    'DrivingFrequency_3-4 times a week': 'Driving Frequency: 3-4/week',
-    'DrivingFrequency_Daily': 'Driving Frequency: Daily',
-    'DrivingFrequency_less than 1 time a month': 'Driving Frequency: <1/month',
-    'DrivingFrequency_On working days': 'Driving Frequency: Working days',
-    'Distance_25.000 - 32.999km': 'Distance: 25.000 - 32.999km',
-    'Distance_7.000 - 14.999km': 'Distance: 7.000 - 14.999km',
-    'Distance_less than 7.000km': 'Distance: <7.000km',
-    'Distance_33.000 or more km': 'Distance: >=30.000km',
-}
-
-
 
 # Apply a Seaborn style
 sns.set(style="whitegrid")
@@ -419,7 +405,6 @@ plt.title('Feature Importances using Mean Decrease in Impurity')
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
-
 # Rotate and reduce font size of x labels
 plt.xticks(rotation=45, ha='right', fontsize=10)
 
@@ -437,15 +422,12 @@ plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 ########## PERMUTATION IMPORTANCE ##################
 
-
-
 # Create a scorer from the performance metric
 mae_scorer = make_scorer(mean_absolute_error, greater_is_better=False)
 
 # Calculate permutation importance using MAE as the scoring metric
 perm_importance = permutation_importance(forest, X_test, y_test, n_repeats=30,
                                          random_state=42, scoring=mae_scorer)
-
 
 # Evaluate the model
 y_pred = forest.predict(X_test)
@@ -472,6 +454,8 @@ importance_data = pd.DataFrame({
 
 # Sort by importance
 importance_data = importance_data.sort_values(by='Importance', ascending=False)
+importance_data.index = importance_data.index.to_series().replace(label_replacements)
+
 
 # Start plotting
 plt.figure(figsize=(12, 8))  # Set figure size
@@ -482,14 +466,10 @@ sns.barplot(x='Importance', y='Feature', data=importance_data, hue="Importance",
 # Add error bars
 plt.errorbar(x=importance_data['Importance'], y=np.arange(len(importance_data)), xerr=importance_data['Std'], fmt='none', c='black', capsize=5, label='_nolegend_')
 
-
 # Add labels and title
 plt.xlabel('Importance')
 plt.ylabel('Features')
 plt.title('Permutation Importances using Mean Decrease in Impurity')
-
-# Optional: Rotate x labels for better visibility
-plt.xticks(rotation=90)
 
 sns.despine()  # Removes the top and right border of the plot
 
@@ -498,18 +478,13 @@ metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, 
           fontsize=12, verticalalignment='bottom', 
           bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
-
+          
+# Rotate and reduce font size of x labels
+plt.xticks(rotation=45, ha='right', fontsize=10)
 plt.tight_layout()  # Adjust the plot to ensure everything fits without overlapping
-# plt.show()  # Display the plot
-
-
-
 
 file_path = folder_path / 'perm_importances_random_regressor.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
-
-
 
 
 
@@ -533,21 +508,11 @@ plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 
-
-
-
-
 ########## catboost IMPORTANCE ##################
 
 
 # try other version that can handle categorical data natively
 from catboost import CatBoostRegressor
-numerical_features = ['mIoU', 'License', 'Age']
-categorical_features = ['SCENARIO', 'INTRODUCTION', 'Gender', 'Education', 'Job', 'DrivingFrequency', 'Distance']
-target_column = 'trust'
-
-
-
 
 # Prepare Features and Target variable
 X = df_original_catboost[numerical_features + categorical_features]
@@ -581,6 +546,11 @@ importances = model.get_feature_importance()
 feature_names = X_train.columns.tolist()
 forest_importances = pd.Series(importances, index=feature_names)
 
+# Prepare the data
+forest_importances.index = forest_importances.index.to_series().replace(label_replacements)
+
+
+
 # Apply a Seaborn style
 sns.set(style="whitegrid")
 
@@ -598,10 +568,8 @@ metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
 # Optional: Rotate x labels for better visibility
-plt.xticks(rotation=90)
-
+plt.xticks(rotation=45)
 sns.despine()
-
 # Show the plot
 plt.tight_layout()
 
@@ -619,20 +587,16 @@ shap_values_cat_train = explainercat.shap_values(X_train)
 #fig = plt.subplots(figsize=(6,6),dpi=150)
 #ax_3= shap.plots._waterfall.waterfall_legacy(explainercat.expected_value, shap_values_cat_test[5], feature_names = X_test.columns,max_display = 20)
 
-
-
 #fig = plt.subplots(figsize=(6,6),dpi=200)
 #ax_2= shap.decision_plot(explainercat.expected_value, shap_values_cat_test[15], X_test.iloc[[15]], link= "logit")
-
 
 #shap.initjs()
 #shap.force_plot(explainercat.expected_value, shap_values_cat_test[:50], X_test.iloc[:50],link= "logit")
 
 
 
-
 ########## XGBoost IMPORTANCE ##################
-
+print("AT XGBoost")
 
 # try it with XGBoost
 import xgboost as xgb
@@ -676,6 +640,9 @@ importances = model.feature_importances_
 feature_names = X_train.columns.tolist()
 forest_importances = pd.Series(importances, index=feature_names)
 
+# Prepare the data
+forest_importances.index = forest_importances.index.to_series().replace(label_replacements)
+
 
 # Apply a Seaborn style
 sns.set(style="whitegrid")
@@ -693,9 +660,7 @@ plt.title('Feature Importances using XGBoost')
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
-# Optional: Rotate x labels for better visibility
-plt.xticks(rotation=90)
-
+plt.xticks(rotation=45)
 sns.despine()
 
 # Show the plot
@@ -711,6 +676,8 @@ plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
 
 ####### With LightGBM ######
+
+#print("AT LightGBM")
 
 import lightgbm as lgb
 
@@ -768,16 +735,12 @@ plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, ve
 
 # Optional: Rotate x labels for better visibility
 plt.xticks(rotation=90)
-
 sns.despine()
 
 # Show the plot
 plt.tight_layout()
 file_path = folder_path / 'feature_importance_lightgbm.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
-
-
 
 
 explainer = shap.TreeExplainer(model)
@@ -799,3 +762,77 @@ plt.tight_layout()
 # Save the plot in high resolution
 file_path = folder_path / 'enhanced_shap_summary_plot_lgboost.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+
+
+
+
+
+
+
+
+
+####### With TabPFN ######
+#print("AT TabPFN")
+
+# Convert categorical features to 'category' dtype
+for feature in categorical_features:
+    df_original_tabpfn[feature] = df_original_tabpfn[feature].astype('category')
+
+# Prepare Features and Target variable
+X = df_original_tabpfn[numerical_features + categorical_features]
+y = df_original_tabpfn[target_column]
+
+# Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize a regressor
+reg = TabPFNRegressor()
+reg.fit(X_train, y_train)
+
+# Predict a point estimate (using the mean)
+predictions = reg.predict(X_test)
+
+# Calculate evaluation metrics
+mse = mean_squared_error(y_test, predictions)
+mae = mean_absolute_error(y_test, predictions)
+r2 = r2_score(y_test, predictions)
+
+# Prepare a list to collect result strings
+results = []
+results.append(f"Mean Squared Error (MSE): {mse}")
+results.append(f"Mean Absolute Error (MAE): {mae}")
+results.append(f"R-squared (R^2): {r2}")
+
+# Print the point estimate results
+print(results[-3])
+print(results[-2])
+print(results[-1])
+
+# Predict quantiles
+quantiles = [0.25, 0.5, 0.75]
+quantile_predictions = reg.predict(
+    X_test,
+    output_type="quantiles",
+    quantiles=quantiles,
+)
+
+# Calculate and print MAE for each quantile, also save to results
+for q, q_pred in zip(quantiles, quantile_predictions):
+    q_mae = mean_absolute_error(y_test, q_pred)
+    result_line = f"Quantile {q} MAE: {q_mae}"
+    results.append(result_line)
+    print(result_line)
+
+# Predict with mode
+mode_predictions = reg.predict(X_test, output_type="mode")
+mode_mae = mean_absolute_error(y_test, mode_predictions)
+result_line = f"Mode MAE: {mode_mae}"
+results.append(result_line)
+print(result_line)
+
+# Save all the results to a text file in the folder_path
+results_file_path = folder_path / 'results_tabpfnregressor.txt'
+with open(results_file_path, "w") as file:
+    file.write("\n".join(results))
+
+#print(f"Results have been saved to {results_file_path}")
