@@ -625,8 +625,6 @@ importances = model.feature_importances_
 # Map feature importances to feature names
 feature_names = X_train.columns.tolist()
 forest_importances = pd.Series(importances, index=feature_names)
-
-# Prepare the data
 forest_importances.index = forest_importances.index.to_series().replace(label_replacements)
 
 
@@ -702,15 +700,14 @@ importances = model.feature_importances_
 # Map feature importances to feature names
 feature_names = X_train.columns.tolist()
 forest_importances = pd.Series(importances, index=feature_names)
+forest_importances.index = forest_importances.index.to_series().replace(label_replacements)
+
 
 # Apply a Seaborn style
 sns.set(style="whitegrid")
-
-# Create the plot
 plt.figure(figsize=(12, 8))
 sns.barplot(x=forest_importances.index, y=forest_importances.values, hue=forest_importances.index, palette="muted", legend=False)
 
-# Add labels and title
 plt.xlabel('')
 plt.ylabel('Importance')
 plt.title('Feature Importances using LightGBM')
@@ -719,11 +716,9 @@ plt.title('Feature Importances using LightGBM')
 metrics_text = f"MAE: {mae:.4f}\nMSE: {mse:.4f}\nRMSE: {rmse:.4f}"
 plt.text(0.75, 0.6, metrics_text, transform=plt.gca().transAxes, fontsize=12, verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='black'))
 
-# Optional: Rotate x labels for better visibility
-plt.xticks(rotation=90)
+plt.xticks(rotation=45)
 sns.despine()
 
-# Show the plot
 plt.tight_layout()
 file_path = folder_path / 'feature_importance_lightgbm.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
@@ -743,12 +738,9 @@ np.abs(shap_values.sum(axis=1) + explanation.base_values - y_pred).max()
 
 
 plt.figure(figsize=(10, 8))
-# Generate the SHAP summary plot with a specified color palette
 shap.plots.beeswarm(explanation, show = False)
-# Adjust layout to fit and prevent label cut-off
 plt.tight_layout()
 
-# Save the plot in high resolution
 file_path = folder_path / 'enhanced_shap_summary_plot_lgboost.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
