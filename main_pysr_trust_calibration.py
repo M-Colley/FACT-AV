@@ -1,4 +1,4 @@
-#!/usr/bin/env/python
+#!/usr/bin/env python3
 # External packages
 import numpy as np
 from pysr import PySRRegressor
