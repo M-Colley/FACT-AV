@@ -29,6 +29,8 @@ from sklearn.inspection import permutation_importance
 from pathlib import Path
 
 from tabpfn import TabPFNRegressor
+from tabpfn.model_loading import save_fitted_tabpfn_model
+
 
 import os
 os.environ["LOKY_MAX_CPU_COUNT"] = "2"  # or any number that fits your system
@@ -228,6 +230,8 @@ plt.title(f"Estimated number of clusters from DBSCAN: {n_clusters_}")
 file_path = folder_path / f'dbscan_clusters_{n_clusters_}.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
 
+plt.close()
+
 
 # knn_graph = kneighbors_graph(features, 20, include_self=False)
 
@@ -416,7 +420,7 @@ sns.despine()
 
 file_path = folder_path / 'feature_importance_random_classifier.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 
 
@@ -485,7 +489,7 @@ plt.tight_layout()  # Adjust the plot to ensure everything fits without overlapp
 
 file_path = folder_path / 'perm_importances_random_regressor.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 # Rename the columns in X_test using label_replacements
 X_test_renamed = X_test.rename(columns=label_replacements)
@@ -503,7 +507,7 @@ plt.tight_layout()
 # Save the plot in high resolution
 file_path = folder_path / 'enhanced_shap_summary_plot.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 
 
@@ -576,7 +580,7 @@ plt.tight_layout()
 
 file_path = folder_path / 'feature_importance_catboost.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 explainercat = shap.TreeExplainer(model)
 shap_values_cat_test = explainercat.shap_values(X_test)
@@ -652,7 +656,7 @@ plt.tight_layout()
 
 file_path = folder_path / 'feature_importance_xgboost.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 
 
@@ -722,7 +726,7 @@ sns.despine()
 plt.tight_layout()
 file_path = folder_path / 'feature_importance_lightgbm.png'
 plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
-
+plt.close()
 
 explainer = shap.TreeExplainer(model)
 explanation = explainer(X_test)
@@ -767,8 +771,10 @@ y = df_original_tabpfn[target_column]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Initialize a regressor
-reg = TabPFNRegressor()
+# reg = TabPFNRegressor(device="cuda")
+reg = TabPFNRegressor(ignore_pretraining_limits=True)
 reg.fit(X_train, y_train)
+save_fitted_tabpfn_model(reg, "fact-av.tabpfn_fit")
 
 # Predict a point estimate (using the mean)
 predictions = reg.predict(X_test)
