@@ -8,6 +8,10 @@ ASSET_PATHS = [
     Path("MLP/epochs/epoch1990.jpg"),
 ]
 
+README_SCRIPT_PATHS = [
+    Path("ML-approaches.py"),
+]
+
 
 def test_readme_assets_exist():
     missing = [path.as_posix() for path in ASSET_PATHS if not path.exists()]
@@ -19,3 +23,8 @@ def test_model_json_is_valid():
     assert model_path.exists(), "your_model.json is missing"
     with model_path.open("r", encoding="utf-8") as handle:
         json.load(handle)
+
+
+def test_readme_script_paths_exist():
+    missing = [path.as_posix() for path in README_SCRIPT_PATHS if not path.exists()]
+    assert not missing, f"Missing README script paths: {missing}"
