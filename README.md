@@ -7,7 +7,7 @@ This repository contains code and analysis artifacts for studying how the mean I
 - `MLP/`: PyTorch dataset, network, training, and evaluation scripts.
 - `results/`: Generated figures and outputs for each modeling approach.
 - `outputs/`: Intermediate results produced by the scripts.
-- `ML-approaches.py`, `ML-approaches-New.py`: Traditional ML baselines and feature-importance workflows.
+- `ML-approaches.py`: Traditional ML baselines and feature-importance workflows.
 - `main_*pysr_trust_calibration*.py`: PySR symbolic regression pipelines.
 
 ## Data
