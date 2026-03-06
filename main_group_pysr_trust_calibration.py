@@ -421,7 +421,8 @@ def custom_function(df, id):
     print("")
 
     # Create or open a text file for writing
-    with open(f'split_groups_personalized/model_info_{id}.txt', 'w') as f:
+    file_path = results_path_split_groups_personalized / f"model_info_{id}.txt"
+    with file_path.open("w") as f:
         f.write("SYMPY\n")
         f.write(str(model.sympy()))
         f.write("\n\nLATEX\n")

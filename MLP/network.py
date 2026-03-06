@@ -2,7 +2,7 @@ import torch
 from torch.nn import Module
 
 class Model(Module):
-    def __init__(self, input_size, *args, **kwargs) -> None:
+    def __init__(self, input_size, num_classes=5, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.model = torch.nn.Sequential(
             torch.nn.Linear(input_size, 128),
@@ -16,7 +16,7 @@ class Model(Module):
             torch.nn.Dropout(0.5),
             torch.nn.Linear(1024, 1024),
             torch.nn.ReLU(),
-            torch.nn.Linear(1024, 5)
+            torch.nn.Linear(1024, num_classes)
         )
         
     def forward(self, x):

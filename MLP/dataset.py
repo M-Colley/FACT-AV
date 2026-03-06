@@ -1,3 +1,4 @@
+import math
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -8,6 +9,8 @@ from torch.utils.data.dataset import Dataset
 
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
+
+TRUST_LABEL_MODES = ("floor", "separate_fractional")
 
 
 def _encode_one_hot(value, classes, feature_name):
@@ -70,16 +73,57 @@ def encode_license(string):
     return torch.tensor([string == "Y"]).float()
 
 
-# function to add value labels
-def addlabels(x, y):
-    for i in range(len(x)):
-        plt.text(i, y[i], f"{y[i]}({(y[i] / np.sum(y)) * 100:0.1f}%)", ha="center")
+def resolve_trust_class_values(trust_values, trust_label_mode):
+    if trust_label_mode == "floor":
+        return [1.0, 2.0, 3.0, 4.0, 5.0]
+
+    if trust_label_mode == "separate_fractional":
+        return sorted({float(value) for value in trust_values.dropna()})
+
+    raise ValueError(
+        f"Unknown trust_label_mode: {trust_label_mode!r}. Expected one of {TRUST_LABEL_MODES}."
+    )
+
+
+def encode_trust_value(value, trust_label_mode, class_values):
+    numeric_value = float(value)
+
+    if trust_label_mode == "floor":
+        floored_value = min(5, max(1, math.floor(numeric_value)))
+        return floored_value - 1
+
+    if trust_label_mode == "separate_fractional":
+        for index, class_value in enumerate(class_values):
+            if np.isclose(numeric_value, class_value):
+                return index
+        raise ValueError(
+            f"Unknown trust value {numeric_value!r} for mode {trust_label_mode!r}. "
+            f"Expected one of {class_values}."
+        )
+
+    raise ValueError(
+        f"Unknown trust_label_mode: {trust_label_mode!r}. Expected one of {TRUST_LABEL_MODES}."
+    )
+
+
+def addlabels(x_positions, y_values):
+    total = np.sum(y_values)
+    for x_position, y_value in zip(x_positions, y_values):
+        if y_value == 0:
+            continue
+        plt.text(
+            x_position,
+            y_value,
+            f"{int(y_value)}({(y_value / total) * 100:0.1f}%)",
+            ha="center",
+        )
 
 
 class TrustDataset(Dataset):
-    def __init__(self, file_path, split) -> None:
+    def __init__(self, file_path, split, trust_label_mode="floor") -> None:
         super().__init__()
         self.split = split
+        self.trust_label_mode = trust_label_mode
         # read data
 
         # Specify the sheet name (optional)
@@ -89,6 +133,8 @@ class TrustDataset(Dataset):
         df = pd.read_excel(file_path, sheet_name=sheet_name)
 
         df.dropna(inplace=True)
+        self.class_values = resolve_trust_class_values(df["trust"], trust_label_mode)
+        self.num_classes = len(self.class_values)
 
         ### ONCE FOR ALL DATA
 
@@ -172,26 +218,33 @@ class TrustDataset(Dataset):
             # all datapoints
             self.datapoints = x_values_extended[0:]
 
-        self.labels, self.counts = np.unique(
-            [int(d[-1] - 1) for d in self.datapoints], return_counts=True
-        )
+        encoded_labels = [
+            encode_trust_value(d[-1], self.trust_label_mode, self.class_values)
+            for d in self.datapoints
+        ]
+        self.labels, self.counts = np.unique(encoded_labels, return_counts=True)
         print(f"Found {len(self.datapoints)} for split {self.split}")
         print(f"Labels: {self.labels} counts {self.counts}")
         print(f"Labels: {self.labels} weights {np.sum(self.counts) / self.counts}")
 
-        bar_labels = [f"Trust Level {l + 1}" for l in range(5)]
-        bar_colors = ["tab:red", "tab:blue", "tab:gray", "tab:orange", "tab:green"]
-        plt.bar(bar_labels, self.counts, width=0.8, color=bar_colors)
+        positions = np.arange(self.num_classes)
+        full_counts = np.zeros(self.num_classes, dtype=int)
+        full_counts[self.labels] = self.counts
+        bar_labels = [f"Trust {value:g}" for value in self.class_values]
+        bar_colors = plt.cm.tab10(np.linspace(0, 1, self.num_classes))
+        plt.bar(positions, full_counts, width=0.8, color=bar_colors)
         # Add in a title and axes labels
         plt.title(f"{str(self.split).capitalize()} Dataset Label Distribution")
         plt.xlabel("Labels")
-        addlabels(self.labels, self.counts)
+        plt.xticks(positions, bar_labels, rotation=45 if self.num_classes > 5 else 0)
+        addlabels(positions, full_counts)
         # Set the tick locations
         plt.yticks([])
 
-        file_path = results_folder / f"{self.split}.labels.pdf"
+        mode_suffix = "" if self.trust_label_mode == "floor" else f".{self.trust_label_mode}"
+        file_path = results_folder / f"{self.split}{mode_suffix}.labels.pdf"
         plt.savefig(file_path, bbox_inches="tight", pad_inches=0)
-        file_path = results_folder / f"{self.split}.labels.jpg"
+        file_path = results_folder / f"{self.split}{mode_suffix}.labels.jpg"
         plt.savefig(file_path, bbox_inches="tight", pad_inches=0)
         plt.close()
 
@@ -227,5 +280,7 @@ class TrustDataset(Dataset):
             ],
             dim=1,
         )
-        y = torch.tensor(y - 1).long()
+        y = torch.tensor(
+            encode_trust_value(y, self.trust_label_mode, self.class_values)
+        ).long()
         return x.flatten(), y.flatten()

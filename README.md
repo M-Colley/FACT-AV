@@ -56,6 +56,15 @@ python MLP/eval.py
 ```
 The MLP is trained on ten features, including mIoU, demographics, and scenario metadata. It uses a 4-layer architecture with dimensions `[128, 512, 1024, 1024]`, dropout of 0.5, and the AdamW optimizer.
 
+By default, the MLP keeps the current floor-based label mapping for trust values, so `3.5` is treated as class `3` and `4.5` is treated as class `4`. Checkpoints are selected by the best validation F1 score and then evaluated once on the test split.
+
+To model half-step trust values as their own classes instead, run:
+```bash
+python MLP/train.py --trust-label-mode separate_fractional
+python MLP/eval.py --trust-label-mode separate_fractional
+```
+This mode learns a separate class for each observed trust value, such as `1.0`, `1.5`, `2.0`, `2.5`, and so on.
+
 ![MLP Training Snapshot](MLP/epochs/epoch1990.jpg)
 
 ## Testing
