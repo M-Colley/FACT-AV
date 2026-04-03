@@ -1,18 +1,18 @@
 openpyxl>=3.1.5
-pysr>=1.5.9
+pysr>=1.5.10
 seaborn>=0.13.2
 matplotlib>=3.10.8
 pandas>=2.3.3
 bottleneck>=1.5.0
 scikit-learn>=1.8.0
-shap>=0.50.0
+shap>=0.51.0
 catboost>=1.2.10
 xgboost>=3.2.0
 lightgbm>=4.6.0
-torchmetrics>=1.8.2
-numpy >= 2.4.2
+torchmetrics>=1.9.0
+numpy >= 2.4.3
 
-tabpfn>=6.4.1
+tabpfn>=7.1.0
 
 
 
