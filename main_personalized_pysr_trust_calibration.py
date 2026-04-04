@@ -5,7 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import sympy as sympy
+import sympy
 from pysr import PySRRegressor
 
 warnings.filterwarnings("ignore")
