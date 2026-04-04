@@ -138,9 +138,6 @@ class TrustDataset(Dataset):
 
         ### ONCE FOR ALL DATA
 
-        x_values = df["mIoU"].to_numpy()
-        x_values = x_values.reshape(-1, 1)
-
         y_values = df[["trust"]].dropna()
 
         x_values = df["mIoU"].dropna().to_numpy()

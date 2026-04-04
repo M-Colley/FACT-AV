@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from matplotlib.pylab import plt
+import matplotlib.pyplot as plt
 from torch.utils.data.dataloader import DataLoader
 from torchmetrics.functional.classification import multiclass_accuracy, multiclass_f1_score
 from tqdm import tqdm

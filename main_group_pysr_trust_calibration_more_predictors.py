@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import sympy as sympy
+import sympy
 from pysr import PySRRegressor
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
