@@ -131,10 +131,10 @@ class TestDataProcessorLoadErrors:
 # ---------------------------------------------------------------------------
 
 class TestPrepareCategoricalAsString:
-    def test_converts_specified_columns_to_object_dtype(self):
+    def test_converts_specified_columns_to_string_dtype(self):
         df = pd.DataFrame({"cat": [1, 2, 3], "num": [4.0, 5.0, 6.0]})
         result = prepare_categorical_as_string(df, ["cat"])
-        assert result["cat"].dtype == object
+        assert pd.api.types.is_string_dtype(result["cat"])
 
     def test_leaves_unspecified_columns_unchanged(self):
         df = pd.DataFrame({"cat": [1, 2, 3], "num": [4.0, 5.0, 6.0]})
@@ -150,8 +150,8 @@ class TestPrepareCategoricalAsString:
     def test_converts_multiple_columns(self):
         df = pd.DataFrame({"a": [1, 2], "b": [3, 4], "c": [5.0, 6.0]})
         result = prepare_categorical_as_string(df, ["a", "b"])
-        assert result["a"].dtype == object
-        assert result["b"].dtype == object
+        assert pd.api.types.is_string_dtype(result["a"])
+        assert pd.api.types.is_string_dtype(result["b"])
         assert result["c"].dtype == float
 
 

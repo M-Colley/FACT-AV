@@ -1,4 +1,8 @@
-"""Tests for helper functions in main_group_pysr_trust_calibration_more_predictors.py."""
+"""Tests for helper functions in main_group_pysr_trust_calibration_more_predictors.py.
+
+PySR requires a working Julia installation. These tests are skipped automatically
+when Julia is not available (e.g. fresh CI runners, hash-mismatch download failures).
+"""
 
 import sys
 from pathlib import Path
@@ -9,7 +13,10 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from main_group_pysr_trust_calibration_more_predictors import (
+# Skip the whole module if PySR/Julia cannot be imported.
+pytest.importorskip("pysr", reason="PySR / Julia not available in this environment")
+
+from main_group_pysr_trust_calibration_more_predictors import (  # noqa: E402
     build_feature_matrix,
     find_equal_groups,
     split_groups,
