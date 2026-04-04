@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # External packages
-from pickle import TRUE
 import numpy as np
 from pysr import PySRRegressor
 import seaborn as sns
@@ -244,6 +243,7 @@ for path in file_paths:
 
     file_path = results_path_split_groups / f'relationship_pysr_other_rows_df_stacked_{name_without_extension}.png'
     plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
 
 
@@ -305,6 +305,7 @@ for path in file_paths:
 
     file_path = results_path_split_groups / f'relationship_pysr_all_equal_df_{name_without_extension}.png'
     plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
 
 
@@ -367,6 +368,7 @@ for path in file_paths:
 
     file_path = results_path_split_groups / f'relationship_pysr_other_rows_df_{name_without_extension}.png'
     plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
 
 
@@ -452,6 +454,7 @@ def custom_function(df, id):
     
     file_path = results_path_split_groups_personalized / f'relationship_pysr_{id}.png'
     plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
 
 unique_prolifics = other_rows_df['ProlificID'].unique()
