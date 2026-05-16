@@ -20,6 +20,9 @@ This repository contains the full analysis pipeline for studying how the mean In
    - [MLP Classifier — Training](#6-mlp-classifier--training)
    - [MLP Classifier — Evaluation](#7-mlp-classifier--evaluation)
    - [Running All PySR Pipelines at Once (Windows)](#8-running-all-pysr-pipelines-at-once-windows)
+   - [Publication Figures](#9-publication-figures)
+   - [Advanced Explainability](#10-advanced-explainability)
+   - [Mixed-Effects Baseline](#11-mixed-effects-baseline)
 7. [Configuration Reference](#configuration-reference)
 8. [Output Artifacts](#output-artifacts)
 9. [Running Tests](#running-tests)
@@ -332,9 +335,19 @@ python MLP/eval.py --checkpoint-path path/to/checkpoint.pt
 **Outputs** → `results/MLP/`
 
 ```
-confusion_matrix.pdf / .jpg          # floor mode
-confusion_matrix_separate_fractional.pdf / .jpg
+confusion_matrix.pdf / .png             # floor mode, annotated with QWK + MAE + F1
+confusion_matrix_separate_fractional.pdf / .png
+calibration.pdf / .png                  # reliability diagram + confidence histogram (ECE)
+calibration_separate_fractional.pdf / .png
+per_class_metrics.csv                   # per-class precision / recall / F1 / support
+per_class_metrics_separate_fractional.csv
 ```
+
+In addition to accuracy and macro-F1, the evaluator reports:
+
+- **Quadratic-Weighted Kappa (QWK)** — ordinal-aware agreement; rewards predictions that are close to the true class even if not exact. Standard for ordinal targets like Likert ratings.
+- **MAE in trust units** — average distance between the predicted and true trust value on the original 1–5 scale.
+- **Expected Calibration Error (ECE)** — average gap between predicted confidence and empirical accuracy, summarising the reliability diagram as a scalar. Lower is better.
 
 ---
 
@@ -345,6 +358,82 @@ all_pysr.bat
 ```
 
 This batch script sequentially executes all four PySR scripts. PySR is compute-intensive; on a typical workstation expect each script to run for 30–90 minutes depending on dataset size and `niterations`.
+
+---
+
+### 9. Publication Figures
+
+Generates four reviewer-grade figures consolidating model behaviour. All figures use a colorblind-safe Okabe-Ito palette and standardised typography defined in `plotting_style.py`.
+
+```bash
+python publication_figures.py
+```
+
+**What it produces** → `results/publication/`
+
+| File | Content |
+|---|---|
+| `forest_feature_importance.{pdf,png}` | Cross-model normalized feature importance comparison (one row per feature, one marker per model) |
+| `importance_rank_heatmap.{pdf,png}` | Companion heatmap showing per-feature rank stability across RF, XGBoost, LightGBM, CatBoost |
+| `miou_trust_panel.{pdf,png}` | 2×2 panel of mIoU → trust curves (one scenario per panel, ambiguous vs boasting overlaid) with bootstrap 95% bands |
+| `pdp_ice_miou_by_cell.{pdf,png}` | Partial dependence + ICE for mIoU across the 8 (INTRODUCTION × SCENARIO) cells |
+| `model_importances_raw.csv` | Tidy importance values used as input to the forest plot |
+
+All models use a participant-grouped train/test split (`GroupShuffleSplit` on `ProlificID`) to prevent leakage across the splits.
+
+---
+
+### 10. Advanced Explainability
+
+Extends the existing SHAP bar/beeswarm plots with three new outputs aimed directly at the moderation hypotheses (does mIoU × INTRODUCTION or mIoU × SCENARIO matter?).
+
+```bash
+python explainability_extras.py
+```
+
+**What it produces** → `results/publication/explainability/`
+
+| File | Content |
+|---|---|
+| `shap_interaction_heatmap.{pdf,png}` | Mean absolute pairwise SHAP interaction strength across all features |
+| `shap_top_interactions.csv` | Ranked table of the 15 strongest feature×feature interactions |
+| `shap_miou_moderation.{pdf,png}` | SHAP(mIoU) coloured by INTRODUCTION (panel A) and SCENARIO (panel B) — directly visualises moderation |
+| `dice_counterfactuals.csv` | DiCE-generated minimal feature changes that would flip a low-trust prediction to high-trust |
+| `dice_feature_change_frequency.{pdf,png}` | How often each feature is suggested for change across counterfactual examples |
+| `anchors_rules.txt` | Local high-precision IF–THEN rules. Uses `alibi.AnchorTabular` when available; otherwise falls back to a shallow surrogate decision tree |
+
+> `alibi` does not build cleanly on every Windows install; the script transparently uses the surrogate-tree fallback when import fails.
+
+---
+
+### 11. Mixed-Effects Baseline
+
+The study uses a within-subjects design — every participant rates trust across multiple mIoU values, two INTRODUCTION conditions and four SCENARIOs. Treating each row as i.i.d. (as the ML baselines do) violates the repeated-measures structure. This script fits a linear mixed-effects (LME) model with a random intercept per participant and tests the moderation hypotheses directly.
+
+```bash
+python mixed_effects_baseline.py
+```
+
+**Three nested models are fit and compared (likelihood-ratio + AIC + BIC):**
+
+| Model | Fixed effects |
+|---|---|
+| `M0` | (intercept only — null variance decomposition) |
+| `M1` | mIoU, INTRODUCTION, SCENARIO |
+| `M2` | M1 + mIoU × INTRODUCTION + mIoU × SCENARIO interactions |
+
+**What it produces** → `results/publication/mixed_effects/`
+
+| File | Content |
+|---|---|
+| `summary_M0.txt` / `summary_M1.txt` / `summary_M2.txt` | Full statsmodels textual summaries |
+| `model_comparison.csv` | AIC, BIC, log-likelihood, LR test for nested model comparison |
+| `fixed_effects_M2.csv` | Tidy coefficient table with 95% CIs and p-values |
+| `icc.json` | Intraclass correlation + between-vs-within-participant variance decomposition |
+| `fixed_effects_forest.{pdf,png}` | Coefficient forest plot for M2 with 95% CIs (significant effects highlighted) |
+| `interaction_marginal_effects.{pdf,png}` | Predicted-trust curves over mIoU per (INTRODUCTION × SCENARIO) cell from M2 |
+
+> The script uses `data/all_combined_prepared_with_demographics_with_baseline.xlsx` because it is the only file that retains real ProlificIDs (134 participants).
 
 ---
 
@@ -507,6 +596,8 @@ python MLP/train.py
 | **Feature Importance (Random Forest)** | mIoU contributes ~23% feature importance to trust prediction |
 | **Symbolic Regression** | Weak overall correlation (R²=0.01); filtered subsets (equal-trust groups) show stronger trends |
 | **MLP Classifier** | 74.2% accuracy and F1 on a 5-class trust estimation task |
+| **Mixed-Effects Baseline** | ICC=0.69 — about 69% of variance in trust ratings is between participants rather than within. M2 (with mIoU × SCENARIO interactions) fits significantly better than the main-effects model (LR p≈0.006); the mIoU × `NeueMitte` (City) interaction is the strongest moderator (p≈0.001). |
+| **SHAP moderation analysis** | Strongest pairwise interactions involve Age and License years; the mIoU slope visibly differs between scenarios and intro conditions, consistent with the LME interaction tests. |
 
 ### Qualitative Feedback Highlights
 
