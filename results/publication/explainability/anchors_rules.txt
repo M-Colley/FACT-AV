@@ -1,0 +1,34 @@
+# Local high-precision rules for trust classification (low/med vs high)
+# Surrogate-tree fallback (alibi not installed)
+
+|--- DrivingFrequency_A6 <= 0.50
+|   |--- Age <= 40.50
+|   |   |--- Distance_A5 <= 0.50
+|   |   |   |--- Age <= 20.50
+|   |   |   |   |--- class: 0
+|   |   |   |--- Age >  20.50
+|   |   |   |   |--- class: 1
+|   |   |--- Distance_A5 >  0.50
+|   |   |   |--- Age <= 21.00
+|   |   |   |   |--- class: 1
+|   |   |   |--- Age >  21.00
+|   |   |   |   |--- class: 0
+|   |--- Age >  40.50
+|   |   |--- Distance_A1 <= 0.50
+|   |   |   |--- DrivingFrequency_A4 <= 0.50
+|   |   |   |   |--- class: 1
+|   |   |   |--- DrivingFrequency_A4 >  0.50
+|   |   |   |   |--- class: 1
+|   |   |--- Distance_A1 >  0.50
+|   |   |   |--- Education_A4 <= 0.50
+|   |   |   |   |--- class: 0
+|   |   |   |--- Education_A4 >  0.50
+|   |   |   |   |--- class: 1
+|--- DrivingFrequency_A6 >  0.50
+|   |--- mIoU <= 84.42
+|   |   |--- class: 0
+|   |--- mIoU >  84.42
+|   |   |--- INTRODUCTION_ambiguous <= 0.50
+|   |   |   |--- class: 1
+|   |   |--- INTRODUCTION_ambiguous >  0.50
+|   |   |   |--- class: 0

@@ -1,8 +1,8 @@
 SYMPY
-4.294524 - sin(15.1686779458724*(0.506714191052836*x0 + 1)**4)
+4.966721 - tan(cos(tan(x0/0.37383464))**6)
 
 LATEX
-4.29 - \sin{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)}
+4.97 - \tan{\left(\cos^{6}{\left(\tan{\left(\frac{x_{0}}{0.374} \right)} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,12 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.40$ & $1$ & $0.615$ & $0.0$ \\
 $y = 4.84 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.569$ & $0.0258$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos{\left(x_{0} \right)} \right)} + 3.74 \end{dmath*} \end{minipage} & $5$ & $0.555$ & $0.0255$ \\
-$y = \cos^{2}{\left(x_{0} \cdot 5.37 \right)} + 3.88$ & $6$ & $0.338$ & $0.497$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.29 - \sin{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $7$ & $0.251$ & $0.295$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.29 - \sin^{3}{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $8$ & $0.234$ & $0.0718$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \sin^{3}{\left(15.2 \left(0.507 x_{0} + 1\right)^{4} \right)} \end{dmath*} \end{minipage} & $9$ & $0.226$ & $0.0355$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.87 - \tan^{2}{\left(\sin^{4}{\left(\left(x_{0} - 12.9\right)^{3} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.188$ & $0.185$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos{\left(x_{0} \right)} \right)} - -3.74 \end{dmath*} \end{minipage} & $5$ & $0.555$ & $0.0255$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.86 - \cos^{2}{\left(x_{0} \left(-5.35\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.335$ & $0.504$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.97 - \cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.374} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.297$ & $0.122$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.20 - \tan{\left(\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.374} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.190$ & $0.445$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.97 - \tan{\left(\cos^{6}{\left(\tan{\left(\frac{x_{0}}{0.374} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.137$ & $0.327$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.97 - \tan^{2}{\left(\cos^{8}{\left(\tan{\left(\frac{x_{0}}{0.374} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.104$ & $0.277$ \\
 \bottomrule
 \end{tabular}
 \end{center}

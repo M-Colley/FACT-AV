@@ -1,8 +1,8 @@
 SYMPY
-cos(cos(x0/0.009009164)**2) + 3.0362597
+cos(cos(x0*16.576403)) + 3.0968237
 
 LATEX
-\cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.00901} \right)} \right)} + 3.04
+\cos{\left(\cos{\left(x_{0} \cdot 16.6 \right)} \right)} + 3.10
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,12 @@ Equation & Complexity & Loss & Score \\
 $y = 3.88$ & $1$ & $1.04$ & $0.0$ \\
 $y = x_{0}^{0.313}$ & $3$ & $1.04$ & $0.000279$ \\
 $y = \log{\left(x_{0} \right)}^{0.924}$ & $4$ & $1.04$ & $0.00147$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.57\right) - \frac{52.2}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $1.04$ & $0.000309$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-0.0396\right) \right)} + 2.93 \end{dmath*} \end{minipage} & $6$ & $1.04$ & $0.00229$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.00901} \right)} \right)} + 3.04 \end{dmath*} \end{minipage} & $7$ & $1.02$ & $0.0129$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\sin{\left(\frac{x_{0}}{0.00901} \right)} \right)} \right)} + 3.06 \end{dmath*} \end{minipage} & $8$ & $1.02$ & $0.000733$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\sin{\left(\frac{x_{0}}{0.00901} \right)} + 0.0894 \right)} \right)} + 3.05 \end{dmath*} \end{minipage} & $10$ & $1.02$ & $0.000621$ \\
+$y = 4.57 - \frac{52.3}{x_{0}}$ & $5$ & $1.04$ & $0.000309$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(x_{0} \left(-0.0595\right) \right)} + 2.95 \end{dmath*} \end{minipage} & $6$ & $1.04$ & $0.00255$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos{\left(x_{0} \cdot 16.6 \right)} \right)} + 3.10 \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00681$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos{\left(\sin{\left(x_{0} \cdot 2.08 \right)} \right)} \right)} + 3.19 \end{dmath*} \end{minipage} & $8$ & $1.03$ & $0.000758$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos{\left(16.6 x_{0} \right)} + 0.0838 \right)} + 3.06 \end{dmath*} \end{minipage} & $9$ & $1.03$ & $0.000709$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos{\left(\cos{\left(x_{0} \left(-2.10\right) \right)} + 0.0908 \right)} \right)} + 3.18 \end{dmath*} \end{minipage} & $10$ & $1.03$ & $0.000185$ \\
 \bottomrule
 \end{tabular}
 \end{center}

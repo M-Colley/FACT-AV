@@ -10,8 +10,15 @@ shap>=0.51.0
 catboost>=1.2.10
 xgboost>=3.2.0
 lightgbm>=4.6.0
-torch>=2.5.0
+torch>=2.10.0
 torchmetrics>=1.9.0
 tqdm>=4.67.3
 numpy>=2.4.4
-tabpfn>=7.1.1
+tabpfn>=8.0.2
+statsmodels>=0.14.0
+scipy>=1.11.0
+dice-ml>=0.11
+# Optional: alibi enables canonical Anchors explanations; otherwise a surrogate
+# decision tree is used as a fallback. ``alibi`` does not build cleanly on all
+# Windows installs, so we keep it as a soft dependency.
+# alibi>=0.9.0

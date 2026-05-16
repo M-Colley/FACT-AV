@@ -1,8 +1,8 @@
 SYMPY
-(x0 + tan(x0*0.66518855))**0.31229508
+log(x0*cos(cos(tan(6.2693837590736*x0))))
 
 LATEX
-\left(x_{0} + \tan{\left(x_{0} \cdot 0.665 \right)}\right)^{0.312}
+\log{\left(x_{0} \cos{\left(\cos{\left(\tan{\left(6.27 x_{0} \right)} \right)} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,12 @@ Equation & Complexity & Loss & Score \\
 $y = 3.89$ & $1$ & $1.15$ & $0.0$ \\
 $y = x_{0}^{0.313}$ & $3$ & $1.15$ & $0.00203$ \\
 $y = \log{\left(0.641 x_{0} \right)}$ & $4$ & $1.15$ & $0.000229$ \\
-$y = x_{0} \cdot 0.0128 - -2.91$ & $5$ & $1.15$ & $0.000135$ \\
+$y = x_{0} \cdot 0.0129 + 2.91$ & $5$ & $1.15$ & $0.000134$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos{\left(x_{0} \right)}\right)^{0.313} \end{dmath*} \end{minipage} & $6$ & $1.15$ & $0.000477$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{0.315} \end{dmath*} \end{minipage} & $7$ & $1.15$ & $0.00166$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 0.665 \right)}\right)^{0.312} \end{dmath*} \end{minipage} & $8$ & $1.14$ & $0.00475$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(0.648 x_{0} - \tan{\left(3.78 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.14$ & $0.00257$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} + 0.606 \right)}\right)^{0.313} \end{dmath*} \end{minipage} & $8$ & $1.14$ & $0.00349$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \cos{\left(\cos{\left(\tan{\left(6.27 x_{0} \right)} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.14$ & $0.00503$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \cos{\left(\cos{\left(\sin{\left(\tan{\left(10.2 x_{0} \right)} \right)} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $1.13$ & $0.00490$ \\
 \bottomrule
 \end{tabular}
 \end{center}

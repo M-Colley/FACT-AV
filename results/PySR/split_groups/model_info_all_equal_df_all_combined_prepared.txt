@@ -1,8 +1,8 @@
 SYMPY
-exp((x0 + tan(x0*(-2.2938533)))**0.081594914)
+exp((x0 + tan(x0*0.2953362))**0.08172885)
 
 LATEX
-e^{\left(x_{0} + \tan{\left(x_{0} \left(-2.29\right) \right)}\right)^{0.0816}}
+e^{\left(x_{0} + \tan{\left(x_{0} \cdot 0.295 \right)}\right)^{0.0817}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.16$ & $1$ & $0.931$ & $0.0$ \\
 $y = e^{x_{0}^{0.0816}}$ & $4$ & $0.930$ & $0.000259$ \\
 $y = x_{0} \cdot 0.00505 + 3.77$ & $5$ & $0.930$ & $6.78 \cdot 10^{-5}$ \\
-$y = x_{0}^{3} \cdot 2.89 \cdot 10^{-7} + 4.02$ & $6$ & $0.930$ & $2.46 \cdot 10^{-5}$ \\
-$y = 6.59 \cdot 10^{-25} x_{0}^{12} + 4.12$ & $7$ & $0.930$ & $3.45 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{0.0820}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000201$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \left(-2.29\right) \right)}\right)^{0.0816}} \end{dmath*} \end{minipage} & $9$ & $0.929$ & $0.000331$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} - \tan{\left(x_{0}^{2} \left(-2.29\right) \right)}\right)^{0.0816}} \end{dmath*} \end{minipage} & $10$ & $0.929$ & $4.57 \cdot 10^{-5}$ \\
+$y = x_{0}^{4} \cdot 2.81 \cdot 10^{-9} + 4.06$ & $6$ & $0.930$ & $3.51 \cdot 10^{-5}$ \\
+$y = 3.81 \cdot 10^{-17} x_{0}^{8} + 4.10$ & $7$ & $0.930$ & $2.90 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{0.0820}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000196$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \cdot 0.295 \right)}\right)^{0.0817}} \end{dmath*} \end{minipage} & $9$ & $0.929$ & $0.000318$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 0.295 \right)}\right) 0.00505 + 3.77 \end{dmath*} \end{minipage} & $10$ & $0.929$ & $4.85 \cdot 10^{-5}$ \\
 \bottomrule
 \end{tabular}
 \end{center}

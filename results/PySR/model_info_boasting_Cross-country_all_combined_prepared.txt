@@ -1,5 +1,5 @@
 SYMPY
-x0**0.32224193
+x0**0.32225585
 
 LATEX
 x_{0}^{0.322}
@@ -19,12 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.05$ & $1$ & $0.901$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.892$ & $0.00540$ \\
 $y = \log{\left(x_{0} - 19.2 \right)}$ & $4$ & $0.891$ & $0.000252$ \\
-$y = 5.43 - \frac{105.}{x_{0}}$ & $5$ & $0.891$ & $0.000240$ \\
-$y = \cos{\left(\frac{x_{0}}{12.7} \right)} + 3.17$ & $6$ & $0.890$ & $0.00133$ \\
-$y = 4.12 - \sin^{3}{\left(x_{0}^{0.511} \right)}$ & $7$ & $0.889$ & $0.00144$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.12 - \tanh{\left(\sin^{3}{\left(x_{0}^{0.511} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.889$ & $4.97 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.12 - \tanh{\left(\tanh{\left(\sin^{3}{\left(x_{0}^{0.511} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.889$ & $3.22 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.12 - \tanh{\left(\tanh{\left(\tanh{\left(\sin^{3}{\left(x_{0}^{0.511} \right)} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.889$ & $1.02 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-5.43\right) - \frac{106.}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $0.891$ & $0.000241$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $7$ & $0.890$ & $0.000729$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 20.5 \right)} \end{dmath*} \end{minipage} & $8$ & $0.890$ & $0.000284$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(1.60 x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.889$ & $0.00111$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\tan{\left(x_{0}^{0.938} \right)} \right)} - 20.1 \right)} \end{dmath*} \end{minipage} & $10$ & $0.888$ & $0.00106$ \\
 \bottomrule
 \end{tabular}
 \end{center}

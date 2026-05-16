@@ -1,0 +1,6 @@
+{
+  "between_participant_var": 0.6587157419745635,
+  "residual_var": 0.2920629407378984,
+  "ICC": 0.6928171129114122,
+  "interpretation": "69.3% of variance in trust ratings is between participants; 30.7% is within participants."
+}

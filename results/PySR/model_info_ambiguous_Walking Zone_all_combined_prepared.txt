@@ -1,8 +1,8 @@
 SYMPY
-log(x0 - exp(3*cos(1.2444278*x0)))
+log(x0 + log(cos(0.6017181*x0)**6))
 
 LATEX
-\log{\left(x_{0} - e^{3 \cos{\left(1.24 x_{0} \right)}} \right)}
+\log{\left(x_{0} + \log{\left(\cos^{6}{\left(0.602 x_{0} \right)} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +19,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.27$ & $1$ & $0.618$ & $0.0$ \\
 $y = x_{0}^{0.334}$ & $3$ & $0.615$ & $0.00275$ \\
 $y = \log{\left(x_{0} \right)}^{0.989}$ & $4$ & $0.613$ & $0.00203$ \\
-$y = x_{0}^{0.221} \cdot 1.64$ & $5$ & $0.613$ & $1.19 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.28 + \cos{\left(x_{0} \right)} \left(-0.105\right) \end{dmath*} \end{minipage} & $6$ & $0.613$ & $0.000194$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(0.874 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.611$ & $0.00314$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(\cos^{2}{\left(x_{0} \right)} + 0.953 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00343$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - e^{3 \cos{\left(1.24 x_{0} \right)}} \right)} \end{dmath*} \end{minipage} & $9$ & $0.605$ & $0.00699$ \\
+$y = \left(x_{0} + 31.1\right)^{0.310}$ & $5$ & $0.613$ & $1.22 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} - 0.905 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.612$ & $0.00107$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{2}{\left(0.601 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00461$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{6}{\left(0.602 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.606$ & $0.00501$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{8}{\left(\tan{\left(x_{0} \right)} - 0.618 \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.605$ & $0.00131$ \\
 \bottomrule
 \end{tabular}
 \end{center}

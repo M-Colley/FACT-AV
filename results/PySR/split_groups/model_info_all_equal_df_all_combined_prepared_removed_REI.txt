@@ -1,8 +1,8 @@
 SYMPY
-cos(x0*(-8.177381))*0.045062598 + 4.196442
+4.245012 + cos(x0**1.9676427)**2*(-0.08251479)
 
 LATEX
-\cos{\left(x_{0} \left(-8.18\right) \right)} 0.0451 + 4.20
+4.25 + \cos^{2}{\left(x_{0}^{1.97} \right)} \left(-0.0825\right)
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,9 +18,12 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.20$ & $1$ & $0.918$ & $0.0$ \\
 $y = e^{x_{0}^{0.0831}}$ & $4$ & $0.917$ & $5.82 \cdot 10^{-5}$ \\
-$y = x_{0} \cdot 0.00366 + 3.91$ & $5$ & $0.917$ & $0.000278$ \\
-$y = 4.05 - - 2.39 \cdot 10^{-5} x_{0}^{2}$ & $6$ & $0.917$ & $2.18 \cdot 10^{-7}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(x_{0} \left(-8.18\right) \right)} 0.0451 + 4.20 \end{dmath*} \end{minipage} & $8$ & $0.917$ & $0.000289$ \\
+$y = x_{0} \cdot 0.00365 + 3.92$ & $5$ & $0.917$ & $0.000278$ \\
+$y = x_{0}^{2} \cdot 2.40 \cdot 10^{-5} + 4.05$ & $6$ & $0.917$ & $2.18 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.0742 \cos^{2}{\left(\sqrt{x_{0}} \right)} + 4.15 \end{dmath*} \end{minipage} & $7$ & $0.917$ & $2.40 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.25 + \cos^{2}{\left(x_{0}^{1.97} \right)} \left(-0.0825\right) \end{dmath*} \end{minipage} & $8$ & $0.917$ & $0.000371$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.25 + \tanh{\left(\cos^{2}{\left(x_{0}^{1.97} \right)} \right)} \left(-0.115\right) \end{dmath*} \end{minipage} & $9$ & $0.917$ & $8.26 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.25 - 0.131 \tanh{\left(\tanh{\left(\cos^{2}{\left(x_{0}^{1.97} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.917$ & $2.24 \cdot 10^{-5}$ \\
 \bottomrule
 \end{tabular}
 \end{center}

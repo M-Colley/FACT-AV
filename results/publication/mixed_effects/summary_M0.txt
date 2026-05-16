@@ -1,0 +1,14 @@
+         Mixed Linear Model Regression Results
+========================================================
+Model:            MixedLM Dependent Variable: trust     
+No. Observations: 2656    Method:             ML        
+No. Groups:       134     Scale:              0.2921    
+Min. group size:  7       Log-Likelihood:     -2390.0628
+Max. group size:  20      Converged:          Yes       
+Mean group size:  19.8                                  
+---------------------------------------------------------
+           Coef.  Std.Err.    z     P>|z|  [0.025  0.975]
+---------------------------------------------------------
+Intercept  4.021     0.071  56.712  0.000   3.882   4.160
+Group Var  0.659     0.156                               
+========================================================

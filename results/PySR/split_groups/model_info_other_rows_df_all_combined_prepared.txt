@@ -1,8 +1,8 @@
 SYMPY
-x0*0.049389392
+x0/20.24716
 
 LATEX
-x_{0} \cdot 0.0494
+\frac{x_{0}}{20.2}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -17,13 +17,13 @@ LATEX TABLE
 Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.79$ & $1$ & $0.931$ & $0.0$ \\
-$y = x_{0} \cdot 0.0494$ & $3$ & $0.896$ & $0.0189$ \\
+$y = \frac{x_{0}}{20.2}$ & $3$ & $0.896$ & $0.0189$ \\
 $y = 0.434 \sqrt{x_{0}}$ & $4$ & $0.895$ & $0.00188$ \\
-$y = 6.54 - \frac{210.}{x_{0}}$ & $5$ & $0.891$ & $0.00441$ \\
-$y = 2.75 \log{\left(x_{0} \right)} - 8.15$ & $6$ & $0.891$ & $1.46 \cdot 10^{-7}$ \\
-$y = 15.7 - \frac{51.8}{\log{\left(x_{0} \right)}}$ & $7$ & $0.891$ & $1.14 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.186 x_{0} - \cos{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.888$ & $0.00331$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.297 x_{0} - \cos{\left(x_{0}^{2} \right)}} - 0.993 \end{dmath*} \end{minipage} & $10$ & $0.886$ & $0.000621$ \\
+$y = 6.54 - \frac{210.}{x_{0}}$ & $5$ & $0.891$ & $0.00442$ \\
+$y = 15.7 - \frac{51.8}{\log{\left(x_{0} \right)}}$ & $6$ & $0.891$ & $1.14 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.186 x_{0} - \cos{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.888$ & $0.00165$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{\cos{\left(x_{0}^{2} \right)} + 30.3} + 1.24 \end{dmath*} \end{minipage} & $9$ & $0.887$ & $0.000937$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{\tan{\left(\cos{\left(x_{0}^{2} \right)} \right)} + 32.0} + 1.37 \end{dmath*} \end{minipage} & $10$ & $0.886$ & $0.000369$ \\
 \bottomrule
 \end{tabular}
 \end{center}

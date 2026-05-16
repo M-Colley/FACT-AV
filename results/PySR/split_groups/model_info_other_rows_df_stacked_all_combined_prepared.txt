@@ -1,5 +1,5 @@
 SYMPY
-x0*0.049389403
+x0*0.049389392
 
 LATEX
 x_{0} \cdot 0.0494
@@ -20,10 +20,10 @@ $y = 3.79$ & $1$ & $0.931$ & $0.0$ \\
 $y = x_{0} \cdot 0.0494$ & $3$ & $0.896$ & $0.0189$ \\
 $y = 0.434 \sqrt{x_{0}}$ & $4$ & $0.895$ & $0.00188$ \\
 $y = 6.54 - \frac{210.}{x_{0}}$ & $5$ & $0.891$ & $0.00441$ \\
-$y = 2.75 \log{\left(x_{0} \right)} - 8.15$ & $6$ & $0.891$ & $1.46 \cdot 10^{-7}$ \\
-$y = 7.42 - \frac{366.}{x_{0} - -24.3}$ & $7$ & $0.891$ & $8.84 \cdot 10^{-6}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.186 x_{0} - \cos{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.888$ & $0.00331$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{0.296 x_{0} - \cos{\left(x_{0}^{2} \right)}} - 0.989 \end{dmath*} \end{minipage} & $10$ & $0.886$ & $0.000621$ \\
+$y = 15.7 - \frac{51.8}{\log{\left(x_{0} \right)}}$ & $6$ & $0.891$ & $1.15 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 6.56 - \frac{212.}{x_{0} + \cos^{2}{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.890$ & $0.000385$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 6.47 - \frac{205.}{x_{0} - \cos{\left(x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.888$ & $0.00166$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 6.04 - \frac{170.}{x_{0} - \tan{\left(\log{\left(x_{0} \right)}^{3} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.887$ & $0.00101$ \\
 \bottomrule
 \end{tabular}
 \end{center}

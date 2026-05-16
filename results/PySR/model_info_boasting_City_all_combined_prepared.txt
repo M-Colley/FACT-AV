@@ -1,5 +1,5 @@
 SYMPY
-x0*0.05064493
+x0*0.050640974
 
 LATEX
 x_{0} \cdot 0.0506
@@ -19,10 +19,10 @@ Equation & Complexity & Loss & Score \\
 $y = 3.89$ & $1$ & $1.08$ & $0.0$ \\
 $y = x_{0} \cdot 0.0506$ & $3$ & $1.04$ & $0.0217$ \\
 $y = x_{0} \cdot 0.0401 + 0.815$ & $5$ & $1.03$ & $0.00167$ \\
-$y = x_{0}^{4} \cdot 2.23 \cdot 10^{-8} + 3.09$ & $6$ & $1.03$ & $0.00267$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(- x_{0} + \tan{\left(\tan{\left(x_{0} \right)} \right)}\right) \left(-0.0509\right) \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00240$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(- x_{0} + \tan{\left(\frac{x_{0}}{0.702} \right)}\right) \left(-0.0509\right) \end{dmath*} \end{minipage} & $8$ & $1.01$ & $0.0179$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\tan{\left(x_{0} \cdot 0.625 \right)} \right)}\right) 0.0511 \end{dmath*} \end{minipage} & $9$ & $1.01$ & $0.00331$ \\
+$y = x_{0}^{3} \cdot 2.30 \cdot 10^{-6} - -2.83$ & $6$ & $1.03$ & $0.00185$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\tan{\left(x_{0} \right)} \right)}\right) 0.0509 \end{dmath*} \end{minipage} & $7$ & $1.03$ & $0.00322$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\frac{x_{0}}{0.702} \right)}\right) 0.0506 \end{dmath*} \end{minipage} & $8$ & $1.01$ & $0.0144$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\tan{\left(x_{0} \cdot 0.625 \right)} \right)}\right) 0.0510 \end{dmath*} \end{minipage} & $9$ & $1.01$ & $0.00438$ \\
 \bottomrule
 \end{tabular}
 \end{center}
