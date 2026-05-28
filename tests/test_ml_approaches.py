@@ -57,7 +57,7 @@ class TestConfig:
 
     def test_bootstrap_n_default(self):
         config = Config()
-        assert config.bootstrap_n == 20
+        assert config.bootstrap_n == 10
 
 
 # ---------------------------------------------------------------------------

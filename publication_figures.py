@@ -279,9 +279,12 @@ def plot_importance_rank_heatmap(importances: pd.DataFrame, config: FigureConfig
     """Companion heatmap showing per-feature rank stability across models."""
     apply_paper_style()
     df = _consolidate_one_hot(importances)
-    wide = df.pivot(index="feature", columns="model", values="importance").fillna(0.0)
-    ranks = wide.rank(axis=0, ascending=False, method="min").astype(int)
-    order = wide.mean(axis=1).sort_values(ascending=False).index
+    # Do NOT fill missing (model, feature) cells with 0 — a model that wasn't
+    # available is "no data", not "rated this feature least important". Keep
+    # them NaN so they rank as NaN and are drawn as blanks below.
+    wide = df.pivot(index="feature", columns="model", values="importance")
+    ranks = wide.rank(axis=0, ascending=False, method="min")
+    order = wide.mean(axis=1, skipna=True).sort_values(ascending=False).index
     ranks = ranks.loc[order]
 
     fig, ax = plt.subplots(figsize=(1.6 * len(ranks.columns) + 2, 0.4 * len(ranks.index) + 1.5))
@@ -291,7 +294,8 @@ def plot_importance_rank_heatmap(importances: pd.DataFrame, config: FigureConfig
     ax.set_yticks(np.arange(len(ranks.index)))
     ax.set_yticklabels(ranks.index)
     for (i, j), value in np.ndenumerate(ranks.values):
-        ax.text(j, i, int(value), ha="center", va="center", color="white", fontsize=9)
+        label = "-" if np.isnan(value) else str(int(value))
+        ax.text(j, i, label, ha="center", va="center", color="white", fontsize=9)
     ax.set_title("Feature importance rank by model (1 = most important)")
     ax.set_xlabel("Model")
     ax.set_ylabel("Feature")

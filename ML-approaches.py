@@ -4,6 +4,7 @@ Improved ML Analysis Script for Trust Prediction.
 """
 
 import json
+import os
 import logging
 import warnings
 from dataclasses import dataclass
@@ -19,9 +20,16 @@ from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GroupShuffleSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+from dotenv import load_dotenv
+
+
+# Load the TabPFN API key from the .env file into the environment variables
+load_dotenv()
+
 
 # Hardware Detection
 try:
@@ -62,9 +70,16 @@ try:
 except ImportError:
     LIGHTGBM_AVAILABLE = False
 
+# Verify the token loaded successfully (optional but helpful)
+if "TABPFN_TOKEN" not in os.environ:
+    print("WARNING: TABPFN_TOKEN not found in environment or .env file.")
+    print("TabPFN may crash on Windows if it needs to download weights.")
+else:
+    print("API Key loaded securely from .env file.")
+
 try:
     from tabpfn import TabPFNRegressor
-    from tabpfn.model_loading import save_fitted_tabpfn_model
+    from tabpfn.model_loading import save_fitted_tabpfn_model, load_fitted_tabpfn_model
 
     TABPFN_AVAILABLE = True
 except ImportError:
@@ -87,18 +102,23 @@ warnings.filterwarnings("ignore", category=UserWarning, module="xgboost")
 class Config:
     """Configuration class for the ML analysis."""
 
-    data_path: Path = Path("data") / "all_combined_prepared_with_demographics.xlsx"
+    # Use the file with real ProlificIDs so train/test can be split by
+    # participant (the demographics-only file has a single placeholder ID).
+    data_path: Path = Path("data") / "all_combined_prepared_with_demographics_with_baseline.xlsx"
     results_path: Path = Path("results") / "ML-Approaches"
     sheet_name: str = "Sheet1"
     test_size: float = 0.2
     random_state: int = 42
 
-    # Number of bootstrap resamples for CatBoost error bars
-    bootstrap_n: int = 20
+    # Number of bootstrap resamples for CatBoost error bars. Each resample is a
+    # full CatBoost fit (the runtime bottleneck), so keep this modest: 10 keeps
+    # the per-feature importance std stable while roughly halving the cost of 20.
+    bootstrap_n: int = 10
 
     numerical_features: List[str] = None
     categorical_features: List[str] = None
     target_column: str = "trust"
+    group_column: str = "ProlificID"
 
     def __post_init__(self):
         if self.numerical_features is None:
@@ -211,6 +231,15 @@ class DataProcessor:
         if dropped_rows > 0:
             logger.info("Dropped %d rows containing missing required fields.", dropped_rows)
 
+        # The grouping column is needed for a leakage-free participant split.
+        if self.config.group_column in df.columns:
+            df = df.dropna(subset=[self.config.group_column])
+        else:
+            logger.warning(
+                "Group column %r not found; falling back to a random (non-grouped) split.",
+                self.config.group_column,
+            )
+
         for column, mapping in self.get_label_mappings().items():
             if column in df.columns:
                 df[column] = df[column].replace(mapping)
@@ -246,7 +275,14 @@ def prepare_categorical_as_string(frame: pd.DataFrame, columns: List[str]) -> pd
 # ---------------------------------------------------------------------------
 
 def get_xgb_importance_std(model: "xgb.XGBRegressor", feature_names: List[str]) -> np.ndarray:
-    """Compute per-feature importance std across individual XGBoost trees."""
+    """Per-feature importance std across individual XGBoost trees.
+
+    ``XGBRegressor.feature_importances_`` returns gain shares normalized to sum
+    to 1. To keep the error bars in the *same units as the bar heights*, we
+    normalize each tree's per-feature gain to a within-tree share before taking
+    the std across trees (previously this returned the std of raw summed gain,
+    which is on a totally different scale from the plotted bars).
+    """
     df_trees = model.get_booster().trees_to_dataframe()
     splits = df_trees[df_trees["Feature"] != "Leaf"].copy()
     per_tree = (
@@ -255,11 +291,17 @@ def get_xgb_importance_std(model: "xgb.XGBRegressor", feature_names: List[str]) 
         .unstack(fill_value=0.0)
         .reindex(columns=feature_names, fill_value=0.0)
     )
+    row_sums = per_tree.sum(axis=1).replace(0.0, np.nan)
+    per_tree = per_tree.div(row_sums, axis=0).fillna(0.0)
     return per_tree.std(axis=0).values
 
 
 def get_lgb_importance_std(model: "lgb.LGBMRegressor", feature_names: List[str]) -> np.ndarray:
-    """Compute per-feature importance std across individual LightGBM trees."""
+    """Per-feature gain std across individual LightGBM trees.
+
+    This sums ``split_gain`` per tree, matching the ``importance_type="gain"``
+    bars produced by the regressor (so error bars share the bars' scale).
+    """
     model_json = model.booster_.dump_model(num_iteration=model.booster_.num_trees())
     trees = model_json.get("tree_info", [])
 
@@ -528,12 +570,28 @@ class ModelEvaluator:
         X = df[self.config.numerical_features + self.config.categorical_features]
         y = df[self.config.target_column]
 
-        X_train, X_test, y_train, y_test = train_test_split(
-            X,
-            y,
-            test_size=self.config.test_size,
-            random_state=self.config.random_state,
-        )
+        # Participant-grouped split: the design is within-subjects, so a plain
+        # random split leaks the same participant into both train and test and
+        # produces over-optimistic metrics.
+        if self.config.group_column in df.columns:
+            groups = df[self.config.group_column]
+            splitter = GroupShuffleSplit(
+                n_splits=1,
+                test_size=self.config.test_size,
+                random_state=self.config.random_state,
+            )
+            (train_idx, test_idx), = splitter.split(X, y, groups=groups)
+            X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+            y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+        else:
+            from sklearn.model_selection import train_test_split
+
+            X_train, X_test, y_train, y_test = train_test_split(
+                X,
+                y,
+                test_size=self.config.test_size,
+                random_state=self.config.random_state,
+            )
         preprocessor = self.data_processor.get_preprocessor()
 
         # ------------------------------------------------------------------
@@ -555,7 +613,9 @@ class ModelEvaluator:
         rf_model = rf_pipeline.named_steps["regressor"]
         fitted_preprocessor = rf_pipeline.named_steps["preprocessor"]
         raw_feature_names = fitted_preprocessor.get_feature_names_out()
-        base_feature_names = [name.split("__")[-1] for name in raw_feature_names]
+        # Split only on the FIRST "__" (the ColumnTransformer prefix); one-hot
+        # category labels may themselves contain "__".
+        base_feature_names = [name.split("__", 1)[-1] for name in raw_feature_names]
 
         X_test_transformed = pd.DataFrame(
             fitted_preprocessor.transform(X_test),
@@ -665,7 +725,6 @@ class ModelEvaluator:
                 xgb_model.fit(X_train_xgb, y_train)
 
             xgb_model.save_model(self.config.results_path / "your_model.json")
-            xgb_model.save_model(Path("your_model.json"))
 
             metrics_xgb = self.calculate_metrics(y_test, xgb_model.predict(X_test_xgb))
             self.results["XGBoost"] = metrics_xgb
@@ -698,7 +757,14 @@ class ModelEvaluator:
                 X_train_lgb[column] = X_train_lgb[column].astype("category")
                 X_test_lgb[column] = X_test_lgb[column].astype("category")
 
-            lgb_params = {"random_state": self.config.random_state, "verbose": -1}
+            # ``importance_type="gain"`` so the plotted bars match the
+            # gain-based per-tree std returned by get_lgb_importance_std
+            # (LightGBM's default is split-count, a different scale entirely).
+            lgb_params = {
+                "random_state": self.config.random_state,
+                "verbose": -1,
+                "importance_type": "gain",
+            }
             if GPU_AVAILABLE:
                 lgb_params["device"] = "gpu"
 
@@ -709,7 +775,9 @@ class ModelEvaluator:
                 logger.warning(
                     "LightGBM GPU fit failed (usually missing OpenCL compilation). Falling back to CPU..."
                 )
-                lgb_model = lgb.LGBMRegressor(random_state=self.config.random_state, verbose=-1)
+                lgb_model = lgb.LGBMRegressor(
+                    random_state=self.config.random_state, verbose=-1, importance_type="gain"
+                )
                 lgb_model.fit(X_train_lgb, y_train)
 
             metrics_lgb = self.calculate_metrics(y_test, lgb_model.predict(X_test_lgb))
@@ -773,11 +841,24 @@ class ModelEvaluator:
             ]
 
             quantiles = [0.25, 0.5, 0.75]
-            q_preds = reg.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
+            
+            # --- WORKAROUND: TabPFN CUDA Quantile Bug ---
+            # TabPFN raises a device mismatch RuntimeError when predicting quantiles on CUDA.
+            # Since the model is already saved, we reload it onto CPU specifically for these predictions.
+            current_device = getattr(reg, "device_", getattr(reg, "device", "cpu"))
+            if "cuda" in str(current_device):
+                logger.info("Reloading TabPFN on CPU to bypass CUDA quantile prediction bug...")
+                reg_cpu = load_fitted_tabpfn_model(self.config.results_path / "fact-av.tabpfn_fit", device="cpu")
+                q_preds = reg_cpu.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
+                mode_preds = reg_cpu.predict(X_test_tab, output_type="mode")
+            else:
+                q_preds = reg.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
+                mode_preds = reg.predict(X_test_tab, output_type="mode")
+            # --------------------------------------------
+
             for quantile, quantile_preds in get_tabpfn_quantile_columns(q_preds, quantiles):
                 results_txt.append(f"Quantile {quantile} MAE: {mean_absolute_error(y_test, quantile_preds)}")
 
-            mode_preds = reg.predict(X_test_tab, output_type="mode")
             results_txt.append(f"Mode MAE: {mean_absolute_error(y_test, mode_preds)}")
 
             with (self.config.results_path / "results_tabpfnregressor.txt").open("w", encoding="utf-8") as handle:
@@ -804,7 +885,11 @@ def main() -> None:
         logger.info("Optional dependencies not available: %s", ", ".join(unavailable))
 
     config = Config()
-    np.random.seed(config.random_state)
+    # No global np.random.seed: every stochastic step here is already pinned by
+    # an explicit ``random_state`` (the split, each model, permutation
+    # importance, the CatBoost bootstrap via np.random.default_rng). Seeding the
+    # legacy global RNG additionally triggers NumPy's deprecation FutureWarning
+    # once libraries like SHAP read from it.
 
     data_processor = DataProcessor(config)
     df = data_processor.load_and_preprocess_data()

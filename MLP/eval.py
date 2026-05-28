@@ -1,27 +1,45 @@
 import argparse
+import os
 import sys
 from pathlib import Path
 
-import matplotlib.pyplot as plt
-import numpy as np
-import torch
-from sklearn.metrics import (
-    ConfusionMatrixDisplay,
-    cohen_kappa_score,
-    mean_absolute_error,
-)
-from torch.utils.data.dataloader import DataLoader
-from torchmetrics.functional.classification import multiclass_accuracy, multiclass_f1_score
+# IMPORTANT: pyarrow must be imported before matplotlib on Windows -- otherwise
+# the matplotlib DLLs change loader state such that pyarrow's later import
+# (triggered transitively through sklearn -> pandas) segfaults during
+# ``from sklearn.metrics import ...``.
+try:  # pragma: no cover - environment-dependent
+    import pyarrow  # noqa: F401
+except ImportError:
+    pass
 
-from dataset import TRUST_LABEL_MODES, TrustDataset
-from network import Model
+# Force a non-GUI matplotlib backend before anything imports pyplot.
+os.environ.setdefault("MPLBACKEND", "Agg")
+import matplotlib  # noqa: E402
+
+matplotlib.use("Agg", force=True)
 
 # Allow ``import plotting_style`` when running from the MLP/ subdirectory.
 _repo_root = Path(__file__).resolve().parent.parent
 if str(_repo_root) not in sys.path:
     sys.path.insert(0, str(_repo_root))
-
 from plotting_style import OKABE_ITO, apply_paper_style, save_fig  # noqa: E402
+
+import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
+from sklearn.metrics import (  # noqa: E402
+    ConfusionMatrixDisplay,
+    cohen_kappa_score,
+    mean_absolute_error,
+)
+from torch.utils.data.dataloader import DataLoader  # noqa: E402
+from torchmetrics.functional.classification import (  # noqa: E402
+    multiclass_accuracy,
+    multiclass_f1_score,
+)
+
+from dataset import TRUST_LABEL_MODES, TrustDataset  # noqa: E402
+from network import Model  # noqa: E402
 
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
@@ -29,8 +47,9 @@ results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 # Get the parent directory and construct the path to the data folder
 data_folder = Path(__file__).parent.parent / "data"
 
-# Construct the full file path
-data_file = data_folder / "all_combined_prepared_with_demographics.xlsx"
+# Construct the full file path. Mirror train.py: the *_with_baseline file is
+# the one with real ProlificIDs needed for the participant-grouped split.
+data_file = data_folder / "all_combined_prepared_with_demographics_with_baseline.xlsx"
 
 
 def get_device():
@@ -209,7 +228,7 @@ def main():
             f"{args.trust_label_mode!r} resolves to {test_dataset.num_classes} classes."
         )
 
-    model = Model(input_size=34, num_classes=num_classes).to(device)
+    model = Model(input_size=test_dataset.input_size, num_classes=num_classes).to(device)
     model.load_state_dict(model_state_dict)
     print(f"Loaded checkpoint: {checkpoint_path.name}")
 

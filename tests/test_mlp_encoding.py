@@ -153,21 +153,21 @@ class TestEncodeDistance:
 # ---------------------------------------------------------------------------
 
 class TestEncodeLicense:
-    def test_y_returns_one(self):
-        result = encode_license("Y")
-        assert result.item() == 1.0
+    # ``License`` is years of holding a driving licence (int), not a Y/N flag.
+    def test_integer_years_passed_through(self):
+        assert encode_license(17).item() == 17.0
 
-    def test_n_returns_zero(self):
-        result = encode_license("N")
-        assert result.item() == 0.0
+    def test_zero_years(self):
+        assert encode_license(0).item() == 0.0
 
-    def test_any_non_y_returns_zero(self):
-        assert encode_license("N").item() == 0.0
-        assert encode_license("no").item() == 0.0
-        assert encode_license("").item() == 0.0
+    def test_numeric_string_is_coerced(self):
+        assert encode_license("23").item() == 23.0
+
+    def test_output_is_float32(self):
+        assert encode_license(5).dtype == torch.float32
 
     def test_output_shape(self):
-        assert encode_license("Y").shape == (1,)
+        assert encode_license(10).shape == (1,)
 
 
 # ---------------------------------------------------------------------------

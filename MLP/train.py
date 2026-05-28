@@ -15,8 +15,10 @@ from network import Model
 # Get the parent directory and construct the path to the data folder
 data_folder = Path(__file__).parent.parent / "data"
 
-# Construct the full file path
-data_file = data_folder / "all_combined_prepared_with_demographics.xlsx"
+# Construct the full file path. Use the file that carries real ProlificIDs
+# (the demographics-only file has a single placeholder ID for every row, which
+# makes a participant-grouped split impossible).
+data_file = data_folder / "all_combined_prepared_with_demographics_with_baseline.xlsx"
 
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)
@@ -88,8 +90,8 @@ def get_report_path(trust_label_mode):
 def main():
     args = parse_args()
     device = get_device()
-    print(f"Using device: {device}")
-    print(f"Trust label mode: {args.trust_label_mode}")
+    tqdm.write(f"Using device: {device}")
+    tqdm.write(f"Trust label mode: {args.trust_label_mode}")
 
     train_dataset = TrustDataset(
         data_file,
@@ -106,6 +108,9 @@ def main():
         split="test",
         trust_label_mode=args.trust_label_mode,
     )
+
+    for dataset in (train_dataset, valid_dataset, test_dataset):
+        dataset.plot_label_distribution(results_folder)
 
     num_classes = train_dataset.num_classes
 
@@ -132,11 +137,11 @@ def main():
         pin_memory=use_pin_memory,
     )
 
-    model = Model(input_size=34, num_classes=num_classes).to(device)
+    model = Model(input_size=train_dataset.input_size, num_classes=num_classes).to(device)
     criterion = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
-    print(f"N steps: {len(train_loader) * epochs}")
+    tqdm.write(f"N steps: {len(train_loader) * epochs}")
 
     history = []
     best_valid_f1 = float("-inf")
@@ -208,37 +213,40 @@ def main():
                 checkpoint_path,
             )
 
-        if epoch % 10 == 0 and epoch > 0:
+        # Re-plotting the whole history every 10 epochs makes the savefig cost
+        # scale ~O(epochs^2); 100 keeps the curve readable for far less I/O.
+        if epoch % 100 == 0 and epoch > 0:
             epoch_numbers = range(1, epoch + 2)
 
-            plt.plot(epoch_numbers, [h["Train_Acc"] for h in history], label="Train Accuracy")
-            plt.plot(epoch_numbers, [h["Valid_Acc"] for h in history], label="Valid Accuracy")
+            fig, ax = plt.subplots()
+            ax.plot(epoch_numbers, [h["Train_Acc"] for h in history], label="Train Accuracy")
+            ax.plot(epoch_numbers, [h["Valid_Acc"] for h in history], label="Valid Accuracy")
 
-            plt.title("Training and Validation Accuracy")
-            plt.xlabel("Epochs")
-            plt.ylabel("Accuracy")
+            ax.set_title("Training and Validation Accuracy")
+            ax.set_xlabel("Epochs")
+            ax.set_ylabel("Accuracy")
 
-            plt.xticks(np.arange(0, epochs + 1, 200))
-            plt.yticks(np.arange(0, 1.1, 0.2))
+            ax.set_xticks(np.arange(0, epochs + 1, max(epochs // 10, 1)))
+            ax.set_yticks(np.arange(0, 1.1, 0.2))
 
-            plt.legend(loc="best")
+            ax.legend(loc="best")
             output_name = (
                 f"epoch{epoch}.jpg"
                 if args.trust_label_mode == "floor"
                 else f"epoch{epoch}.{args.trust_label_mode}.jpg"
             )
-            plt.savefig(epochs_dir / output_name)
-            plt.close()
+            fig.savefig(epochs_dir / output_name)
+            plt.close(fig)
 
     checkpoint = torch.load(checkpoint_path, map_location=device)
     model.load_state_dict(checkpoint["model_state_dict"])
 
     test_metrics = evaluate_split(model, test_loader, criterion, device, num_classes)
-    print(f"Best Validation F1: {checkpoint['valid_metrics']['f1']}")
-    print(f"Test Loss: {test_metrics['loss']}")
-    print(f"Test Acc: {test_metrics['acc']}")
-    print(f"Test F1: {test_metrics['f1']}")
-    print(f"Saved model: {checkpoint_path}")
+    tqdm.write(f"Best Validation F1: {checkpoint['valid_metrics']['f1']}")
+    tqdm.write(f"Test Loss: {test_metrics['loss']}")
+    tqdm.write(f"Test Acc: {test_metrics['acc']}")
+    tqdm.write(f"Test F1: {test_metrics['f1']}")
+    tqdm.write(f"Saved model: {checkpoint_path}")
 
     report = {
         "trust_label_mode": args.trust_label_mode,

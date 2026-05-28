@@ -69,8 +69,12 @@ def encode_distance(string):
     return encode_cat(string, 5)
 
 
-def encode_license(string):
-    return torch.tensor([string == "Y"]).float()
+def encode_license(value):
+    # ``License`` is the number of years the participant has held a driving
+    # licence (integer), not a Y/N flag. Pass it through as a float scalar so
+    # the feature actually reaches the model (previously ``value == "Y"`` was
+    # always False, silently feeding the network a constant 0).
+    return torch.tensor([float(value)], dtype=torch.float32)
 
 
 def resolve_trust_class_values(trust_values, trust_label_mode):
@@ -131,89 +135,47 @@ class TrustDataset(Dataset):
 
         # Read the Excel file into a DataFrame
         df = pd.read_excel(file_path, sheet_name=sheet_name)
+        df = df.dropna().reset_index(drop=True)
 
-        df.dropna(inplace=True)
         self.class_values = resolve_trust_class_values(df["trust"], trust_label_mode)
         self.num_classes = len(self.class_values)
 
-        ### ONCE FOR ALL DATA
-
-        y_values = df[["trust"]].dropna()
-
-        x_values = df["mIoU"].dropna().to_numpy()
-        x_values = x_values.reshape(-1, 1)
-
-        # New dimension based on the 'SCENARIO' column
-        x_scenario = df["SCENARIO"].dropna().to_numpy()
-        x_scenario = x_scenario.reshape(-1, 1)
-
-        # # New dimension based on the 'GENDER' column
-        x_gender = df["Gender"].dropna().to_numpy()
-        x_gender = x_gender.reshape(-1, 1)
-
-        #     # New dimension based on the 'AGE' column
-        x_age = df["Age"].dropna().to_numpy()
-        x_age = x_age.reshape(-1, 1)
-
-        #     # New dimension based on the 'Education' column
-        x_education = df["Education"].dropna().to_numpy()
-        x_education = x_education.reshape(-1, 1)
-
-        #     # New dimension based on the 'Job' column
-        x_job = df["Job"].dropna().to_numpy()
-        x_job = x_job.reshape(-1, 1)
-
-        #     # New dimension based on the 'License' column
-        x_license = df["License"].dropna().to_numpy()
-        x_license = x_license.reshape(-1, 1)
-
-        #     # New dimension based on the 'DrivingFrequency' column
-        x_drivingfreq = df["DrivingFrequency"].dropna().to_numpy()
-        x_drivingfreq = x_drivingfreq.reshape(-1, 1)
-
-        #     # New dimension based on the 'Distance' column
-        x_distance = df["Distance"].dropna().to_numpy()
-        x_distance = x_distance.reshape(-1, 1)
-
-        # New dimension based on the 'INTRODUCTION' column
-        x_intro = df["INTRODUCTION"].dropna().to_numpy()
-        x_intro = x_intro.reshape(-1, 1)
-
-        # Adding new dimension to x_values
-        x_values_extended = np.hstack(
-            [
-                x_values,
-                x_scenario,
-                x_intro,
-                x_gender,
-                x_age,
-                x_education,
-                x_job,
-                x_license,
-                x_drivingfreq,
-                x_distance,
-                y_values,
-            ]
+        # Assemble the feature matrix in a fixed column order. The trailing
+        # column holds the raw trust target, decoded lazily in __getitem__.
+        # The order here MUST stay in sync with the positional indexing in
+        # __getitem__ (data[0]..data[10]).
+        feature_columns = [
+            "mIoU",
+            "SCENARIO",
+            "INTRODUCTION",
+            "Gender",
+            "Age",
+            "Education",
+            "Job",
+            "License",
+            "DrivingFrequency",
+            "Distance",
+        ]
+        x_values_extended = np.column_stack(
+            [df[column].to_numpy() for column in feature_columns]
+            + [df["trust"].to_numpy()]
         )
 
-        N = len(x_values_extended)
-        N_Train = int(0.8 * N)
-        N_Valid = int(0.1 * N)
-        N_Test = N - N_Train - N_Valid
-
-        np.random.seed(1337)
-        np.random.shuffle(x_values_extended)
+        # Participant-grouped split: the study is within-subjects (each
+        # ProlificID rated trust many times), so a plain row shuffle leaks the
+        # same participant across train/valid/test and inflates test metrics.
+        participant_ids = df["ProlificID"].to_numpy()
+        train_idx, valid_idx, test_idx = self._participant_grouped_indices(participant_ids)
 
         if self.split == "train":
-            self.datapoints = x_values_extended[0:N_Train]
+            self.datapoints = x_values_extended[train_idx]
         elif self.split == "valid":
-            self.datapoints = x_values_extended[N_Train : N_Train + N_Valid]
+            self.datapoints = x_values_extended[valid_idx]
         elif self.split == "test":
-            self.datapoints = x_values_extended[N_Train + N_Valid :]
-            assert len(self.datapoints) == N_Test, f"{len(self.datapoints)} {N_Test}"
+            self.datapoints = x_values_extended[test_idx]
         else:
             # all datapoints
-            self.datapoints = x_values_extended[0:]
+            self.datapoints = x_values_extended
 
         encoded_labels = [
             encode_trust_value(d[-1], self.trust_label_mode, self.class_values)
@@ -224,26 +186,68 @@ class TrustDataset(Dataset):
         print(f"Labels: {self.labels} counts {self.counts}")
         print(f"Labels: {self.labels} weights {np.sum(self.counts) / self.counts}")
 
+    @staticmethod
+    def _participant_grouped_indices(participant_ids, seed: int = 1337):
+        """Deterministic 80/10/10 split that never splits a participant.
+
+        Uses two nested GroupShuffleSplit passes (80% train, then a 50/50
+        split of the 20% holdout into valid/test). Returns integer index
+        arrays into the row order of ``participant_ids``.
+        """
+        from sklearn.model_selection import GroupShuffleSplit
+
+        indices = np.arange(len(participant_ids))
+        train_idx, holdout_idx = next(
+            GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=seed).split(
+                indices, groups=participant_ids
+            )
+        )
+        valid_rel, test_rel = next(
+            GroupShuffleSplit(n_splits=1, test_size=0.5, random_state=seed).split(
+                holdout_idx, groups=participant_ids[holdout_idx]
+            )
+        )
+        return train_idx, holdout_idx[valid_rel], holdout_idx[test_rel]
+
+    @property
+    def input_size(self) -> int:
+        """Feature dimension, probed from a real sample so it always tracks the
+        encoders (avoids the previously hard-coded ``input_size=34``)."""
+        x, _ = self[0]
+        return int(x.shape[0])
+
+    def plot_label_distribution(self, results_dir: Path = results_folder) -> None:
+        """Save the per-split label-distribution bar chart.
+
+        Kept out of ``__init__`` so that merely constructing a dataset has no
+        filesystem / global-pyplot side effects. Call explicitly when wanted.
+        """
+        fig, ax = plt.subplots()
         positions = np.arange(self.num_classes)
         full_counts = np.zeros(self.num_classes, dtype=int)
         full_counts[self.labels] = self.counts
         bar_labels = [f"Trust {value:g}" for value in self.class_values]
         bar_colors = plt.cm.tab10(np.linspace(0, 1, self.num_classes))
-        plt.bar(positions, full_counts, width=0.8, color=bar_colors)
-        # Add in a title and axes labels
-        plt.title(f"{str(self.split).capitalize()} Dataset Label Distribution")
-        plt.xlabel("Labels")
-        plt.xticks(positions, bar_labels, rotation=45 if self.num_classes > 5 else 0)
-        addlabels(positions, full_counts)
-        # Set the tick locations
-        plt.yticks([])
+        ax.bar(positions, full_counts, width=0.8, color=bar_colors)
+        ax.set_title(f"{str(self.split).capitalize()} Dataset Label Distribution")
+        ax.set_xlabel("Labels")
+        ax.set_xticks(positions)
+        ax.set_xticklabels(bar_labels, rotation=45 if self.num_classes > 5 else 0)
+        ax.set_yticks([])
+
+        total = full_counts.sum()
+        for x_pos, y_val in zip(positions, full_counts):
+            if y_val:
+                ax.text(x_pos, y_val, f"{int(y_val)}({y_val / total * 100:0.1f}%)", ha="center")
 
         mode_suffix = "" if self.trust_label_mode == "floor" else f".{self.trust_label_mode}"
-        file_path = results_folder / f"{self.split}{mode_suffix}.labels.pdf"
-        plt.savefig(file_path, bbox_inches="tight", pad_inches=0)
-        file_path = results_folder / f"{self.split}{mode_suffix}.labels.jpg"
-        plt.savefig(file_path, bbox_inches="tight", pad_inches=0)
-        plt.close()
+        for ext in ("pdf", "jpg"):
+            fig.savefig(
+                results_dir / f"{self.split}{mode_suffix}.labels.{ext}",
+                bbox_inches="tight",
+                pad_inches=0,
+            )
+        plt.close(fig)
 
     def __len__(self):
         return len(self.datapoints)

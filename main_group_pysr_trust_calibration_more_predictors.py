@@ -62,30 +62,34 @@ def write_model_info(model, output_path):
 
 
 def find_equal_groups(df):
-    trust_counts = {}
-    for participant_id, introduction, scenario in df[
-        ["ProlificID", "INTRODUCTION", "SCENARIO"]
-    ].itertuples(index=False, name=None):
-        trust_counts[(participant_id, introduction, scenario)] = df[
-            (df["ProlificID"] == participant_id)
-            & (df["INTRODUCTION"] == introduction)
-            & (df["SCENARIO"] == scenario)
-        ]["trust"].value_counts()
+    """(ProlificID, INTRODUCTION, SCENARIO) cells with clustered trust ratings.
+
+    A cell qualifies if its most common trust value occurs >=14 times, or its
+    two most common values each occur >=7 times and are within 1 of each other.
+
+    Computed with a single groupby pass. The previous implementation re-scanned
+    the whole frame once per row (O(N^2)) and tracked the ">=7" comparison in a
+    dict keyed across *different* cells, so a count from one cell could spuriously
+    qualify another.
+    """
+    trust_counts = (
+        df.groupby(["ProlificID", "INTRODUCTION", "SCENARIO"])["trust"]
+        .value_counts()
+        .unstack(fill_value=0)
+    )
 
     combinations = set()
-    last_value2_dict = {}
-
-    for key, value in trust_counts.items():
-        one_was_eight = False
-        for _, value2 in value.items():
-            if value2 >= 14:
-                combinations.add(key)
-            elif value2 >= 7:
-                if one_was_eight and abs(last_value2_dict.get(key, 0) - value2) <= 1:
-                    combinations.add(key)
-                else:
-                    one_was_eight = True
-                    last_value2_dict[key] = value2
+    for key, row in trust_counts.iterrows():
+        counts = sorted(row.to_numpy(), reverse=True)
+        if counts and counts[0] >= 14:
+            combinations.add(key)
+        elif (
+            len(counts) >= 2
+            and counts[0] >= 7
+            and counts[1] >= 7
+            and abs(counts[0] - counts[1]) <= 1
+        ):
+            combinations.add(key)
 
     return combinations
 

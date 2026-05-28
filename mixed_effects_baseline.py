@@ -331,9 +331,26 @@ def main() -> None:
     icc = compute_icc(fits["M0"], config)
     logger.info(icc["interpretation"])
 
-    fe_table = write_fixed_effects(fits["M2"], config)
+    # The M0/M1/M2 fits above use ML (reml=False) because the likelihood-ratio
+    # comparison requires it. ML, however, underestimates the random-effect
+    # variance and thus the fixed-effect standard errors. For *inference* on the
+    # final model, refit M2 with REML and report fixed effects / marginal curves
+    # from that fit.
+    import statsmodels.formula.api as smf
+
+    logger.info("Refitting M2 with REML for fixed-effect inference ...")
+    m2_reml = smf.mixedlm(
+        "trust ~ mIoU_c * (C(INTRODUCTION) + C(SCENARIO))",
+        df,
+        groups=df["ProlificID"],
+    ).fit(reml=True)
+    (config.results_path / "summary_M2_reml.txt").write_text(
+        m2_reml.summary().as_text(), encoding="utf-8"
+    )
+
+    fe_table = write_fixed_effects(m2_reml, config)
     plot_fixed_effects_forest(fe_table, config)
-    plot_marginal_effects(fits["M2"], df, config)
+    plot_marginal_effects(m2_reml, df, config)
 
     logger.info("Mixed-effects baseline complete. Outputs in %s", config.results_path)
 

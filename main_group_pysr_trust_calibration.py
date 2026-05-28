@@ -89,6 +89,34 @@ def _fit_and_save(model, x_values, y_values, info_path, plot_path, hue_series=No
     plt.close(fig)
 
 
+def _find_equal_groups(df):
+    """(ProlificID, INTRODUCTION, SCENARIO) cells where trust ratings cluster.
+
+    A cell qualifies if its single most common trust value occurs >=14 times,
+    or its two most common values each occur >=7 times and are within 1 of each
+    other. Computed with a single groupby pass instead of re-scanning the whole
+    frame once per row.
+    """
+    trust_counts = (
+        df.groupby(["ProlificID", "INTRODUCTION", "SCENARIO"])["trust"]
+        .value_counts()
+        .unstack(fill_value=0)
+    )
+    combinations = []
+    for key, row in trust_counts.iterrows():
+        counts = sorted(row.to_numpy(), reverse=True)
+        if counts and counts[0] >= 14:
+            combinations.append(key)
+        elif (
+            len(counts) >= 2
+            and counts[0] >= 7
+            and counts[1] >= 7
+            and abs(counts[0] - counts[1]) <= 1
+        ):
+            combinations.append(key)
+    return combinations
+
+
 def _fit_personalized(df, participant_id, model):
     """Fit a per-participant model and write its outputs."""
     print(f"Working with ProlificID: {participant_id}")
@@ -107,7 +135,6 @@ def _fit_personalized(df, participant_id, model):
 
 
 def main():
-    model = _create_model()
     file_paths = [_DATA_FILE, _DATA_FILE_REMOVED_DEI]
     other_rows_df = None
 
@@ -123,47 +150,37 @@ def main():
         print(df.head())
         print("df shape:", df.shape)
 
-        # Build trust-count dict: (ProlificID, INTRO, SCENARIO) → value_counts
-        trust_counts = {}
-        for pid, intro, scenario in df[["ProlificID", "INTRODUCTION", "SCENARIO"]].values:
-            trust_counts[(pid, intro, scenario)] = df[
-                (df["ProlificID"] == pid)
-                & (df["INTRODUCTION"] == intro)
-                & (df["SCENARIO"] == scenario)
-            ]["trust"].value_counts()
+        # Identify "equal-trust" groups (>=14 identical ratings, or 2 groups of >=7).
+        combinations = _find_equal_groups(df)
 
-        # Identify "equal-trust" groups (≥14 identical ratings, or 2 groups of ≥7)
-        combinations = []
-        last_value2_dict = {}
-        for key, value in trust_counts.items():
-            one_was_eight = False
-            for _, value2 in value.items():
-                if value2 >= 14:
-                    combinations.append(key)
-                elif value2 >= 7:
-                    if one_was_eight and abs(last_value2_dict.get(key, 0) - value2) <= 1:
-                        combinations.append(key)
-                    else:
-                        one_was_eight = True
-                        last_value2_dict[key] = value2
-
-        all_equal_df = pd.DataFrame()
-        for combination in combinations:
-            filtered_df = df[
-                (df["ProlificID"] == combination[0])
-                & (df["INTRODUCTION"] == combination[1])
-                & (df["SCENARIO"] == combination[2])
+        if combinations:
+            equal_frames = [
+                df[
+                    (df["ProlificID"] == pid)
+                    & (df["INTRODUCTION"] == intro)
+                    & (df["SCENARIO"] == scenario)
+                ]
+                for pid, intro, scenario in combinations
             ]
-            all_equal_df = pd.concat([all_equal_df, filtered_df])
+            all_equal_df = pd.concat(equal_frames)
+        else:
+            all_equal_df = df.iloc[0:0]
 
-        other_rows_df = df[~df.isin(all_equal_df)].dropna()
+        # Set difference by index. The previous ``df[~df.isin(all_equal_df)]``
+        # did an element-wise (value+index aligned) comparison, then dropna(),
+        # which silently discarded far more rows than intended.
+        other_rows_df = df.drop(index=all_equal_df.index)
         print("other_rows_df shape:", other_rows_df.shape)
+
+        # NOTE: a *fresh* PySRRegressor is used for every fit. Reusing one
+        # instance lets Julia-side search state (the equation hall-of-fame)
+        # bleed from one dataset into the next.
 
         # --- Fit 1: other_rows_df (mIoU only) ------------------------------------
         x = other_rows_df["mIoU"].to_numpy().reshape(-1, 1)
         y = other_rows_df[["trust"]].dropna()
         _fit_and_save(
-            model, x, y,
+            _create_model(), x, y,
             info_path=results_path_split_groups / f"model_info_other_rows_df_stacked_{name}.txt",
             plot_path=results_path_split_groups / f"relationship_pysr_other_rows_df_stacked_{name}.png",
             hue_series=other_rows_df["intro_scenario_combo"],
@@ -173,7 +190,7 @@ def main():
         x = all_equal_df["mIoU"].dropna().to_numpy().reshape(-1, 1)
         y = all_equal_df[["trust"]].dropna()
         _fit_and_save(
-            model, x, y,
+            _create_model(), x, y,
             info_path=results_path_split_groups / f"model_info_all_equal_df_{name}.txt",
             plot_path=results_path_split_groups / f"relationship_pysr_all_equal_df_{name}.png",
             hue_series=all_equal_df["intro_scenario_combo"],
@@ -183,7 +200,7 @@ def main():
         x = other_rows_df["mIoU"].to_numpy().reshape(-1, 1)
         y = other_rows_df[["trust"]].dropna()
         _fit_and_save(
-            model, x, y,
+            _create_model(), x, y,
             info_path=results_path_split_groups / f"model_info_other_rows_df_{name}.txt",
             plot_path=results_path_split_groups / f"relationship_pysr_other_rows_df_{name}.png",
             hue_series=other_rows_df["intro_scenario_combo"],
@@ -192,7 +209,7 @@ def main():
     # --- Personalized fits for each participant in other_rows_df (last file) ---
     if other_rows_df is not None:
         for participant_id in other_rows_df["ProlificID"].unique():
-            _fit_personalized(other_rows_df, participant_id, model)
+            _fit_personalized(other_rows_df, participant_id, _create_model())
 
 
 if __name__ == "__main__":
