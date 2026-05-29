@@ -26,8 +26,11 @@ results_folder.mkdir(parents=True, exist_ok=True)
 epochs_dir = Path(__file__).parent / "epochs"
 epochs_dir.mkdir(parents=True, exist_ok=True)
 
+# Features are pre-encoded into in-memory tensors (see TrustDataset), so a
+# large batch is cheap and keeps the GPU busy instead of stalling on per-sample
+# Python encoding. 256 cuts the per-epoch step count ~16x vs the old 16.
 epochs = 2000
-batch_size = 16
+batch_size = 256
 learning_rate = 1e-4
 
 
@@ -138,7 +141,12 @@ def main():
     )
 
     model = Model(input_size=train_dataset.input_size, num_classes=num_classes).to(device)
-    criterion = torch.nn.CrossEntropyLoss().to(device)
+    # Class-balanced loss: trust labels are skewed toward high trust, so an
+    # unweighted loss lets the model ignore the rare low-trust classes. Weights
+    # are derived from the TRAIN distribution only.
+    class_weights = train_dataset.class_weights.to(device)
+    tqdm.write(f"Class weights (train): {class_weights.tolist()}")
+    criterion = torch.nn.CrossEntropyLoss(weight=class_weights).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
     tqdm.write(f"N steps: {len(train_loader) * epochs}")

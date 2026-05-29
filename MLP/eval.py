@@ -204,7 +204,7 @@ def main():
     )
     test_loader = DataLoader(
         test_dataset,
-        batch_size=16,
+        batch_size=256,
         shuffle=False,
         num_workers=0,
         pin_memory=device.type == "cuda",
@@ -266,8 +266,15 @@ def main():
     y_pred_array = y_pred_tensor.numpy()
 
     test_loss = total_loss / total_samples
+    # NOTE: torchmetrics defaults to macro averaging (mean over per-class
+    # scores). With skewed trust labels this differs a lot from overall
+    # accuracy, so we report BOTH plus the majority-class baseline to keep the
+    # numbers from being misread.
     test_acc = float(multiclass_accuracy(y_pred_tensor, y_true_tensor, num_classes=num_classes).item())
     test_f1 = float(multiclass_f1_score(y_pred_tensor, y_true_tensor, num_classes=num_classes).item())
+    micro_acc = float((y_pred_array == y_true_array).mean())
+    class_counts = np.bincount(y_true_array, minlength=num_classes)
+    majority_baseline = float(class_counts.max() / class_counts.sum())
 
     # Ordinal-aware metrics: trust is on an ordered scale, so reward "almost right".
     qwk = float(cohen_kappa_score(y_true_array, y_pred_array, weights="quadratic"))
@@ -277,8 +284,12 @@ def main():
     mae_trust = float(mean_absolute_error(true_trust, pred_trust))
 
     print(f"Test Loss: {test_loss}")
-    print(f"Test Acc: {test_acc}")
-    print(f"Test F1: {test_f1}")
+    print(f"Test Acc (macro-recall): {test_acc}")
+    print(f"Test F1 (macro): {test_f1}")
+    print(f"Test Accuracy (micro/overall): {micro_acc:.4f}")
+    print(f"Majority-class baseline: {majority_baseline:.4f}")
+    print(f"Predicted-class distribution: {np.bincount(y_pred_array, minlength=num_classes).tolist()}")
+    print(f"True-class distribution: {class_counts.tolist()}")
     print(f"Test Quadratic-Weighted Kappa: {qwk:.4f}")
     print(f"Test MAE in trust units: {mae_trust:.4f}")
 

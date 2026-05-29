@@ -5,12 +5,29 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
+from sklearn.preprocessing import StandardScaler
 from torch.utils.data.dataset import Dataset
 
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 
 TRUST_LABEL_MODES = ("floor", "separate_fractional")
+
+# Single source of truth for the categorical class orders. The scalar encoders
+# below and the vectorised pre-encoder in ``TrustDataset`` both use these, so
+# the two code paths can never drift out of sync.
+SCENARIO_CLASSES = ["3Spurig", "Spielstrasse", "Ueberland", "NeueMitte"]
+GENDER_CLASSES = ["A1", "A2", "A3", "A4"]
+EDUCATION_CLASSES = ["A1", "A2", "A3", "A4", "A5"]
+JOB_CLASSES = ["A1", "A2", "A3", "A4", "A5", "A6"]
+DRIVING_CLASSES = ["A1", "A2", "A3", "A4", "A5", "A6"]
+DISTANCE_CLASSES = ["A1", "A2", "A3", "A4", "A5"]
+
+# Numeric features that get standardised (zero mean / unit variance). The scaler
+# is fit on the TRAIN split only, mirroring the StandardScaler used in
+# ML-approaches.py so the MLP sees features on the same footing as the tree
+# models. Order here defines the columns handed to the scaler.
+NUMERIC_FEATURES = ["mIoU", "Age", "License"]
 
 
 def _encode_one_hot(value, classes, feature_name):
@@ -28,8 +45,7 @@ def _encode_one_hot(value, classes, feature_name):
 
 
 def encode_scenario(scenario):
-    classes = ["3Spurig", "Spielstrasse", "Ueberland", "NeueMitte"]
-    return _encode_one_hot(scenario, classes, "SCENARIO")
+    return _encode_one_hot(scenario, SCENARIO_CLASSES, "SCENARIO")
 
 
 def encode_intro(intro):
@@ -73,7 +89,9 @@ def encode_license(value):
     # ``License`` is the number of years the participant has held a driving
     # licence (integer), not a Y/N flag. Pass it through as a float scalar so
     # the feature actually reaches the model (previously ``value == "Y"`` was
-    # always False, silently feeding the network a constant 0).
+    # always False, silently feeding the network a constant 0). NOTE: the
+    # production path standardises this in ``TrustDataset``; this scalar encoder
+    # is kept for unit tests and returns the raw (unscaled) value.
     return torch.tensor([float(value)], dtype=torch.float32)
 
 
@@ -110,6 +128,36 @@ def encode_trust_value(value, trust_label_mode, class_values):
     )
 
 
+def _one_hot_block(values, classes, feature_name):
+    """Vectorised one-hot for a whole column (mirror of ``_encode_one_hot``)."""
+    index = {cls: i for i, cls in enumerate(classes)}
+    block = np.zeros((len(values), len(classes)), dtype=np.float32)
+    for row, raw in enumerate(values):
+        key = str(raw).strip()
+        position = index.get(key)
+        if position is None:
+            raise ValueError(
+                f"Unknown value for {feature_name}: {key!r}. Expected one of {classes}."
+            )
+        block[row, position] = 1.0
+    return block
+
+
+def _intro_block(values):
+    """Vectorised INTRODUCTION encoder (mirror of ``encode_intro``)."""
+    block = np.zeros((len(values), 1), dtype=np.float32)
+    for row, raw in enumerate(values):
+        normalized = str(raw).strip().lower()
+        if normalized == "boasting":
+            block[row, 0] = 1.0
+        elif normalized not in {"ambiguous", "ambigious"}:
+            raise ValueError(
+                f"Unknown value for INTRODUCTION: {raw!r}. "
+                "Expected one of ['ambiguous', 'ambigious', 'boasting']."
+            )
+    return block
+
+
 def addlabels(x_positions, y_values):
     total = np.sum(y_values)
     for x_position, y_value in zip(x_positions, y_values):
@@ -128,38 +176,12 @@ class TrustDataset(Dataset):
         super().__init__()
         self.split = split
         self.trust_label_mode = trust_label_mode
-        # read data
 
-        # Specify the sheet name (optional)
-        sheet_name = "Sheet1"
-
-        # Read the Excel file into a DataFrame
-        df = pd.read_excel(file_path, sheet_name=sheet_name)
+        df = pd.read_excel(file_path, sheet_name="Sheet1")
         df = df.dropna().reset_index(drop=True)
 
         self.class_values = resolve_trust_class_values(df["trust"], trust_label_mode)
         self.num_classes = len(self.class_values)
-
-        # Assemble the feature matrix in a fixed column order. The trailing
-        # column holds the raw trust target, decoded lazily in __getitem__.
-        # The order here MUST stay in sync with the positional indexing in
-        # __getitem__ (data[0]..data[10]).
-        feature_columns = [
-            "mIoU",
-            "SCENARIO",
-            "INTRODUCTION",
-            "Gender",
-            "Age",
-            "Education",
-            "Job",
-            "License",
-            "DrivingFrequency",
-            "Distance",
-        ]
-        x_values_extended = np.column_stack(
-            [df[column].to_numpy() for column in feature_columns]
-            + [df["trust"].to_numpy()]
-        )
 
         # Participant-grouped split: the study is within-subjects (each
         # ProlificID rated trust many times), so a plain row shuffle leaks the
@@ -167,22 +189,65 @@ class TrustDataset(Dataset):
         participant_ids = df["ProlificID"].to_numpy()
         train_idx, valid_idx, test_idx = self._participant_grouped_indices(participant_ids)
 
-        if self.split == "train":
-            self.datapoints = x_values_extended[train_idx]
-        elif self.split == "valid":
-            self.datapoints = x_values_extended[valid_idx]
-        elif self.split == "test":
-            self.datapoints = x_values_extended[test_idx]
-        else:
-            # all datapoints
-            self.datapoints = x_values_extended
+        # Standardise numeric features using TRAIN ROWS ONLY (no leakage),
+        # matching the StandardScaler in ML-approaches.py. The scaler is refit
+        # here deterministically, so train.py and eval.py derive identical
+        # statistics from the same train participants.
+        numeric_raw = df[NUMERIC_FEATURES].to_numpy(dtype=np.float64)
+        self.scaler = StandardScaler().fit(numeric_raw[train_idx])
+        numeric_scaled = self.scaler.transform(numeric_raw).astype(np.float32)
 
-        encoded_labels = [
-            encode_trust_value(d[-1], self.trust_label_mode, self.class_values)
-            for d in self.datapoints
-        ]
-        self.labels, self.counts = np.unique(encoded_labels, return_counts=True)
-        print(f"Found {len(self.datapoints)} for split {self.split}")
+        # Build the full encoded feature matrix ONCE (vectorised). Column order
+        # must match the model's expected input layout; total width = 34.
+        scenario_block = _one_hot_block(df["SCENARIO"], SCENARIO_CLASSES, "SCENARIO")
+        intro_block = _intro_block(df["INTRODUCTION"])
+        gender_block = _one_hot_block(df["Gender"], GENDER_CLASSES, "Gender")
+        education_block = _one_hot_block(df["Education"], EDUCATION_CLASSES, "Education")
+        job_block = _one_hot_block(df["Job"], JOB_CLASSES, "Job")
+        driving_block = _one_hot_block(df["DrivingFrequency"], DRIVING_CLASSES, "DrivingFrequency")
+        distance_block = _one_hot_block(df["Distance"], DISTANCE_CLASSES, "Distance")
+
+        miou_col = numeric_scaled[:, 0:1]
+        age_col = numeric_scaled[:, 1:2]
+        license_col = numeric_scaled[:, 2:3]
+
+        features = np.hstack(
+            [
+                miou_col,
+                scenario_block,
+                intro_block,
+                gender_block,
+                age_col,
+                education_block,
+                job_block,
+                license_col,
+                driving_block,
+                distance_block,
+            ]
+        ).astype(np.float32)
+
+        labels = np.array(
+            [
+                encode_trust_value(value, self.trust_label_mode, self.class_values)
+                for value in df["trust"].to_numpy()
+            ],
+            dtype=np.int64,
+        )
+
+        if self.split == "train":
+            selection = train_idx
+        elif self.split == "valid":
+            selection = valid_idx
+        elif self.split == "test":
+            selection = test_idx
+        else:
+            selection = np.arange(len(df))  # all datapoints
+
+        self.X = torch.from_numpy(features[selection])
+        self.y = torch.from_numpy(labels[selection])
+
+        self.labels, self.counts = np.unique(self.y.numpy(), return_counts=True)
+        print(f"Found {len(self.X)} for split {self.split}")
         print(f"Labels: {self.labels} counts {self.counts}")
         print(f"Labels: {self.labels} weights {np.sum(self.counts) / self.counts}")
 
@@ -211,10 +276,28 @@ class TrustDataset(Dataset):
 
     @property
     def input_size(self) -> int:
-        """Feature dimension, probed from a real sample so it always tracks the
-        encoders (avoids the previously hard-coded ``input_size=34``)."""
-        x, _ = self[0]
-        return int(x.shape[0])
+        """Feature dimension of the pre-encoded matrix (tracks the encoders, so
+        no hard-coded ``input_size=34`` is needed)."""
+        return int(self.X.shape[1])
+
+    @property
+    def class_weights(self) -> torch.Tensor:
+        """Inverse-frequency class weights (sklearn 'balanced' form) over the
+        full class range, for ``CrossEntropyLoss(weight=...)``.
+
+        Trust labels are heavily skewed toward high trust; without weighting the
+        model collapses onto the majority classes and never predicts the rare
+        ones. Weights are ``N / (num_classes * count_c)`` so they average ~1.
+        Classes absent from this split get weight 0 (cannot be learned anyway).
+        Compute this from the TRAIN dataset and pass it to the loss.
+        """
+        full_counts = np.zeros(self.num_classes, dtype=np.float64)
+        full_counts[self.labels] = self.counts
+        total = full_counts.sum()
+        with np.errstate(divide="ignore", invalid="ignore"):
+            weights = total / (self.num_classes * full_counts)
+        weights[~np.isfinite(weights)] = 0.0
+        return torch.tensor(weights, dtype=torch.float32)
 
     def plot_label_distribution(self, results_dir: Path = results_folder) -> None:
         """Save the per-split label-distribution bar chart.
@@ -250,38 +333,10 @@ class TrustDataset(Dataset):
         plt.close(fig)
 
     def __len__(self):
-        return len(self.datapoints)
+        return len(self.X)
 
     def __getitem__(self, index):
-        data = self.datapoints[index]
-        x_miou = torch.tensor([data[0]], dtype=torch.float32)
-        x_scenario = encode_scenario(data[1])
-        x_intro = encode_intro(data[2])
-        x_gender = encode_gender(data[3])
-        x_age = torch.tensor([data[4]], dtype=torch.float32)
-        x_education = encode_education(data[5])
-        x_job = encode_job(data[6])
-        x_license = encode_license(data[7])
-        x_drivingfreq = encode_driving(data[8])
-        x_distance = encode_distance(data[9])
-        y = data[10]
-
-        x = torch.concatenate(
-            [
-                x_miou.view(1, -1),
-                x_scenario.view(1, -1),
-                x_intro.view(1, -1),
-                x_gender.view(1, -1),
-                x_age.view(1, -1),
-                x_education.view(1, -1),
-                x_job.view(1, -1),
-                x_license.view(1, -1),
-                x_drivingfreq.view(1, -1),
-                x_distance.view(1, -1),
-            ],
-            dim=1,
-        )
-        y = torch.tensor(
-            encode_trust_value(y, self.trust_label_mode, self.class_values)
-        ).long()
-        return x.flatten(), y.flatten()
+        # Pre-encoded: indexing is a cheap tensor slice (no per-row Python
+        # encoding), which is what makes large batch sizes and the GPU actually
+        # pay off.
+        return self.X[index], self.y[index].reshape(1)
