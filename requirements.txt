@@ -5,7 +5,7 @@ seaborn>=0.13.2
 matplotlib>=3.10.9
 pandas>=2.3.3
 bottleneck>=1.5.0
-scikit-learn>=1.8.0
+scikit-learn>=1.9.0
 shap>=0.52.0
 catboost>=1.2.10
 xgboost>=3.2.0
@@ -14,10 +14,10 @@ torch>=2.12.0
 torchmetrics>=1.9.0
 tqdm>=4.67.3
 numpy>=2.4.6
-tabpfn>=8.0.3
+tabpfn>=8.0.4
 statsmodels>=0.14.0
-scipy>=1.11.0
-dice-ml>=0.11
+scipy>=1.17.1
+dice-ml>=0.12
 # Optional: alibi enables canonical Anchors explanations; otherwise a surrogate
 # decision tree is used as a fallback. ``alibi`` does not build cleanly on all
 # Windows installs, so we keep it as a soft dependency.
