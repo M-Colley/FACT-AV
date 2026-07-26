@@ -143,6 +143,126 @@ def fit_models(df: pd.DataFrame, config: MixedEffectsConfig) -> Dict[str, "Mixed
     return fits
 
 
+def fit_random_slope_sensitivity(
+    df: pd.DataFrame, config: MixedEffectsConfig
+) -> "MixedLMResults | None":
+    """Refit M2 with a random slope for mIoU, as a sensitivity check on M2.
+
+    Why this matters. In this design INTRODUCTION and SCENARIO are *between*-
+    subject factors (each participant is assigned one of each), while mIoU varies
+    *within* participant across 20 videos. M0-M2 specify a random intercept only,
+    which assumes every participant responds to mIoU with the same slope. If
+    participants actually differ in mIoU sensitivity, that variance is absorbed
+    into residual error and the standard errors on the mIoU terms come out too
+    small -- i.e. the moderation p-values are anticonservative. A random slope for
+    mIoU is the maximal random-effects structure this design supports
+    (Barr et al., 2013), and the mIoU x SCENARIO interaction is the headline
+    result, so it should be read against both models.
+
+    On the predictor scale. mIoU is on a 0-100 scale, so ``mIoU_c`` spans roughly
+    [-8.8, +9.6]. With a random intercept variance near 1.4, a random slope on that
+    scale is badly conditioned and statsmodels does *not* converge: it exhausts
+    lbfgs and cg, reports a non-positive-definite Hessian, and returns standard
+    errors inflated by a uniform ~13x across every coefficient -- an artifact, not
+    a correction. Both models here therefore use mIoU in **standard-deviation
+    units**, which is a pure reparameterisation of the fixed effects (the
+    random-intercept p-values are identical either way) and converges cleanly.
+
+    This is deliberately *additive*: M0-M2 are left untouched and M2 remains the
+    model behind ``fixed_effects_M2.csv`` and the published figures. Both models
+    are refitted here on the common scale so the comparison is apples-to-apples.
+    Returns ``None`` if the random-slope model still fails to converge.
+    """
+    import statsmodels.formula.api as smf
+    from statsmodels.tools.sm_exceptions import ConvergenceWarning
+
+    scaled = df.copy()
+    miou_sd = float(scaled["mIoU_c"].std())
+    scaled["mIoU_sd"] = scaled["mIoU_c"] / miou_sd
+    formula = "trust ~ mIoU_sd * (C(INTRODUCTION) + C(SCENARIO))"
+
+    def _fit(re_formula: str | None) -> tuple[Optional["MixedLMResults"], int]:
+        try:
+            with warnings.catch_warnings(record=True) as caught:
+                warnings.simplefilter("always", ConvergenceWarning)
+                fit = smf.mixedlm(
+                    formula, scaled, groups=scaled["ProlificID"], re_formula=re_formula
+                ).fit(reml=True)
+        except Exception as exc:  # noqa: BLE001 - report and degrade gracefully
+            logger.warning("Fit failed (re_formula=%r): %s", re_formula, exc)
+            return None, 0
+        n_conv = sum(1 for w in caught if issubclass(w.category, ConvergenceWarning))
+        return fit, n_conv
+
+    logger.info(
+        "Random-slope sensitivity check: refitting M2 with mIoU in SD units "
+        "(1 unit = %.3f mIoU points), with and without a random slope ...",
+        miou_sd,
+    )
+    ri_fit, ri_conv = _fit(None)
+    rs_fit, rs_conv = _fit("~mIoU_sd")
+
+    if ri_fit is None or rs_fit is None:
+        return None
+    if rs_conv:
+        logger.warning(
+            "The random-slope model reported %d convergence warning(s); its standard "
+            "errors should not be trusted. Do not read the p-values below as a result.",
+            rs_conv,
+        )
+
+    (config.results_path / "summary_M2_random_slope.txt").write_text(
+        rs_fit.summary().as_text(), encoding="utf-8"
+    )
+
+    terms = [t for t in ri_fit.params.index if "mIoU_sd" in t]
+    comparison = pd.DataFrame(
+        {
+            "term": terms,
+            "estimate_random_intercept": [float(ri_fit.params[t]) for t in terms],
+            "std_err_random_intercept": [float(ri_fit.bse[t]) for t in terms],
+            "p_value_random_intercept": [float(ri_fit.pvalues[t]) for t in terms],
+            "estimate_random_slope": [float(rs_fit.params[t]) for t in terms],
+            "std_err_random_slope": [float(rs_fit.bse[t]) for t in terms],
+            "p_value_random_slope": [float(rs_fit.pvalues[t]) for t in terms],
+            "std_err_ratio": [float(rs_fit.bse[t] / ri_fit.bse[t]) for t in terms],
+        }
+    )
+    comparison.to_csv(
+        config.results_path / "fixed_effects_M2_random_slope.csv",
+        index=False,
+        float_format="%.4f",
+    )
+
+    meta = {
+        "note": (
+            "Sensitivity check on M2's random-effects structure. mIoU is expressed in "
+            "SD units here so the random-slope model converges; see the function "
+            "docstring. M0-M2 and the published figures are unchanged."
+        ),
+        "miou_sd_in_original_units": miou_sd,
+        "random_intercept_loglik": float(ri_fit.llf),
+        "random_slope_loglik": float(rs_fit.llf),
+        "random_intercept_convergence_warnings": ri_conv,
+        "random_slope_convergence_warnings": rs_conv,
+        "random_slope_trustworthy": rs_conv == 0,
+    }
+    (config.results_path / "random_slope_sensitivity.json").write_text(
+        json.dumps(meta, indent=2), encoding="utf-8"
+    )
+
+    logger.info(
+        "Random-slope sensitivity check (mIoU terms):\n%s",
+        comparison.to_string(index=False),
+    )
+    logger.info(
+        "log-likelihood: random intercept %.3f -> random slope %.3f",
+        ri_fit.llf,
+        rs_fit.llf,
+    )
+    return rs_fit
+
+
 def compare_models(fits: Dict[str, "MixedLMResults"], config: MixedEffectsConfig) -> pd.DataFrame:
     """Likelihood-ratio + AIC/BIC comparison for nested LME models."""
     from scipy.stats import chi2
@@ -351,6 +471,12 @@ def main() -> None:
     fe_table = write_fixed_effects(m2_reml, config)
     plot_fixed_effects_forest(fe_table, config)
     plot_marginal_effects(m2_reml, df, config)
+
+    # Sensitivity check: M2 assumes every participant shares one mIoU slope.
+    # mIoU is the within-subject factor, so that assumption is what makes the
+    # moderation p-values anticonservative if it is wrong. Fit the random-slope
+    # version alongside and compare before reporting the interaction result.
+    fit_random_slope_sensitivity(df, config)
 
     logger.info("Mixed-effects baseline complete. Outputs in %s", config.results_path)
 

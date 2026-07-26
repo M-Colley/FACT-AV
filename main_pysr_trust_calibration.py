@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-import warnings
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import sympy
-from pysr import PySRRegressor
 
-warnings.filterwarnings("ignore")
+from pysr_config import create_model, write_model_info
 
 results_path = Path("results") / "PySR"
 results_path.mkdir(parents=True, exist_ok=True)
@@ -18,46 +15,8 @@ file_path_removed_dei = Path("data") / "all_combined_prepared_removed_REI.xlsx"
 sheet_name = "Sheet1"
 
 
-def create_model():
-    return PySRRegressor(
-        niterations=300,
-        binary_operators=["+", "-", "*", "/", "^"],
-        unary_operators=[
-            "sin",
-            "square",
-            "tan",
-            "cos",
-            "cube",
-            "tanh",
-            "sqrt",
-            "abs",
-            "log",
-            "exp",
-            "cos2(x)=cos(x)^2",
-            "quart(x) = x^4",
-            "inv(x) = 1/x",
-        ],
-        extra_sympy_mappings={
-            "cos2": lambda x: sympy.cos(x) ** 2,
-            "inv": lambda x: 1 / x,
-            "quart": lambda x: x**4,
-        },
-        constraints={"^": (-1, 1)},
-        ncyclesperiteration=2500,
-        maxsize=10,
-        precision=32,
-        turbo=True,
-    )
-
-
-def write_model_info(model, output_path):
-    with output_path.open("w") as handle:
-        handle.write("SYMPY\n")
-        handle.write(str(model.sympy()))
-        handle.write("\n\nLATEX\n")
-        handle.write(str(model.latex()))
-        handle.write("\n\nLATEX TABLE\n")
-        handle.write(str(model.latex_table()))
+# This script's searches are shorter than the other three PySR pipelines'.
+NITERATIONS = 300
 
 
 def fit_and_plot_subset(df, intro, scenario, name_without_extension):
@@ -73,7 +32,7 @@ def fit_and_plot_subset(df, intro, scenario, name_without_extension):
     x_values = filtered_df["mIoU"].to_numpy().reshape(-1, 1)
     y_values = filtered_df["trust"].to_numpy()
 
-    model = create_model()
+    model = create_model(niterations=NITERATIONS)
     model.fit(x_values, y_values)
 
     info_path = results_path / f"model_info_{intro}_{scenario}_{name_without_extension}.txt"
@@ -105,8 +64,13 @@ def run_all_data(df, name_without_extension):
     x_values = df["mIoU"].to_numpy().reshape(-1, 1)
     y_values = df["trust"].to_numpy()
 
-    model = create_model()
+    model = create_model(niterations=NITERATIONS)
     model.fit(x_values, y_values)
+
+    # The all-data equation used to be fitted, plotted, and then discarded --
+    # only the figure was written, so the equation behind it was unrecoverable.
+    info_path = results_path / f"model_info_all_data_{name_without_extension}.txt"
+    write_model_info(model, info_path)
 
     sns.set_style("whitegrid")
     sns.set_context("notebook", font_scale=1.5)

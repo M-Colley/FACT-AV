@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
@@ -168,6 +169,10 @@ def plot_calibration(y_true, y_probs, n_bins, save_path, title):
     save_fig(fig, save_path)
     plt.close(fig)
 
+    # Returned so the caller can persist it. ECE was previously computed here,
+    # rendered into the figure title, and then thrown away.
+    return ece
+
 
 def write_per_class_report(y_true, y_pred, class_values, csv_path):
     """Per-class precision/recall/F1/support as a publication-ready CSV."""
@@ -277,7 +282,17 @@ def main():
     majority_baseline = float(class_counts.max() / class_counts.sum())
 
     # Ordinal-aware metrics: trust is on an ordered scale, so reward "almost right".
-    qwk = float(cohen_kappa_score(y_true_array, y_pred_array, weights="quadratic"))
+    # ``labels`` is passed explicitly: without it, sklearn infers the label set
+    # from the data, so a class absent from both y_true and y_pred silently
+    # shrinks the quadratic weight matrix and changes the QWK scale between runs.
+    qwk = float(
+        cohen_kappa_score(
+            y_true_array,
+            y_pred_array,
+            labels=list(range(num_classes)),
+            weights="quadratic",
+        )
+    )
     class_values_array = np.asarray(class_values, dtype=float)
     true_trust = class_values_array[y_true_array]
     pred_trust = class_values_array[y_pred_array]
@@ -313,13 +328,14 @@ def main():
     plt.close(fig)
 
     # ------------------------- Reliability diagram --------------------------
-    plot_calibration(
+    ece = plot_calibration(
         y_true_array,
         y_probs_array,
         n_bins=10,
         save_path=results_folder / f"calibration{suffix}",
         title=f"MLP reliability diagram (mode={args.trust_label_mode})",
     )
+    print(f"Test Expected Calibration Error: {ece:.4f}")
 
     # ------------ Per-class precision/recall/F1 + support table -------------
     write_per_class_report(
@@ -328,6 +344,35 @@ def main():
         class_values,
         results_folder / f"per_class_metrics{suffix}.csv",
     )
+
+    # --------------------- Machine-readable metric dump ---------------------
+    # QWK, MAE-in-trust-units and ECE are the metrics the README calls primary
+    # for this ordinal task, but they previously existed only as stdout lines and
+    # figure titles -- nothing downstream could read them, and reruns could not be
+    # compared. Persist everything alongside the CSV and figures.
+    metrics_path = results_folder / f"eval_metrics{suffix}.json"
+    metrics_payload = {
+        "trust_label_mode": args.trust_label_mode,
+        "checkpoint": str(checkpoint_path),
+        "num_classes": num_classes,
+        "class_values": [float(v) for v in class_values],
+        "n_test_samples": int(total_samples),
+        "test_loss_unweighted": float(test_loss),
+        "accuracy_macro_recall": test_acc,
+        "accuracy_micro": micro_acc,
+        "f1_macro": test_f1,
+        "majority_class_baseline": majority_baseline,
+        "beats_majority_baseline": bool(micro_acc > majority_baseline),
+        "quadratic_weighted_kappa": qwk,
+        "mae_trust_units": mae_trust,
+        "expected_calibration_error": ece,
+        "true_class_distribution": class_counts.tolist(),
+        "predicted_class_distribution": np.bincount(
+            y_pred_array, minlength=num_classes
+        ).tolist(),
+    }
+    metrics_path.write_text(json.dumps(metrics_payload, indent=2), encoding="utf-8")
+    print(f"Wrote metrics to {metrics_path}")
 
 
 if __name__ == "__main__":

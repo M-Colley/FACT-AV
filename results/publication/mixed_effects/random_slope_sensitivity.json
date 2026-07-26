@@ -1,0 +1,9 @@
+{
+  "note": "Sensitivity check on M2's random-effects structure. mIoU is expressed in SD units here so the random-slope model converges; see the function docstring. M0-M2 and the published figures are unchanged.",
+  "miou_sd_in_original_units": 5.553589361920968,
+  "random_intercept_loglik": -2369.2052086665262,
+  "random_slope_loglik": -2293.664961358232,
+  "random_intercept_convergence_warnings": 0,
+  "random_slope_convergence_warnings": 0,
+  "random_slope_trustworthy": true
+}

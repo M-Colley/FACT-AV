@@ -1,0 +1,6 @@
+term,estimate_random_intercept,std_err_random_intercept,p_value_random_intercept,estimate_random_slope,std_err_random_slope,p_value_random_slope,std_err_ratio
+mIoU_sd,0.0401,0.0222,0.0713,0.0404,0.0391,0.3009,1.7575
+mIoU_sd:C(INTRODUCTION)[T.boasting],0.0267,0.0207,0.1969,0.0266,0.0365,0.4655,1.7630
+mIoU_sd:C(SCENARIO)[T.NeueMitte],0.0964,0.0299,0.0013,0.0961,0.0528,0.0688,1.7642
+mIoU_sd:C(SCENARIO)[T.Spielstrasse],0.0023,0.0286,0.9360,0.0012,0.0502,0.9811,1.7585
+mIoU_sd:C(SCENARIO)[T.Ueberland],0.0322,0.0282,0.2536,0.0319,0.0497,0.5212,1.7638

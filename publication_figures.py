@@ -327,17 +327,53 @@ def _bootstrap_smooth(
     bandwidth: float,
     n_boot: int,
     rng: np.random.Generator,
+    groups: np.ndarray | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Return point estimate plus pointwise 2.5/97.5 percentile bands."""
+    """Return point estimate plus pointwise 2.5/97.5 percentile bands.
+
+    When ``groups`` is supplied the bootstrap resamples **participants** with
+    replacement (a cluster bootstrap), carrying all of a sampled participant's
+    rows along. This design is repeated-measures -- every participant contributes
+    20 ratings and the intraclass correlation is ~0.69 -- so the i.i.d. row
+    bootstrap this function used to perform treats strongly correlated
+    observations as independent and yields bands that are much too narrow.
+
+    Passing ``groups=None`` restores the old row-wise behaviour; it is only
+    appropriate for genuinely independent observations.
+    """
     if len(x) < 5:
         flat = np.full_like(x_grid, np.mean(y) if len(y) else np.nan, dtype=float)
         return flat, flat, flat
-    boots = np.empty((n_boot, len(x_grid)))
-    n = len(x)
-    for b in range(n_boot):
-        idx = rng.integers(0, n, size=n)
-        boots[b] = _loess_like(x[idx], y[idx], x_grid, bandwidth)
+
     mean = _loess_like(x, y, x_grid, bandwidth)
+
+    if groups is None:
+        n = len(x)
+
+        def draw() -> np.ndarray:
+            return rng.integers(0, n, size=n)
+    else:
+        unique_groups = np.unique(groups)
+        if len(unique_groups) < 5:
+            logger.warning(
+                "Only %d participant(s) in this cell -- too few clusters to bootstrap; "
+                "omitting the uncertainty band.",
+                len(unique_groups),
+            )
+            blank = np.full_like(x_grid, np.nan, dtype=float)
+            return mean, blank, blank
+
+        rows_by_group = {g: np.flatnonzero(groups == g) for g in unique_groups}
+
+        def draw() -> np.ndarray:
+            picked = rng.choice(unique_groups, size=len(unique_groups), replace=True)
+            return np.concatenate([rows_by_group[g] for g in picked])
+
+    boots = np.empty((n_boot, len(x_grid)))
+    for b in range(n_boot):
+        idx = draw()
+        boots[b] = _loess_like(x[idx], y[idx], x_grid, bandwidth)
+
     lower = np.nanpercentile(boots, 2.5, axis=0)
     upper = np.nanpercentile(boots, 97.5, axis=0)
     return mean, lower, upper
@@ -364,7 +400,13 @@ def plot_miou_trust_panel(df: pd.DataFrame, config: FigureConfig) -> None:
             x = sub["mIoU"].to_numpy(dtype=float)
             y = sub["trust"].to_numpy(dtype=float)
             mean, lower, upper = _bootstrap_smooth(
-                x, y, x_grid, bandwidth, config.bootstrap_n, rng
+                x,
+                y,
+                x_grid,
+                bandwidth,
+                config.bootstrap_n,
+                rng,
+                groups=sub["ProlificID"].to_numpy(),
             )
             color = INTRO_COLORS.get(intro, "grey")
             ax.fill_between(x_grid, lower, upper, color=color, alpha=0.2)

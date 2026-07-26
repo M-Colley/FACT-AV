@@ -331,14 +331,47 @@ def get_catboost_importance_std(
     cat_features: List[str],
     n_bootstrap: int = 20,
     random_state: int = 42,
+    groups: np.ndarray | None = None,
 ) -> np.ndarray:
-    """Compute per-feature importance std for CatBoost via bootstrap resampling."""
-    logger.info("Computing CatBoost error bars via %d bootstrap resamples...", n_bootstrap)
+    """Compute per-feature importance std for CatBoost via bootstrap resampling.
+
+    When ``groups`` is supplied this is a **cluster** bootstrap: participants are
+    resampled with replacement and all of a sampled participant's rows come along.
+    Each participant contributes 20 correlated ratings (ICC ~ 0.69), so resampling
+    individual rows -- as this function used to do -- treats those as independent
+    and understates the spread of the importance estimates.
+    """
     rng = np.random.default_rng(random_state)
+
+    if groups is None:
+        logger.info(
+            "Computing CatBoost error bars via %d row-wise bootstrap resamples...", n_bootstrap
+        )
+
+        def draw() -> np.ndarray:
+            return rng.integers(0, len(X_train), size=len(X_train))
+    else:
+        groups = np.asarray(groups)
+        if len(groups) != len(X_train):
+            raise ValueError(
+                f"groups has length {len(groups)} but X_train has {len(X_train)} rows."
+            )
+        unique_groups = np.unique(groups)
+        rows_by_group = {g: np.flatnonzero(groups == g) for g in unique_groups}
+        logger.info(
+            "Computing CatBoost error bars via %d cluster bootstrap resamples over %d participants...",
+            n_bootstrap,
+            len(unique_groups),
+        )
+
+        def draw() -> np.ndarray:
+            picked = rng.choice(unique_groups, size=len(unique_groups), replace=True)
+            return np.concatenate([rows_by_group[g] for g in picked])
+
     importances = []
 
     for _ in range(n_bootstrap):
-        idx = rng.integers(0, len(X_train), size=len(X_train))
+        idx = draw()
         X_b = X_train.iloc[idx].copy()
         y_b = y_train.iloc[idx]
         X_b = prepare_categorical_as_string(X_b, cat_features)
@@ -438,11 +471,19 @@ class ModelEvaluator:
         ax.set_ylabel("Importance")
         ax.set_title(f"Feature Importances using {method_name}")
 
+        # R2 is included deliberately. Impurity- and gain-based importance shares
+        # always sum to 1 whether or not the model generalises, so an importance
+        # figure without a generalisation metric can be read as evidence of an
+        # effect even when the model does not beat the test-set mean. On this data
+        # most models land near or below R2 = 0, so the reader needs to see it.
         metrics_text = (
             f"MAE: {metrics['mae']:.4f}\n"
             f"MSE: {metrics['mse']:.4f}\n"
-            f"RMSE: {metrics['rmse']:.4f}"
+            f"RMSE: {metrics['rmse']:.4f}\n"
+            f"R2:   {metrics['r2']:.4f}"
         )
+        if metrics["r2"] <= 0:
+            metrics_text += "\n(does not beat test mean)"
         ax.text(
             0.75,
             0.6,
@@ -502,11 +543,19 @@ class ModelEvaluator:
         ax.set_title("Permutation Importances")
         sns.despine()
 
+        # R2 is included deliberately. Impurity- and gain-based importance shares
+        # always sum to 1 whether or not the model generalises, so an importance
+        # figure without a generalisation metric can be read as evidence of an
+        # effect even when the model does not beat the test-set mean. On this data
+        # most models land near or below R2 = 0, so the reader needs to see it.
         metrics_text = (
             f"MAE: {metrics['mae']:.4f}\n"
             f"MSE: {metrics['mse']:.4f}\n"
-            f"RMSE: {metrics['rmse']:.4f}"
+            f"RMSE: {metrics['rmse']:.4f}\n"
+            f"R2:   {metrics['r2']:.4f}"
         )
+        if metrics["r2"] <= 0:
+            metrics_text += "\n(does not beat test mean)"
         ax.text(
             0.72,
             0.1,
@@ -570,9 +619,11 @@ class ModelEvaluator:
         X = df[self.config.numerical_features + self.config.categorical_features]
         y = df[self.config.target_column]
 
-        # Participant-grouped split: the design is within-subjects, so a plain
-        # random split leaks the same participant into both train and test and
-        # produces over-optimistic metrics.
+        # Participant-grouped split: mIoU varies *within* participant (20 ratings
+        # each), so a plain random split leaks the same participant into both
+        # train and test and produces over-optimistic metrics. INTRODUCTION and
+        # SCENARIO are between-subject factors, so they vary only across groups.
+        groups_train = None
         if self.config.group_column in df.columns:
             groups = df[self.config.group_column]
             splitter = GroupShuffleSplit(
@@ -583,6 +634,7 @@ class ModelEvaluator:
             (train_idx, test_idx), = splitter.split(X, y, groups=groups)
             X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
             y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+            groups_train = groups.iloc[train_idx].to_numpy()
         else:
             from sklearn.model_selection import train_test_split
 
@@ -678,6 +730,7 @@ class ModelEvaluator:
                     cat_features=self.config.categorical_features,
                     n_bootstrap=self.config.bootstrap_n,
                     random_state=self.config.random_state,
+                    groups=groups_train,
                 )
             except Exception as exc:
                 logger.warning("CatBoost bootstrap std computation failed: %s", exc)

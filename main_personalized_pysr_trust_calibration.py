@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-import warnings
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import sympy
-from pysr import PySRRegressor
 
-warnings.filterwarnings("ignore")
+from pysr_config import create_model, write_model_info
 
 results_path_personalized = Path("results") / "PySR" / "personalized_plots"
 results_path_personalized.mkdir(parents=True, exist_ok=True)
@@ -16,48 +13,6 @@ results_path_personalized.mkdir(parents=True, exist_ok=True)
 file_path = Path("data") / "all_combined_prepared.xlsx"
 file_path_removed_dei = Path("data") / "all_combined_prepared_removed_REI.xlsx"
 sheet_name = "Sheet1"
-
-
-def create_model():
-    return PySRRegressor(
-        niterations=500,
-        binary_operators=["+", "-", "*", "/", "^"],
-        unary_operators=[
-            "sin",
-            "square",
-            "tan",
-            "cos",
-            "cube",
-            "tanh",
-            "sqrt",
-            "abs",
-            "log",
-            "exp",
-            "cos2(x)=cos(x)^2",
-            "quart(x) = x^4",
-            "inv(x) = 1/x",
-        ],
-        extra_sympy_mappings={
-            "cos2": lambda x: sympy.cos(x) ** 2,
-            "inv": lambda x: 1 / x,
-            "quart": lambda x: x**4,
-        },
-        constraints={"^": (-1, 1)},
-        ncyclesperiteration=2500,
-        maxsize=10,
-        precision=32,
-        turbo=True,
-    )
-
-
-def write_model_info(model, output_path):
-    with output_path.open("w") as handle:
-        handle.write("SYMPY\n")
-        handle.write(str(model.sympy()))
-        handle.write("\n\nLATEX\n")
-        handle.write(str(model.latex()))
-        handle.write("\n\nLATEX TABLE\n")
-        handle.write(str(model.latex_table()))
 
 
 def fit_personalized(df, participant_id, name_without_extension):
@@ -74,7 +29,10 @@ def fit_personalized(df, participant_id, name_without_extension):
     model = create_model()
     model.fit(x_values, y_values)
 
-    info_path = results_path_personalized / f"model_info_{participant_id}.txt"
+    # The dataset stem is part of the filename. Without it, the second dataset's
+    # equations overwrite the first's, since both files share participant IDs --
+    # the .png path already included it, so the two artifacts disagreed.
+    info_path = results_path_personalized / f"model_info_{participant_id}_{name_without_extension}.txt"
     write_model_info(model, info_path)
 
     sns.set_style("whitegrid")

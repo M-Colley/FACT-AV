@@ -38,11 +38,23 @@ This repository contains the full analysis pipeline for studying how the mean In
 Autonomous vehicles (AVs) rely on perception systems to understand their environment. The **mIoU** (mean Intersection over Union) is a standard metric quantifying how accurately a perception model delineates objects — higher mIoU means more reliable perception. This project investigates:
 
 - How much does mIoU drive human trust in AV systems?
-- Do presentation style (boasting vs. ambiguous introduction) and driving scenario (urban, rural, pedestrian zone) moderate this relationship?
+- Do presentation style (boasting vs. ambiguous introduction) and driving scenario (highway, city, walking zone, cross-country) moderate this relationship?
 - Can symbolic equations describe the mIoU–trust relationship at the individual and group level?
 - How accurately can a deep model classify human trust levels from reliability and demographic features?
 
-The study uses a within-subjects experiment. Participants watched videos with varying mIoU values paired with either a **boasting** (overconfident) or **ambiguous** system introduction across four scenarios.
+### Experimental design
+
+The study uses a **mixed (split-plot) design**:
+
+| Factor | Type | Levels |
+|---|---|---|
+| `mIoU` | **Within**-subjects | 20 values, all seen by every participant |
+| `INTRODUCTION` | **Between**-subjects | 2 (`ambiguous`, `boasting`) |
+| `SCENARIO` | **Between**-subjects | 4 (highway, city, walking zone, cross-country) |
+
+Each participant is assigned to exactly **one** INTRODUCTION condition and **one** SCENARIO, and rates trust after each of 20 videos whose mIoU varies. That yields 8 between-subject cells of 14–18 participants each, and 20 repeated measures per participant.
+
+This matters for the analysis: mIoU is the only factor that varies *within* a participant, so the repeated-measures structure applies to mIoU and its interactions, while the INTRODUCTION and SCENARIO main effects are estimated *between* participants. See [Mixed-Effects Baseline](#11-mixed-effects-baseline).
 
 ---
 
@@ -122,6 +134,7 @@ pip install --upgrade -r requirements-dev.txt
 ├── main_group_pysr_trust_calibration.py                    # PySR: equal-group splitting
 ├── main_group_pysr_trust_calibration_more_predictors.py    # PySR: multi-feature model
 ├── main_personalized_pysr_trust_calibration.py             # PySR: per-participant
+├── pysr_config.py                 # Shared PySR search config used by all four scripts
 ├── all_pysr.bat                   # Windows batch script to run all PySR pipelines
 ├── requirements.txt
 └── requirements-dev.txt
@@ -137,33 +150,59 @@ All datasets are Excel files with `Sheet1`. Columns vary by file:
 
 | Column | Type | Description |
 |---|---|---|
-| `ProlificID` | string | Anonymised participant identifier |
-| `mIoU` | float [0, 1] | Perception reliability metric for the shown video |
-| `trust` | float {1.0, 1.5, …, 5.0} | Aggregated trust rating on a 1–5 scale (half-steps possible) |
+| `ProlificID` | string / int | Participant identifier — see the note below |
+| `mIoU` | float, **0–100 scale** | Perception reliability for the shown video. Observed range `[67.87, 86.20]` across 20 distinct values |
+| `trust` | float {1.0, 1.5, …, 5.0} | Aggregated trust rating on a 1–5 scale (half-steps possible). Mean ≈ 4.02, i.e. strongly ceiling-skewed |
 | `Trust1`–`Trust5` | float | Individual trust sub-scale items |
-| `SCENARIO` | string | Driving scenario: `3Spurig`, `NeueMitte`, `Spielstrasse`, `Ueberland` |
-| `INTRODUCTION` | string | System intro style: `ambiguous` or `boasting` |
+| `SCENARIO` | string | Driving scenario — **label set differs by file**, see below |
+| `INTRODUCTION` | string | System intro style: `ambiguous` (spelled `ambigious` in the baseline file) or `boasting` |
+
+> **mIoU is a percentage, not a fraction.** Values run 67.87–86.20. Anything that rescales, centers, or feeds mIoU into an exponential/power operator has to account for this — see [Configuration Reference](#configuration-reference).
+
+#### SCENARIO label sets
+
+The two label sets refer to the same four scenarios. Code that filters on scenario names must match the file it is reading.
+
+| Scenario | `all_combined_prepared*.xlsx` | `*_with_demographics*.xlsx` |
+|---|---|---|
+| Highway (3-lane) | `Highway` | `3Spurig` |
+| City | `City` | `NeueMitte` |
+| Walking zone | `Walking Zone` | `Spielstrasse` |
+| Cross-country | `Cross-country` | `Ueberland` |
+
+#### Participant identifiers
+
+| File | `ProlificID` contents |
+|---|---|
+| `all_combined_prepared.xlsx` | Real Prolific IDs — 130 participants |
+| `all_combined_prepared_removed_REI.xlsx` | Real Prolific IDs — 130 participants |
+| `all_combined_prepared_with_demographics.xlsx` | **Constant `1`** — no participant structure |
+| `all_combined_prepared_with_demographics_with_baseline.xlsx` | Real Prolific IDs — 134 participants |
+
+Any analysis that groups or splits by participant must use one of the three files with real IDs. `all_combined_prepared_with_demographics.xlsx` cannot support a grouped split or a per-participant partition.
 
 ### Additional columns (demographics files)
 
 | Column | Type | Description |
 |---|---|---|
 | `Age` | int | Participant age in years |
-| `Gender` | string `A1`–`A4` | F / M / non-binary / prefer not to say |
-| `Education` | string `A1`–`A5` | Secondary / Middle / High School / College / Vocational |
-| `Job` | string `A1`–`A6` | Student (school) / Student (college) / Employee / Self-employed / Jobseeker / Other |
-| `License` | string `Y`/`N` | Holds a driving licence |
+| `Gender` | string `A1`–`A4` | F / M / non-binary / prefer not to say (only `A1`–`A3` observed) |
+| `Education` | string `A1`–`A5` | Secondary / Middle / High School / College / Vocational (only `A3`–`A5` observed) |
+| `Job` | string `A1`–`A6` | Student (school) / Student (college) / Employee / Self-employed / Jobseeker / Other (`A1` not observed) |
+| `License` | **int** | **Years** the participant has held a driving licence (range 1–42). Correlates r ≈ 0.92 with `Age` |
 | `DrivingFrequency` | string `A1`–`A6` | Daily → less than once/month |
 | `Distance` | string `A1`–`A5` | Annual kilometres driven (bands) |
+
+> `License` is a count of years, not a `Y`/`N` flag. It belongs in the numeric feature block; passing it through an ordinal/label encoder replaces years with ranks and destroys the scale.
 
 ### Dataset variants
 
 | File | Notes |
 |---|---|
-| `all_combined_prepared.xlsx` | Base dataset |
-| `all_combined_prepared_removed_REI.xlsx` | REI (Rational–Experiential Inventory) participants removed |
-| `all_combined_prepared_with_demographics.xlsx` | Base + demographics |
-| `all_combined_prepared_with_demographics_with_baseline.xlsx` | Demographics + baseline trust measurement |
+| `all_combined_prepared.xlsx` | Base dataset — 2600 rows, 130 participants |
+| `all_combined_prepared_removed_REI.xlsx` | REI (Rational–Experiential Inventory) participants removed — 2310 rows |
+| `all_combined_prepared_with_demographics.xlsx` | Base + demographics, 2656 rows. **`ProlificID` is a constant** — do not use for grouped analyses |
+| `all_combined_prepared_with_demographics_with_baseline.xlsx` | Demographics + baseline trust, 2788 rows, 134 participants. The only file with both demographics and real IDs, so all grouped analyses use it |
 
 ---
 
@@ -221,6 +260,12 @@ For each combination and dataset:
 - `model_info_<intro>_<scenario>_<dataset>.txt` — SymPy expression + LaTeX table
 - `relationship_pysr_<intro>_<scenario>_<dataset>.png` — scatter + fitted curve
 
+Plus one pooled fit per dataset:
+- `model_info_all_data_<dataset>.txt` — SymPy expression + LaTeX table
+- `relationship_pysr_all_data_<dataset>.png` — scatter + fitted curve
+
+> The pooled fit previously wrote only the figure; its equation was computed and discarded.
+
 ---
 
 ### 3. Symbolic Regression — Group-based
@@ -231,7 +276,23 @@ Partitions data by participant (ProlificID) × INTRODUCTION × SCENARIO into **e
 python main_group_pysr_trust_calibration.py
 ```
 
+> **Caveat.** This partition conditions on the *outcome's own variance* — participants who used the trust scale flatly go to the equal-trust group (87 of 130 in the base dataset), the rest to `other_rows_df` (43). Slopes estimated on either side are not unbiased estimates of the mIoU effect, so treat this split as exploratory rather than confirmatory.
+
 **Outputs** → `results/PySR/split_groups/` and `results/PySR/split_groups_personalized/`
+
+Per dataset, in `split_groups/`:
+
+| File | Content |
+|---|---|
+| `model_info_other_rows_df_<dataset>.txt` | Equation for the high-variance subset |
+| `relationship_pysr_other_rows_df_<dataset>.png` | Scatter + curve, with condition legend |
+| `relationship_pysr_other_rows_df_stacked_<dataset>.png` | Same fit, legend suppressed |
+| `model_info_all_equal_df_<dataset>.txt` | Equation for the equal-trust subset |
+| `relationship_pysr_all_equal_df_<dataset>.png` | Scatter + curve |
+
+Per participant, in `split_groups_personalized/`: `model_info_<ProlificID>_<dataset>.txt` and `relationship_pysr_<ProlificID>_<dataset>.png`.
+
+> The two `other_rows_df` figures come from a **single** search. This step previously ran two byte-identical searches of the same data under different filenames, so the resulting equation files could disagree purely because the search is stochastic. The personalized fits now also run for *both* datasets — they previously read a leaked loop variable and silently covered only the last one.
 
 ---
 
@@ -242,6 +303,8 @@ Extends the group-based analysis with a full demographic feature matrix (mIoU, A
 ```bash
 python main_group_pysr_trust_calibration_more_predictors.py
 ```
+
+> This script reads `all_combined_prepared_with_demographics_with_baseline.xlsx`. It previously read `all_combined_prepared_with_demographics.xlsx`, whose `ProlificID` is a constant — so every cell qualified as an "equal group", `other_rows_df` came out empty, and the script returned at its `len(df) < 3` guard without writing anything. It now also raises if the input has fewer than two distinct participants.
 
 **Outputs** → `results/PySR/more_predictors/`
 
@@ -255,7 +318,14 @@ Fits an independent PySR model for each participant across both datasets.
 python main_personalized_pysr_trust_calibration.py
 ```
 
+> **Caveat.** Each participant contributes exactly 20 rows at 20 distinct mIoU values — one observation per x. Fitting a free-form expression of up to `maxsize=10` nodes from an 18-operator alphabet to 20 points will fit noise; the committed equations include artifacts such as `4.966721 - tan(cos(tan(x0/0.37383464))**6)`. For per-participant slopes, a random-slope mixed-effects model is the better-conditioned tool.
+
 **Outputs** → `results/PySR/personalized_plots/`
+
+- `model_info_<ProlificID>_<dataset>.txt` — SymPy expression + LaTeX table
+- `relationship_pysr_<ProlificID>_<dataset>.png` — scatter + fitted curve
+
+> The `.txt` filename now carries the dataset stem, as the `.png` already did. Without it the second dataset's equations overwrote the first's, leaving the two artifacts describing different fits.
 
 ---
 
@@ -287,13 +357,13 @@ python MLP/train.py --trust-label-mode separate_fractional
 | Parameter | Default |
 |---|---|
 | Epochs | 2000 |
-| Batch size | 16 |
+| Batch size | 256 |
 | Learning rate | 1e-4 |
 | Optimizer | AdamW |
-| Loss | CrossEntropyLoss |
-| Data split | 80 / 10 / 10 (train / valid / test) |
+| Loss | CrossEntropyLoss (inverse-frequency class weights) |
+| Data split | 80 / 10 / 10 — **grouped by `ProlificID`**, so no participant spans two splits |
 | Split seed | 1337 |
-| Checkpoint criterion | Best validation F1 |
+| Checkpoint criterion | Best validation macro-F1 |
 
 **Outputs** → `results/MLP/` and `MLP/epochs/`
 
@@ -432,6 +502,27 @@ python mixed_effects_baseline.py
 | `icc.json` | Intraclass correlation + between-vs-within-participant variance decomposition |
 | `fixed_effects_forest.{pdf,png}` | Coefficient forest plot for M2 with 95% CIs (significant effects highlighted) |
 | `interaction_marginal_effects.{pdf,png}` | Predicted-trust curves over mIoU per (INTRODUCTION × SCENARIO) cell from M2 |
+| `summary_M2_random_slope.txt` | M2 refitted with a random slope for mIoU (sensitivity check) |
+| `fixed_effects_M2_random_slope.csv` | Side-by-side mIoU-term estimates, SEs and p-values: random intercept vs random slope |
+| `random_slope_sensitivity.json` | Log-likelihoods, convergence status, and the mIoU SD used for rescaling |
+
+#### Random-slope sensitivity check
+
+M0–M2 specify a **random intercept only**, which assumes every participant shares one mIoU slope. Since mIoU is the *within*-subject factor (INTRODUCTION and SCENARIO vary only between participants), that assumption is what the moderation p-values rest on. `fit_random_slope_sensitivity()` refits M2 with `re_formula="~mIoU_sd"` and reports both side by side.
+
+| mIoU term | Random intercept | + Random slope |
+|---|---|---|
+| `mIoU` | p = 0.071 | p = 0.301 |
+| `mIoU × INTRODUCTION[boasting]` | p = 0.197 | p = 0.466 |
+| **`mIoU × SCENARIO[NeueMitte]`** | **p = 0.0013** | **p = 0.069** |
+| `mIoU × SCENARIO[Spielstrasse]` | p = 0.936 | p = 0.981 |
+| `mIoU × SCENARIO[Ueberland]` | p = 0.254 | p = 0.521 |
+
+The **point estimates are essentially unchanged** (0.0964 → 0.0961 for the City interaction); only the standard errors move, uniformly by ~1.76×. That is the expected signature of a random-effects correction on a balanced within-subject design: the effect size was fine, the uncertainty was understated. Adding the random slope improves the log-likelihood substantially (−2369.2 → −2293.7), so the data clearly support participant-specific mIoU slopes.
+
+**Consequence:** the mIoU × City moderation does not reach p < 0.05 under the better-specified model. Which model to report is a call for the authors; both are written out, and M2 and all published figures are left untouched.
+
+> **Predictor scale matters here.** mIoU is on a 0–100 scale, so `mIoU_c` spans about [−8.8, +9.6]. Against a random-intercept variance near 1.4, a random slope on that scale does not converge — statsmodels exhausts lbfgs and cg, reports a non-positive-definite Hessian, and returns SEs inflated by a uniform ~13× across *every* coefficient, which is an artifact rather than a correction. The sensitivity check therefore expresses mIoU in standard-deviation units (1 unit = 5.554 mIoU points). That is a pure reparameterisation of the fixed effects — the random-intercept p-values are identical either way — and it converges with no warnings. `random_slope_sensitivity.json` records `random_slope_trustworthy` so a non-converged fit cannot be mistaken for a result.
 
 > The script uses `data/all_combined_prepared_with_demographics_with_baseline.xlsx` because it is the only file that retains real ProlificIDs (134 participants).
 
@@ -446,26 +537,49 @@ Edit the `Config` class at the top of `ML-approaches.py`:
 ```python
 @dataclass
 class Config:
-    data_path: Path = Path("data") / "all_combined_prepared_with_demographics.xlsx"
+    data_path: Path = Path("data") / "all_combined_prepared_with_demographics_with_baseline.xlsx"
     results_path: Path = Path("results") / "ML-Approaches"
     sheet_name: str = "Sheet1"
-    test_size: float = 0.2          # Fraction of data held out for testing
+    test_size: float = 0.2          # Fraction of *participants* held out for testing
     random_state: int = 42
-    bootstrap_n: int = 20           # CatBoost error-bar resamples
+    bootstrap_n: int = 10           # CatBoost error-bar resamples
     target_column: str = "trust"
+    group_column: str = "ProlificID"  # Split unit — keeps participants out of both splits
 ```
 
-### PySR scripts (`create_model()`)
+### PySR scripts (`pysr_config.py`)
 
-Each PySR script exposes a `create_model()` function. Tune these parameters to control search quality vs. runtime:
+All four PySR scripts share one search configuration in `pysr_config.py`, which exposes `create_model()` and `write_model_info()`. Tune these parameters to control search quality vs. runtime:
 
 | Parameter | Default | Effect |
 |---|---|---|
-| `niterations` | 300–500 | More iterations = longer search, potentially better equations |
+| `niterations` | 300 (basic script) / 500 (others) | More iterations = longer search, potentially better equations |
 | `maxsize` | 10 | Maximum expression complexity (nodes in the expression tree) |
-| `ncyclesperiteration` | 2500 | Evolutionary cycles per iteration |
+| `ncycles_per_iteration` | 2500 | Evolutionary cycles per iteration |
 | `precision` | 32 | Float precision (`16`, `32`, or `64`) |
 | `turbo` | `True` | Enable Julia LoopVectorization for faster evaluation |
+| `batching` | `False` | Pinned explicitly — see the PySR 2.0 note below |
+| `random_state` | `None` | Search seed. Leave `None` for exploration |
+| `deterministic` | `False` | Repeatable search. Requires serial execution, so much slower |
+
+**Reproducing a specific run.** PySR's search is stochastic, so by default two runs on the same data can return different equations. For a repeatable publication run:
+
+```python
+model = create_model(niterations=500, random_state=1337, deterministic=True)
+```
+
+`deterministic=True` forces `parallelism="serial"`, which is considerably slower — use it for a final run, not for exploration.
+
+**PySR 2.0 compatibility.** Every keyword in `pysr_config.py` is accepted by both `pysr 1.5.10` and `pysr 2.0.0-alpha.11`, so no change is needed when 2.0 ships. Two defaults move between those versions:
+
+| Parameter | 1.5.10 | 2.0.0-alpha |
+|---|---|---|
+| `batching` | `False` | `"auto"` (enables minibatching when `len(X) > 1000`) |
+| `batch_size` | `50` | `None` (auto-selects 128 for `N < 5000`) |
+
+`batching` is therefore pinned to `False` in `create_model()`. Left at the 2.0 default it would silently switch the fits on 2600/2310 rows (`run_all_data`) and on `all_equal_df` (1740 rows) from full-sample MSE to a 128-row minibatch MSE, changing which equations the search finds. `tests/test_pysr_api_compat.py` guards this and the rest of the API surface — run `pytest tests/test_pysr_api_compat.py` after any PySR upgrade.
+
+> `ncyclesperiteration` (no underscores) still works but is deprecated and emits a `FutureWarning`. Use `ncycles_per_iteration`. The PySR scripts no longer call `warnings.filterwarnings("ignore")` at import, so warnings like this are now visible.
 
 ### MLP hyperparameters
 
@@ -485,7 +599,7 @@ learning_rate = 1e-4
 |---|---|---|
 | `results/ML-Approaches/feature_importance_*.png` | `ML-approaches.py` | Feature importance bar charts |
 | `results/ML-Approaches/model_metrics.json` | `ML-approaches.py` | MAE / MSE / RMSE / R² for all models |
-| `your_model.json` | `ML-approaches.py` | Serialised XGBoost model |
+| `results/ML-Approaches/your_model.json` | `ML-approaches.py` | Serialised XGBoost model |
 | `results/PySR/**/*.txt` | PySR scripts | Discovered equations (SymPy + LaTeX) |
 | `results/PySR/**/*.png` | PySR scripts | Scatter + fitted-curve visualisations |
 | `results/MLP/best_valid_*.pt` | `MLP/train.py` | Best model checkpoint |
@@ -525,6 +639,7 @@ pytest tests/test_ml_approaches.py::TestConfig::test_default_target_column
 | `test_mlp_encoding.py` | All encoding functions (`encode_scenario`, `encode_intro`, `encode_trust_value`, etc.) |
 | `test_mlp_label_modes.py` | `floor` and `separate_fractional` label-mapping logic |
 | `test_pysr_helpers.py` | `find_equal_groups`, `split_groups`, `build_feature_matrix` |
+| `test_pysr_api_compat.py` | The PySR API surface `pysr_config.py` depends on — kwargs, defaults, export methods, custom-operator contract. Run this after any PySR upgrade |
 | `test_repo_assets.py` | Existence of generated result files and source scripts |
 
 > Tests that check generated assets (`test_readme_assets_exist`, `test_model_json_is_valid`) are skipped automatically if the analysis scripts have not been run yet.
@@ -535,14 +650,11 @@ pytest tests/test_ml_approaches.py::TestConfig::test_default_target_column
 
 ### PySR / Julia installation fails
 
-PySR downloads a Julia runtime on first use. If this fails due to network restrictions:
+PySR downloads a Julia runtime on first use via `juliacall`. If this fails due to network restrictions, set `JULIA_DEPOT_PATH` to point at an existing Julia installation.
 
-```bash
-pip install pysr
-python -c "import pysr; pysr.install()"
-```
+> The old `pysr.install()` entry point has been removed — calling it only emits a `FutureWarning`. Julia is now initialised automatically at import time.
 
-If Julia is already installed system-wide, set `JULIA_DEPOT_PATH` to point PySR to the correct installation.
+PySR 2.0 additionally resolves SymbolicRegression.jl from a **git URL at a pinned revision** rather than from the Julia registry, so the first import needs `git` on `PATH` plus network access.
 
 ### CUDA / GPU not detected
 
@@ -593,11 +705,11 @@ python MLP/train.py
 
 | Analysis | Key Finding |
 |---|---|
-| **Feature Importance (Random Forest)** | mIoU contributes ~23% feature importance to trust prediction |
-| **Symbolic Regression** | Weak overall correlation (R²=0.01); filtered subsets (equal-trust groups) show stronger trends |
-| **MLP Classifier** | 74.2% accuracy and F1 on a 5-class trust estimation task |
-| **Mixed-Effects Baseline** | ICC=0.69 — about 69% of variance in trust ratings is between participants rather than within. M2 (with mIoU × SCENARIO interactions) fits significantly better than the main-effects model (LR p≈0.006); the mIoU × `NeueMitte` (City) interaction is the strongest moderator (p≈0.001). |
-| **SHAP moderation analysis** | Strongest pairwise interactions involve Age and License years; the mIoU slope visibly differs between scenarios and intro conditions, consistent with the LME interaction tests. |
+| **Feature Importance** | No model beats a mean baseline by a useful margin on held-out participants. Held-out R²: TabPFN 0.16, CatBoost 0.03, XGBoost −0.02, LightGBM −0.02, Random Forest −0.06 (`results/ML-Approaches/model_metrics.json`). Because four of five models do not beat the test-set mean, their impurity-based importance rankings are not interpretable as effect sizes, and no percentage is quoted from them |
+| **Symbolic Regression** | Weak overall relationship: OLS mIoU→trust R² = 0.0075 on the full base dataset. Within the post-hoc split, the *high-variance* subset (`other_rows_df`, 43 participants) shows R² = 0.043 while the equal-trust subset (87 participants) shows R² = 0.0008. Note this split conditions on the outcome's own variance, so it is exploratory only |
+| **MLP Classifier** | 34.4% test accuracy, 0.223 macro-F1 on the 5-class task, best epoch 11 of 2000 (`results/MLP/best_valid_floor.json`). That is below the majority-class share of the test split (≈41%), so the classifier does not currently beat a constant predictor |
+| **Mixed-Effects Baseline** | ICC=0.69 — about 69% of variance in trust ratings is between participants rather than within. M2 (with mIoU × SCENARIO interactions) fits significantly better than the main-effects model (LR p≈0.006). Under M2's random-intercept structure the mIoU × `NeueMitte` (City) interaction is the strongest moderator (p≈0.001, surviving Bonferroni across the four interaction terms) and the mIoU main effect is not significant (p≈0.071). **However**, refitting with a random slope for mIoU — the maximal structure this design supports — leaves the estimate unchanged but widens its SE by ~1.76×, moving the City interaction to **p≈0.069**. The random-slope model fits markedly better (log-lik −2369.2 → −2293.7), so the moderation result should be treated as suggestive rather than established. See [Random-slope sensitivity check](#random-slope-sensitivity-check). |
+| **SHAP moderation analysis** | The mIoU slope visibly differs between scenarios and intro conditions, consistent with the LME interaction tests. The strongest pairwise interaction involves Age and License years, but note those two correlate at r ≈ 0.92, so that pair should not be read as two independent moderators. |
 
 ### Qualitative Feedback Highlights
 

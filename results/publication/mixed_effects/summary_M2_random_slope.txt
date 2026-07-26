@@ -1,0 +1,25 @@
+                    Mixed Linear Model Regression Results
+==============================================================================
+Model:                    MixedLM        Dependent Variable:        trust     
+No. Observations:         2656           Method:                    REML      
+No. Groups:               134            Scale:                     0.2514    
+Min. group size:          7              Log-Likelihood:            -2293.6650
+Max. group size:          20             Converged:                 Yes       
+Mean group size:          19.8                                                
+------------------------------------------------------------------------------
+                                    Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+------------------------------------------------------------------------------
+Intercept                            3.950    0.152 25.953 0.000  3.652  4.248
+C(INTRODUCTION)[T.boasting]          0.037    0.142  0.262 0.793 -0.242  0.317
+C(SCENARIO)[T.NeueMitte]            -0.063    0.206 -0.306 0.759 -0.468  0.341
+C(SCENARIO)[T.Spielstrasse]          0.292    0.196  1.490 0.136 -0.092  0.675
+C(SCENARIO)[T.Ueberland]            -0.031    0.194 -0.161 0.872 -0.412  0.350
+mIoU_sd                              0.040    0.039  1.034 0.301 -0.036  0.117
+mIoU_sd:C(INTRODUCTION)[T.boasting]  0.027    0.036  0.730 0.465 -0.045  0.098
+mIoU_sd:C(SCENARIO)[T.NeueMitte]     0.096    0.053  1.820 0.069 -0.007  0.200
+mIoU_sd:C(SCENARIO)[T.Spielstrasse]  0.001    0.050  0.024 0.981 -0.097  0.100
+mIoU_sd:C(SCENARIO)[T.Ueberland]     0.032    0.050  0.642 0.521 -0.066  0.129
+Group Var                            0.666    0.173                           
+Group x mIoU_sd Cov                 -0.041    0.031                           
+mIoU_sd Var                          0.032    0.011                           
+==============================================================================
