@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pandas as pd
 
-
 DATA_FILES = {
     "all_combined_prepared.xlsx": {"mIoU", "Trust1", "SCENARIO", "INTRODUCTION"},
     "all_combined_prepared_removed_REI.xlsx": {"mIoU", "Trust1", "SCENARIO", "INTRODUCTION"},

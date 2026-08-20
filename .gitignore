@@ -159,6 +159,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 /outputs
+
+# CatBoost scratch directory. The analysis scripts now point CatBoost at a
+# temporary directory (allow_writing_files=False), so this should stay empty;
+# the entry remains for older CatBoost versions and stray manual runs.
 /catboost_info
-/catboost_info
-/catboost_info
+
+# Trained model binaries. These are large (6 MB+ each), change on every run and
+# are fully regenerable from the scripts, so they are deliberately not tracked.
+# Figures, metric JSON/CSV and the PySR equation files under results/ ARE tracked.
+/results/MLP/*.pt
+/results/ML-Approaches/*.tabpfn_fit
+/results/ML-Approaches/xgboost_model.json

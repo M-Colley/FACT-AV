@@ -42,7 +42,14 @@ import logging
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # pragma: no cover - import only for type annotations
+    # Used as a forward reference in the fit_* signatures. statsmodels is
+    # imported lazily inside those functions (it is slow to import), so this
+    # keeps the annotations meaningful without paying for the import at module
+    # load — and without leaving an undefined name that type checkers flag.
+    from statsmodels.regression.mixed_linear_model import MixedLMResults
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -51,7 +58,6 @@ import pandas as pd
 from plotting_style import (
     INTRO_COLORS,
     OKABE_ITO,
-    SCENARIO_COLORS,
     SCENARIO_LABELS,
     apply_paper_style,
     save_fig,
@@ -74,7 +80,11 @@ class MixedEffectsConfig:
         self.results_path.mkdir(parents=True, exist_ok=True)
 
 
-INTRODUCTION_NORMALIZER = {"ambigious": "ambiguous", "ambiguous": "ambiguous", "boasting": "boasting"}
+INTRODUCTION_NORMALIZER = {
+    "ambigious": "ambiguous",
+    "ambiguous": "ambiguous",
+    "boasting": "boasting",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -115,11 +125,11 @@ def load_data(config: MixedEffectsConfig) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 
 
-def fit_models(df: pd.DataFrame, config: MixedEffectsConfig) -> Dict[str, "MixedLMResults"]:
+def fit_models(df: pd.DataFrame, config: MixedEffectsConfig) -> dict[str, MixedLMResults]:
     """Fit M0 (random intercept), M1 (main effects), M2 (interactions)."""
     import statsmodels.formula.api as smf
 
-    fits: Dict[str, "MixedLMResults"] = {}
+    fits: dict[str, MixedLMResults] = {}
 
     # M0: null model -- random intercept only, fixed intercept only
     logger.info("Fitting M0 (random intercept only) ...")
@@ -138,14 +148,16 @@ def fit_models(df: pd.DataFrame, config: MixedEffectsConfig) -> Dict[str, "Mixed
     ).fit(reml=False)
 
     for name, fit in fits.items():
-        (config.results_path / f"summary_{name}.txt").write_text(fit.summary().as_text(), encoding="utf-8")
+        (config.results_path / f"summary_{name}.txt").write_text(
+            fit.summary().as_text(), encoding="utf-8"
+        )
 
     return fits
 
 
 def fit_random_slope_sensitivity(
     df: pd.DataFrame, config: MixedEffectsConfig
-) -> "MixedLMResults | None":
+) -> MixedLMResults | None:
     """Refit M2 with a random slope for mIoU, as a sensitivity check on M2.
 
     Why this matters. In this design INTRODUCTION and SCENARIO are *between*-
@@ -181,7 +193,7 @@ def fit_random_slope_sensitivity(
     scaled["mIoU_sd"] = scaled["mIoU_c"] / miou_sd
     formula = "trust ~ mIoU_sd * (C(INTRODUCTION) + C(SCENARIO))"
 
-    def _fit(re_formula: str | None) -> tuple[Optional["MixedLMResults"], int]:
+    def _fit(re_formula: str | None) -> tuple[MixedLMResults | None, int]:
         try:
             with warnings.catch_warnings(record=True) as caught:
                 warnings.simplefilter("always", ConvergenceWarning)
@@ -263,7 +275,7 @@ def fit_random_slope_sensitivity(
     return rs_fit
 
 
-def compare_models(fits: Dict[str, "MixedLMResults"], config: MixedEffectsConfig) -> pd.DataFrame:
+def compare_models(fits: dict[str, MixedLMResults], config: MixedEffectsConfig) -> pd.DataFrame:
     """Likelihood-ratio + AIC/BIC comparison for nested LME models."""
     from scipy.stats import chi2
 
@@ -276,7 +288,9 @@ def compare_models(fits: Dict[str, "MixedLMResults"], config: MixedEffectsConfig
             "logL": float(fit.llf),
             "AIC": float(fit.aic),
             "BIC": float(fit.bic),
-            "df_resid": int(getattr(fit, "df_resid", np.nan)) if hasattr(fit, "df_resid") else np.nan,
+            "df_resid": int(getattr(fit, "df_resid", np.nan))
+            if hasattr(fit, "df_resid")
+            else np.nan,
             "n_params": int(fit.df_modelwc) if hasattr(fit, "df_modelwc") else len(fit.fe_params),
         }
         if i > 0:
@@ -318,7 +332,7 @@ def write_fixed_effects(fit, config: MixedEffectsConfig) -> pd.DataFrame:
     return table
 
 
-def compute_icc(fit_m0, config: MixedEffectsConfig) -> Dict[str, float]:
+def compute_icc(fit_m0, config: MixedEffectsConfig) -> dict[str, float]:
     """Intraclass correlation from the random-intercept null model.
 
     ICC = sigma_u^2 / (sigma_u^2 + sigma_e^2) -- proportion of variance
@@ -360,7 +374,7 @@ def plot_fixed_effects_forest(table: pd.DataFrame, config: MixedEffectsConfig) -
     y = np.arange(len(rows))
     colors = [
         OKABE_ITO[6] if (lo > 0 or hi < 0) else "grey"
-        for lo, hi in zip(rows["ci_lower"], rows["ci_upper"])
+        for lo, hi in zip(rows["ci_lower"], rows["ci_upper"], strict=True)
     ]
     ax.errorbar(
         rows["estimate"],
@@ -372,7 +386,7 @@ def plot_fixed_effects_forest(table: pd.DataFrame, config: MixedEffectsConfig) -
         markersize=5,
         capsize=3,
     )
-    for yi, color, est in zip(y, colors, rows["estimate"]):
+    for yi, color, est in zip(y, colors, rows["estimate"], strict=True):
         ax.plot([est], [yi], "o", color=color, markersize=7, zorder=3)
     ax.axvline(0, color="grey", linewidth=0.6)
     ax.set_yticks(y)
@@ -400,7 +414,7 @@ def plot_marginal_effects(fit_m2, df: pd.DataFrame, config: MixedEffectsConfig) 
     if len(scenarios) == 1:
         axes = [axes]
 
-    for ax, scenario in zip(axes, scenarios):
+    for ax, scenario in zip(axes, scenarios, strict=True):
         for intro in intros:
             pred_df = pd.DataFrame(
                 {

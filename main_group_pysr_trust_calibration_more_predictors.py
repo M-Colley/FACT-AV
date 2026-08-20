@@ -1,13 +1,25 @@
 #!/usr/bin/env python3
+"""Symbolic regression on the variable-trust subset using the full predictor set.
+
+Run a reproducible (publication) search with::
+
+    python main_group_pysr_trust_calibration_more_predictors.py --seed 0 --deterministic
+"""
+
+import argparse
+import logging
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
-from pysr_config import create_model, write_model_info
+from pysr_config import add_search_args, model_factory, write_model_info
+from pysr_plots import save_relationship_plot
+from trust_groups import find_equal_groups, split_groups
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
 results_path_more_predictors = Path("results") / "PySR" / "more_predictors"
 results_path_more_predictors.mkdir(parents=True, exist_ok=True)
@@ -38,66 +50,12 @@ REQUIRED_COLS = [
 ]
 
 
-def find_equal_groups(df):
-    """(ProlificID, INTRODUCTION, SCENARIO) cells with clustered trust ratings.
-
-    A cell qualifies if either:
-
-    * its most common trust value occurs >=14 times -- the participant answered
-      almost flatly; or
-    * its two most common trust values each occur >=7 times **and those two
-      frequencies differ by at most 1** -- the participant split roughly evenly
-      between two ratings.
-
-    Note the ``<= 1`` compares *frequencies*, not the trust values themselves:
-    a 10/10 split between trust 1 and trust 5 qualifies, because the criterion is
-    about how concentrated the responses are, not how close the two ratings are.
-    The earlier wording ("within 1 of each other") read ambiguously as if it
-    constrained the values; it does not, and the behaviour here is unchanged.
-
-    Computed with a single groupby pass. The original implementation re-scanned
-    the whole frame once per row (O(N^2)) and tracked the ">=7" comparison in a
-    dict keyed across *different* cells, so a count from one cell could spuriously
-    qualify another.
-    """
-    trust_counts = (
-        df.groupby(["ProlificID", "INTRODUCTION", "SCENARIO"])["trust"]
-        .value_counts()
-        .unstack(fill_value=0)
-    )
-
-    combinations = set()
-    for key, row in trust_counts.iterrows():
-        counts = sorted(row.to_numpy(), reverse=True)
-        if counts and counts[0] >= 14:
-            combinations.add(key)
-        elif (
-            len(counts) >= 2
-            and counts[0] >= 7
-            and counts[1] >= 7
-            and abs(counts[0] - counts[1]) <= 1
-        ):
-            combinations.add(key)
-
-    return combinations
-
-
-def split_groups(df):
-    combinations = find_equal_groups(df)
-    if not combinations:
-        return pd.DataFrame(columns=df.columns), df.copy()
-
-    equal_frames = [
-        df[
-            (df["ProlificID"] == combination[0])
-            & (df["INTRODUCTION"] == combination[1])
-            & (df["SCENARIO"] == combination[2])
-        ]
-        for combination in combinations
-    ]
-    all_equal_df = pd.concat(equal_frames).sort_index()
-    other_rows_df = df.drop(index=all_equal_df.index).sort_index()
-    return all_equal_df, other_rows_df
+# ``find_equal_groups`` / ``split_groups`` used to be defined here AND, in a
+# slightly different form, in ``main_group_pysr_trust_calibration.py`` -- one
+# returned a list and the other a set. The canonical pair now lives in
+# ``trust_groups`` and is imported above; they stay in this module's public
+# surface (tests and the README both reference them from here).
+__all__ = ["find_equal_groups", "split_groups", "build_feature_matrix", "fit_and_plot", "main"]
 
 
 def build_feature_matrix(df):
@@ -111,23 +69,21 @@ def build_feature_matrix(df):
     encoded_ordinals = []
     for column in ordinal_features:
         encoder = LabelEncoder()
-        encoded_ordinals.append(
-            encoder.fit_transform(df[column]).reshape(-1, 1).astype(float)
-        )
+        encoded_ordinals.append(encoder.fit_transform(df[column]).reshape(-1, 1).astype(float))
 
     return np.hstack([x_numeric, x_categorical, *encoded_ordinals])
 
 
-def fit_and_plot(df, name_without_extension):
+def fit_and_plot(df, name_without_extension, make_model):
     if len(df) < 3:
-        print(f"Skipping {name_without_extension}: insufficient rows ({len(df)})")
+        logger.warning("Skipping %s: insufficient rows (%d)", name_without_extension, len(df))
         return
 
     x_values = df["mIoU"].to_numpy(dtype=float).reshape(-1, 1)
     x_values_extended = build_feature_matrix(df)
     y_values = df["trust"].to_numpy(dtype=float)
 
-    model = create_model()
+    model = make_model()
     model.fit(x_values_extended, y_values)
 
     info_path = (
@@ -136,43 +92,32 @@ def fit_and_plot(df, name_without_extension):
     )
     write_model_info(model, info_path)
 
-    predictions = model.predict(x_values_extended)
-    sort_idx = np.argsort(x_values.ravel())
-    sorted_x = x_values.ravel()[sort_idx]
-    sorted_predictions = predictions[sort_idx]
-
-    sns.set_style("whitegrid")
-    sns.set_context("notebook", font_scale=1.5)
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(
-        x=x_values.ravel(),
-        y=y_values,
-        hue=df["intro_scenario_combo"],
-        palette="viridis",
-        alpha=0.3,
-        s=50,
-        edgecolor=None,
-        ax=ax,
-    )
-    ax.plot(sorted_x, sorted_predictions, color="black", lw=2)
-
-    ax.set_xlabel("mIoU")
-    ax.set_ylabel("Trust")
-    ax.set_title("Visualization of the Equation with Additional Predictors")
-    ax.set_ylim(1, 5)
-
-    sns.despine()
-
-    output_path = (
+    # ``sort_by_x`` matters here and only here: the model is fitted on the full
+    # predictor matrix, so predictions arrive in dataset order rather than mIoU
+    # order. Drawing them unsorted produces a zigzag across the panel.
+    save_relationship_plot(
+        x_values,
+        y_values,
+        model.predict(x_values_extended),
         results_path_more_predictors
-        / f"relationship_pysr_other_rows_df_stacked_MULTIPLE_{name_without_extension}.png"
+        / f"relationship_pysr_other_rows_df_stacked_MULTIPLE_{name_without_extension}.png",
+        title="Visualization of the Equation with Additional Predictors",
+        hue_series=df["intro_scenario_combo"],
+        ylim=(1, 5),
+        sort_by_x=True,
     )
-    plt.savefig(output_path, bbox_inches="tight", pad_inches=0)
-    plt.close(fig)
 
 
-def main():
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    add_search_args(parser)
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    make_model = model_factory(args)
+
     df = pd.read_excel(file_path, sheet_name=sheet_name)
 
     missing = sorted(set(REQUIRED_COLS) - set(df.columns))
@@ -183,9 +128,7 @@ def main():
     # ``dropna()`` also discards rows for unrelated columns elsewhere in the
     # 64-column sheet.
     df = df.dropna(subset=REQUIRED_COLS).copy()
-    df["intro_scenario_combo"] = (
-        df["INTRODUCTION"].astype(str) + "_" + df["SCENARIO"].astype(str)
-    )
+    df["intro_scenario_combo"] = df["INTRODUCTION"].astype(str) + "_" + df["SCENARIO"].astype(str)
 
     if df["ProlificID"].nunique() < 2:
         raise ValueError(
@@ -195,8 +138,10 @@ def main():
         )
 
     all_equal_df, other_rows_df = split_groups(df)
-    print(f"rows={len(df)}  all_equal_df={len(all_equal_df)}  other_rows_df={len(other_rows_df)}")
-    fit_and_plot(other_rows_df, file_path.stem)
+    logger.info(
+        "rows=%d  all_equal_df=%d  other_rows_df=%d", len(df), len(all_equal_df), len(other_rows_df)
+    )
+    fit_and_plot(other_rows_df, file_path.stem, make_model)
 
 
 if __name__ == "__main__":

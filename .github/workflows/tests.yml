@@ -5,27 +5,112 @@ on:
     branches: ["**"]
   pull_request:
 
+concurrency:
+  # A new push to the same branch cancels the previous run: the PySR job pulls a
+  # Julia toolchain, so stacked runs are expensive.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  # Fast feedback: lint and lock-file drift finish in well under a minute and do
+  # not need the heavy scientific stack.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install ruff
+        run: pip install ruff==0.15.13
+      - name: Lint
+        run: ruff check --output-format=github .
+      - name: Check formatting
+        run: ruff format --check --diff .
+
+  # The bulk of the suite. PySR (and therefore Julia) is excluded here so a
+  # failure in the fast tests is reported in ~2 minutes rather than ~10.
   pytest:
     runs-on: ubuntu-latest
     strategy:
+      # Report every version rather than stopping at the first failure: knowing
+      # a break is 3.11-only versus universal is the useful signal.
+      fail-fast: false
       matrix:
-        python-version: ["3.13", "3.14"]
+        # The floor matches `requires-python` in pyproject.toml; the ceiling is
+        # the newest release. If the pinned scientific stack drops support for
+        # the floor, narrow BOTH this matrix and requires-python together --
+        # never leave the README claiming a version that is not tested here.
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install dependencies
+        # No `--upgrade`: it silently re-resolves the whole stack on every run,
+        # so CI could break (or start passing) with no change to this repo.
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Run tests (excluding the PySR/Julia guard tests)
+        run: pytest --ignore=tests/test_pysr_api_compat.py --cov --cov-report=term-missing
+
+  # PySR is pinned to a 2.0.0 beta, so the API-guard tests are the ones most
+  # likely to catch a breaking change. They run on one Python version only:
+  # they inspect signatures, which do not vary across interpreters.
+  pysr-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Cache the Julia depot
+        # First import of PySR downloads a Julia toolchain and precompiles
+        # SymbolicRegression.jl (~5 minutes). Keyed on the pysr pin so a version
+        # bump correctly invalidates it.
+        uses: actions/cache@v4
+        with:
+          path: ~/.julia
+          key: julia-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install --upgrade -r requirements.txt
-          pip install --upgrade -r requirements-dev.txt
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
-      - name: Run pytest
-        run: pytest
+      - name: Run the PySR API guard tests
+        run: pytest tests/test_pysr_api_compat.py -v
+
+  # The lock file only helps if it still resolves. This installs from it exactly
+  # and runs the fast tests, which is what a reproduction attempt does.
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: requirements.lock
+      - name: Install the pinned environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.lock
+          pip install -r requirements-dev.txt
+      - name: Run tests
+        run: pytest --ignore=tests/test_pysr_api_compat.py

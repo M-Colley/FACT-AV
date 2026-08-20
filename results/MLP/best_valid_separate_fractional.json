@@ -1,5 +1,42 @@
 {
-  "trust_label_mode": "separate_fractional",
+  "config": {
+    "trust_label_mode": "separate_fractional",
+    "head": "nominal",
+    "seed": 0,
+    "split_seed": 1337,
+    "max_epochs": 2000,
+    "patience": 100,
+    "batch_size": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.2,
+    "n_parameters": 4617
+  },
+  "environment": {
+    "git_commit": "55d16c5",
+    "python": "3.13.12",
+    "torch": "2.13.0+cu132",
+    "device": "cuda",
+    "command": "train.py --seed 0 --trust-label-mode separate_fractional"
+  },
+  "split_sizes": {
+    "train": {
+      "rows": 2124,
+      "participants": 107
+    },
+    "valid": {
+      "rows": 260,
+      "participants": 13
+    },
+    "test": {
+      "rows": 272,
+      "participants": 14
+    }
+  },
   "num_classes": 9,
   "class_values": [
     1.0,
@@ -12,15 +49,65 @@
     4.5,
     5.0
   ],
-  "best_epoch": 646,
+  "best_epoch": 77,
+  "epochs_run": 178,
+  "stopped_early": true,
   "validation_metrics": {
-    "loss": 1.127816004348251,
-    "acc": 0.5165031552314758,
-    "f1": 0.5380194187164307
+    "acc": 0.2076923076923077,
+    "macro_f1": 0.09429978660074899,
+    "mae_class": 2.4884615384615385,
+    "mae_trust": 1.2442307692307693,
+    "qwk": -0.4605736942185541,
+    "loss": 1.9169099514301007
   },
   "test_metrics": {
-    "loss": 1.006962563214677,
-    "acc": 0.5315274000167847,
-    "f1": 0.5354166626930237
-  }
+    "acc": 0.27205882352941174,
+    "macro_f1": 0.14869644140326924,
+    "mae_class": 1.3897058823529411,
+    "mae_trust": 0.6948529411764706,
+    "qwk": 0.44250023018322593,
+    "loss": 2.176827823414522
+  },
+  "test_metrics_ci": {
+    "acc": {
+      "estimate": 0.27205882352941174,
+      "lo": 0.11742424242424243,
+      "hi": 0.45224002100840316,
+      "se": 0.08539006613576582
+    },
+    "macro_f1": {
+      "estimate": 0.14869644140326924,
+      "lo": 0.06747703341230296,
+      "hi": 0.20625867042969387,
+      "se": 0.035234235224673734
+    },
+    "mae_class": {
+      "estimate": 1.3897058823529411,
+      "lo": 1.0146953781512604,
+      "hi": 1.7968979779411764,
+      "se": 0.20064229930871846
+    },
+    "mae_trust": {
+      "estimate": 0.6948529411764706,
+      "lo": 0.5073476890756302,
+      "hi": 0.8984489889705882,
+      "se": 0.10032114965435923
+    },
+    "qwk": {
+      "estimate": 0.44250023018322593,
+      "lo": 0.15185198203240732,
+      "hi": 0.6124930736334618,
+      "se": 0.11671842708928137
+    }
+  },
+  "majority_baseline": {
+    "acc": 0.40808823529411764,
+    "macro_f1": 0.06440382941688425,
+    "mae_class": 2.0183823529411766,
+    "mae_trust": 1.0091911764705883,
+    "qwk": 0.0,
+    "majority_class": 8,
+    "majority_trust_value": 5.0
+  },
+  "beats_majority_baseline": false
 }

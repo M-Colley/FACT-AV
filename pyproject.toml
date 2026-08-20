@@ -1,0 +1,52 @@
+[project]
+name = "fact-av"
+version = "1.0.0"
+description = "Analysis pipeline for the effect of AV perception reliability (mIoU) on trust calibration"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Mark Colley" }]
+
+# Runtime dependencies live in requirements.txt / requirements.lock rather than
+# here: this repository is an analysis pipeline run from a checkout, not a
+# package to be installed from an index. The metadata above exists so the
+# project is self-describing (and so a CITATION.cff can be generated from it
+# once the paper is out of review).
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Replaces the separate pytest.ini so there is one configuration file, not two.
+markers = [
+    "slow: tests that import Julia via PySR (minutes on a cold cache)",
+]
+filterwarnings = [
+    "ignore::PendingDeprecationWarning:shap.*",
+]
+
+[tool.ruff]
+# 100 rather than the default 88: the existing code sits comfortably under 100
+# and reflowing every line would bury the substantive changes in noise.
+line-length = 100
+target-version = "py311"
+extend-exclude = ["catboost_info", "results"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # import sorting
+    "UP",  # pyupgrade
+    "B",   # bugbear
+    "W",   # pycodestyle warnings
+]
+ignore = [
+    "E501",  # line length is handled by the formatter, not as a hard error
+    "B008",  # function call in default argument — used deliberately for Path defaults
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests deliberately import after sys.path manipulation.
+"tests/*" = ["E402"]
+"MLP/*" = ["E402"]
+"cross_validation.py" = ["E402"]
+"run_all.py" = ["E402"]

@@ -23,11 +23,12 @@ matplotlib.use("Agg", force=True)
 _repo_root = Path(__file__).resolve().parent.parent
 if str(_repo_root) not in sys.path:
     sys.path.insert(0, str(_repo_root))
-from plotting_style import OKABE_ITO, apply_paper_style, save_fig  # noqa: E402
-
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import torch  # noqa: E402
+from dataset import DEFAULT_SPLIT_SEED, TRUST_LABEL_MODES, TrustDataset  # noqa: E402
+from metrics import bootstrap_metrics, format_ci, majority_baseline_metrics  # noqa: E402
+from network import HEADS, Model  # noqa: E402
 from sklearn.metrics import (  # noqa: E402
     ConfusionMatrixDisplay,
     cohen_kappa_score,
@@ -39,8 +40,7 @@ from torchmetrics.functional.classification import (  # noqa: E402
     multiclass_f1_score,
 )
 
-from dataset import TRUST_LABEL_MODES, TrustDataset  # noqa: E402
-from network import Model  # noqa: E402
+from plotting_style import OKABE_ITO, apply_paper_style, save_fig  # noqa: E402
 
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
@@ -66,6 +66,25 @@ def parse_args():
         help="How to map trust labels into classification classes.",
     )
     parser.add_argument(
+        "--head",
+        choices=HEADS,
+        default="nominal",
+        help="Output head of the checkpoint to load (must match how it was trained).",
+    )
+    parser.add_argument(
+        "--split-seed",
+        type=int,
+        default=DEFAULT_SPLIT_SEED,
+        help="Must match the --split-seed used at training time.",
+    )
+    parser.add_argument(
+        "--bootstrap-n",
+        type=int,
+        default=2000,
+        help="Cluster-bootstrap resamples for the confidence intervals.",
+    )
+    parser.add_argument("--seed", type=int, default=0, help="Seed for the bootstrap resampling.")
+    parser.add_argument(
         "--checkpoint-path",
         type=Path,
         default=None,
@@ -74,12 +93,22 @@ def parse_args():
     return parser.parse_args()
 
 
-def default_checkpoint_path(trust_label_mode):
-    return results_folder / f"best_valid_{trust_label_mode}.pt"
+def default_checkpoint_path(trust_label_mode, head="nominal", split_seed=DEFAULT_SPLIT_SEED):
+    """Mirrors ``train.checkpoint_stem``: a non-default head or split seed is part
+    of the filename, so a split-sensitivity sweep does not overwrite the canonical
+    run's checkpoint."""
+    stem = f"best_valid_{trust_label_mode}"
+    if head != "nominal":
+        stem = f"{stem}_{head}"
+    if split_seed != DEFAULT_SPLIT_SEED:
+        stem = f"{stem}_split{split_seed}"
+    return results_folder / f"{stem}.pt"
 
 
-def resolve_checkpoint(trust_label_mode, checkpoint_path=None):
-    path = checkpoint_path or default_checkpoint_path(trust_label_mode)
+def resolve_checkpoint(
+    trust_label_mode, checkpoint_path=None, head="nominal", split_seed=DEFAULT_SPLIT_SEED
+):
+    path = checkpoint_path or default_checkpoint_path(trust_label_mode, head, split_seed)
     if not path.exists():
         raise FileNotFoundError(f"Checkpoint not found: {path}")
     return path
@@ -206,6 +235,15 @@ def main():
         data_file,
         split="test",
         trust_label_mode=args.trust_label_mode,
+        split_seed=args.split_seed,
+    )
+    # The majority-class baseline has to come from the TRAIN split: taking the
+    # modal class from test would be choosing the baseline with the test labels.
+    train_dataset = TrustDataset(
+        data_file,
+        split="train",
+        trust_label_mode=args.trust_label_mode,
+        split_seed=args.split_seed,
     )
     test_loader = DataLoader(
         test_dataset,
@@ -215,8 +253,10 @@ def main():
         pin_memory=device.type == "cuda",
     )
 
-    checkpoint_path = resolve_checkpoint(args.trust_label_mode, args.checkpoint_path)
-    checkpoint = torch.load(checkpoint_path, map_location=device)
+    checkpoint_path = resolve_checkpoint(
+        args.trust_label_mode, args.checkpoint_path, args.head, args.split_seed
+    )
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     if "model_state_dict" in checkpoint:
         model_state_dict = checkpoint["model_state_dict"]
@@ -227,15 +267,30 @@ def main():
         num_classes = test_dataset.num_classes
         class_values = test_dataset.class_values
 
+    # Architecture is read back from the checkpoint rather than assumed, so a run
+    # trained with non-default --hidden/--dropout/--head reloads correctly. Older
+    # checkpoints predate model_config; fall back to the original 128/512/1024/1024
+    # nominal network those were trained with.
+    model_config = checkpoint.get("model_config") if isinstance(checkpoint, dict) else None
+    if model_config is None:
+        model_config = {
+            "input_size": test_dataset.input_size,
+            "num_classes": num_classes,
+            "hidden_sizes": [128, 512, 1024, 1024],
+            "dropout": 0.5,
+            "head": "nominal",
+        }
+        print("Checkpoint has no model_config — assuming the original architecture.")
+
     if num_classes != test_dataset.num_classes:
         raise ValueError(
             f"Checkpoint expects {num_classes} classes but dataset mode "
             f"{args.trust_label_mode!r} resolves to {test_dataset.num_classes} classes."
         )
 
-    model = Model(input_size=test_dataset.input_size, num_classes=num_classes).to(device)
+    model = Model(**model_config).to(device)
     model.load_state_dict(model_state_dict)
-    print(f"Loaded checkpoint: {checkpoint_path.name}")
+    print(f"Loaded checkpoint: {checkpoint_path.name} (head={model_config['head']})")
 
     criterion = torch.nn.CrossEntropyLoss().to(device)
 
@@ -251,7 +306,10 @@ def main():
             x = x.to(device)
             y = y.squeeze(-1).to(device)
 
-            logits = model(x)
+            # ``class_logits`` normalises the two heads onto the same (N, K)
+            # scale, so the softmax, argmax and calibration code below is
+            # identical for the nominal and ordinal models.
+            logits = model.class_logits(x)
             probs = torch.softmax(logits, dim=-1)
             predictions = torch.argmax(logits, dim=-1)
 
@@ -275,11 +333,34 @@ def main():
     # scores). With skewed trust labels this differs a lot from overall
     # accuracy, so we report BOTH plus the majority-class baseline to keep the
     # numbers from being misread.
-    test_acc = float(multiclass_accuracy(y_pred_tensor, y_true_tensor, num_classes=num_classes).item())
-    test_f1 = float(multiclass_f1_score(y_pred_tensor, y_true_tensor, num_classes=num_classes).item())
+    test_acc = float(
+        multiclass_accuracy(y_pred_tensor, y_true_tensor, num_classes=num_classes).item()
+    )
+    test_f1 = float(
+        multiclass_f1_score(y_pred_tensor, y_true_tensor, num_classes=num_classes).item()
+    )
     micro_acc = float((y_pred_array == y_true_array).mean())
     class_counts = np.bincount(y_true_array, minlength=num_classes)
-    majority_baseline = float(class_counts.max() / class_counts.sum())
+    # Baseline = always predict the modal TRAIN class. The previous version used
+    # ``class_counts.max()`` from the TEST labels, which both peeks at test and
+    # flatters the baseline by definition (it is the best constant *in hindsight*).
+    baseline = majority_baseline_metrics(
+        train_dataset.y.numpy(), y_true_array, num_classes, class_values
+    )
+    majority_baseline = baseline["acc"]
+
+    # Participant-level cluster bootstrap. The test split is ~13 participants of
+    # ~21 correlated ratings each, so every point estimate below needs an
+    # interval attached before it can be quoted.
+    test_cis = bootstrap_metrics(
+        y_true_array,
+        y_pred_array,
+        test_dataset.participant_ids,
+        num_classes=num_classes,
+        class_values=class_values,
+        n_boot=args.bootstrap_n,
+        seed=args.seed,
+    )
 
     # Ordinal-aware metrics: trust is on an ordered scale, so reward "almost right".
     # ``labels`` is passed explicitly: without it, sklearn infers the label set
@@ -301,12 +382,22 @@ def main():
     print(f"Test Loss: {test_loss}")
     print(f"Test Acc (macro-recall): {test_acc}")
     print(f"Test F1 (macro): {test_f1}")
-    print(f"Test Accuracy (micro/overall): {micro_acc:.4f}")
-    print(f"Majority-class baseline: {majority_baseline:.4f}")
-    print(f"Predicted-class distribution: {np.bincount(y_pred_array, minlength=num_classes).tolist()}")
+    print(f"Test Accuracy (micro/overall): {format_ci(test_cis['acc'])}")
+    print(f"Test macro-F1 with CI: {format_ci(test_cis['macro_f1'])}")
+    print(
+        f"Majority-class baseline (modal train class {baseline['majority_class']}): {majority_baseline:.4f}"
+    )
+    print(
+        f"Predicted-class distribution: {np.bincount(y_pred_array, minlength=num_classes).tolist()}"
+    )
     print(f"True-class distribution: {class_counts.tolist()}")
-    print(f"Test Quadratic-Weighted Kappa: {qwk:.4f}")
-    print(f"Test MAE in trust units: {mae_trust:.4f}")
+    print(f"Test Quadratic-Weighted Kappa: {format_ci(test_cis['qwk'])}")
+    print(f"Test MAE in trust units: {format_ci(test_cis['mae_trust'])}")
+    beats_baseline = test_cis["acc"]["lo"] > majority_baseline
+    print(
+        f"Model {'beats' if beats_baseline else 'does NOT beat'} the majority baseline "
+        f"(accuracy CI lower bound {test_cis['acc']['lo']:.4f} vs {majority_baseline:.4f})."
+    )
 
     apply_paper_style()
     suffix = "" if args.trust_label_mode == "floor" else f"_{args.trust_label_mode}"
@@ -362,14 +453,19 @@ def main():
         "accuracy_micro": micro_acc,
         "f1_macro": test_f1,
         "majority_class_baseline": majority_baseline,
-        "beats_majority_baseline": bool(micro_acc > majority_baseline),
+        "majority_baseline_detail": baseline,
+        # Judged on the CI lower bound, not the point estimate: with 13 test
+        # participants a point estimate a hair above the baseline is noise.
+        "beats_majority_baseline": bool(test_cis["acc"]["lo"] > majority_baseline),
+        "test_metrics_ci": test_cis,
+        "bootstrap_n": int(args.bootstrap_n),
+        "head": model_config["head"],
+        "split_seed": int(args.split_seed),
         "quadratic_weighted_kappa": qwk,
         "mae_trust_units": mae_trust,
         "expected_calibration_error": ece,
         "true_class_distribution": class_counts.tolist(),
-        "predicted_class_distribution": np.bincount(
-            y_pred_array, minlength=num_classes
-        ).tolist(),
+        "predicted_class_distribution": np.bincount(y_pred_array, minlength=num_classes).tolist(),
     }
     metrics_path.write_text(json.dumps(metrics_payload, indent=2), encoding="utf-8")
     print(f"Wrote metrics to {metrics_path}")

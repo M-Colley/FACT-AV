@@ -1,5 +1,42 @@
 {
-  "trust_label_mode": "floor",
+  "config": {
+    "trust_label_mode": "floor",
+    "head": "nominal",
+    "seed": 0,
+    "split_seed": 1337,
+    "max_epochs": 2000,
+    "patience": 100,
+    "batch_size": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.2,
+    "n_parameters": 4485
+  },
+  "environment": {
+    "git_commit": "55d16c5",
+    "python": "3.13.12",
+    "torch": "2.13.0+cu132",
+    "device": "cuda",
+    "command": "train.py --seed 0"
+  },
+  "split_sizes": {
+    "train": {
+      "rows": 2124,
+      "participants": 107
+    },
+    "valid": {
+      "rows": 260,
+      "participants": 13
+    },
+    "test": {
+      "rows": 272,
+      "participants": 14
+    }
+  },
   "num_classes": 5,
   "class_values": [
     1.0,
@@ -8,15 +45,65 @@
     4.0,
     5.0
   ],
-  "best_epoch": 11,
+  "best_epoch": 79,
+  "epochs_run": 180,
+  "stopped_early": true,
   "validation_metrics": {
-    "loss": 1.4554184363438534,
-    "acc": 0.21524739265441895,
-    "f1": 0.21816137433052063
+    "acc": 0.36923076923076925,
+    "macro_f1": 0.18638915514172258,
+    "mae_class": 1.073076923076923,
+    "mae_trust": 1.073076923076923,
+    "qwk": -0.4692148760330579,
+    "loss": 1.7426660684438853
   },
   "test_metrics": {
-    "loss": 1.5134128121768726,
-    "acc": 0.3441961407661438,
-    "f1": 0.22314991056919098
-  }
+    "acc": 0.43014705882352944,
+    "macro_f1": 0.3979917267846657,
+    "mae_class": 0.9044117647058824,
+    "mae_trust": 0.9044117647058824,
+    "qwk": 0.2980523313004131,
+    "loss": 1.6354013400919296
+  },
+  "test_metrics_ci": {
+    "acc": {
+      "estimate": 0.43014705882352944,
+      "lo": 0.26953125,
+      "hi": 0.5956092436974789,
+      "se": 0.0858524566282954
+    },
+    "macro_f1": {
+      "estimate": 0.3979917267846657,
+      "lo": 0.190452928958163,
+      "hi": 0.4581036626204116,
+      "se": 0.06908671668018619
+    },
+    "mae_class": {
+      "estimate": 0.9044117647058824,
+      "lo": 0.584498424369748,
+      "hi": 1.234375,
+      "se": 0.16729092173788201
+    },
+    "mae_trust": {
+      "estimate": 0.9044117647058824,
+      "lo": 0.584498424369748,
+      "hi": 1.234375,
+      "se": 0.16729092173788201
+    },
+    "qwk": {
+      "estimate": 0.2980523313004131,
+      "lo": -0.16730506101470433,
+      "hi": 0.5625014548551277,
+      "se": 0.18366578091331878
+    }
+  },
+  "majority_baseline": {
+    "acc": 0.22426470588235295,
+    "macro_f1": 0.07327327327327328,
+    "mae_class": 0.8786764705882353,
+    "mae_trust": 0.8786764705882353,
+    "qwk": 0.0,
+    "majority_class": 3,
+    "majority_trust_value": 4.0
+  },
+  "beats_majority_baseline": true
 }

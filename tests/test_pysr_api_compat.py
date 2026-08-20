@@ -5,13 +5,18 @@ immediately and specifically instead of the change surfacing three hours into a
 fitting run. They inspect signatures and defaults only -- no search is executed,
 so the module runs in well under a second once Julia has been imported.
 
-Verified against pysr 1.5.10 and pysr 2.0.0-alpha.11 (both pass).
+Verified against pysr 1.5.10, 2.0.0-alpha.11 and 2.0.0b2 (the pinned version).
 
-Findings from the diff of those two versions, for context:
-  * No constructor parameter was removed (94 -> 100 params, purely additive).
+Findings from the diff of those versions, for context:
+  * No constructor parameter this repo passes was ever removed (94 -> 100 params
+    across 1.5 -> 2.0, purely additive).
   * Exactly two defaults changed: ``batching`` (False -> "auto") and
     ``batch_size`` (50 -> None). ``pysr_config.create_model`` pins ``batching``.
   * ``ncyclesperiteration`` is still auto-renamed but emits a FutureWarning.
+  * ``_maybe_create_inline_operators`` -- the private helper behind the custom
+    ``cos2``/``quart``/``inv`` operators -- changed signature twice, so the
+    bridge below dispatches on the actual parameter names rather than on a
+    version number.
 """
 
 import inspect
@@ -70,6 +75,7 @@ def test_constructor_accepts_kwarg(signature, kwarg):
 # 2. Defaults we rely on must not drift underneath us.
 # ---------------------------------------------------------------------------
 
+
 def test_batching_is_pinned_explicitly():
     """``batching`` differs across versions, so create_model must set it itself.
 
@@ -109,6 +115,7 @@ def test_default_unchanged(signature, kwarg, expected):
 # 3. The methods used to serialise results must still exist.
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.parametrize("method", ["fit", "predict", "sympy", "latex", "latex_table"])
 def test_regressor_exposes_method(method):
     assert callable(getattr(PySRRegressor, method, None)), (
@@ -124,24 +131,45 @@ def test_regressor_exposes_method(method):
 # is exactly what we want to be told about.
 # ---------------------------------------------------------------------------
 
-def _inline_operator_kwargs(unary_operators, extra_sympy_mappings):
-    """Bridge the 1.x -> 2.x signature change of ``_maybe_create_inline_operators``.
 
-    1.5.10 takes ``binary_operators=`` / ``unary_operators=`` lists and returns a
-    tuple of lists. 2.0.0a takes a single ``operators={arity: [...]}`` dict and
-    returns a dict.
+def _inline_operator_kwargs(unary_operators, extra_sympy_mappings):
+    """Bridge the signature changes of ``_maybe_create_inline_operators``.
+
+    Three shapes exist in the wild, so dispatch on parameter names rather than on
+    a version string::
+
+        1.5.10   binary_operators=/unary_operators= lists, expression_spec=  -> tuple
+        2.0.0a11 operators={arity: [...]},                 expression_spec=  -> dict
+        2.0.0b2  operators={arity: [...]},                 supports_sympy=bool -> dict
+
+    If a fourth shape appears this raises with the actual parameter list, rather
+    than failing somewhere less obvious.
     """
-    from pysr.expression_specs import ExpressionSpec
     from pysr.sr import _maybe_create_inline_operators
 
     params = inspect.signature(_maybe_create_inline_operators).parameters
-    common = {
-        "extra_sympy_mappings": extra_sympy_mappings,
-        "expression_spec": ExpressionSpec(),
-    }
+    kwargs = {"extra_sympy_mappings": extra_sympy_mappings}
+
     if "operators" in params:
-        return {"operators": {1: list(unary_operators), 2: ["+"]}, **common}
-    return {"binary_operators": ["+"], "unary_operators": list(unary_operators), **common}
+        kwargs["operators"] = {1: list(unary_operators), 2: ["+"]}
+    elif "unary_operators" in params:
+        kwargs["binary_operators"] = ["+"]
+        kwargs["unary_operators"] = list(unary_operators)
+    else:  # pragma: no cover - only reachable on an unreleased PySR
+        raise AssertionError(
+            f"Unrecognised _maybe_create_inline_operators signature: {list(params)}"
+        )
+
+    # ``expression_spec=ExpressionSpec()`` was replaced by a plain
+    # ``supports_sympy: bool`` in 2.0.0b2.
+    if "supports_sympy" in params:
+        kwargs["supports_sympy"] = True
+    elif "expression_spec" in params:
+        from pysr.expression_specs import ExpressionSpec
+
+        kwargs["expression_spec"] = ExpressionSpec()
+
+    return kwargs
 
 
 def _flatten(result):
@@ -160,7 +188,6 @@ def test_custom_operator_requires_sympy_mapping():
 
 def test_custom_operator_accepted_with_sympy_mapping():
     import sympy
-
     from pysr.sr import _maybe_create_inline_operators
 
     result = _maybe_create_inline_operators(
@@ -176,6 +203,7 @@ def test_custom_operator_accepted_with_sympy_mapping():
 # ---------------------------------------------------------------------------
 # 5. Deprecated spelling must not be reintroduced.
 # ---------------------------------------------------------------------------
+
 
 def test_repo_does_not_use_deprecated_ncyclesperiteration():
     """The old spelling still works in 2.0 but warns on every construction.

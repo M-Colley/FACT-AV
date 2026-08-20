@@ -22,7 +22,6 @@ import logging
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,14 +29,13 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import PartialDependenceDisplay
-from sklearn.model_selection import GroupShuffleSplit, train_test_split
+from sklearn.model_selection import GroupShuffleSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from plotting_style import (
     INTRO_COLORS,
     OKABE_ITO,
-    SCENARIO_COLORS,
     SCENARIO_LABELS,
     apply_paper_style,
     save_fig,
@@ -66,7 +64,11 @@ class FigureConfig:
         self.results_path.mkdir(parents=True, exist_ok=True)
 
 
-INTRODUCTION_NORMALIZER = {"ambigious": "ambiguous", "ambiguous": "ambiguous", "boasting": "boasting"}
+INTRODUCTION_NORMALIZER = {
+    "ambigious": "ambiguous",
+    "ambiguous": "ambiguous",
+    "boasting": "boasting",
+}
 
 NUM_FEATURES: tuple[str, ...] = ("mIoU", "Age", "License")
 CAT_FEATURES: tuple[str, ...] = (
@@ -120,7 +122,7 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
     splitter = GroupShuffleSplit(
         n_splits=1, test_size=config.test_size, random_state=config.random_state
     )
-    (train_idx, _), = splitter.split(X, y, groups=groups)
+    ((train_idx, _),) = splitter.split(X, y, groups=groups)
     X_train = X.iloc[train_idx]
     y_train = y.iloc[train_idx]
 
@@ -135,13 +137,16 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
         ]
     )
 
-    importances: List[pd.DataFrame] = []
+    importances: list[pd.DataFrame] = []
 
     # Random Forest -----------------------------------------------------------
     rf = Pipeline(
         [
             ("preprocessor", preprocessor),
-            ("regressor", RandomForestRegressor(n_estimators=300, random_state=config.random_state)),
+            (
+                "regressor",
+                RandomForestRegressor(n_estimators=300, random_state=config.random_state),
+            ),
         ]
     )
     rf.fit(X_train, y_train)
@@ -152,7 +157,9 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
             {
                 "feature": rf_features,
                 "model": "Random Forest",
-                "importance": _normalize_importance(rf.named_steps["regressor"].feature_importances_),
+                "importance": _normalize_importance(
+                    rf.named_steps["regressor"].feature_importances_
+                ),
             }
         )
     )
@@ -187,7 +194,9 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
         X_train_lgb = X_train.copy()
         for c in CAT_FEATURES:
             X_train_lgb[c] = X_train_lgb[c].astype("category")
-        lgb_model = lgb.LGBMRegressor(random_state=config.random_state, verbose=-1, n_estimators=300)
+        lgb_model = lgb.LGBMRegressor(
+            random_state=config.random_state, verbose=-1, n_estimators=300
+        )
         lgb_model.fit(X_train_lgb, y_train)
         importances.append(
             pd.DataFrame(
@@ -210,6 +219,8 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
             verbose=False,
             cat_features=list(CAT_FEATURES),
             iterations=300,
+            # Keeps CatBoost from writing a ``catboost_info/`` scratch dir here.
+            allow_writing_files=False,
         )
         cb_model.fit(X_train, y_train)
         importances.append(
@@ -229,6 +240,7 @@ def collect_model_importances(df: pd.DataFrame, config: FigureConfig) -> pd.Data
 
 def _consolidate_one_hot(importances: pd.DataFrame) -> pd.DataFrame:
     """Sum importances across one-hot columns of the same parent feature."""
+
     def parent(name: str) -> str:
         for cat in CAT_FEATURES:
             if name == cat or name.startswith(f"{cat}_"):
@@ -310,9 +322,7 @@ def plot_importance_rank_heatmap(importances: pd.DataFrame, config: FigureConfig
 # ---------------------------------------------------------------------------
 
 
-def _loess_like(
-    x: np.ndarray, y: np.ndarray, x_grid: np.ndarray, bandwidth: float
-) -> np.ndarray:
+def _loess_like(x: np.ndarray, y: np.ndarray, x_grid: np.ndarray, bandwidth: float) -> np.ndarray:
     """Simple kernel-smoothed mean (Gaussian kernel) - a robust LOESS stand-in."""
     weights = np.exp(-0.5 * ((x_grid[:, None] - x[None, :]) / bandwidth) ** 2)
     norm = weights.sum(axis=1)
@@ -392,7 +402,7 @@ def plot_miou_trust_panel(df: pd.DataFrame, config: FigureConfig) -> None:
     x_grid = np.linspace(x_lo, x_hi, 80)
     bandwidth = max((x_hi - x_lo) / 8.0, 0.5)
 
-    for ax, scenario in zip(axes, scenarios):
+    for ax, scenario in zip(axes, scenarios, strict=True):
         for intro in ("ambiguous", "boasting"):
             sub = df[(df["SCENARIO"] == scenario) & (df["INTRODUCTION"] == intro)]
             if len(sub) == 0:
@@ -460,8 +470,10 @@ def plot_pdp_ice(df: pd.DataFrame, config: FigureConfig) -> None:
     y = df["trust"].copy()
     groups = df["ProlificID"].copy()
 
-    splitter = GroupShuffleSplit(n_splits=1, test_size=config.test_size, random_state=config.random_state)
-    (train_idx, _), = splitter.split(X, y, groups=groups)
+    splitter = GroupShuffleSplit(
+        n_splits=1, test_size=config.test_size, random_state=config.random_state
+    )
+    ((train_idx, _),) = splitter.split(X, y, groups=groups)
     X_train = X.iloc[train_idx]
     y_train = y.iloc[train_idx]
 
@@ -479,7 +491,10 @@ def plot_pdp_ice(df: pd.DataFrame, config: FigureConfig) -> None:
     model = Pipeline(
         [
             ("preprocessor", preprocessor),
-            ("regressor", RandomForestRegressor(n_estimators=300, random_state=config.random_state)),
+            (
+                "regressor",
+                RandomForestRegressor(n_estimators=300, random_state=config.random_state),
+            ),
         ]
     )
     model.fit(X_train, y_train)
@@ -487,8 +502,11 @@ def plot_pdp_ice(df: pd.DataFrame, config: FigureConfig) -> None:
     scenarios = sorted(df["SCENARIO"].unique(), key=lambda s: SCENARIO_LABELS.get(s, s))
     intros = ("ambiguous", "boasting")
     fig, axes = plt.subplots(
-        len(intros), len(scenarios), figsize=(3.0 * len(scenarios), 3.0 * len(intros)),
-        sharex=True, sharey=True,
+        len(intros),
+        len(scenarios),
+        figsize=(3.0 * len(scenarios), 3.0 * len(intros)),
+        sharex=True,
+        sharey=True,
     )
 
     for i, intro in enumerate(intros):

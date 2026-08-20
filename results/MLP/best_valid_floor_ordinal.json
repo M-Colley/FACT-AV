@@ -1,0 +1,109 @@
+{
+  "config": {
+    "trust_label_mode": "floor",
+    "head": "ordinal",
+    "seed": 0,
+    "split_seed": 1337,
+    "max_epochs": 2000,
+    "patience": 200,
+    "batch_size": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.2,
+    "n_parameters": 4356
+  },
+  "environment": {
+    "git_commit": "55d16c5",
+    "python": "3.13.12",
+    "torch": "2.13.0+cu132",
+    "device": "cuda",
+    "command": "train.py --head ordinal --seed 0 --patience 200"
+  },
+  "split_sizes": {
+    "train": {
+      "rows": 2124,
+      "participants": 107
+    },
+    "valid": {
+      "rows": 260,
+      "participants": 13
+    },
+    "test": {
+      "rows": 272,
+      "participants": 14
+    }
+  },
+  "num_classes": 5,
+  "class_values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0
+  ],
+  "best_epoch": 41,
+  "epochs_run": 242,
+  "stopped_early": true,
+  "validation_metrics": {
+    "acc": 0.34615384615384615,
+    "macro_f1": 0.10315186246418337,
+    "mae_class": 1.073076923076923,
+    "mae_trust": 1.073076923076923,
+    "qwk": -0.26136935976061393,
+    "loss": 0.6000114280443926
+  },
+  "test_metrics": {
+    "acc": 0.40808823529411764,
+    "macro_f1": 0.1294460641399417,
+    "mae_class": 1.0772058823529411,
+    "mae_trust": 1.0772058823529411,
+    "qwk": 0.3131201764057332,
+    "loss": 0.6713032880250145
+  },
+  "test_metrics_ci": {
+    "acc": {
+      "estimate": 0.40808823529411764,
+      "lo": 0.1953125,
+      "hi": 0.6177361853832437,
+      "se": 0.10816946571838226
+    },
+    "macro_f1": {
+      "estimate": 0.1294460641399417,
+      "lo": 0.08104414772043787,
+      "hi": 0.16519004981766897,
+      "se": 0.02196192267961808
+    },
+    "mae_class": {
+      "estimate": 1.0772058823529411,
+      "lo": 0.6397058823529411,
+      "hi": 1.537908380681818,
+      "se": 0.23632325162810872
+    },
+    "mae_trust": {
+      "estimate": 1.0772058823529411,
+      "lo": 0.6397058823529411,
+      "hi": 1.537908380681818,
+      "se": 0.23632325162810872
+    },
+    "qwk": {
+      "estimate": 0.3131201764057332,
+      "lo": 0.0,
+      "hi": 0.5422204033985184,
+      "se": 0.15182985870943863
+    }
+  },
+  "majority_baseline": {
+    "acc": 0.22426470588235295,
+    "macro_f1": 0.07327327327327328,
+    "mae_class": 0.8786764705882353,
+    "mae_trust": 0.8786764705882353,
+    "qwk": 0.0,
+    "majority_class": 3,
+    "majority_trust_value": 4.0
+  },
+  "beats_majority_baseline": false
+}

@@ -6,7 +6,7 @@ All figures use a colorblind-safe Okabe-Ito palette and consistent typography.
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt

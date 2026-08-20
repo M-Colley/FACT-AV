@@ -23,10 +23,10 @@ from MLP.dataset import (
     resolve_trust_class_values,
 )
 
-
 # ---------------------------------------------------------------------------
 # encode_scenario
 # ---------------------------------------------------------------------------
+
 
 class TestEncodeScenario:
     VALID_SCENARIOS = ["3Spurig", "Spielstrasse", "Ueberland", "NeueMitte"]
@@ -60,6 +60,7 @@ class TestEncodeScenario:
 # encode_intro
 # ---------------------------------------------------------------------------
 
+
 class TestEncodeIntro:
     def test_ambiguous_returns_zero(self):
         assert encode_intro("ambiguous").item() == 0.0
@@ -91,6 +92,7 @@ class TestEncodeIntro:
 # ---------------------------------------------------------------------------
 # encode_gender / encode_education / encode_job / encode_driving / encode_distance
 # ---------------------------------------------------------------------------
+
 
 class TestEncodeGender:
     def test_valid_values_produce_4d_one_hot(self):
@@ -152,6 +154,7 @@ class TestEncodeDistance:
 # encode_license
 # ---------------------------------------------------------------------------
 
+
 class TestEncodeLicense:
     # ``License`` is years of holding a driving licence (int), not a Y/N flag.
     def test_integer_years_passed_through(self):
@@ -173,6 +176,7 @@ class TestEncodeLicense:
 # ---------------------------------------------------------------------------
 # resolve_trust_class_values
 # ---------------------------------------------------------------------------
+
 
 class TestResolveTrustClassValues:
     def test_floor_mode_returns_five_integer_classes(self):
@@ -208,6 +212,7 @@ class TestResolveTrustClassValues:
 # ---------------------------------------------------------------------------
 # encode_trust_value
 # ---------------------------------------------------------------------------
+
 
 class TestEncodeTrustValue:
     FLOOR_CLASSES = [1.0, 2.0, 3.0, 4.0, 5.0]
@@ -251,6 +256,7 @@ class TestEncodeTrustValue:
 # ---------------------------------------------------------------------------
 # TRUST_LABEL_MODES constant
 # ---------------------------------------------------------------------------
+
 
 class TestTrustLabelModes:
     def test_floor_is_present(self):

@@ -19,12 +19,10 @@ Run with ``python explainability_extras.py`` from the repository root.
 
 from __future__ import annotations
 
-import json
 import logging
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -64,7 +62,11 @@ class ExplainConfig:
         self.results_path.mkdir(parents=True, exist_ok=True)
 
 
-INTRODUCTION_NORMALIZER = {"ambigious": "ambiguous", "ambiguous": "ambiguous", "boasting": "boasting"}
+INTRODUCTION_NORMALIZER = {
+    "ambigious": "ambiguous",
+    "ambiguous": "ambiguous",
+    "boasting": "boasting",
+}
 
 NUM_FEATURES: tuple[str, ...] = ("mIoU", "Age", "License")
 CAT_FEATURES: tuple[str, ...] = (
@@ -90,13 +92,17 @@ def load_data(config: ExplainConfig) -> pd.DataFrame:
     return df
 
 
-def split_data(df: pd.DataFrame, config: ExplainConfig) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+def split_data(
+    df: pd.DataFrame, config: ExplainConfig
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """Participant-grouped split (no leakage across train/test)."""
     X = df[list(NUM_FEATURES) + list(CAT_FEATURES)].copy()
     y = df["trust"].copy()
     groups = df["ProlificID"]
-    splitter = GroupShuffleSplit(n_splits=1, test_size=config.test_size, random_state=config.random_state)
-    (train_idx, test_idx), = splitter.split(X, y, groups=groups)
+    splitter = GroupShuffleSplit(
+        n_splits=1, test_size=config.test_size, random_state=config.random_state
+    )
+    ((train_idx, test_idx),) = splitter.split(X, y, groups=groups)
     return X.iloc[train_idx], X.iloc[test_idx], y.iloc[train_idx], y.iloc[test_idx]
 
 
@@ -115,7 +121,7 @@ def _train_xgb_for_shap(X_train: pd.DataFrame, y_train: pd.Series, config: Expla
     import xgboost as xgb
 
     X = X_train.copy()
-    category_codes: Dict[str, List[str]] = {}
+    category_codes: dict[str, list[str]] = {}
     for c in CAT_FEATURES:
         codes = pd.Categorical(X[c])
         category_codes[c] = list(codes.categories)
@@ -146,7 +152,11 @@ def shap_interactions(df: pd.DataFrame, config: ExplainConfig) -> None:
     category_codes = getattr(model, "_fact_category_codes", {})
     for c in CAT_FEATURES:
         cats = category_codes.get(c)
-        codes = pd.Categorical(X_test_enc[c], categories=cats) if cats is not None else pd.Categorical(X_test_enc[c])
+        codes = (
+            pd.Categorical(X_test_enc[c], categories=cats)
+            if cats is not None
+            else pd.Categorical(X_test_enc[c])
+        )
         X_test_enc[c] = codes.codes.astype(np.int32)
     # Keep an unencoded copy so we can colour points by original category labels.
     X_test_raw = X_test.copy().loc[X_test_enc.index]
@@ -161,7 +171,9 @@ def shap_interactions(df: pd.DataFrame, config: ExplainConfig) -> None:
     try:
         inter = explainer.shap_interaction_values(X_test_cat)
     except Exception as exc:
-        logger.warning("shap_interaction_values failed (%s). Falling back to dependence plots only.", exc)
+        logger.warning(
+            "shap_interaction_values failed (%s). Falling back to dependence plots only.", exc
+        )
         inter = None
 
     feat_names = list(X_test_cat.columns)
@@ -185,7 +197,13 @@ def shap_interactions(df: pd.DataFrame, config: ExplainConfig) -> None:
         rows = []
         for i in range(len(feat_names)):
             for j in range(i + 1, len(feat_names)):
-                rows.append({"feature_a": feat_names[i], "feature_b": feat_names[j], "mean_abs_interaction": float(abs_inter[i, j])})
+                rows.append(
+                    {
+                        "feature_a": feat_names[i],
+                        "feature_b": feat_names[j],
+                        "mean_abs_interaction": float(abs_inter[i, j]),
+                    }
+                )
         ranked = pd.DataFrame(rows).sort_values("mean_abs_interaction", ascending=False).head(15)
         ranked.to_csv(config.results_path / "shap_top_interactions.csv", index=False)
 
@@ -353,7 +371,13 @@ def dice_counterfactuals(df: pd.DataFrame, config: ExplainConfig) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _try_alibi_anchors(X_train: pd.DataFrame, y_train: pd.Series, X_test: pd.DataFrame, n_rules: int, config: ExplainConfig) -> Optional[List[str]]:
+def _try_alibi_anchors(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_test: pd.DataFrame,
+    n_rules: int,
+    config: ExplainConfig,
+) -> list[str] | None:
     """Try the canonical Alibi Anchors explainer; return None if unavailable."""
     try:
         from alibi.explainers import AnchorTabular
@@ -376,7 +400,7 @@ def _try_alibi_anchors(X_train: pd.DataFrame, y_train: pd.Series, X_test: pd.Dat
         try:
             expl = explainer.explain(X_test_enc.values[idx], threshold=0.9)
             rule = " AND ".join(expl.anchor) if expl.anchor else "(no rule)"
-            pred_cls = int(rf.predict(X_test_enc.values[idx:idx + 1])[0])
+            pred_cls = int(rf.predict(X_test_enc.values[idx : idx + 1])[0])
             rules.append(
                 f"IF {rule} THEN trust={'high' if pred_cls == 1 else 'low/med'} "
                 f"(precision={expl.precision:.2f}, coverage={expl.coverage:.2f})"
@@ -386,7 +410,9 @@ def _try_alibi_anchors(X_train: pd.DataFrame, y_train: pd.Series, X_test: pd.Dat
     return rules
 
 
-def _surrogate_tree_rules(X_train: pd.DataFrame, y_train: pd.Series, config: ExplainConfig) -> List[str]:
+def _surrogate_tree_rules(
+    X_train: pd.DataFrame, y_train: pd.Series, config: ExplainConfig
+) -> list[str]:
     """Fallback: train a shallow surrogate tree over a hot-encoded feature space."""
     X_enc = pd.get_dummies(X_train, columns=list(CAT_FEATURES), drop_first=False)
     rf = RandomForestClassifier(n_estimators=300, random_state=config.random_state)

@@ -4,18 +4,19 @@ Improved ML Analysis Script for Trust Prediction.
 """
 
 import json
-import os
 import logging
+import os
 import warnings
 from dataclasses import dataclass
 from math import sqrt
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from dotenv import load_dotenv
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
@@ -23,9 +24,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-
-from dotenv import load_dotenv
-
 
 # Load the TabPFN API key from the .env file into the environment variables
 load_dotenv()
@@ -38,7 +36,9 @@ try:
     GPU_AVAILABLE = torch.cuda.is_available()
 except ImportError:
     GPU_AVAILABLE = False
-    warnings.warn("PyTorch not found; GPU detection disabled. Models will default to CPU.")
+    warnings.warn(
+        "PyTorch not found; GPU detection disabled. Models will default to CPU.", stacklevel=2
+    )
 
 # Optional imports with error handling
 try:
@@ -47,7 +47,7 @@ try:
     SHAP_AVAILABLE = True
 except ImportError:
     SHAP_AVAILABLE = False
-    warnings.warn("SHAP not available - feature explanations will be skipped")
+    warnings.warn("SHAP not available - feature explanations will be skipped", stacklevel=2)
 
 try:
     from catboost import CatBoostRegressor
@@ -79,7 +79,7 @@ else:
 
 try:
     from tabpfn import TabPFNRegressor
-    from tabpfn.model_loading import save_fitted_tabpfn_model, load_fitted_tabpfn_model
+    from tabpfn.model_loading import load_fitted_tabpfn_model, save_fitted_tabpfn_model
 
     TABPFN_AVAILABLE = True
 except ImportError:
@@ -115,8 +115,8 @@ class Config:
     # the per-feature importance std stable while roughly halving the cost of 20.
     bootstrap_n: int = 10
 
-    numerical_features: List[str] = None
-    categorical_features: List[str] = None
+    numerical_features: list[str] = None
+    categorical_features: list[str] = None
     target_column: str = "trust"
     group_column: str = "ProlificID"
 
@@ -142,7 +142,7 @@ class DataProcessor:
     def __init__(self, config: Config):
         self.config = config
 
-    def get_label_mappings(self) -> Dict[str, Dict[str, str]]:
+    def get_label_mappings(self) -> dict[str, dict[str, str]]:
         return {
             "Gender": {"A1": "F", "A2": "M", "A3": "non-binary", "A4": "Prefer not to tell"},
             "Education": {
@@ -177,7 +177,7 @@ class DataProcessor:
             },
         }
 
-    def get_feature_name_mappings(self) -> Dict[str, str]:
+    def get_feature_name_mappings(self) -> dict[str, str]:
         return {
             "SCENARIO": "Scenario",
             "SCENARIO_NeueMitte": "Scenario: City",
@@ -263,7 +263,7 @@ class DataProcessor:
         )
 
 
-def prepare_categorical_as_string(frame: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
+def prepare_categorical_as_string(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     output = frame.copy()
     for column in columns:
         output[column] = output[column].astype(str)
@@ -274,7 +274,8 @@ def prepare_categorical_as_string(frame: pd.DataFrame, columns: List[str]) -> pd
 # Error bar helpers
 # ---------------------------------------------------------------------------
 
-def get_xgb_importance_std(model: "xgb.XGBRegressor", feature_names: List[str]) -> np.ndarray:
+
+def get_xgb_importance_std(model: "xgb.XGBRegressor", feature_names: list[str]) -> np.ndarray:
     """Per-feature importance std across individual XGBoost trees.
 
     ``XGBRegressor.feature_importances_`` returns gain shares normalized to sum
@@ -296,7 +297,7 @@ def get_xgb_importance_std(model: "xgb.XGBRegressor", feature_names: List[str]) 
     return per_tree.std(axis=0).values
 
 
-def get_lgb_importance_std(model: "lgb.LGBMRegressor", feature_names: List[str]) -> np.ndarray:
+def get_lgb_importance_std(model: "lgb.LGBMRegressor", feature_names: list[str]) -> np.ndarray:
     """Per-feature gain std across individual LightGBM trees.
 
     This sums ``split_gain`` per tree, matching the ``importance_type="gain"``
@@ -328,7 +329,7 @@ def get_catboost_importance_std(
     model_params: dict,
     X_train: pd.DataFrame,
     y_train: pd.Series,
-    cat_features: List[str],
+    cat_features: list[str],
     n_bootstrap: int = 20,
     random_state: int = 42,
     groups: np.ndarray | None = None,
@@ -382,7 +383,10 @@ def get_catboost_importance_std(
             model.fit(X_b, y_b)
         except Exception as exc:
             if params.get("task_type") == "GPU":
-                logger.warning("CatBoost bootstrap GPU fit failed (%s). Falling back to CPU for this sample.", exc)
+                logger.warning(
+                    "CatBoost bootstrap GPU fit failed (%s). Falling back to CPU for this sample.",
+                    exc,
+                )
                 params.pop("task_type", None)
                 model = CatBoostRegressor(**params)
                 model.fit(X_b, y_b)
@@ -394,7 +398,9 @@ def get_catboost_importance_std(
     return np.std(importances, axis=0)
 
 
-def get_tabpfn_quantile_columns(q_preds: Any, quantiles: List[float]) -> List[tuple[float, np.ndarray]]:
+def get_tabpfn_quantile_columns(
+    q_preds: Any, quantiles: list[float]
+) -> list[tuple[float, np.ndarray]]:
     """Return (quantile, predictions_vector) pairs independent of output orientation."""
     values = np.asarray(q_preds)
 
@@ -419,6 +425,52 @@ def get_tabpfn_quantile_columns(q_preds: Any, quantiles: List[float]) -> List[tu
 
 # ---------------------------------------------------------------------------
 
+
+def participant_grouped_split(
+    X: pd.DataFrame,
+    y: pd.Series,
+    groups: pd.Series | None,
+    test_size: float,
+    random_state: int,
+) -> tuple:
+    """Split into train/test without ever putting one participant on both sides.
+
+    mIoU varies *within* participant (~21 ratings each), so a plain random row
+    split leaks the same person into train and test and produces over-optimistic
+    metrics: the model can memorise a participant's rating level from their train
+    rows and reuse it on their test rows. INTRODUCTION and SCENARIO are
+    between-subject factors, so they vary only across groups.
+
+    Returns ``(X_train, X_test, y_train, y_test, groups_train)``; ``groups_train``
+    is ``None`` when no group column was supplied, and is needed downstream for
+    the cluster bootstrap.
+
+    Extracted from ``ModelEvaluator.evaluate_all_models`` so the no-leakage
+    property can actually be asserted in a test -- see ``tests/test_splits.py``.
+    """
+    if groups is None:
+        logger.warning(
+            "No group column available — falling back to a plain random split. "
+            "Metrics from this path are optimistically biased for repeated-measures data."
+        )
+        from sklearn.model_selection import train_test_split
+
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=test_size, random_state=random_state
+        )
+        return X_train, X_test, y_train, y_test, None
+
+    splitter = GroupShuffleSplit(n_splits=1, test_size=test_size, random_state=random_state)
+    ((train_idx, test_idx),) = splitter.split(X, y, groups=groups)
+    return (
+        X.iloc[train_idx],
+        X.iloc[test_idx],
+        y.iloc[train_idx],
+        y.iloc[test_idx],
+        groups.iloc[train_idx].to_numpy(),
+    )
+
+
 class ModelEvaluator:
     """Handles pipeline construction, evaluation, and figure generation."""
 
@@ -426,9 +478,9 @@ class ModelEvaluator:
         self.config = config
         self.data_processor = data_processor
         self.feature_name_mappings = data_processor.get_feature_name_mappings()
-        self.results: Dict[str, Dict[str, float]] = {}
+        self.results: dict[str, dict[str, float]] = {}
 
-    def calculate_metrics(self, y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
+    def calculate_metrics(self, y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
         mse = mean_squared_error(y_true, y_pred)
         return {
             "mae": float(mean_absolute_error(y_true, y_pred)),
@@ -446,11 +498,11 @@ class ModelEvaluator:
         self,
         model: Any,
         importances: np.ndarray,
-        feature_names: List[str],
-        metrics: Dict[str, float],
+        feature_names: list[str],
+        metrics: dict[str, float],
         method_name: str,
         filename: str,
-        std: Optional[np.ndarray] = None,
+        std: np.ndarray | None = None,
     ) -> None:
         frame = pd.DataFrame({"Feature": feature_names, "Importance": importances})
 
@@ -507,7 +559,7 @@ class ModelEvaluator:
         model: Any,
         X_test: pd.DataFrame,
         y_test: pd.Series,
-        metrics: Dict[str, float],
+        metrics: dict[str, float],
     ) -> None:
         logger.info("Calculating permutation importances...")
 
@@ -567,7 +619,11 @@ class ModelEvaluator:
         )
 
         plt.tight_layout()
-        plt.savefig(self.config.results_path / "perm_importances_random_regressor.png", bbox_inches="tight", pad_inches=0)
+        plt.savefig(
+            self.config.results_path / "perm_importances_random_regressor.png",
+            bbox_inches="tight",
+            pad_inches=0,
+        )
         plt.close(fig)
 
     def generate_shap_plots(
@@ -619,31 +675,14 @@ class ModelEvaluator:
         X = df[self.config.numerical_features + self.config.categorical_features]
         y = df[self.config.target_column]
 
-        # Participant-grouped split: mIoU varies *within* participant (20 ratings
-        # each), so a plain random split leaks the same participant into both
-        # train and test and produces over-optimistic metrics. INTRODUCTION and
-        # SCENARIO are between-subject factors, so they vary only across groups.
-        groups_train = None
-        if self.config.group_column in df.columns:
-            groups = df[self.config.group_column]
-            splitter = GroupShuffleSplit(
-                n_splits=1,
-                test_size=self.config.test_size,
-                random_state=self.config.random_state,
-            )
-            (train_idx, test_idx), = splitter.split(X, y, groups=groups)
-            X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-            y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-            groups_train = groups.iloc[train_idx].to_numpy()
-        else:
-            from sklearn.model_selection import train_test_split
-
-            X_train, X_test, y_train, y_test = train_test_split(
-                X,
-                y,
-                test_size=self.config.test_size,
-                random_state=self.config.random_state,
-            )
+        groups = df[self.config.group_column] if self.config.group_column in df.columns else None
+        X_train, X_test, y_train, y_test, groups_train = participant_grouped_split(
+            X,
+            y,
+            groups=groups,
+            test_size=self.config.test_size,
+            random_state=self.config.random_state,
+        )
         preprocessor = self.data_processor.get_preprocessor()
 
         # ------------------------------------------------------------------
@@ -653,7 +692,10 @@ class ModelEvaluator:
         rf_pipeline = Pipeline(
             steps=[
                 ("preprocessor", preprocessor),
-                ("regressor", RandomForestRegressor(n_estimators=100, random_state=self.config.random_state)),
+                (
+                    "regressor",
+                    RandomForestRegressor(n_estimators=100, random_state=self.config.random_state),
+                ),
             ]
         )
         rf_pipeline.fit(X_train, y_train)
@@ -702,6 +744,10 @@ class ModelEvaluator:
                 "cat_features": self.config.categorical_features,
                 "random_state": self.config.random_state,
                 "verbose": False,
+                # Without this CatBoost writes a ``catboost_info/`` scratch
+                # directory into the CWD on every fit, which shows up as a dirty
+                # working tree after each run.
+                "allow_writing_files": False,
             }
             if GPU_AVAILABLE:
                 cb_params["task_type"] = "GPU"
@@ -777,7 +823,7 @@ class ModelEvaluator:
                 )
                 xgb_model.fit(X_train_xgb, y_train)
 
-            xgb_model.save_model(self.config.results_path / "your_model.json")
+            xgb_model.save_model(self.config.results_path / "xgboost_model.json")
 
             metrics_xgb = self.calculate_metrics(y_test, xgb_model.predict(X_test_xgb))
             self.results["XGBoost"] = metrics_xgb
@@ -894,27 +940,47 @@ class ModelEvaluator:
             ]
 
             quantiles = [0.25, 0.5, 0.75]
-            
-            # --- WORKAROUND: TabPFN CUDA Quantile Bug ---
-            # TabPFN raises a device mismatch RuntimeError when predicting quantiles on CUDA.
-            # Since the model is already saved, we reload it onto CPU specifically for these predictions.
-            current_device = getattr(reg, "device_", getattr(reg, "device", "cpu"))
-            if "cuda" in str(current_device):
-                logger.info("Reloading TabPFN on CPU to bypass CUDA quantile prediction bug...")
-                reg_cpu = load_fitted_tabpfn_model(self.config.results_path / "fact-av.tabpfn_fit", device="cpu")
-                q_preds = reg_cpu.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
-                mode_preds = reg_cpu.predict(X_test_tab, output_type="mode")
-            else:
+
+            # TabPFN used to raise a device-mismatch RuntimeError when predicting
+            # quantiles on CUDA, so this block unconditionally reloaded the fitted
+            # model onto the CPU whenever a GPU was in use. That bug is fixed as of
+            # the pinned tabpfn 8.4.0 (verified on torch 2.13 / CUDA 13.2: both
+            # ``quantiles`` and ``mode`` predict correctly on the GPU), and the
+            # reload cost a full deserialisation plus CPU inference on every run.
+            #
+            # The GPU path is now tried first and the CPU reload kept only as a
+            # fallback, so an older tabpfn still produces results instead of
+            # crashing. Note the fallback changes the compute device, so its
+            # numbers can differ from the GPU path in the last float digits.
+            try:
                 q_preds = reg.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
                 mode_preds = reg.predict(X_test_tab, output_type="mode")
-            # --------------------------------------------
+            except RuntimeError as exc:
+                current_device = getattr(reg, "device_", getattr(reg, "device", "cpu"))
+                if "cuda" not in str(current_device):
+                    raise
+                logger.warning(
+                    "TabPFN quantile prediction failed on %s (%s). Reloading on CPU — "
+                    "this is the pre-8.4.0 device-mismatch bug; consider upgrading tabpfn.",
+                    current_device,
+                    exc,
+                )
+                reg_cpu = load_fitted_tabpfn_model(
+                    self.config.results_path / "fact-av.tabpfn_fit", device="cpu"
+                )
+                q_preds = reg_cpu.predict(X_test_tab, output_type="quantiles", quantiles=quantiles)
+                mode_preds = reg_cpu.predict(X_test_tab, output_type="mode")
 
             for quantile, quantile_preds in get_tabpfn_quantile_columns(q_preds, quantiles):
-                results_txt.append(f"Quantile {quantile} MAE: {mean_absolute_error(y_test, quantile_preds)}")
+                results_txt.append(
+                    f"Quantile {quantile} MAE: {mean_absolute_error(y_test, quantile_preds)}"
+                )
 
             results_txt.append(f"Mode MAE: {mean_absolute_error(y_test, mode_preds)}")
 
-            with (self.config.results_path / "results_tabpfnregressor.txt").open("w", encoding="utf-8") as handle:
+            with (self.config.results_path / "results_tabpfnregressor.txt").open(
+                "w", encoding="utf-8"
+            ) as handle:
                 handle.write("\n".join(results_txt))
 
         self._save_metrics_summary()

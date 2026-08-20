@@ -1,3 +1,4 @@
+import logging
 import math
 from pathlib import Path
 
@@ -11,7 +12,14 @@ from torch.utils.data.dataset import Dataset
 results_folder = Path(__file__).parent.parent / "results" / "MLP"
 results_folder.mkdir(parents=True, exist_ok=True)  # Ensure the folder exists
 
+logger = logging.getLogger(__name__)
+
 TRUST_LABEL_MODES = ("floor", "separate_fractional")
+
+# Seed for the participant-grouped 80/10/10 split. Kept as a named constant so
+# train.py and eval.py provably derive the same split, and so a sensitivity run
+# over several splits can vary it explicitly rather than by editing a default.
+DEFAULT_SPLIT_SEED = 1337
 
 # Single source of truth for the categorical class orders. The scalar encoders
 # below and the vectorised pre-encoder in ``TrustDataset`` both use these, so
@@ -160,7 +168,7 @@ def _intro_block(values):
 
 def addlabels(x_positions, y_values):
     total = np.sum(y_values)
-    for x_position, y_value in zip(x_positions, y_values):
+    for x_position, y_value in zip(x_positions, y_values, strict=True):
         if y_value == 0:
             continue
         plt.text(
@@ -172,10 +180,13 @@ def addlabels(x_positions, y_values):
 
 
 class TrustDataset(Dataset):
-    def __init__(self, file_path, split, trust_label_mode="floor") -> None:
+    def __init__(
+        self, file_path, split, trust_label_mode="floor", split_seed=DEFAULT_SPLIT_SEED
+    ) -> None:
         super().__init__()
         self.split = split
         self.trust_label_mode = trust_label_mode
+        self.split_seed = int(split_seed)
 
         df = pd.read_excel(file_path, sheet_name="Sheet1")
         df = df.dropna().reset_index(drop=True)
@@ -187,7 +198,9 @@ class TrustDataset(Dataset):
         # ProlificID rated trust many times), so a plain row shuffle leaks the
         # same participant across train/valid/test and inflates test metrics.
         participant_ids = df["ProlificID"].to_numpy()
-        train_idx, valid_idx, test_idx = self._participant_grouped_indices(participant_ids)
+        train_idx, valid_idx, test_idx = self._participant_grouped_indices(
+            participant_ids, seed=self.split_seed
+        )
 
         # Standardise numeric features using TRAIN ROWS ONLY (no leakage),
         # matching the StandardScaler in ML-approaches.py. The scaler is refit
@@ -245,14 +258,24 @@ class TrustDataset(Dataset):
 
         self.X = torch.from_numpy(features[selection])
         self.y = torch.from_numpy(labels[selection])
+        # Participant id per retained row. Test-set uncertainty has to be
+        # estimated by resampling *participants*, not rows: each participant
+        # contributes ~21 correlated ratings (ICC ~ 0.69), so a row-wise
+        # bootstrap would treat 279 correlated rows as 279 independent ones and
+        # report an interval several times too narrow.
+        self.participant_ids = participant_ids[selection]
 
         self.labels, self.counts = np.unique(self.y.numpy(), return_counts=True)
-        print(f"Found {len(self.X)} for split {self.split}")
-        print(f"Labels: {self.labels} counts {self.counts}")
-        print(f"Labels: {self.labels} weights {np.sum(self.counts) / self.counts}")
+        logger.info(
+            "Split %s: %d rows, %d participants.",
+            self.split,
+            len(self.X),
+            len(np.unique(self.participant_ids)),
+        )
+        logger.info("Split %s: labels %s counts %s", self.split, self.labels, self.counts)
 
     @staticmethod
-    def _participant_grouped_indices(participant_ids, seed: int = 1337):
+    def _participant_grouped_indices(participant_ids, seed: int = DEFAULT_SPLIT_SEED):
         """Deterministic 80/10/10 split that never splits a participant.
 
         Uses two nested GroupShuffleSplit passes (80% train, then a 50/50
@@ -319,7 +342,7 @@ class TrustDataset(Dataset):
         ax.set_yticks([])
 
         total = full_counts.sum()
-        for x_pos, y_val in zip(positions, full_counts):
+        for x_pos, y_val in zip(positions, full_counts, strict=True):
             if y_val:
                 ax.text(x_pos, y_val, f"{int(y_val)}({y_val / total * 100:0.1f}%)", ha="center")
 

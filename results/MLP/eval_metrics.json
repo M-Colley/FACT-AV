@@ -1,0 +1,80 @@
+{
+  "trust_label_mode": "floor",
+  "checkpoint": "C:\\Users\\Mark\\Desktop\\FACT-AV\\results\\MLP\\best_valid_floor.pt",
+  "num_classes": 5,
+  "class_values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0
+  ],
+  "n_test_samples": 272,
+  "test_loss_unweighted": 1.4167014781166525,
+  "accuracy_macro_recall": 0.42876848578453064,
+  "accuracy_micro": 0.43014705882352944,
+  "f1_macro": 0.39799171686172485,
+  "majority_class_baseline": 0.22426470588235295,
+  "majority_baseline_detail": {
+    "acc": 0.22426470588235295,
+    "macro_f1": 0.07327327327327328,
+    "mae_class": 0.8786764705882353,
+    "mae_trust": 0.8786764705882353,
+    "qwk": 0.0,
+    "majority_class": 3,
+    "majority_trust_value": 4.0
+  },
+  "beats_majority_baseline": true,
+  "test_metrics_ci": {
+    "acc": {
+      "estimate": 0.43014705882352944,
+      "lo": 0.26953125,
+      "hi": 0.5956092436974789,
+      "se": 0.0858524566282954
+    },
+    "macro_f1": {
+      "estimate": 0.3979917267846657,
+      "lo": 0.190452928958163,
+      "hi": 0.4581036626204116,
+      "se": 0.06908671668018619
+    },
+    "mae_class": {
+      "estimate": 0.9044117647058824,
+      "lo": 0.584498424369748,
+      "hi": 1.234375,
+      "se": 0.16729092173788201
+    },
+    "mae_trust": {
+      "estimate": 0.9044117647058824,
+      "lo": 0.584498424369748,
+      "hi": 1.234375,
+      "se": 0.16729092173788201
+    },
+    "qwk": {
+      "estimate": 0.2980523313004131,
+      "lo": -0.16730506101470433,
+      "hi": 0.5625014548551277,
+      "se": 0.18366578091331878
+    }
+  },
+  "bootstrap_n": 2000,
+  "head": "nominal",
+  "split_seed": 1337,
+  "quadratic_weighted_kappa": 0.2980523313004131,
+  "mae_trust_units": 0.9044117647058824,
+  "expected_calibration_error": 0.11904806490330136,
+  "true_class_distribution": [
+    3,
+    22,
+    75,
+    61,
+    111
+  ],
+  "predicted_class_distribution": [
+    5,
+    20,
+    53,
+    43,
+    151
+  ]
+}

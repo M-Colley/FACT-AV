@@ -22,10 +22,10 @@ from main_group_pysr_trust_calibration_more_predictors import (  # noqa: E402
     split_groups,
 )
 
-
 # ---------------------------------------------------------------------------
 # Shared fixture
 # ---------------------------------------------------------------------------
+
 
 def _make_df(
     n_p1: int = 20,
@@ -61,6 +61,7 @@ def _make_df(
 # find_equal_groups
 # ---------------------------------------------------------------------------
 
+
 class TestFindEqualGroups:
     def test_detects_group_with_14_identical_trust_values(self):
         df = _make_df()
@@ -93,6 +94,7 @@ class TestFindEqualGroups:
 # ---------------------------------------------------------------------------
 # split_groups
 # ---------------------------------------------------------------------------
+
 
 class TestSplitGroups:
     def test_returns_two_dataframes(self):
@@ -132,6 +134,7 @@ class TestSplitGroups:
 # ---------------------------------------------------------------------------
 # build_feature_matrix
 # ---------------------------------------------------------------------------
+
 
 class TestBuildFeatureMatrix:
     def test_returns_numpy_array(self):

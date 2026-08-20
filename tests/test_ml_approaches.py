@@ -1,6 +1,5 @@
 """Tests for ML-approaches.py helpers (Config, DataProcessor, utility functions)."""
 
-import importlib.util
 import sys
 from pathlib import Path
 
@@ -8,13 +7,15 @@ import numpy as np
 import pandas as pd
 import pytest
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from conftest import load_hyphenated_module  # noqa: E402
+
 # ML-approaches.py uses a hyphen so it cannot be imported with a plain `import`.
-_spec = importlib.util.spec_from_file_location(
-    "ml_approaches",
-    Path(__file__).resolve().parents[1] / "ML-approaches.py",
-)
-_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_module)
+# Loaded at module scope here because the names below are bound as module-level
+# globals used throughout this file. Other test modules should use the
+# session-scoped ``ml_approaches`` fixture from conftest instead.
+_module = load_hyphenated_module("ml_approaches", "ML-approaches.py")
 
 Config = _module.Config
 DataProcessor = _module.DataProcessor
@@ -25,6 +26,7 @@ get_tabpfn_quantile_columns = _module.get_tabpfn_quantile_columns
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
+
 
 class TestConfig:
     def test_default_target_column(self):
@@ -63,6 +65,7 @@ class TestConfig:
 # ---------------------------------------------------------------------------
 # DataProcessor label mappings
 # ---------------------------------------------------------------------------
+
 
 class TestDataProcessorLabelMappings:
     @pytest.fixture
@@ -130,6 +133,7 @@ class TestDataProcessorLoadErrors:
 # prepare_categorical_as_string
 # ---------------------------------------------------------------------------
 
+
 class TestPrepareCategoricalAsString:
     def test_converts_specified_columns_to_string_dtype(self):
         df = pd.DataFrame({"cat": [1, 2, 3], "num": [4.0, 5.0, 6.0]})
@@ -158,6 +162,7 @@ class TestPrepareCategoricalAsString:
 # ---------------------------------------------------------------------------
 # get_tabpfn_quantile_columns
 # ---------------------------------------------------------------------------
+
 
 class TestGetTabpfnQuantileColumns:
     def test_1d_array_single_quantile(self):
