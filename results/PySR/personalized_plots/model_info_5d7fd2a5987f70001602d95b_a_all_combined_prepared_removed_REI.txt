@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T07:48:16+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 + tan(x0*0.23389702))*0.055364344
+
+LATEX
+\left(x_{0} + \tan{\left(x_{0} \cdot 0.234 \right)}\right) 0.0554
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.25$ & $1$ & $0.287$ & $0.0$ \\
+$y = \log{\left(x_{0} \right)}$ & $2$ & $0.257$ & $0.112$ \\
+$y = x_{0} \cdot 0.0555$ & $3$ & $0.196$ & $0.273$ \\
+$y = {1.02}^{x_{0}} + 1.10$ & $5$ & $0.194$ & $0.00415$ \\
+$y = x_{0}^{3} \cdot 3.18 \cdot 10^{-6} + 2.79$ & $6$ & $0.189$ & $0.0261$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(1.84 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.156$ & $0.190$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 0.234 \right)}\right) 0.0554 \end{dmath*} \end{minipage} & $8$ & $0.0795$ & $0.676$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \cdot 0.234 \right)} 1.05\right) 0.0554 \end{dmath*} \end{minipage} & $10$ & $0.0793$ & $0.00132$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

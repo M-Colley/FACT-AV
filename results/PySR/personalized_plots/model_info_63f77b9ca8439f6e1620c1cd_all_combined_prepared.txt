@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:07:48+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(sin(x0*(-72.919395))**4)**24 + 3.9955502
+
+LATEX
+\cos^{24}{\left(\sin^{4}{\left(x_{0} \left(-72.9\right) \right)} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.45$ & $1$ & $0.247$ & $0.0$ \\
+$y = 4.46 - \frac{1}{x_{0}}$ & $4$ & $0.247$ & $1.86 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 83.4 \right)} \end{dmath*} \end{minipage} & $5$ & $0.220$ & $0.120$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 77.7 \right)} + 3.96$ & $6$ & $0.0618$ & $1.27$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(\sin{\left(x_{0} \cdot 77.7 \right)} \right)} \right)} + 3.99 \end{dmath*} \end{minipage} & $8$ & $0.0559$ & $0.0501$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\sin^{3}{\left(x_{0} \left(-72.9\right) \right)} \right)} + 3.96 \end{dmath*} \end{minipage} & $9$ & $0.0444$ & $0.229$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{24}{\left(\sin^{4}{\left(x_{0} \left(-72.9\right) \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $0.0352$ & $0.233$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

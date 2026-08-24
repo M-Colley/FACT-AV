@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:47:45+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(x0*19.625868))**27 + 2.9257784
+
+LATEX
+\cos^{27}{\left(\tan{\left(x_{0} \cdot 19.6 \right)} \right)} + 2.93
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.03$ & $1$ & $0.180$ & $0.0$ \\
+$y = \frac{13.1}{\log{\left(x_{0} \right)}}$ & $4$ & $0.179$ & $0.00155$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \right)} \right)} + 2.58 \end{dmath*} \end{minipage} & $5$ & $0.164$ & $0.0865$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 9.99 \right)} + 2.49$ & $6$ & $0.104$ & $0.460$ \\
+$y = \cos^{8}{\left(x_{0} \cdot 9.45 \right)} + 2.80$ & $7$ & $0.0729$ & $0.351$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{9}{\left(x_{0} \left(-13.8\right) \right)} + 2.92 \end{dmath*} \end{minipage} & $8$ & $0.0507$ & $0.363$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{9}{\left(\tan{\left(x_{0} \cdot 11.8 \right)} \right)} + 2.89 \end{dmath*} \end{minipage} & $9$ & $0.0463$ & $0.0904$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{27}{\left(\tan{\left(x_{0} \cdot 19.6 \right)} \right)} + 2.93 \end{dmath*} \end{minipage} & $10$ & $0.0194$ & $0.873$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

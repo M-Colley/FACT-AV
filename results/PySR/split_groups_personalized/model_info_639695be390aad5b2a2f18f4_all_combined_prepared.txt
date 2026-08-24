@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T20:34:02+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sqrt(x0 - 63.72872) - sin(tan(x0 + 0.039506514))
+
+LATEX
+\sqrt{x_{0} - 63.7} - \sin{\left(\tan{\left(x_{0} + 0.0395 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.55$ & $1$ & $0.723$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.400$ & $0.296$ \\
+$y = \sqrt{x_{0} - 63.2}$ & $4$ & $0.291$ & $0.319$ \\
+$y = \left(x_{0} - 61.8\right)^{0.477}$ & $5$ & $0.275$ & $0.0554$ \\
+$y = \log{\left(x_{0} - 61.2 \right)}^{1.29}$ & $6$ & $0.272$ & $0.0118$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - \sin{\left(\tan{\left(x_{0} \right)} \right)} - 63.4} \end{dmath*} \end{minipage} & $8$ & $0.229$ & $0.0855$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - \tan{\left(\sin{\left(\tan{\left(x_{0} \right)} \right)} \right)} - 63.5} \end{dmath*} \end{minipage} & $9$ & $0.214$ & $0.0696$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - 63.7} - \sin{\left(\tan{\left(x_{0} + 0.0395 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.152$ & $0.341$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T13:08:22+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tan(tan(x0**0.1230912))*0.0011464006 + 5.000777
+
+LATEX
+\tan{\left(\tan{\left(x_{0}^{0.123} \right)} \right)} 0.00115 + 5.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.97$ & $1$ & $0.0119$ & $0.0$ \\
+$y = 4.99 - \frac{1}{x_{0}}$ & $4$ & $0.0119$ & $0.000632$ \\
+$y = x_{0} \cdot 0.00245 - -4.79$ & $5$ & $0.0117$ & $0.0139$ \\
+$y = \sin{\left(x_{0} \right)} 0.0403 + 4.98$ & $6$ & $0.0110$ & $0.0627$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.97 + \frac{0.0233}{\cos{\left(\tan{\left(x_{0} \right)} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.00857$ & $0.248$ \\
+$y = \tan{\left(x_{0} + 0.228 \right)} 0.00504 + 5.01$ & $8$ & $0.00113$ & $2.02$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\tan{\left(x_{0}^{0.123} \right)} \right)} 0.00115 + 5.00 \end{dmath*} \end{minipage} & $9$ & $1.11 \cdot 10^{-5}$ & $4.63$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

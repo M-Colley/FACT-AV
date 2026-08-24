@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T11:26:10+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sqrt(x0 - 58.84548) - cos(1.4375995537691*x0)**2
+
+LATEX
+\sqrt{x_{0} - 58.8} - \cos^{2}{\left(1.44 x_{0} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.61$ & $1$ & $0.654$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.356$ & $0.305$ \\
+$y = 0.000610 x_{0}^{2}$ & $4$ & $0.290$ & $0.205$ \\
+$y = 12.0 - \frac{643.}{x_{0}}$ & $5$ & $0.271$ & $0.0666$ \\
+$y = 1.40 \log{\left(x_{0} - 62.5 \right)}$ & $6$ & $0.264$ & $0.0272$ \\
+$y = 2.09 \sqrt[4]{x_{0} - 66.4}$ & $7$ & $0.263$ & $0.00380$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - \sin{\left(\tan{\left(x_{0} \right)} \right)} - 63.3} \end{dmath*} \end{minipage} & $8$ & $0.243$ & $0.0799$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - 58.8} - \cos^{2}{\left(1.44 x_{0} \right)} \end{dmath*} \end{minipage} & $9$ & $0.156$ & $0.441$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0} - 59.5} - \cos^{2}{\left(\left(x_{0} + 58.2\right)^{2} \right)} \end{dmath*} \end{minipage} & $10$ & $0.121$ & $0.256$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

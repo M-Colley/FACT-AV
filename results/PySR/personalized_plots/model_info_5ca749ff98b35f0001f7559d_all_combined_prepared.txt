@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:39:34+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(0.00539576610875808/cos(x0/0.32317904)**4) + 3.9997077
+
+LATEX
+\cos{\left(\frac{0.00540}{\cos^{4}{\left(\frac{x_{0}}{0.323} \right)}} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.80$ & $1$ & $0.460$ & $0.0$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 4.36$ & $4$ & $0.444$ & $0.0118$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.59 - \cos{\left(\cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.420$ & $0.0555$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.323} \right)} + 4.11 \end{dmath*} \end{minipage} & $6$ & $0.302$ & $0.331$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\frac{x_{0}}{0.323} \right)} \right)} + 4.14 \end{dmath*} \end{minipage} & $7$ & $0.153$ & $0.677$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{3}{\left(\frac{x_{0}}{0.323} \right)} \right)} + 4.03 \end{dmath*} \end{minipage} & $8$ & $0.0908$ & $0.524$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(- \frac{0.321}{\cos{\left(\frac{x_{0}}{0.323} \right)}} \right)} + 4.01 \end{dmath*} \end{minipage} & $9$ & $0.0564$ & $0.477$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\frac{0.00540}{\cos^{4}{\left(\frac{x_{0}}{0.323} \right)}} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $0.00236$ & $3.17$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

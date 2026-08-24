@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T23:41:15+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+5.000437 - 2.7129445e-7*Abs(tan(x0)**4 - 1691.1854)
+
+LATEX
+5.00 - \left|{\tan^{4}{\left(x_{0} \right)} - 1.69 \cdot 10^{3}}\right| 2.71 \cdot 10^{-7}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.92$ & $1$ & $0.107$ & $0.0$ \\
+$y = 9.26 - \log{\left(x_{0} \right)}$ & $4$ & $0.105$ & $0.00542$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(x_{0} \right)} \right)} + 4.79 \end{dmath*} \end{minipage} & $5$ & $0.104$ & $0.00883$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.01 - \frac{0.000639}{\cos^{2}{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $6$ & $7.41 \cdot 10^{-5}$ & $7.25$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \tan^{4}{\left(x_{0} \right)} 2.71 \cdot 10^{-7} \end{dmath*} \end{minipage} & $7$ & $3.86 \cdot 10^{-8}$ & $7.56$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\tan{\left(x_{0} \right)} + 1.19\right)^{4} \cdot 2.46 \cdot 10^{-7} \end{dmath*} \end{minipage} & $9$ & $1.61 \cdot 10^{-8}$ & $0.437$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left|{\tan^{4}{\left(x_{0} \right)} - 1.69 \cdot 10^{3}}\right| 2.71 \cdot 10^{-7} \end{dmath*} \end{minipage} & $10$ & $2.06 \cdot 10^{-9}$ & $2.06$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

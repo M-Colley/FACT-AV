@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T20:01:02+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.1080427 - tan(cos(tan(x0/0.082278326))**2)
+
+LATEX
+4.11 - \tan{\left(\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0823} \right)} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.55$ & $1$ & $0.547$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.461$ & $0.0860$ \\
+$y = {1.02}^{x_{0}} + 0.166$ & $5$ & $0.460$ & $0.000718$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 - \cos^{2}{\left(\frac{x_{0}}{0.0823} \right)} \end{dmath*} \end{minipage} & $6$ & $0.306$ & $0.408$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.97 - \cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0823} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.205$ & $0.401$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.11 - \tan{\left(\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0823} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.153$ & $0.293$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.11 - \cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0823} \right)} \right)} 1.54 \end{dmath*} \end{minipage} & $9$ & $0.147$ & $0.0390$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \left|{\tan{\left(\cos{\left(\tan{\left(12.2 x_{0} \right)} \right)} \right)}}\right| \end{dmath*} \end{minipage} & $10$ & $0.131$ & $0.118$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

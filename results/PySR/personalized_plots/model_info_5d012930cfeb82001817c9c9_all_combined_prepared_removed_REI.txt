@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T08:59:43+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.8416848 - cos(cos(x0**3.83134))**2
+
+LATEX
+3.84 - \cos^{2}{\left(\cos{\left(x_{0}^{3.83} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.29$ & $1$ & $0.114$ & $0.0$ \\
+$y = 3.29$ & $2$ & $0.114$ & $4.40 \cdot 10^{-8}$ \\
+$y = e^{x_{0}^{0.0402}}$ & $4$ & $0.113$ & $0.000971$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.07 - \cos{\left(\cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.100$ & $0.125$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.45 \left(\cos^{2}{\left(x_{0} \right)}\right)^{0.0309} \end{dmath*} \end{minipage} & $6$ & $0.0791$ & $0.234$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.84 - \cos^{2}{\left(\cos{\left(x_{0}^{3.83} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0299$ & $0.972$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0}^{3.83} \right)}\right)^{0.0865} \cdot 3.56 \end{dmath*} \end{minipage} & $8$ & $0.0232$ & $0.253$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0}^{3.83} \right)}\right)^{0.0801} \cdot 3.54 \end{dmath*} \end{minipage} & $9$ & $0.0224$ & $0.0371$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh^{0.0409}{\left(\cos^{4}{\left(x_{0}^{3.83} \right)} \right)} 3.58 \end{dmath*} \end{minipage} & $10$ & $0.0222$ & $0.00732$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

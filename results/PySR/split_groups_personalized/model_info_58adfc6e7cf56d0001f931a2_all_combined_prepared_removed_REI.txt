@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T03:37:00+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+2.7948806 - cos(x0*66.28821)
+
+LATEX
+2.79 - \cos{\left(x_{0} \cdot 66.3 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.89$ & $1$ & $0.877$ & $0.0$ \\
+$y = {1.01}^{x_{0}}$ & $3$ & $0.788$ & $0.0534$ \\
+$y = \sqrt{x_{0}} - 5.87$ & $4$ & $0.786$ & $0.00157$ \\
+$y = 2.78 - \cos{\left(x_{0}^{2} \right)}$ & $5$ & $0.732$ & $0.0718$ \\
+$y = 2.79 - \cos{\left(x_{0} \cdot 66.3 \right)}$ & $6$ & $0.331$ & $0.793$ \\
+$y = 2.82 - \cos^{3}{\left(x_{0} \cdot 66.3 \right)}$ & $7$ & $0.300$ & $0.0989$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.80 - \tan{\left(\cos^{3}{\left(x_{0} \left(-66.3\right) \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.240$ & $0.225$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.81 - \cos^{9}{\left(x_{0} \cdot 66.3 \right)} 1.72 \end{dmath*} \end{minipage} & $10$ & $0.233$ & $0.0131$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

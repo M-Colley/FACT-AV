@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T12:02:36+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+5.0278387 - tan(cos(x0/0.0067963884)**6)
+
+LATEX
+5.03 - \tan{\left(\cos^{6}{\left(\frac{x_{0}}{0.00680} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.63$ & $1$ & $0.364$ & $0.0$ \\
+$y = 4.62 + \frac{1}{x_{0}}$ & $4$ & $0.364$ & $6.70 \cdot 10^{-5}$ \\
+$y = \cos^{2}{\left(x_{0}^{4} \right)} + 4.18$ & $5$ & $0.351$ & $0.0380$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.11 - \cos^{2}{\left(\frac{x_{0}}{0.00680} \right)} \end{dmath*} \end{minipage} & $6$ & $0.159$ & $0.788$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.90 - \cos^{8}{\left(\frac{x_{0}}{0.00680} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0928$ & $0.541$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.03 - \tan{\left(\cos^{6}{\left(\frac{x_{0}}{0.00680} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.0537$ & $0.547$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.03 - \tan^{4}{\left(\sin{\left(\cos^{2}{\left(\frac{x_{0}}{0.00680} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0512$ & $0.0476$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

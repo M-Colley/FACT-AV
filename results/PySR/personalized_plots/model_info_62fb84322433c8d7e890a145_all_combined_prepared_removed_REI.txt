@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T10:27:10+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+2.988576 + (tan(x0/1.4839317) + 6.852554)**(-2)
+
+LATEX
+2.99 + \frac{1}{\left(\tan{\left(\frac{x_{0}}{1.48} \right)} + 6.85\right)^{2}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.05$ & $1$ & $0.0225$ & $0.0$ \\
+$y = 3.04 + \frac{1}{x_{0}}$ & $4$ & $0.0224$ & $0.00108$ \\
+$y = 2.52 + \frac{40.4}{x_{0}}$ & $5$ & $0.0210$ & $0.0650$ \\
+$y = 2.94 + \frac{1}{x_{0} - 64.3}$ & $6$ & $0.0197$ & $0.0639$ \\
+$y = 2.92 + \frac{1}{\tan{\left(x_{0} \right)} + 9.30}$ & $7$ & $0.0104$ & $0.636$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.99 + \frac{1}{\left(\tan{\left(x_{0} \right)} + 6.19\right)^{2}} \end{dmath*} \end{minipage} & $8$ & $0.0102$ & $0.0209$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.90 + \frac{1}{\tan{\left(\frac{x_{0}}{-1.50} \right)} + 7.99} \end{dmath*} \end{minipage} & $9$ & $0.00803$ & $0.242$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.99 + \frac{1}{\left(\tan{\left(\frac{x_{0}}{1.48} \right)} + 6.85\right)^{2}} \end{dmath*} \end{minipage} & $10$ & $0.000263$ & $3.42$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

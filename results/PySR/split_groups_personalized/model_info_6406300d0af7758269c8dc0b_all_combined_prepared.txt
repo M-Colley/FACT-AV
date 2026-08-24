@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T18:40:16+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos((-x0 + tan(x0))/12.893977)**2*4.9976387
+
+LATEX
+\cos^{2}{\left(\frac{- x_{0} + \tan{\left(x_{0} \right)}}{12.9} \right)} 5.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.70$ & $1$ & $2.31$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $1.70$ & $0.152$ \\
+$y = \sqrt{x_{0} - 63.1}$ & $4$ & $1.19$ & $0.362$ \\
+$y = - 5.05 \cos{\left(\sqrt{x_{0}} \right)}$ & $5$ & $0.997$ & $0.174$ \\
+$y = \cos^{2}{\left(\frac{x_{0}}{-12.9} \right)} 4.88$ & $6$ & $0.807$ & $0.212$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos^{2}{\left(x_{0}^{0.603} \right)} \right)} 4.71 \end{dmath*} \end{minipage} & $7$ & $0.758$ & $0.0623$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{- x_{0} + \tan{\left(x_{0} \right)}}{12.9} \right)} 5.00 \end{dmath*} \end{minipage} & $9$ & $0.503$ & $0.205$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos^{2}{\left(\left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.602} \right)} \right)} 4.73 \end{dmath*} \end{minipage} & $10$ & $0.427$ & $0.165$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

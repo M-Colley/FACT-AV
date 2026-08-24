@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T01:13:20+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+-1*(-2.5263991) + 0.06442217/cos(0.19567284 - x0)
+
+LATEX
+\left(-1\right) \left(-2.53\right) + \frac{0.0644}{\cos{\left(0.196 - x_{0} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.64$ & $1$ & $0.141$ & $0.0$ \\
+$y = 23.1 \sqrt{\frac{1}{x_{0}}}$ & $4$ & $0.139$ & $0.00410$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0} \right)} \right)} + 1.77 \end{dmath*} \end{minipage} & $5$ & $0.136$ & $0.0171$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{e^{\tan{\left(x_{0} \right)} \left(-0.0141\right)}} \end{dmath*} \end{minipage} & $6$ & $0.0642$ & $0.754$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\tan{\left(x_{0} \right)} \left(-0.0772\right) \right)} + 2.68 \end{dmath*} \end{minipage} & $7$ & $0.0348$ & $0.612$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-2.53\right) + \frac{0.0644}{\cos{\left(0.196 - x_{0} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.0248$ & $0.339$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{0.0725}{\cos{\left(x_{0} - 0.114 \right)}} \right)} - -2.57 \end{dmath*} \end{minipage} & $9$ & $0.0221$ & $0.116$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\frac{0.00280}{\cos^{3}{\left(x_{0} - 0.144 \right)}} \right)} - -2.56 \end{dmath*} \end{minipage} & $10$ & $0.0196$ & $0.120$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

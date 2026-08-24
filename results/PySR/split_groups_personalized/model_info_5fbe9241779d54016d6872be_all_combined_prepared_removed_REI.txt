@@ -1,0 +1,41 @@
+PROVENANCE
+generated_utc: 2026-08-22T09:45:46+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.714158 - tan(cos(x0*111.25282)**2)
+
+LATEX
+3.71 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 111. \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.26$ & $1$ & $0.404$ & $0.0$ \\
+$y = 3.26$ & $2$ & $0.404$ & $9.89 \cdot 10^{-8}$ \\
+$y = x_{0}^{0.273}$ & $3$ & $0.392$ & $0.0306$ \\
+$y = 0.373 \sqrt{x_{0}}$ & $4$ & $0.388$ & $0.0100$ \\
+$y = \cos^{3}{\left(x_{0} \right)} + 3.24$ & $5$ & $0.347$ & $0.113$ \\
+$y = 3.63 - \cos^{2}{\left(x_{0} \cdot 111. \right)}$ & $6$ & $0.186$ & $0.624$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.71 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 111. \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.154$ & $0.185$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.90 - \tan{\left(\cos^{2}{\left(\left(x_{0} + 4.04\right)^{2} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.129$ & $0.184$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.73 - \tan{\left(\cos^{4}{\left(\left(x_{0} + 4.04\right)^{2} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.125$ & $0.0307$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0}^{0.314} - \tan{\left(\cos^{2}{\left(\left(x_{0} + 4.04\right)^{2} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.115$ & $0.0822$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

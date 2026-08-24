@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T11:14:29+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 + tan(tan(x0/(-0.16122083))))*0.047746673
+
+LATEX
+\left(x_{0} + \tan{\left(\tan{\left(\frac{x_{0}}{-0.161} \right)} \right)}\right) 0.0477
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.63$ & $1$ & $0.197$ & $0.0$ \\
+$y = x_{0} \cdot 0.0473$ & $3$ & $0.106$ & $0.307$ \\
+$y = \sqrt{x_{0}} - 5.12$ & $4$ & $0.105$ & $0.0145$ \\
+$y = \cos^{2}{\left(\sqrt{x_{0}} \right)} + 3.04$ & $5$ & $0.104$ & $0.00652$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \sin{\left(x_{0} \right)}\right) 0.0473 \end{dmath*} \end{minipage} & $6$ & $0.0990$ & $0.0516$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(x_{0} \right)} \right)}\right) 0.0471 \end{dmath*} \end{minipage} & $7$ & $0.0868$ & $0.132$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{x_{0}}{-0.291} \right)}\right) 0.0475 \end{dmath*} \end{minipage} & $8$ & $0.0699$ & $0.216$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(\frac{x_{0}}{-0.161} \right)} \right)}\right) 0.0477 \end{dmath*} \end{minipage} & $9$ & $0.0503$ & $0.329$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

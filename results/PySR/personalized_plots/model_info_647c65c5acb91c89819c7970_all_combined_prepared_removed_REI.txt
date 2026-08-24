@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:09:46+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 - tan(x0/6.3372207))*0.061797004
+
+LATEX
+\left(x_{0} - \tan{\left(\frac{x_{0}}{6.34} \right)}\right) 0.0618
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.61$ & $1$ & $0.805$ & $0.0$ \\
+$y = x_{0} \cdot 0.0605$ & $3$ & $0.674$ & $0.0889$ \\
+$y = \sqrt{x_{0}} - 4.12$ & $4$ & $0.673$ & $0.000707$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-10.0\right) - \frac{409.}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $0.662$ & $0.0173$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 3.05 \right)} + 3.96$ & $6$ & $0.493$ & $0.295$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(0.0675 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.449$ & $0.0935$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\frac{x_{0}}{6.34} \right)}\right) 0.0618 \end{dmath*} \end{minipage} & $8$ & $0.211$ & $0.754$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\frac{x_{0}}{8.88} \right)}\right) 0.0485 + 0.965 \end{dmath*} \end{minipage} & $10$ & $0.206$ & $0.0130$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

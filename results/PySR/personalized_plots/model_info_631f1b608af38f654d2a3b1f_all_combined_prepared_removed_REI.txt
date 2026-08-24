@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T03:16:36+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+5.22427299929614e-7*tan(tan(x0)**2)**3 + 5.0001163
+
+LATEX
+5.22 \cdot 10^{-7} \tan^{3}{\left(\tan^{2}{\left(x_{0} \right)} \right)} + 5.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.95$ & $1$ & $0.0499$ & $0.0$ \\
+$y = 4.93 + \frac{1}{x_{0}}$ & $4$ & $0.0498$ & $0.000662$ \\
+$y = 5.70 + x_{0} \left(-0.00977\right)$ & $5$ & $0.0470$ & $0.0575$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.93 + \sin{\left(x_{0} \right)} \left(-0.0918\right) \end{dmath*} \end{minipage} & $6$ & $0.0454$ & $0.0340$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.91 + \sin{\left(\tan{\left(x_{0} \right)} \right)} \left(-0.142\right) \end{dmath*} \end{minipage} & $7$ & $0.0410$ & $0.102$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 + \tan{\left(x_{0} + 0.666 \right)} \left(-0.00610\right) \end{dmath*} \end{minipage} & $8$ & $0.00121$ & $3.52$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 + \frac{1}{- x_{0} + \tan{\left(- x_{0} - 0.684 \right)}} \end{dmath*} \end{minipage} & $9$ & $8.76 \cdot 10^{-5}$ & $2.62$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.22 \cdot 10^{-7} \tan^{3}{\left(\tan^{2}{\left(x_{0} \right)} \right)} + 5.00 \end{dmath*} \end{minipage} & $10$ & $1.33 \cdot 10^{-7}$ & $6.49$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

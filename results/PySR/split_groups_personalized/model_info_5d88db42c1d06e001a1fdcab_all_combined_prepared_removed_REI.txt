@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T11:03:02+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.3644657 - cos((x0 - 1*0.82089466)**2)**2
+
+LATEX
+4.36 - \cos^{2}{\left(\left(x_{0} - 0.821\right)^{2} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.83$ & $1$ & $0.333$ & $0.0$ \\
+$y = x_{0}^{0.310}$ & $3$ & $0.316$ & $0.0273$ \\
+$y = \log{\left(x_{0} - 30.3 \right)}$ & $4$ & $0.312$ & $0.0109$ \\
+$y = 4.35 - \cos^{2}{\left(x_{0}^{4} \right)}$ & $5$ & $0.253$ & $0.212$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.756} \right)} - -3.36 \end{dmath*} \end{minipage} & $6$ & $0.171$ & $0.388$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.36 - \cos^{2}{\left(\left(x_{0} - 0.821\right)^{2} \right)} \end{dmath*} \end{minipage} & $7$ & $0.125$ & $0.315$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \cos^{2}{\left(\left(x_{0} - 0.821\right)^{2} \right)} \end{dmath*} \end{minipage} & $8$ & $0.116$ & $0.0770$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\log{\left(x_{0} \right)} - \cos^{2}{\left(\left(x_{0} - 0.821\right)^{2} \right)}\right)^{1.01} \end{dmath*} \end{minipage} & $10$ & $0.114$ & $0.00786$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

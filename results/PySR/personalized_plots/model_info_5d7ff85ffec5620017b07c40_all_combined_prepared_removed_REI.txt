@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T09:52:55+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.999853 - (cos(x0*(-17.393007))**2)**426.074736
+
+LATEX
+5.00 - \left(\cos^{2}{\left(x_{0} \left(-17.4\right) \right)}\right)^{426.}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.89$ & $1$ & $0.0942$ & $0.0$ \\
+$y = x_{0}^{0.366}$ & $3$ & $0.0826$ & $0.0659$ \\
+$y = \log{\left(x_{0} \right)}^{1.08}$ & $4$ & $0.0824$ & $0.00134$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.64 - \cos{\left(\sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.0766$ & $0.0736$ \\
+$y = 4.94 - \frac{0.00636}{\sin{\left(x_{0} \right)}}$ & $6$ & $0.0480$ & $0.467$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \cos^{6}{\left(x_{0} \left(-17.7\right) \right)} \end{dmath*} \end{minipage} & $7$ & $0.0373$ & $0.252$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(x_{0} \left(-1.17\right) \right)}\right)^{x_{0}} \end{dmath*} \end{minipage} & $8$ & $0.000175$ & $5.36$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(x_{0} \left(-17.4\right) \right)}\right)^{426.} \end{dmath*} \end{minipage} & $9$ & $4.20 \cdot 10^{-5}$ & $1.43$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(\tan{\left(x_{0} \left(-17.4\right) \right)} \right)}\right)^{426.} \end{dmath*} \end{minipage} & $10$ & $4.15 \cdot 10^{-5}$ & $0.0114$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

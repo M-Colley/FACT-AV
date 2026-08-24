@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T10:18:06+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tan(cos(x0**2/(-0.6298251))**2) + 3.5501041
+
+LATEX
+\tan{\left(\cos^{2}{\left(\frac{x_{0}^{2}}{-0.630} \right)} \right)} + 3.55
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.11$ & $1$ & $0.305$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.09\right) + \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $4$ & $0.305$ & $9.40 \cdot 10^{-6}$ \\
+$y = \cos^{2}{\left(x_{0}^{2} \right)} + 3.62$ & $5$ & $0.295$ & $0.0338$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 21.1 \right)} + 3.65$ & $6$ & $0.131$ & $0.810$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}^{2}}{0.630} \right)} + 3.67 \end{dmath*} \end{minipage} & $7$ & $0.0940$ & $0.332$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\frac{x_{0}^{2}}{-0.630} \right)} \right)} + 3.55 \end{dmath*} \end{minipage} & $8$ & $0.0724$ & $0.261$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sqrt{\cos^{2}{\left(1.59 x_{0}^{2} \right)}} \right)} + 3.35 \end{dmath*} \end{minipage} & $9$ & $0.0627$ & $0.144$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sqrt{\cos^{2}{\left(1.59 x_{0}^{2} \right)}} \right)} + 3.35 \end{dmath*} \end{minipage} & $10$ & $0.0627$ & $0.00116$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

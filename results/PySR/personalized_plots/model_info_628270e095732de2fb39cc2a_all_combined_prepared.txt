@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T02:10:37+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.9825745 - 0.0029780907/(cos(x0**4)**2)
+
+LATEX
+4.98 - \frac{0.00298}{\cos^{2}{\left(x_{0}^{4} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.90$ & $1$ & $0.0650$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.89\right) + \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $4$ & $0.0649$ & $0.000550$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(x_{0} \right)} \right)} + 4.76 \end{dmath*} \end{minipage} & $5$ & $0.0617$ & $0.0504$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(x_{0} \right)} \left(-0.122\right) - -4.91 \end{dmath*} \end{minipage} & $6$ & $0.0586$ & $0.0521$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.98 - \frac{0.00298}{\cos^{2}{\left(x_{0}^{4} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.0216$ & $0.999$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.98 - \frac{0.00265}{\sin^{2}{\left(x_{0}^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.0204$ & $0.0581$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.81\right) + \frac{1}{\left(-1\right) \left(-6.44\right) + \frac{1}{\sin{\left(x_{0}^{3} \right)}}} \end{dmath*} \end{minipage} & $9$ & $0.0185$ & $0.0933$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.95\right) + \frac{1}{x_{0} \cos{\left(x_{0}^{4} \right)} + 3.56} \end{dmath*} \end{minipage} & $10$ & $0.0159$ & $0.151$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

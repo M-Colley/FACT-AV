@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T04:36:13+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(x0 + tan(x0 - 0.7091585))**0.9426337
+
+LATEX
+\log{\left(x_{0} + \tan{\left(x_{0} - 0.709 \right)} \right)}^{0.943}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.88$ & $1$ & $0.234$ & $0.0$ \\
+$y = x_{0} \cdot 0.0501$ & $3$ & $0.197$ & $0.0879$ \\
+$y = 0.441 \sqrt{x_{0}}$ & $4$ & $0.196$ & $0.00515$ \\
+$y = 7.01 - \frac{241.}{x_{0}}$ & $5$ & $0.185$ & $0.0557$ \\
+$y = \sin{\left(\frac{x_{0}}{-7.23} \right)} + 3.17$ & $6$ & $0.143$ & $0.261$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} - 0.702 \right)} + 51.0 \right)} \end{dmath*} \end{minipage} & $7$ & $0.00839$ & $2.83$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\left|{\tan{\left(x_{0} - 51.0 \right)} + 51.8}\right| \right)} \end{dmath*} \end{minipage} & $8$ & $0.00552$ & $0.419$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0} - 0.709 \right)} \right)}^{0.943} \end{dmath*} \end{minipage} & $9$ & $0.00319$ & $0.547$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\left|{\tan{\left(x_{0} - 51.0 \right)} + 51.0}\right| \right)} + 0.0669 \end{dmath*} \end{minipage} & $10$ & $0.00213$ & $0.405$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

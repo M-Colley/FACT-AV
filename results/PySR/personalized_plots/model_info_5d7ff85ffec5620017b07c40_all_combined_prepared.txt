@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T23:32:22+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+5.0001874 - (cos(x0**1.0286803)**2)**138.45778
+
+LATEX
+5.00 - \left(\cos^{2}{\left(x_{0}^{1.03} \right)}\right)^{138.}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.90$ & $1$ & $0.0900$ & $0.0$ \\
+$y = x_{0}^{0.366}$ & $3$ & $0.0799$ & $0.0593$ \\
+$y = \log{\left(x_{0} \right)}^{1.08}$ & $4$ & $0.0794$ & $0.00637$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.65 - \cos{\left(\sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.0732$ & $0.0823$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.95 - \left(\cos^{2}{\left(x_{0} \right)}\right)^{1.24 \cdot 10^{3}} \end{dmath*} \end{minipage} & $6$ & $0.0474$ & $0.435$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.95 - \left(\cos^{2}{\left(x_{0} \right)}\right)^{1.23 \cdot 10^{3}} \end{dmath*} \end{minipage} & $7$ & $0.0474$ & $1.48 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(x_{0}^{1.03} \right)}\right)^{138.} \end{dmath*} \end{minipage} & $8$ & $9.75 \cdot 10^{-7}$ & $10.8$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(x_{0}^{1.03} \right)}\right)^{2 x_{0}} \end{dmath*} \end{minipage} & $9$ & $9.61 \cdot 10^{-7}$ & $0.0143$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

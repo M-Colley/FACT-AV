@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T14:59:49+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(2.35923779977923*x0**3)**2 + 4.125894
+
+LATEX
+\cos^{2}{\left(2.36 x_{0}^{3} \right)} + 4.13
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.53$ & $1$ & $0.137$ & $0.0$ \\
+$y = 4.51 + \frac{1}{x_{0}}$ & $4$ & $0.137$ & $0.000117$ \\
+$y = 4.91 + x_{0} \left(-0.00501\right)$ & $5$ & $0.136$ & $0.00534$ \\
+$y = \cos^{2}{\left(\frac{x_{0}}{1.41} \right)} + 4.06$ & $6$ & $0.0768$ & $0.572$ \\
+$y = \cos^{2}{\left(2.36 x_{0}^{3} \right)} + 4.13$ & $7$ & $0.0419$ & $0.606$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos^{2}{\left(2.36 x_{0}^{3} \right)} \right)} + 4.17 \end{dmath*} \end{minipage} & $8$ & $0.0401$ & $0.0437$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(2.36 x_{0}^{3} - 3.05 \right)} + 4.13 \end{dmath*} \end{minipage} & $9$ & $0.0346$ & $0.147$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos^{2}{\left(2.36 x_{0}^{3} - 3.05 \right)} \right)} + 4.17 \end{dmath*} \end{minipage} & $10$ & $0.0340$ & $0.0183$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

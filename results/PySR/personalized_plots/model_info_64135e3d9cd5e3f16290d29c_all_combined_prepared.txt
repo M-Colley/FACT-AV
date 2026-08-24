@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T23:57:54+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 + tan(tan(x0**0.5639462)))**0.36419562
+
+LATEX
+\left(x_{0} + \tan{\left(\tan{\left(x_{0}^{0.564} \right)} \right)}\right)^{0.364}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.80$ & $1$ & $0.0850$ & $0.0$ \\
+$y = x_{0}^{0.362}$ & $3$ & $0.0617$ & $0.160$ \\
+$y = 0.549 \sqrt{x_{0}}$ & $4$ & $0.0613$ & $0.00652$ \\
+$y = 6.98 - \frac{166.}{x_{0}}$ & $5$ & $0.0599$ & $0.0240$ \\
+$y = \log{\left(3.60 x_{0} - 153. \right)}$ & $6$ & $0.0596$ & $0.00360$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(x_{0} \right)} \right)}\right)^{0.361} \end{dmath*} \end{minipage} & $7$ & $0.0545$ & $0.0894$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\frac{x_{0}}{-0.0417} \right)}\right)^{0.363} \end{dmath*} \end{minipage} & $8$ & $0.0418$ & $0.266$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(x_{0}^{0.564} \right)} \right)}\right)^{0.364} \end{dmath*} \end{minipage} & $9$ & $0.0319$ & $0.269$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\frac{x_{0}}{\cos{\left(\sin{\left(\frac{1}{\cos{\left(12.8 x_{0} \right)}} \right)} \right)}} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0268$ & $0.175$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

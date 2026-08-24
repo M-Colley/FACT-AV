@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T17:58:39+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(cos(x0*1.2477025)**8)**2*3.9946148
+
+LATEX
+\cos^{2}{\left(\cos^{8}{\left(x_{0} \cdot 1.25 \right)} \right)} 3.99
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.55$ & $1$ & $0.647$ & $0.0$ \\
+$y = x_{0} \cdot 0.0464$ & $3$ & $0.526$ & $0.104$ \\
+$y = \sqrt{x_{0}} - 5.20$ & $4$ & $0.514$ & $0.0223$ \\
+$y = 3.38 - \cos{\left(x_{0}^{2} \right)}$ & $5$ & $0.438$ & $0.161$ \\
+$y = 3.63 - \cos{\left(x_{0} \cdot 2.50 \right)}$ & $6$ & $0.342$ & $0.247$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0} \cdot 1.25 \right)} \right)} 4.34 \end{dmath*} \end{minipage} & $7$ & $0.241$ & $0.351$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos^{8}{\left(x_{0} \cdot 1.25 \right)} \right)} 3.99 \end{dmath*} \end{minipage} & $8$ & $0.126$ & $0.651$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\cos^{2}{\left(\cos^{8}{\left(x_{0} \cdot 1.25 \right)} \right)} 1.39} \end{dmath*} \end{minipage} & $9$ & $0.109$ & $0.142$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

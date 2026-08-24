@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T08:25:51+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(tan(tan(x0 + 0.14514542)) + 141.22763)
+
+LATEX
+\log{\left(\tan{\left(\tan{\left(x_{0} + 0.145 \right)} \right)} + 141. \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.71$ & $1$ & $0.347$ & $0.0$ \\
+$y = \log{\left(x_{0} + 35.5 \right)}$ & $4$ & $0.346$ & $0.000895$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.64 - \tanh{\left(\sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.285$ & $0.195$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 31.7 \right)} + 4.12$ & $6$ & $0.163$ & $0.560$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} - 0.416 \right)} + 136. \right)} \end{dmath*} \end{minipage} & $7$ & $0.0654$ & $0.910$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(\tan{\left(x_{0} + 0.145 \right)} \right)} + 141. \right)} \end{dmath*} \end{minipage} & $8$ & $0.0235$ & $1.02$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 1.01 \log{\left(\tan{\left(\tan{\left(x_{0} + 0.145 \right)} \right)} + 133. \right)} \end{dmath*} \end{minipage} & $10$ & $0.0224$ & $0.0229$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

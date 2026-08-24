@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T14:07:08+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tanh((tan(x0) + 3.9050932)**12) + 3.0
+
+LATEX
+\tanh{\left(\left(\tan{\left(x_{0} \right)} + 3.91\right)^{12} \right)} + 3.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.88$ & $1$ & $0.109$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.0627$ & $0.279$ \\
+$y = \sqrt{x_{0}} - 5.08$ & $4$ & $0.0601$ & $0.0411$ \\
+$y = \tan{\left(\sqrt{x_{0}} \right)} + 4.41$ & $5$ & $0.0501$ & $0.183$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.07 - \sin{\left(x_{0} \left(-0.173\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.0298$ & $0.521$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\tan{\left(x_{0} \right)} + 3.72 \right)} + 3.01 \end{dmath*} \end{minipage} & $7$ & $0.000877$ & $3.52$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\left(\tan{\left(x_{0} \right)} + 3.77\right)^{4} \right)} + 3.00 \end{dmath*} \end{minipage} & $8$ & $1.33 \cdot 10^{-11}$ & $18.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\left(\tan{\left(x_{0} \right)} + 3.91\right)^{12} \right)} + 3.00 \end{dmath*} \end{minipage} & $9$ & $0.0$ & $\infty$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

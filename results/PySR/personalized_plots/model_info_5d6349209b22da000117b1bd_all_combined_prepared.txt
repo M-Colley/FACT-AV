@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:21:32+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.9986706 - (cos(x0*22.407478)**2)**113.42874
+
+LATEX
+4.00 - \left(\cos^{2}{\left(x_{0} \cdot 22.4 \right)}\right)^{113.}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.88$ & $1$ & $0.0969$ & $0.0$ \\
+$y = e^{x_{0}^{0.0700}}$ & $4$ & $0.0963$ & $0.00210$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.95 - \sin{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.0962$ & $0.00112$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.24 - \cos^{2}{\left(\frac{x_{0}}{0.316} \right)} \end{dmath*} \end{minipage} & $6$ & $0.0547$ & $0.565$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.04 - \cos^{8}{\left(\frac{x_{0}}{0.316} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0175$ & $1.14$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.01 - \left(\cos^{2}{\left(x_{0} \cdot 22.4 \right)}\right)^{x_{0}} \end{dmath*} \end{minipage} & $8$ & $0.000733$ & $3.18$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \left(\cos^{2}{\left(x_{0} \cdot 22.4 \right)}\right)^{113.} \end{dmath*} \end{minipage} & $9$ & $4.05 \cdot 10^{-5}$ & $2.90$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

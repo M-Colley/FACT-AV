@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T17:31:33+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.9966493 - tan(cos(x0**3 - 17.087791)**8)
+
+LATEX
+5.00 - \tan{\left(\cos^{8}{\left(x_{0}^{3} - 17.1 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.60$ & $1$ & $0.390$ & $0.0$ \\
+$y = 5.04 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.299$ & $0.0881$ \\
+$y = \cos^{2}{\left(x_{0}^{3} \right)} + 4.03$ & $5$ & $0.191$ & $0.448$ \\
+$y = 4.93 - \sin^{4}{\left(x_{0}^{3} \right)}$ & $6$ & $0.157$ & $0.199$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.03 - \tan{\left(\sin^{4}{\left(x_{0}^{3} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.129$ & $0.194$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\sin{\left(x_{0}^{3} \right)} + 0.119\right)^{4} \end{dmath*} \end{minipage} & $8$ & $0.0873$ & $0.392$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \tan{\left(\cos^{8}{\left(x_{0}^{3} - 17.1 \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0447$ & $0.669$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.94 - \tan{\left(\cos^{16}{\left(x_{0}^{3} - 17.1 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0365$ & $0.203$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

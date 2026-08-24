@@ -1,0 +1,37 @@
+PROVENANCE
+generated_utc: 2026-08-23T12:38:39+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+152.60968/(x0 + tan(x0*5.914949))
+
+LATEX
+\frac{153.}{x_{0} + \tan{\left(x_{0} \cdot 5.92 \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 1.95$ & $1$ & $0.122$ & $0.0$ \\
+$y = \frac{149.}{x_{0}}$ & $3$ & $0.108$ & $0.0638$ \\
+$y = \frac{x_{0}}{x_{0} - 36.9}$ & $5$ & $0.106$ & $0.00747$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\tanh{\left(\cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.251} \right)} \right)} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.0809$ & $0.136$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{153.}{x_{0} + \tan{\left(x_{0} \cdot 5.92 \right)}} \end{dmath*} \end{minipage} & $8$ & $0.0336$ & $0.878$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{\frac{x_{0}}{1.98} + \tan{\left(x_{0} \cdot 5.92 \right)}} \end{dmath*} \end{minipage} & $10$ & $0.0317$ & $0.0300$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

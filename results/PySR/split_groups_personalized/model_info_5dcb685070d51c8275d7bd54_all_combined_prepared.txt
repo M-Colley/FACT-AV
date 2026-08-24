@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-21T15:48:29+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.478682*cos(cos(3.73433285634084*x0**2)**8)
+
+LATEX
+3.48 \cos{\left(\cos^{8}{\left(3.73 x_{0}^{2} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.13$ & $1$ & $0.297$ & $0.0$ \\
+$y = x_{0}^{0.263}$ & $3$ & $0.285$ & $0.0210$ \\
+$y = 0.357 \sqrt{x_{0}}$ & $4$ & $0.279$ & $0.0183$ \\
+$y = {1.01}^{x_{0}} + 0.811$ & $5$ & $0.278$ & $0.00718$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.59 - \cos^{2}{\left(x_{0} \left(-1.87\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.150$ & $0.616$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.38 - \cos^{6}{\left(x_{0} \left(-1.87\right) \right)} \end{dmath*} \end{minipage} & $7$ & $0.117$ & $0.247$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{4}{\left(x_{0} \cdot 1.87 \right)} \right)} 3.48 \end{dmath*} \end{minipage} & $8$ & $0.0979$ & $0.178$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.48 \cos{\left(\cos^{8}{\left(3.73 x_{0}^{2} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0572$ & $0.536$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{6}{\left(3.73 x_{0}^{2} \right)} \right)} 3.48 \end{dmath*} \end{minipage} & $10$ & $0.0572$ & $0.000324$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

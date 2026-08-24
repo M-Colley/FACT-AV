@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:53:01+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(cos(x0/3.3580995)**(-2)) + 3.0019665
+
+LATEX
+\sin{\left(\frac{1}{\cos^{2}{\left(\frac{x_{0}}{3.36} \right)}} \right)} + 3.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.40$ & $1$ & $0.440$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.297$ & $0.197$ \\
+$y = \sqrt{x_{0}} - 5.35$ & $4$ & $0.290$ & $0.0243$ \\
+$y = 8.92 - \frac{421.}{x_{0}}$ & $5$ & $0.279$ & $0.0387$ \\
+$y = {1.01}^{x_{0}} + \cos^{2}{\left(x_{0} \right)}$ & $6$ & $0.263$ & $0.0593$ \\
+$y = {1.02}^{x_{0}} + \cos^{8}{\left(x_{0} \right)}$ & $7$ & $0.225$ & $0.156$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{1}{\cos^{2}{\left(\frac{x_{0}}{3.36} \right)}} \right)} + 3.00 \end{dmath*} \end{minipage} & $8$ & $0.106$ & $0.755$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin^{3}{\left(\frac{1}{\cos^{2}{\left(\frac{x_{0}}{3.36} \right)}} \right)} + 3.05 \end{dmath*} \end{minipage} & $9$ & $0.0996$ & $0.0591$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.01}^{x_{0}} + \sin{\left(\frac{1}{\cos^{2}{\left(\frac{x_{0}}{3.36} \right)}} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0849$ & $0.160$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

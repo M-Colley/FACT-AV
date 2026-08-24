@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T16:22:14+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+x0*0.05289061 - cos(0.0202422405462343*x0**3)**2
+
+LATEX
+x_{0} \cdot 0.0529 - \cos^{2}{\left(0.0202 x_{0}^{3} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.60$ & $1$ & $0.340$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.250$ & $0.154$ \\
+$y = e^{x_{0} \cdot 0.0166}$ & $4$ & $0.250$ & $1.20 \cdot 10^{-7}$ \\
+$y = {1.02}^{x_{0}} + 0.198$ & $5$ & $0.249$ & $0.00369$ \\
+$y = 4.18 - \cos^{2}{\left(x_{0} \cdot 46.6 \right)}$ & $6$ & $0.161$ & $0.435$ \\
+$y = 4.05 - \cos^{2}{\left(0.0202 x_{0}^{3} \right)}$ & $7$ & $0.126$ & $0.246$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.18 - \left|{\cos{\left(- 0.0202 x_{0}^{3} \right)}}\right| \end{dmath*} \end{minipage} & $8$ & $0.117$ & $0.0720$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0529 - \cos^{2}{\left(0.0202 x_{0}^{3} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0856$ & $0.313$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

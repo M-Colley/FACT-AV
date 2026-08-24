@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-21T16:20:52+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(sqrt(x0))**12) + 3.068506
+
+LATEX
+\cos{\left(\tan^{12}{\left(\sqrt{x_{0}} \right)} \right)} + 3.07
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.60$ & $1$ & $0.815$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.634$ & $0.126$ \\
+$y = 0.000608 x_{0}^{2}$ & $4$ & $0.629$ & $0.00761$ \\
+$y = x_{0} \cdot 0.0791 - 2.46$ & $5$ & $0.622$ & $0.0109$ \\
+$y = 3.41 - \sin{\left(x_{0} \cdot 19.5 \right)}$ & $6$ & $0.462$ & $0.297$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{4}{\left(\sqrt{x_{0}} \right)} \right)} + 3.02 \end{dmath*} \end{minipage} & $7$ & $0.441$ & $0.0457$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{12}{\left(\sqrt{x_{0}} \right)} \right)} + 3.07 \end{dmath*} \end{minipage} & $8$ & $0.291$ & $0.416$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{3}{\left(\tan^{12}{\left(\sqrt{x_{0}} \right)} \right)} + 3.02 \end{dmath*} \end{minipage} & $9$ & $0.291$ & $0.00100$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sin{\left(\cos{\left(\tan^{12}{\left(\sqrt{x_{0}} \right)} \right)} \right)} \right)} + 3.00 \end{dmath*} \end{minipage} & $10$ & $0.287$ & $0.0130$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

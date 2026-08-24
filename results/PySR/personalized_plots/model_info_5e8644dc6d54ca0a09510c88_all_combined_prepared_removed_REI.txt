@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T03:53:57+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(sin(x0*(-6.908926)) - 0.47648832)**3 + 3.935811
+
+LATEX
+\left(\sin{\left(x_{0} \left(-6.91\right) \right)} - 0.477\right)^{3} + 3.94
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.48$ & $1$ & $0.912$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.717$ & $0.120$ \\
+$y = 0.000588 x_{0}^{2}$ & $4$ & $0.695$ & $0.0318$ \\
+$y = 9.93 - \frac{492.}{x_{0}}$ & $5$ & $0.692$ & $0.00473$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(x_{0} \left(-6.91\right) \right)} + 3.36 \end{dmath*} \end{minipage} & $6$ & $0.359$ & $0.657$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sin{\left(x_{0} \left(-6.91\right) \right)} \right)} + 3.33 \end{dmath*} \end{minipage} & $7$ & $0.339$ & $0.0570$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sin^{3}{\left(x_{0} \left(-6.91\right) \right)} \right)} + 3.43 \end{dmath*} \end{minipage} & $8$ & $0.292$ & $0.148$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\sin{\left(x_{0} \left(-6.91\right) \right)} - 0.477\right)^{3} + 3.94 \end{dmath*} \end{minipage} & $9$ & $0.216$ & $0.301$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\tanh{\left(\sin{\left(x_{0} \left(-6.91\right) \right)} \right)} - 0.637\right)^{3} + 4.05 \end{dmath*} \end{minipage} & $10$ & $0.171$ & $0.235$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:48:41+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(1/Abs(cos(x0*45.453217))) + 4.0972033
+
+LATEX
+\sin{\left(\frac{1}{\left|{\cos{\left(x_{0} \cdot 45.5 \right)}}\right|} \right)} + 4.10
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.88$ & $1$ & $0.147$ & $0.0$ \\
+$y = 4.86 + \frac{1}{x_{0}}$ & $4$ & $0.147$ & $0.000222$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(x_{0} \right)} \right)} + 4.74 \end{dmath*} \end{minipage} & $5$ & $0.144$ & $0.0203$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 45.5 \right)} + 4.26$ & $6$ & $0.104$ & $0.326$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\tan{\left(x_{0} \right)} + 7.11 \right)} + 3.95 \end{dmath*} \end{minipage} & $7$ & $0.0474$ & $0.785$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt[4]{\cos^{2}{\left(45.5 x_{0} \right)}} + 4.06 \end{dmath*} \end{minipage} & $8$ & $0.0306$ & $0.437$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{1}{\left|{\cos{\left(x_{0} \cdot 45.5 \right)}}\right|} \right)} + 4.10 \end{dmath*} \end{minipage} & $9$ & $0.00389$ & $2.06$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{1}{\sin{\left(\left|{\cos{\left(x_{0} \cdot 45.5 \right)}}\right| \right)}} \right)} + 4.06 \end{dmath*} \end{minipage} & $10$ & $0.00299$ & $0.264$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

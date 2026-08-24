@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T13:02:52+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+332.05695/(x0 - tan(8.4899990860507*x0**2))
+
+LATEX
+\frac{332.}{x_{0} - \tan{\left(8.49 x_{0}^{2} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.30$ & $1$ & $0.0600$ & $0.0$ \\
+$y = \frac{328.}{x_{0}}$ & $3$ & $0.0362$ & $0.252$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 4.11$ & $4$ & $0.0311$ & $0.153$ \\
+$y = 6.94 - x_{0} \cdot 0.0343$ & $5$ & $0.0170$ & $0.602$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(x_{0} \right)}^{4} \right)} + 4.08 \end{dmath*} \end{minipage} & $6$ & $0.00967$ & $0.566$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\log{\left(x_{0} \right)}^{4} \right)} \right)} + 4.08 \end{dmath*} \end{minipage} & $7$ & $0.00889$ & $0.0840$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{338.}{x_{0} - \tan{\left(x_{0} \left(-6.37\right) \right)}} \end{dmath*} \end{minipage} & $8$ & $0.000888$ & $2.30$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{332.}{x_{0} - \tan{\left(8.49 x_{0}^{2} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.000542$ & $0.494$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

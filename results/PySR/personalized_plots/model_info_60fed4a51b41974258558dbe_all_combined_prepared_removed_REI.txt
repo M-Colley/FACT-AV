@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:38:19+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(sin(x0 + 5.2343564)**(-3)) + 3.1632612
+
+LATEX
+\sin{\left(\frac{1}{\sin^{3}{\left(x_{0} + 5.23 \right)}} \right)} + 3.16
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.27$ & $1$ & $0.596$ & $0.0$ \\
+$y = x_{0}^{0.272}$ & $3$ & $0.595$ & $0.000559$ \\
+$y = \log{\left(x_{0} \right)}^{0.805}$ & $4$ & $0.594$ & $0.00110$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.71 - \cos^{2}{\left(\tan{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.519$ & $0.135$ \\
+$y = 3.75 - \cos^{2}{\left(x_{0} \cdot 17.7 \right)}$ & $6$ & $0.262$ & $0.682$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\left(x_{0} - 0.276\right)^{3} \right)} + 3.40 \end{dmath*} \end{minipage} & $7$ & $0.143$ & $0.604$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{1}{\sin^{3}{\left(x_{0} + 5.23 \right)}} \right)} + 3.16 \end{dmath*} \end{minipage} & $9$ & $0.0793$ & $0.297$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{1}{\tan{\left(\sin^{3}{\left(x_{0} + 5.23 \right)} \right)}} \right)} + 3.15 \end{dmath*} \end{minipage} & $10$ & $0.0742$ & $0.0670$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

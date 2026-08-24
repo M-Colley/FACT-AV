@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T09:23:41+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(tan(x0 - 19384576.0) - 66270336.0) + 4.7592444
+
+LATEX
+\sin{\left(\tan{\left(x_{0} - 1.94 \cdot 10^{7} \right)} - 6.63 \cdot 10^{7} \right)} + 4.76
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.64$ & $1$ & $0.777$ & $0.0$ \\
+$y = x_{0}^{0.352}$ & $3$ & $0.751$ & $0.0167$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 4.14$ & $4$ & $0.585$ & $0.250$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\tan{\left(x_{0} \right)} \right)} + 4.57 \end{dmath*} \end{minipage} & $5$ & $0.576$ & $0.0159$ \\
+$y = \sin{\left(x_{0} \cdot 36.1 \right)} + 4.18$ & $6$ & $0.240$ & $0.875$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\tan{\left(x_{0} \right)} - 4.32 \cdot 10^{7} \right)} + 4.09 \end{dmath*} \end{minipage} & $7$ & $0.205$ & $0.159$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{3}{\left(\tan{\left(\tan{\left(x_{0} \right)} \right)} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $8$ & $0.130$ & $0.455$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\tan{\left(x_{0} - 1.94 \cdot 10^{7} \right)} - 6.63 \cdot 10^{7} \right)} + 4.76 \end{dmath*} \end{minipage} & $9$ & $0.0400$ & $1.18$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

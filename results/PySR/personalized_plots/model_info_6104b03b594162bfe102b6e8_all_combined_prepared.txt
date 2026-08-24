@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:57:46+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(x0*24.881142)**16 - 1*(-2.8940408)
+
+LATEX
+\sin^{16}{\left(x_{0} \cdot 24.9 \right)} - -2.89
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.08$ & $1$ & $0.207$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-3.06\right) + \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $4$ & $0.207$ & $4.64 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \right)} \right)} + 2.59 \end{dmath*} \end{minipage} & $5$ & $0.169$ & $0.202$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-10.0\right) \right)} - -2.52 \end{dmath*} \end{minipage} & $6$ & $0.116$ & $0.380$ \\
+$y = \sin^{4}{\left(x_{0} \cdot 24.9 \right)} + 2.70$ & $7$ & $0.0963$ & $0.183$ \\
+$y = \sin^{16}{\left(x_{0} \cdot 24.9 \right)} - -2.89$ & $8$ & $0.0629$ & $0.426$ \\
+$y = \sin^{24}{\left(x_{0} \cdot 24.9 \right)} - -2.91$ & $9$ & $0.0606$ & $0.0376$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\sin{\left(\sin^{16}{\left(x_{0} \cdot 24.9 \right)} \right)} \right)} - -2.89 \end{dmath*} \end{minipage} & $10$ & $0.0597$ & $0.0150$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

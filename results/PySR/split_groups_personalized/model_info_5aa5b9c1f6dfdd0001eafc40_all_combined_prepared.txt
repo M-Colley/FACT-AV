@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T15:17:30+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.50279 - tan(cos(x0*42.242428)**2)
+
+LATEX
+4.50 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 42.2 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.80$ & $1$ & $0.660$ & $0.0$ \\
+$y = 4.24 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.615$ & $0.0238$ \\
+$y = \cos^{2}{\left(x_{0}^{2} \right)} + 3.34$ & $5$ & $0.522$ & $0.163$ \\
+$y = 4.33 - \cos^{2}{\left(x_{0} \cdot 42.2 \right)}$ & $6$ & $0.370$ & $0.345$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.50 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.276$ & $0.293$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.18 - \tan{\left(\cos^{8}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.236$ & $0.155$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.33 - 1.83 \cos^{8}{\left(x_{0} \cdot 42.2 \right)} \end{dmath*} \end{minipage} & $9$ & $0.232$ & $0.0190$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.27 - \tan{\left(1.11 \cos^{8}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.215$ & $0.0765$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

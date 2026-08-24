@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T00:14:11+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.9078972 - sin(x0*12.759742)**9
+
+LATEX
+3.91 - \sin^{9}{\left(x_{0} \cdot 12.8 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.95$ & $1$ & $0.147$ & $0.0$ \\
+$y = 3.94 + \frac{1}{x_{0}}$ & $4$ & $0.147$ & $6.23 \cdot 10^{-5}$ \\
+$y = 4.20 - x_{0} \cdot 0.00324$ & $5$ & $0.147$ & $0.00201$ \\
+$y = 3.92 - \cos^{9}{\left(x_{0} \right)}$ & $6$ & $0.0843$ & $0.557$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.80 - \sin^{3}{\left(x_{0} \left(-12.7\right) \right)} \end{dmath*} \end{minipage} & $7$ & $0.0724$ & $0.152$ \\
+$y = 3.91 - \sin^{9}{\left(x_{0} \cdot 12.8 \right)}$ & $8$ & $0.0278$ & $0.955$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.90 - \tan{\left(\sin^{9}{\left(x_{0} \cdot 12.8 \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0278$ & $0.00176$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(- \sin^{3}{\left(x_{0} \cdot 12.8 \right)} - 0.0932\right)^{3} + 3.98 \end{dmath*} \end{minipage} & $10$ & $0.0203$ & $0.314$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

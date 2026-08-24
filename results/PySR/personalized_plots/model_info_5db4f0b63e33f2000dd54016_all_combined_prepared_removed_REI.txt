@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T07:53:16+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.0000033 - 1.16971686981814e-19*tan(x0**3)**16
+
+LATEX
+4.00 - 1.17 \cdot 10^{-19} \tan^{16}{\left(x_{0}^{3} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.95$ & $1$ & $0.0475$ & $0.0$ \\
+$y = 3.96 - \frac{1}{x_{0}}$ & $4$ & $0.0475$ & $0.000129$ \\
+$y = x_{0} \cdot 0.00245 - -3.76$ & $5$ & $0.0473$ & $0.00351$ \\
+$y = 4.03 - \frac{\cos^{2}{\left(x_{0} \right)}}{5.27}$ & $6$ & $0.0429$ & $0.0991$ \\
+$y = 4.02 - \frac{\tan{\left(x_{0}^{3} \right)}}{20.4}$ & $7$ & $0.0135$ & $1.16$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \left(\cos^{2}{\left(x_{0} \cdot 9.99 \right)}\right)^{x_{0}} \end{dmath*} \end{minipage} & $8$ & $2.44 \cdot 10^{-7}$ & $10.9$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - 1.17 \cdot 10^{-19} \tan^{16}{\left(x_{0}^{3} \right)} \end{dmath*} \end{minipage} & $9$ & $1.86 \cdot 10^{-11}$ & $9.48$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

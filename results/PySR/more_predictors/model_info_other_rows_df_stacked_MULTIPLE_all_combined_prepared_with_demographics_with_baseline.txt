@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T14:28:33+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+x10**x20 + 2.8696291
+
+LATEX
+x_{10}^{x_{20}} + 2.87
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.78$ & $1$ & $0.899$ & $0.0$ \\
+$y = x_{0} \cdot 0.0493$ & $3$ & $0.871$ & $0.0157$ \\
+$y = 0.433 \sqrt{x_{0}}$ & $4$ & $0.867$ & $0.00560$ \\
+$y = x_{10}^{x_{20}} + 2.87$ & $5$ & $0.841$ & $0.0296$ \\
+$y = 3.88 - x_{3} \tanh{\left(x_{20} \right)}$ & $6$ & $0.823$ & $0.0217$ \\
+$y = x_{10}^{x_{20}} - x_{14} + 2.94$ & $7$ & $0.806$ & $0.0213$ \\
+$y = 3.91 - \tanh{\left(x_{14} + x_{20} x_{3} \right)}$ & $8$ & $0.794$ & $0.0155$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.92 - \sin{\left(x_{14} + \sqrt{x_{20} x_{3}} \right)} \end{dmath*} \end{minipage} & $9$ & $0.789$ & $0.00533$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0510 - \tanh{\left(x_{14} + x_{20} x_{3} \right)} \end{dmath*} \end{minipage} & $10$ & $0.768$ & $0.0278$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

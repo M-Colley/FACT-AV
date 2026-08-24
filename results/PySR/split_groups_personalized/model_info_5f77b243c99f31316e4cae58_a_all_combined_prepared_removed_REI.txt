@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T00:45:19+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+x0*0.090095736 - sin(x0/0.07937993) - 1*3.7739902
+
+LATEX
+x_{0} \cdot 0.0901 - \sin{\left(\frac{x_{0}}{0.0794} \right)} - 3.77
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.53$ & $1$ & $1.07$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.721$ & $0.197$ \\
+$y = \sqrt{x_{0} - 63.4}$ & $4$ & $0.583$ & $0.212$ \\
+$y = \tan{\left(\sqrt{x_{0}} \right)} + 4.51$ & $5$ & $0.565$ & $0.0329$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.60 - \cos{\left(x_{0} \left(-0.923\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.472$ & $0.179$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \tanh{\left(\cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.455$ & $0.0375$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \cos{\left(x_{0} \left(-0.925\right) \right)} \end{dmath*} \end{minipage} & $8$ & $0.297$ & $0.426$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \sin{\left(\cos{\left(\frac{x_{0}}{-1.08} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.294$ & $0.0117$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0901 - \sin{\left(\frac{x_{0}}{0.0794} \right)} - 3.77 \end{dmath*} \end{minipage} & $10$ & $0.148$ & $0.686$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

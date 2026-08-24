@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T00:09:46+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(1.1815047**x0)**2 + 3.9938054
+
+LATEX
+\cos^{2}{\left({1.18}^{x_{0}} \right)} + 3.99
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.50$ & $1$ & $0.350$ & $0.0$ \\
+$y = x_{0}^{0.347}$ & $3$ & $0.343$ & $0.0102$ \\
+$y = \log{\left(x_{0} \right)}^{1.03}$ & $4$ & $0.343$ & $0.00108$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 87.9 \right)} \end{dmath*} \end{minipage} & $5$ & $0.329$ & $0.0409$ \\
+$y = \cos^{2}{\left({1.18}^{x_{0}} \right)} + 3.99$ & $6$ & $0.145$ & $0.817$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(e^{x_{0} \cdot 0.163} \right)} + 3.95 \end{dmath*} \end{minipage} & $7$ & $0.128$ & $0.126$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(e^{x_{0} \cdot 0.163} \right)} \right)} + 3.77 \end{dmath*} \end{minipage} & $8$ & $0.125$ & $0.0257$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(e^{0.163 x_{0}} \right)} 1.38 + 3.76 \end{dmath*} \end{minipage} & $9$ & $0.107$ & $0.158$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(e^{x_{0} \cdot 0.163} \right)} 1.38 + 3.73 \end{dmath*} \end{minipage} & $10$ & $0.107$ & $0.000133$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

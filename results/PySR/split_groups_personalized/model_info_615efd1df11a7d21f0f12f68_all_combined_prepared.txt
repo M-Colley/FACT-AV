@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-21T18:03:43+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.0922093 - cos((x0 + 0.67857426)**4)**2
+
+LATEX
+4.09 - \cos^{2}{\left(\left(x_{0} + 0.679\right)^{4} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.50$ & $1$ & $0.350$ & $0.0$ \\
+$y = \frac{30.6}{\sqrt{x_{0}}}$ & $4$ & $0.334$ & $0.0156$ \\
+$y = 3.97 - \cos^{2}{\left(x_{0}^{4} \right)}$ & $5$ & $0.309$ & $0.0789$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.0974} \right)} + 3.05 \end{dmath*} \end{minipage} & $6$ & $0.184$ & $0.515$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.09 - \cos^{2}{\left(\left(x_{0} + 0.679\right)^{4} \right)} \end{dmath*} \end{minipage} & $7$ & $0.155$ & $0.172$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.25 - \tan{\left(\cos^{2}{\left(\left(x_{0} + 0.679\right)^{4} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.132$ & $0.163$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.47 - \frac{\cos^{2}{\left(\left(x_{0} + 0.679\right)^{4} \right)}}{0.607} \end{dmath*} \end{minipage} & $9$ & $0.118$ & $0.115$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

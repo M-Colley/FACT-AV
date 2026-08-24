@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:57:15+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+-cos(2.62107258483888*x0)**3 + tan(log(x0))
+
+LATEX
+- \cos^{3}{\left(2.62 x_{0} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.63$ & $1$ & $1.02$ & $0.0$ \\
+$y = \tan{\left(\log{\left(x_{0} \right)} \right)}$ & $3$ & $0.702$ & $0.188$ \\
+$y = 5.74 \cdot 10^{-6} x_{0}^{3}$ & $4$ & $0.694$ & $0.0118$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\log{\left(x_{0} \right)} - 7.88 \cdot 10^{5} \right)} \end{dmath*} \end{minipage} & $5$ & $0.572$ & $0.192$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0344 - \sin{\left(x_{0}^{4} \right)} \end{dmath*} \end{minipage} & $7$ & $0.491$ & $0.0769$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \cos{\left(2.62 x_{0} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.404$ & $0.196$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \cos^{3}{\left(2.62 x_{0} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.295$ & $0.314$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \cos^{9}{\left(2.62 x_{0} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.264$ & $0.110$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

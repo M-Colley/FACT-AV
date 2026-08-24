@@ -4,4 +4,4 @@ pytest-cov>=7.1.0
 # Linter and formatter. CI pins an exact version (see .github/workflows/tests.yml)
 # so a ruff release cannot turn a green build red without a change to this repo;
 # the range here is for local use.
-ruff>=0.15.13
+ruff>=0.16.4

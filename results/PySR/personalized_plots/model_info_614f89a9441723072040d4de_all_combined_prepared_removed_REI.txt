@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T12:33:21+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.000007 - (cos(x0 - 1*(-0.66514975))**8)**x0
+
+LATEX
+4.00 - \left(\cos^{8}{\left(x_{0} - -0.665 \right)}\right)^{x_{0}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.98$ & $1$ & $0.0119$ & $0.0$ \\
+$y = 3.96 + \frac{1}{x_{0}}$ & $4$ & $0.0118$ & $0.00105$ \\
+$y = 3.70 - - \frac{21.1}{x_{0}}$ & $5$ & $0.0115$ & $0.0314$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 + \cos{\left(x_{0} \right)} \left(-0.0395\right) \end{dmath*} \end{minipage} & $6$ & $0.0112$ & $0.0242$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 + \frac{0.0157}{\cos{\left(x_{0}^{4} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.00502$ & $0.803$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \left(\cos^{2}{\left(x_{0} - -0.662 \right)}\right)^{281.} \end{dmath*} \end{minipage} & $8$ & $4.55 \cdot 10^{-8}$ & $11.6$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \left(\cos^{8}{\left(x_{0} - -0.665 \right)}\right)^{x_{0}} \end{dmath*} \end{minipage} & $9$ & $9.37 \cdot 10^{-10}$ & $3.88$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

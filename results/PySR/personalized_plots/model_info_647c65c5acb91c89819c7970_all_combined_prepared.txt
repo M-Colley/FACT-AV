@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:39:29+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.964664 - tan(cos(x0*14.727953)**8)**3
+
+LATEX
+4.96 - \tan^{3}{\left(\cos^{8}{\left(x_{0} \cdot 14.7 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.63$ & $1$ & $0.772$ & $0.0$ \\
+$y = x_{0} \cdot 0.0604$ & $3$ & $0.641$ & $0.0929$ \\
+$y = \sqrt{x_{0}} - 4.12$ & $4$ & $0.640$ & $0.00147$ \\
+$y = 9.80 - \frac{394.}{x_{0}}$ & $5$ & $0.630$ & $0.0155$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.96 - \cos^{2}{\left(x_{0} \left(-3.07\right) \right)} \end{dmath*} \end{minipage} & $6$ & $0.491$ & $0.249$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.13 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 44.6 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.391$ & $0.229$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.74 - \tan^{3}{\left(\cos{\left(x_{0} \cdot 38.9 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.175$ & $0.804$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.96 - \tan^{3}{\left(\cos^{8}{\left(x_{0} \cdot 14.7 \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0620$ & $1.04$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.96 - \tan^{3}{\left(\cos^{16}{\left(x_{0} \cdot 14.7 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0595$ & $0.0409$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T02:57:32+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(0.000115271704537328/cos(x0/(-0.10846216))**8)**2 + 4.0004616
+
+LATEX
+\cos^{2}{\left(\frac{0.000115}{\cos^{8}{\left(\frac{x_{0}}{-0.108} \right)}} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.80$ & $1$ & $0.160$ & $0.0$ \\
+$y = \frac{20.8}{\log{\left(x_{0} \right)}}$ & $4$ & $0.159$ & $0.00211$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 120. \right)} \end{dmath*} \end{minipage} & $5$ & $0.155$ & $0.0260$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{-0.0100} \right)} - -4.16 \end{dmath*} \end{minipage} & $6$ & $0.0766$ & $0.704$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left|{\cos{\left(\frac{x_{0}}{0.0100} \right)}}\right| + 4.05 \end{dmath*} \end{minipage} & $7$ & $0.0614$ & $0.220$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\sin^{4}{\left(\frac{x_{0}}{0.108} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $8$ & $0.0507$ & $0.191$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{0.0629}{\cos^{2}{\left(\frac{x_{0}}{-0.108} \right)}} \right)} + 4.00 \end{dmath*} \end{minipage} & $9$ & $0.00817$ & $1.83$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{0.000115}{\cos^{8}{\left(\frac{x_{0}}{-0.108} \right)}} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $0.000563$ & $2.67$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

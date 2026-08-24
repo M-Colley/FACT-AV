@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T13:42:26+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.9993777 - 6.86691221600535e-8*tan(tan(x0*0.09371252))**3
+
+LATEX
+4.00 - 6.87 \cdot 10^{-8} \tan^{3}{\left(\tan{\left(x_{0} \cdot 0.0937 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.95$ & $1$ & $0.0475$ & $0.0$ \\
+$y = \frac{34.5}{\sqrt{x_{0}}}$ & $4$ & $0.0471$ & $0.00284$ \\
+$y = 5.01 + x_{0} \left(-0.0138\right)$ & $5$ & $0.0416$ & $0.124$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0} \left(-0.0432\right) \right)} + 3.03 \end{dmath*} \end{minipage} & $6$ & $0.0373$ & $0.110$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \left(-4.12\right) \right)} \right)} + 3.13 \end{dmath*} \end{minipage} & $7$ & $0.0250$ & $0.399$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 + \tan{\left(x_{0} \cdot 0.498 \right)} \left(-0.00412\right) \end{dmath*} \end{minipage} & $8$ & $0.000121$ & $5.33$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - 7.03 \cdot 10^{-8} \tan^{3}{\left(x_{0} \cdot 0.498 \right)} \end{dmath*} \end{minipage} & $9$ & $1.23 \cdot 10^{-6}$ & $4.59$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - 6.87 \cdot 10^{-8} \tan^{3}{\left(\tan{\left(x_{0} \cdot 0.0937 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $3.72 \cdot 10^{-7}$ & $1.19$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

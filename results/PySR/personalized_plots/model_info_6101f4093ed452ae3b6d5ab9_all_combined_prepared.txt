@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T00:50:38+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(cos(0.2802439*tan(x0)**4)**2)**(-0.17859495)
+
+LATEX
+\left(\cos^{2}{\left(0.280 \tan^{4}{\left(x_{0} \right)} \right)}\right)^{-0.179}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 1.13$ & $1$ & $0.0969$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0} \right)}\right)^{-0.0581} \end{dmath*} \end{minipage} & $4$ & $0.0830$ & $0.0514$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\tan{\left(x_{0} \right)} \right)}\right)^{-0.115} \end{dmath*} \end{minipage} & $5$ & $0.0681$ & $0.198$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\frac{x_{0}}{0.539} \right)}\right)^{-0.0611} \end{dmath*} \end{minipage} & $6$ & $0.0170$ & $1.39$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\tan{\left(x_{0} \cdot 0.328 \right)} \right)}\right)^{-0.110} \end{dmath*} \end{minipage} & $7$ & $0.0117$ & $0.373$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\tan^{4}{\left(x_{0} \right)} 0.0937 \right)}\right)^{-0.115} \end{dmath*} \end{minipage} & $8$ & $0.00319$ & $1.30$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(0.280 \tan^{4}{\left(x_{0} \right)} \right)}\right)^{-0.179} \end{dmath*} \end{minipage} & $9$ & $0.00160$ & $0.691$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T03:44:53+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tan(tan(x0/(-1.4883095)))/44.254322 - 1*(-3.9604623)
+
+LATEX
+\frac{\tan{\left(\tan{\left(\frac{x_{0}}{-1.49} \right)} \right)}}{44.3} - -3.96
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.97$ & $1$ & $0.124$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-3.96\right) + \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $4$ & $0.124$ & $0.000607$ \\
+$y = 2.43 + \frac{117.}{x_{0}}$ & $5$ & $0.111$ & $0.111$ \\
+$y = 3.76 + \frac{1}{x_{0} - 66.8}$ & $6$ & $0.0808$ & $0.317$ \\
+$y = 3.90 + \frac{1}{\left(x_{0} - 66.9\right)^{4}}$ & $7$ & $0.0631$ & $0.247$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(\frac{x_{0}}{2.06} \right)}}{49.1} + 3.92 \end{dmath*} \end{minipage} & $8$ & $0.0382$ & $0.503$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(\tan{\left(\frac{x_{0}}{-1.49} \right)} \right)}}{44.3} - -3.96 \end{dmath*} \end{minipage} & $9$ & $0.0139$ & $1.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\frac{\tan{\left(\tan{\left(\frac{x_{0}}{-1.49} \right)} \right)}}{56.2} \right)} - -3.96 \end{dmath*} \end{minipage} & $10$ & $0.0135$ & $0.0265$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

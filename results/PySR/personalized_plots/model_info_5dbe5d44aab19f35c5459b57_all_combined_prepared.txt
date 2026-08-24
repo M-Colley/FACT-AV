@@ -1,0 +1,37 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:34:53+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tanh(x0**4*tan(x0)**8) + 4.0
+
+LATEX
+\tanh{\left(x_{0}^{4} \tan^{8}{\left(x_{0} \right)} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.95$ & $1$ & $0.0475$ & $0.0$ \\
+$y = \log{\left(x_{0} + 64.6 \right)}$ & $4$ & $0.0460$ & $0.0109$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0} \right)} \right)} + 4.10 \end{dmath*} \end{minipage} & $5$ & $0.0443$ & $0.0376$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \left(\cos^{2}{\left(x_{0} \right)}\right)^{x_{0}} \end{dmath*} \end{minipage} & $6$ & $1.39 \cdot 10^{-6}$ & $10.4$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(1.34 \cdot 10^{3} \tan^{4}{\left(x_{0} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $8$ & $2.96 \cdot 10^{-13}$ & $7.68$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(x_{0}^{4} \tan^{8}{\left(x_{0} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $9$ & $0.0$ & $\infty$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

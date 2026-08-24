@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:30:13+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+exp(tan(cos(tan(x0/2.3559947)/x0)**2))
+
+LATEX
+e^{\tan{\left(\cos^{2}{\left(\frac{\tan{\left(\frac{x_{0}}{2.36} \right)}}{x_{0}} \right)} \right)}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.63$ & $1$ & $0.622$ & $0.0$ \\
+$y = 4.61 + \frac{1}{x_{0}}$ & $4$ & $0.622$ & $6.09 \cdot 10^{-6}$ \\
+$y = \cos^{3}{\left(x_{0} \right)} + 4.60$ & $5$ & $0.552$ & $0.118$ \\
+$y = \cos{\left(x_{0} \cdot 50.4 \right)} + 4.12$ & $6$ & $0.330$ & $0.515$ \\
+$y = \cos^{3}{\left(x_{0} \cdot 194. \right)} + 4.57$ & $7$ & $0.309$ & $0.0653$ \\
+$y = \cos^{9}{\left(x_{0} \cdot 13.9 \right)} + 4.56$ & $8$ & $0.291$ & $0.0601$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\tan{\left(\cos^{2}{\left(\frac{\tan{\left(\frac{x_{0}}{2.36} \right)}}{x_{0}} \right)} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.106$ & $1.01$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

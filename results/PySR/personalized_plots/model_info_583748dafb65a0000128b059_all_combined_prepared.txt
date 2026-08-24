@@ -1,0 +1,41 @@
+PROVENANCE
+generated_utc: 2026-08-22T19:34:17+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.8385124 - cos((x0 - 1*0.49979803)**2)**2
+
+LATEX
+4.84 - \cos^{2}{\left(\left(x_{0} - 0.500\right)^{2} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.33$ & $1$ & $0.407$ & $0.0$ \\
+$y = \log{\left(x_{0} \right)}$ & $2$ & $0.362$ & $0.117$ \\
+$y = x_{0} \cdot 0.0565$ & $3$ & $0.291$ & $0.218$ \\
+$y = \sqrt{x_{0}} - 4.42$ & $4$ & $0.289$ & $0.00604$ \\
+$y = 9.14 - \frac{368.}{x_{0}}$ & $5$ & $0.284$ & $0.0185$ \\
+$y = 4.81 - \cos^{2}{\left(x_{0}^{2.66} \right)}$ & $6$ & $0.226$ & $0.229$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.84 - \cos^{2}{\left(\left(x_{0} - 0.500\right)^{2} \right)} \end{dmath*} \end{minipage} & $7$ & $0.164$ & $0.318$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.99 - \tan{\left(\cos^{2}{\left(\left(0.500 - x_{0}\right)^{2} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.131$ & $0.227$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0628 - \cos^{2}{\left(\left(x_{0} - 0.500\right)^{2} \right)} \end{dmath*} \end{minipage} & $9$ & $0.115$ & $0.130$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0645 - \tan{\left(\cos^{2}{\left(\left(x_{0} - 0.500\right)^{2} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.113$ & $0.0124$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,5 +1,14 @@
+PROVENANCE
+generated_utc: 2026-08-21T13:59:49+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 300
+maxsize: 10
+reproducible: yes
 SYMPY
-x0**0.32152566
+x0**0.32152656
 
 LATEX
 x_{0}^{0.322}
@@ -19,10 +28,10 @@ Equation & Complexity & Loss & Score \\
 $y = 4.03$ & $1$ & $0.913$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.903$ & $0.00522$ \\
 $y = \log{\left(x_{0} - 19.9 \right)}$ & $4$ & $0.903$ & $0.000238$ \\
-$y = 5.40 - \frac{104.}{x_{0}}$ & $5$ & $0.903$ & $0.000209$ \\
+$y = 5.39 - \frac{104.}{x_{0}}$ & $5$ & $0.903$ & $0.000209$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.320} \end{dmath*} \end{minipage} & $7$ & $0.901$ & $0.00111$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(\tan{\left(\cos{\left(x_{0} \right)} \right)} \right)} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.900$ & $0.000309$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\left(x_{0} + \tan{\left(\tan{\left(\tan{\left(\cos{\left(x_{0} \right)} \right)} \right)} \right)}\right)^{0.0651} \right)} \end{dmath*} \end{minipage} & $10$ & $0.900$ & $0.000129$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 21.2 \right)} \end{dmath*} \end{minipage} & $8$ & $0.901$ & $0.000145$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(- 3.50 x_{0}^{3} \right)}\right)^{0.320} \end{dmath*} \end{minipage} & $9$ & $0.899$ & $0.00224$ \\
 \bottomrule
 \end{tabular}
 \end{center}

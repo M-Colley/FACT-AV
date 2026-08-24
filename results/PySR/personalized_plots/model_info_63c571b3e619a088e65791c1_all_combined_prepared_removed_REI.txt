@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T03:11:41+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(log(cos(5.3690534*x0)**2)**3)**8 + 3.9521322
+
+LATEX
+\cos^{8}{\left(\log{\left(\cos^{2}{\left(5.37 x_{0} \right)} \right)}^{3} \right)} + 3.95
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.53$ & $1$ & $0.328$ & $0.0$ \\
+$y = 39.5 \sqrt{\frac{1}{x_{0}}}$ & $4$ & $0.328$ & $0.000621$ \\
+$y = \cos^{2}{\left(x_{0}^{4} \right)} + 4.06$ & $5$ & $0.294$ & $0.108$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 5.37 \right)} + 4.01$ & $6$ & $0.143$ & $0.721$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(x_{0} \left(-5.37\right) \right)} \right)} + 4.10 \end{dmath*} \end{minipage} & $7$ & $0.0668$ & $0.760$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos{\left(\tan{\left(- 5.37 x_{0} \right)} \right)} \right)} + 4.10 \end{dmath*} \end{minipage} & $8$ & $0.0650$ & $0.0272$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(\cos^{2}{\left(5.37 x_{0} \right)} \right)}^{3} \right)} + 3.87 \end{dmath*} \end{minipage} & $9$ & $0.0485$ & $0.294$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\log{\left(\cos^{2}{\left(5.37 x_{0} \right)} \right)}^{3} \right)} + 3.95 \end{dmath*} \end{minipage} & $10$ & $0.0264$ & $0.608$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

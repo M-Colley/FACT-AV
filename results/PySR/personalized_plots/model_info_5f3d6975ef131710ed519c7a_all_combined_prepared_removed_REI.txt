@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T04:22:01+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.9807572 - tan(x0*(-3.769522))/63.080784
+
+LATEX
+3.98 - \frac{\tan{\left(x_{0} \left(-3.77\right) \right)}}{63.1}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.87$ & $1$ & $0.206$ & $0.0$ \\
+$y = 3.88 - \frac{1}{x_{0}}$ & $4$ & $0.206$ & $7.11 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(47.7 - \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.202$ & $0.0230$ \\
+$y = 4.28 - \cos^{2}{\left(\frac{x_{0}}{4.07} \right)}$ & $6$ & $0.167$ & $0.188$ \\
+$y = 4.06 - \cos^{8}{\left(\frac{x_{0}}{4.05} \right)}$ & $7$ & $0.0968$ & $0.545$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 - \frac{\tan{\left(x_{0} \left(-3.77\right) \right)}}{63.1} \end{dmath*} \end{minipage} & $8$ & $0.000966$ & $4.61$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 - \tan{\left(x_{0} \left(-3.77\right) \right)} 1.13 \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $10$ & $0.000925$ & $0.0214$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

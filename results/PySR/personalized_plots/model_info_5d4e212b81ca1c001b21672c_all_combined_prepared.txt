@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T22:42:58+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0/0.53277624)**2 - 1*(-2.759722)
+
+LATEX
+\cos^{2}{\left(\frac{x_{0}}{0.533} \right)} - -2.76
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.25$ & $1$ & $0.388$ & $0.0$ \\
+$y = x_{0} \cdot 0.0423$ & $3$ & $0.364$ & $0.0313$ \\
+$y = \log{\left(x_{0} - 50.2 \right)}$ & $4$ & $0.353$ & $0.0312$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 25.1 \right)} \end{dmath*} \end{minipage} & $5$ & $0.343$ & $0.0295$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.533} \right)} - -2.76 \end{dmath*} \end{minipage} & $6$ & $0.143$ & $0.872$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \left(-0.0360\right) x_{0} + \cos^{2}{\left(\frac{x_{0}}{0.533} \right)} \end{dmath*} \end{minipage} & $8$ & $0.121$ & $0.0852$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\left(\cos^{2}{\left(\frac{x_{0}}{0.533} \right)}\right)^{0.354} \right)} - -2.34 \end{dmath*} \end{minipage} & $9$ & $0.120$ & $0.00722$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \left(-0.0316\right) x_{0} + \left|{\tan{\left(\cos{\left(\frac{x_{0}}{0.533} \right)} \right)}}\right| \end{dmath*} \end{minipage} & $10$ & $0.102$ & $0.161$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

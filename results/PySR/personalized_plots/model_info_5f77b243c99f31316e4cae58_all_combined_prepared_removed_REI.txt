@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T11:59:40+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.9969697 - cos(x0*6.2079344)**8
+
+LATEX
+4.00 - \cos^{8}{\left(x_{0} \cdot 6.21 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.85$ & $1$ & $0.128$ & $0.0$ \\
+$y = x_{0}^{0.311}$ & $3$ & $0.114$ & $0.0540$ \\
+$y = \log{\left(x_{0} - 29.4 \right)}$ & $4$ & $0.112$ & $0.0184$ \\
+$y = 3.11 - \cos{\left(\sqrt{x_{0}} \right)}$ & $5$ & $0.112$ & $0.00428$ \\
+$y = 4.24 - \cos^{2}{\left(x_{0} \cdot 6.21 \right)}$ & $6$ & $0.0580$ & $0.657$ \\
+$y = 4.00 - \cos^{8}{\left(x_{0} \cdot 6.21 \right)}$ & $7$ & $0.0177$ & $1.18$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0}^{0.320} - \cos^{8}{\left(x_{0} \cdot 6.21 \right)} \end{dmath*} \end{minipage} & $9$ & $0.0138$ & $0.127$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T12:31:12+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0/(-0.13420314))**8 + 3.948535
+
+LATEX
+\cos^{8}{\left(\frac{x_{0}}{-0.134} \right)} + 3.95
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.36$ & $1$ & $0.265$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\frac{5.89 \cdot 10^{3}}{x_{0}} \right)} \end{dmath*} \end{minipage} & $4$ & $0.259$ & $0.00804$ \\
+$y = \sqrt{18.9 - \sin{\left(x_{0} \right)}}$ & $5$ & $0.228$ & $0.128$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{-0.134} \right)} + 3.80 \end{dmath*} \end{minipage} & $6$ & $0.0827$ & $1.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\frac{x_{0}}{-0.134} \right)} + 3.95 \end{dmath*} \end{minipage} & $7$ & $0.0409$ & $0.705$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{12}{\left(\frac{x_{0}}{0.134} \right)} + 3.98 \end{dmath*} \end{minipage} & $8$ & $0.0385$ & $0.0600$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\frac{x_{0}}{0.134} \right)} 1.21 + 3.88 \end{dmath*} \end{minipage} & $9$ & $0.0341$ & $0.121$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\tan{\left(\frac{x_{0}}{0.134} \right)} \right)} 1.22 + 3.88 \end{dmath*} \end{minipage} & $10$ & $0.0293$ & $0.151$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

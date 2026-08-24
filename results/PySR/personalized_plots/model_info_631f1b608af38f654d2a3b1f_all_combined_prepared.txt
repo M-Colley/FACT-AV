@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T14:53:09+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.9879293 + tan(x0*(-0.5134334))/x0
+
+LATEX
+4.99 + \frac{\tan{\left(x_{0} \left(-0.513\right) \right)}}{x_{0}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.92$ & $1$ & $0.0569$ & $0.0$ \\
+$y = 4.91 + \frac{1}{x_{0}}$ & $4$ & $0.0568$ & $0.000257$ \\
+$y = 5.26 + x_{0} \left(-0.00443\right)$ & $5$ & $0.0563$ & $0.00995$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.91 + \sin{\left(x_{0} \right)} \left(-0.123\right) \end{dmath*} \end{minipage} & $6$ & $0.0485$ & $0.149$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.89 + \sin{\left(\tan{\left(x_{0} \right)} \right)} \left(-0.174\right) \end{dmath*} \end{minipage} & $7$ & $0.0424$ & $0.134$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.99 + \frac{\tan{\left(x_{0} \left(-0.513\right) \right)}}{x_{0}} \end{dmath*} \end{minipage} & $8$ & $0.00519$ & $2.10$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.99 + \frac{\tan{\left(- 0.513 x_{0} \right)}}{x_{0} - 4.23} \end{dmath*} \end{minipage} & $10$ & $0.00506$ & $0.0133$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

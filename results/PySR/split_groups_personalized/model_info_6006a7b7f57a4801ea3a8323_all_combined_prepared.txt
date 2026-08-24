@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-21T22:07:42+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+1.017834**x0 - tanh(sin(x0))**3
+
+LATEX
+{1.02}^{x_{0}} - \tanh^{3}{\left(\sin{\left(x_{0} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.92$ & $1$ & $0.307$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.171$ & $0.292$ \\
+$y = e^{x_{0} \cdot 0.0178}$ & $4$ & $0.171$ & $2.92 \cdot 10^{-7}$ \\
+$y = {1.02}^{x_{0}} + 0.100$ & $5$ & $0.171$ & $0.00167$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \sin{\left(x_{0} \right)}\right) 0.0513 \end{dmath*} \end{minipage} & $6$ & $0.161$ & $0.0562$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(e^{x_{0} - \sin{\left(x_{0} \right)}}\right)^{0.0178} \end{dmath*} \end{minipage} & $7$ & $0.147$ & $0.0938$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \tanh^{3}{\left(\sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.0966$ & $0.420$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - 0.450 \sin^{3}{\left(x_{0} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0949$ & $0.0181$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \tanh^{3}{\left(\sin{\left(x_{0} \left(-1.04\right) \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0816$ & $0.151$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

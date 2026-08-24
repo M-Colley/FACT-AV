@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T11:28:34+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.0000386 - 4.29790563461874e-5/(tan(x0) + 4.0051427)**8
+
+LATEX
+4.00 - \frac{4.30 \cdot 10^{-5}}{\left(\tan{\left(x_{0} \right)} + 4.00\right)^{8}}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.95$ & $1$ & $0.0475$ & $0.0$ \\
+$y = e^{x_{0}^{0.0732}}$ & $4$ & $0.0471$ & $0.00298$ \\
+$y = x_{0} \cdot 0.00413 + 3.63$ & $5$ & $0.0470$ & $0.00223$ \\
+$y = \sin{\left(x_{0} \right)} 0.0796 + 3.96$ & $6$ & $0.0440$ & $0.0654$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.02 - \frac{0.0415}{\tan{\left(x_{0}^{4} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.0332$ & $0.283$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.01 - \frac{0.0429}{\tan{\left(x_{0} \right)} + 3.76} \end{dmath*} \end{minipage} & $8$ & $0.000210$ & $5.06$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \frac{0.00138}{\left(\tan{\left(x_{0} \right)} + 3.91\right)^{4}} \end{dmath*} \end{minipage} & $9$ & $1.37 \cdot 10^{-7}$ & $7.34$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \frac{4.30 \cdot 10^{-5}}{\left(\tan{\left(x_{0} \right)} + 4.00\right)^{8}} \end{dmath*} \end{minipage} & $10$ & $1.34 \cdot 10^{-9}$ & $4.62$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

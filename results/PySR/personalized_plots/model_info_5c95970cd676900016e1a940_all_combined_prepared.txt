@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:44:02+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(tan(x0**2*0.2532633)/75.514465) + 5.011474
+
+LATEX
+\sin{\left(\frac{\tan{\left(x_{0}^{2} \cdot 0.253 \right)}}{75.5} \right)} + 5.01
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.90$ & $1$ & $0.0900$ & $0.0$ \\
+$y = \frac{21.2}{\log{\left(x_{0} \right)}}$ & $4$ & $0.0795$ & $0.0412$ \\
+$y = 6.36 + x_{0} \left(-0.0191\right)$ & $5$ & $0.0788$ & $0.00911$ \\
+$y = 5.64 + x_{0}^{2} \left(-0.000125\right)$ & $6$ & $0.0787$ & $0.00110$ \\
+$y = 4.95 + \frac{1}{\cos{\left(x_{0}^{4.92} \right)}}$ & $7$ & $0.0482$ & $0.491$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(x_{0} \cdot 6.74 \right)}}{75.1} + 5.00 \end{dmath*} \end{minipage} & $8$ & $0.00513$ & $2.24$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(x_{0}^{2} \cdot 0.253 \right)}}{75.1} + 5.01 \end{dmath*} \end{minipage} & $9$ & $0.00408$ & $0.227$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\frac{\tan{\left(x_{0}^{2} \cdot 0.253 \right)}}{75.5} \right)} + 5.01 \end{dmath*} \end{minipage} & $10$ & $0.00261$ & $0.447$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

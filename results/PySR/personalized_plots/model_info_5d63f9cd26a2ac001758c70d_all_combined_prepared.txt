@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T16:11:36+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tan(Abs(tan(x0 + 17.969622)))/(-26.465206) + 4.0161004
+
+LATEX
+\frac{\tan{\left(\left|{\tan{\left(x_{0} + 18.0 \right)}}\right| \right)}}{-26.5} + 4.02
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.98$ & $1$ & $0.112$ & $0.0$ \\
+$y = 3.96 + \frac{1}{x_{0}}$ & $4$ & $0.112$ & $0.000600$ \\
+$y = e^{e^{\frac{24.5}{x_{0}}}}$ & $5$ & $0.100$ & $0.106$ \\
+$y = 3.78 + \frac{1}{x_{0} - 66.8}$ & $6$ & $0.0748$ & $0.295$ \\
+$y = 3.91 + \frac{1}{\left(66.9 - x_{0}\right)^{4}}$ & $7$ & $0.0578$ & $0.258$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(x_{0} \cdot 46.0 \right)}}{-39.8} + 3.92 \end{dmath*} \end{minipage} & $8$ & $0.0432$ & $0.290$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(\tan{\left(x_{0} + 18.0 \right)} \right)}}{-27.7} + 4.00 \end{dmath*} \end{minipage} & $9$ & $0.0237$ & $0.603$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\tan{\left(\left|{\tan{\left(x_{0} + 18.0 \right)}}\right| \right)}}{-26.5} + 4.02 \end{dmath*} \end{minipage} & $10$ & $0.0136$ & $0.554$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

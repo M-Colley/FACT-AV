@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T02:38:20+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.029634 - cos(x0**3.0228045)**8
+
+LATEX
+3.03 - \cos^{8}{\left(x_{0}^{3.02} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.67$ & $1$ & $0.207$ & $0.0$ \\
+$y = x_{0}^{0.227}$ & $3$ & $0.202$ & $0.0128$ \\
+$y = \log{\left(0.190 x_{0} \right)}$ & $4$ & $0.200$ & $0.00698$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0} \right)} \right)} + 1.83 \end{dmath*} \end{minipage} & $5$ & $0.188$ & $0.0642$ \\
+$y = 3.15 - \cos^{2}{\left(x_{0}^{3.06} \right)}$ & $6$ & $0.0991$ & $0.639$ \\
+$y = 3.03 - \cos^{8}{\left(x_{0}^{3.02} \right)}$ & $7$ & $0.0650$ & $0.421$ \\
+$y = 3.00 - \cos^{12}{\left(x_{0}^{3.02} \right)}$ & $8$ & $0.0649$ & $0.00139$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.02 - \cos^{8}{\left(x_{0}^{3.02} - 3.09 \right)} \end{dmath*} \end{minipage} & $9$ & $0.0636$ & $0.0215$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.02 - \left|{\cos^{8}{\left(x_{0}^{3.02} \right)} - 0.0274}\right| \end{dmath*} \end{minipage} & $10$ & $0.0630$ & $0.00949$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

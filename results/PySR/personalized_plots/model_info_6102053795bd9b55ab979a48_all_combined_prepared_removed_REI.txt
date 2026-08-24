@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T08:16:25+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tan(log(x0 + cos(1.258693*x0) + 1.0433105))
+
+LATEX
+\tan{\left(\log{\left(x_{0} + \cos{\left(1.26 x_{0} \right)} + 1.04 \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.67$ & $1$ & $0.222$ & $0.0$ \\
+$y = \tan{\left(\log{\left(x_{0} \right)} \right)}$ & $3$ & $0.0645$ & $0.619$ \\
+$y = \sqrt{x_{0} - 69.9}$ & $4$ & $0.00369$ & $2.86$ \\
+$y = 15.8 - \frac{1.01 \cdot 10^{3}}{x_{0}}$ & $5$ & $0.00348$ & $0.0569$ \\
+$y = \log{\left(x_{0} - 75.2 \right)} + 1.65$ & $6$ & $0.00166$ & $0.741$ \\
+$y = - x_{0} + 181. - \frac{7.80 \cdot 10^{3}}{x_{0}}$ & $7$ & $0.000719$ & $0.837$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\log{\left(x_{0} + e^{\cos^{6}{\left(x_{0} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.000193$ & $1.31$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - x_{0} - x_{0} + 346. - \frac{1.46 \cdot 10^{4}}{x_{0}} \end{dmath*} \end{minipage} & $9$ & $2.89 \cdot 10^{-5}$ & $1.90$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\log{\left(x_{0} + \cos{\left(1.26 x_{0} \right)} + 1.04 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $1.46 \cdot 10^{-7}$ & $5.29$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

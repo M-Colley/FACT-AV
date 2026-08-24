@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-21T23:49:23+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+5.0552692 - tan(cos(cos(x0*25.747787))**2)**2
+
+LATEX
+5.06 - \tan^{2}{\left(\cos^{2}{\left(\cos{\left(x_{0} \cdot 25.7 \right)} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.45$ & $1$ & $0.576$ & $0.0$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 4.01$ & $4$ & $0.567$ & $0.00539$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \right)} \right)} + 3.94 \end{dmath*} \end{minipage} & $5$ & $0.516$ & $0.0945$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 25.7 \right)} + 3.93$ & $6$ & $0.282$ & $0.604$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\frac{x_{0}^{2}}{-3.83} \right)} + 4.26 \end{dmath*} \end{minipage} & $7$ & $0.192$ & $0.386$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos{\left(\frac{x_{0}^{2}}{3.83} \right)} \right)} + 4.27 \end{dmath*} \end{minipage} & $8$ & $0.187$ & $0.0250$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.06 - \tan^{2}{\left(\cos^{2}{\left(\cos{\left(x_{0} \cdot 25.7 \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.139$ & $0.296$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.93 - \tan^{2}{\left(\cos^{4}{\left(\cos{\left(x_{0} \cdot 25.7 \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.119$ & $0.156$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

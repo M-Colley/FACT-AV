@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:03:20+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+-sin(x0**2.2745497) + tan(x0*0.016020926)
+
+LATEX
+- \sin{\left(x_{0}^{2.27} \right)} + \tan{\left(x_{0} \cdot 0.0160 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.95$ & $1$ & $2.02$ & $0.0$ \\
+$y = \tan{\left(\log{\left(x_{0} \right)} \right)}$ & $3$ & $1.16$ & $0.276$ \\
+$y = \tan{\left(x_{0} \cdot 0.0160 \right)}$ & $4$ & $0.844$ & $0.322$ \\
+$y = x_{0} \cdot 0.200 - 12.4$ & $5$ & $0.792$ & $0.0626$ \\
+$y = 1.09 \cdot 10^{-7} x_{0}^{4} - 0.940$ & $6$ & $0.781$ & $0.0149$ \\
+$y = \sqrt{\left|{1.39 x_{0} - 97.0}\right|}$ & $7$ & $0.757$ & $0.0303$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 8.19 \cdot 10^{-8} \left(- x_{0} + \frac{1}{\sin{\left(x_{0} \right)}}\right)^{4} \end{dmath*} \end{minipage} & $8$ & $0.610$ & $0.216$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \sin{\left(x_{0}^{2.27} \right)} + \tan{\left(x_{0} \cdot 0.0160 \right)} \end{dmath*} \end{minipage} & $9$ & $0.410$ & $0.398$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.200 - \sin{\left(x_{0}^{2.27} \right)} - 12.4 \end{dmath*} \end{minipage} & $10$ & $0.339$ & $0.191$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

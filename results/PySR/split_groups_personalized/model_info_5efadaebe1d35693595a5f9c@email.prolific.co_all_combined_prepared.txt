@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-21T15:36:06+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(exp(cos(tan(x0/0.06261794))**2))*3.3519084
+
+LATEX
+\sin{\left(e^{\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0626} \right)} \right)}} \right)} 3.35
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.52$ & $1$ & $0.712$ & $0.0$ \\
+$y = x_{0} \cdot 0.0330$ & $3$ & $0.667$ & $0.0329$ \\
+$y = 2.99 - \cos^{2}{\left(x_{0}^{4} \right)}$ & $5$ & $0.645$ & $0.0167$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.07 - \cos^{2}{\left(\frac{x_{0}}{0.0626} \right)} \end{dmath*} \end{minipage} & $6$ & $0.377$ & $0.535$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.0626} \right)} \right)} 3.20 \end{dmath*} \end{minipage} & $7$ & $0.262$ & $0.365$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(e^{\cos^{2}{\left(\frac{x_{0}}{0.0626} \right)}} \right)} 3.35 \end{dmath*} \end{minipage} & $8$ & $0.229$ & $0.136$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(e^{\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.0626} \right)} \right)}} \right)} 3.35 \end{dmath*} \end{minipage} & $9$ & $0.160$ & $0.355$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

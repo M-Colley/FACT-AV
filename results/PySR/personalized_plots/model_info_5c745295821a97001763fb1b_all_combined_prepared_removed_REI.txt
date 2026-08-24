@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T06:55:33+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.0 - cos(x0/(-1.1317376))**128
+
+LATEX
+4.00 - \cos^{128}{\left(\frac{x_{0}}{-1.13} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.83$ & $1$ & $0.139$ & $0.0$ \\
+$y = 4.36 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.0999$ & $0.110$ \\
+$y = 4.05 - \cos^{8}{\left(x_{0} \right)}$ & $5$ & $0.0566$ & $0.568$ \\
+$y = \cos^{2}{\left(x_{0}^{1.26} \right)} + 3.08$ & $6$ & $0.00277$ & $3.02$ \\
+$y = 4.00 - \sin^{4}{\left(x_{0}^{1.26} \right)}$ & $7$ & $0.000117$ & $3.16$ \\
+$y = 4.00 - \sin^{12}{\left(x_{0}^{1.26} \right)}$ & $8$ & $1.82 \cdot 10^{-9}$ & $11.1$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \cos^{128}{\left(\frac{x_{0}}{-1.13} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0$ & $\infty$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

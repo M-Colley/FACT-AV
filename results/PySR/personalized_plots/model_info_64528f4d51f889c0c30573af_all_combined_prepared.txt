@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T00:59:55+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(x0) - tan(cos(0.15322159*x0**2)**2)
+
+LATEX
+\log{\left(x_{0} \right)} - \tan{\left(\cos^{2}{\left(0.153 x_{0}^{2} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.92$ & $1$ & $0.257$ & $0.0$ \\
+$y = x_{0}^{0.315}$ & $3$ & $0.237$ & $0.0410$ \\
+$y = 0.449 \sqrt{x_{0}}$ & $4$ & $0.232$ & $0.0199$ \\
+$y = 4.52 - \sin{\left(\sqrt{x_{0}} \right)}$ & $5$ & $0.229$ & $0.0115$ \\
+$y = 4.52 - \cos^{2}{\left(x_{0} \cdot 9.53 \right)}$ & $6$ & $0.131$ & $0.557$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.64 - \left|{\cos{\left(x_{0} \cdot 9.53 \right)}}\right| \end{dmath*} \end{minipage} & $7$ & $0.118$ & $0.109$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \cos^{2}{\left(0.153 x_{0}^{2} \right)} \end{dmath*} \end{minipage} & $8$ & $0.0941$ & $0.224$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \tan{\left(\cos^{2}{\left(0.153 x_{0}^{2} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0728$ & $0.257$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} \right)} - \tan{\left(\cos^{2}{\left(0.153 x_{0}^{2} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0728$ & $5.88 \cdot 10^{-5}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

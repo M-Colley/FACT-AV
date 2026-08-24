@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-22T21:25:37+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(tan(tan(x0 + 0.14510989)) + 143.15057)
+
+LATEX
+\log{\left(\tan{\left(\tan{\left(x_{0} + 0.145 \right)} \right)} + 143. \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.80$ & $1$ & $0.260$ & $0.0$ \\
+$y = \log{\left(x_{0} + 45.0 \right)}$ & $4$ & $0.258$ & $0.00191$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.65 - \cos{\left(\cos^{2}{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.240$ & $0.0745$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.77 + \sin{\left(x_{0} \right)} \left(-0.347\right) \end{dmath*} \end{minipage} & $6$ & $0.193$ & $0.216$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} - 0.416 \right)} + 138. \right)} \end{dmath*} \end{minipage} & $7$ & $0.0474$ & $1.40$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(\tan{\left(x_{0} + 0.145 \right)} \right)} + 143. \right)} \end{dmath*} \end{minipage} & $8$ & $0.0178$ & $0.978$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(\tan{\left(x_{0} + 0.146 \right)} \right)} + 111. \right)} + 0.264 \end{dmath*} \end{minipage} & $10$ & $0.0151$ & $0.0821$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

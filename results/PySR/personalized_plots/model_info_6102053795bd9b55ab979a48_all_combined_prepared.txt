@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T20:19:19+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0/0.001672049)**48 + 3.0016837
+
+LATEX
+\cos^{48}{\left(\frac{x_{0}}{0.00167} \right)} + 3.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.10$ & $1$ & $0.0900$ & $0.0$ \\
+$y = x_{0} \cdot 0.0404$ & $3$ & $0.0673$ & $0.145$ \\
+$y = 0.355 \sqrt{x_{0}}$ & $4$ & $0.0667$ & $0.00947$ \\
+$y = x_{0} \cdot 0.0293 + 0.854$ & $5$ & $0.0635$ & $0.0487$ \\
+$y = \cos{\left(\frac{x_{0}}{7.92} \right)} + 3.85$ & $6$ & $0.0371$ & $0.538$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\frac{x_{0}}{0.00167} \right)} + 2.98 \end{dmath*} \end{minipage} & $7$ & $0.0103$ & $1.28$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{32}{\left(\frac{x_{0}}{0.00167} \right)} + 3.00 \end{dmath*} \end{minipage} & $8$ & $3.81 \cdot 10^{-5}$ & $5.60$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{48}{\left(\frac{x_{0}}{0.00167} \right)} + 3.00 \end{dmath*} \end{minipage} & $9$ & $1.76 \cdot 10^{-5}$ & $0.774$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

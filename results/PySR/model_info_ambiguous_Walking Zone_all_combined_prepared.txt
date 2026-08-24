@@ -1,8 +1,17 @@
+PROVENANCE
+generated_utc: 2026-08-21T12:02:01+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 300
+maxsize: 10
+reproducible: yes
 SYMPY
-log(x0 + log(cos(0.6017181*x0)**6))
+(x0 + tan(cos(x0)**(-2)))**0.33457407
 
 LATEX
-\log{\left(x_{0} + \log{\left(\cos^{6}{\left(0.602 x_{0} \right)} \right)} \right)}
+\left(x_{0} + \tan{\left(\frac{1}{\cos^{2}{\left(x_{0} \right)}} \right)}\right)^{0.335}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +28,12 @@ Equation & Complexity & Loss & Score \\
 $y = 4.27$ & $1$ & $0.618$ & $0.0$ \\
 $y = x_{0}^{0.334}$ & $3$ & $0.615$ & $0.00275$ \\
 $y = \log{\left(x_{0} \right)}^{0.989}$ & $4$ & $0.613$ & $0.00203$ \\
-$y = \left(x_{0} + 31.1\right)^{0.310}$ & $5$ & $0.613$ & $1.22 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} - 0.905 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.612$ & $0.00107$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{2}{\left(0.601 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00461$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{6}{\left(0.602 x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.606$ & $0.00501$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \log{\left(\cos^{8}{\left(\tan{\left(x_{0} \right)} - 0.618 \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.605$ & $0.00131$ \\
+$y = x_{0}^{0.280} + 0.905$ & $5$ & $0.613$ & $1.18 \cdot 10^{-5}$ \\
+$y = 0.215 \sqrt{x_{0}} + 2.39$ & $6$ & $0.613$ & $4.89 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(x_{0} - 0.904 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.612$ & $0.00214$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{1}{\cos^{2}{\left(x_{0} \right)}} \right)}\right)^{0.335} \end{dmath*} \end{minipage} & $8$ & $0.609$ & $0.00541$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(\cos^{2}{\left(x_{0} \right)} + 0.930 \right)}\right)^{0.335} \end{dmath*} \end{minipage} & $9$ & $0.608$ & $0.00189$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(0.943 x_{0} - \tan{\left(\cos^{2}{\left(x_{0} \right)} + 0.936 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.606$ & $0.00215$ \\
 \bottomrule
 \end{tabular}
 \end{center}

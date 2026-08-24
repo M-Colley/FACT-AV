@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T01:56:16+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+sin(cos(x0/0.06711258))**3 + 4.2805667
+
+LATEX
+\sin^{3}{\left(\cos{\left(\frac{x_{0}}{0.0671} \right)} \right)} + 4.28
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.30$ & $1$ & $0.235$ & $0.0$ \\
+$y = 4.30$ & $2$ & $0.235$ & $4.25 \cdot 10^{-8}$ \\
+$y = 4.29 + \frac{1}{x_{0}}$ & $4$ & $0.235$ & $0.000129$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 72.2 \right)} \end{dmath*} \end{minipage} & $5$ & $0.219$ & $0.0685$ \\
+$y = \cos^{2}{\left(x_{0}^{3.38} \right)} + 3.76$ & $6$ & $0.0859$ & $0.938$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin^{3}{\left(\cos{\left(\frac{x_{0}}{0.0671} \right)} \right)} + 4.28 \end{dmath*} \end{minipage} & $8$ & $0.0634$ & $0.152$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\sin^{3}{\left(\cos{\left(\frac{x_{0}}{0.0671} \right)} \right)} \right)} + 4.28 \end{dmath*} \end{minipage} & $9$ & $0.0632$ & $0.00250$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin^{3}{\left(\cos{\left(\frac{x_{0} + 0.0672}{0.0672} \right)} \right)} + 4.28 \end{dmath*} \end{minipage} & $10$ & $0.0572$ & $0.0999$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

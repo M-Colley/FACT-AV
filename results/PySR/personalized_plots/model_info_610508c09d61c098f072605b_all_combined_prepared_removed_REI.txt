@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T04:17:17+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0/0.002514138)**2 + 4.1590695
+
+LATEX
+\cos^{2}{\left(\frac{x_{0}}{0.00251} \right)} + 4.16
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.55$ & $1$ & $0.129$ & $0.0$ \\
+$y = 4.54 + \frac{1}{x_{0}}$ & $4$ & $0.129$ & $6.99 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 93.1 \right)} \end{dmath*} \end{minipage} & $5$ & $0.118$ & $0.0838$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.00251} \right)} + 4.16 \end{dmath*} \end{minipage} & $6$ & $0.0324$ & $1.30$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos^{2}{\left(\frac{x_{0}}{0.00251} \right)} \right)} + 4.20 \end{dmath*} \end{minipage} & $7$ & $0.0283$ & $0.137$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos^{2}{\left(\frac{x_{0} - 0.0788}{0.00251} \right)} \right)} + 4.20 \end{dmath*} \end{minipage} & $9$ & $0.0281$ & $0.00334$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\frac{x_{0}}{0.00251} \right)} 0.812\right)^{0.863} + 4.20 \end{dmath*} \end{minipage} & $10$ & $0.0279$ & $0.00790$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

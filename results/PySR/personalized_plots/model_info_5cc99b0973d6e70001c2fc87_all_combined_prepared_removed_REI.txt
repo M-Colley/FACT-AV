@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T12:13:38+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 + tan(x0*(-28.561512)))*0.051672745
+
+LATEX
+\left(x_{0} + \tan{\left(x_{0} \left(-28.6\right) \right)}\right) 0.0517
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.83$ & $1$ & $0.482$ & $0.0$ \\
+$y = x_{0} \cdot 0.0499$ & $3$ & $0.387$ & $0.109$ \\
+$y = \sqrt{x_{0}} - 4.92$ & $4$ & $0.385$ & $0.00607$ \\
+$y = \cos^{2}{\left(\sqrt{x_{0}} \right)} + 3.24$ & $5$ & $0.381$ & $0.00988$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \sin{\left(x_{0} \right)}\right) 0.0499 \end{dmath*} \end{minipage} & $6$ & $0.369$ & $0.0326$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0560 - \cos^{2}{\left(x_{0}^{4} \right)} \end{dmath*} \end{minipage} & $7$ & $0.335$ & $0.0974$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \left(-28.6\right) \right)}\right) 0.0517 \end{dmath*} \end{minipage} & $8$ & $0.122$ & $1.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(0.657 + x_{0} \left(-85.7\right) \right)}\right) 0.0524 \end{dmath*} \end{minipage} & $10$ & $0.119$ & $0.0126$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

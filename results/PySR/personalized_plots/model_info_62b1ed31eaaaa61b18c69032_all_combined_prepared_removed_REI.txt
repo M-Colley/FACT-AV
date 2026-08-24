@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T06:50:41+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(cos(x0*159.05478)**6)**4)**2 + 3.9989338
+
+LATEX
+\cos^{2}{\left(\tan^{4}{\left(\cos^{6}{\left(x_{0} \cdot 159. \right)} \right)} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.82$ & $1$ & $0.145$ & $0.0$ \\
+$y = 4.84 - \frac{1}{x_{0}}$ & $4$ & $0.145$ & $3.84 \cdot 10^{-5}$ \\
+$y = x_{0} \cdot 0.00250 + 4.63$ & $5$ & $0.145$ & $0.00134$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 159. \right)} + 4.28$ & $6$ & $0.0665$ & $0.780$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left|{\cos{\left(x_{0} \cdot 172. \right)}}\right| + 4.15 \end{dmath*} \end{minipage} & $7$ & $0.0397$ & $0.517$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\cos^{2}{\left(x_{0} \cdot 159. \right)} \right)} \right)} + 4.07 \end{dmath*} \end{minipage} & $8$ & $0.0246$ & $0.478$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{8}{\left(\cos^{8}{\left(159. x_{0} \right)} \right)} + 4.02 \end{dmath*} \end{minipage} & $9$ & $0.00506$ & $1.58$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan^{4}{\left(\cos^{6}{\left(x_{0} \cdot 159. \right)} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $0.000324$ & $2.75$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

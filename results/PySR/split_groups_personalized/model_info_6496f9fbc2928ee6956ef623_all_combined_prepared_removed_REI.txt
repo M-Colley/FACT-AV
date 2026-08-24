@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T13:31:51+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.1129239 - tan(sin(cos(x0)**2/0.059369795)**2)
+
+LATEX
+3.11 - \tan{\left(\sin^{2}{\left(\frac{\cos^{2}{\left(x_{0} \right)}}{0.0594} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.69$ & $1$ & $0.246$ & $0.0$ \\
+$y = x_{0} \cdot 0.0348$ & $3$ & $0.234$ & $0.0248$ \\
+$y = 3.23 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.230$ & $0.0197$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.47 - \cos{\left(\sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.211$ & $0.0869$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.11 - \cos^{2}{\left(\frac{x_{0}}{0.0665} \right)} \end{dmath*} \end{minipage} & $6$ & $0.0893$ & $0.857$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(\frac{x_{0}}{0.0665} \right)} \right)} 3.13 \end{dmath*} \end{minipage} & $7$ & $0.0565$ & $0.457$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\sin{\left(\frac{\cos^{2}{\left(x_{0} \right)}}{0.0594} \right)} \right)} 3.20 \end{dmath*} \end{minipage} & $8$ & $0.0498$ & $0.127$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.11 - \tan{\left(\sin^{2}{\left(\frac{\cos^{2}{\left(x_{0} \right)}}{0.0594} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0392$ & $0.239$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\cos^{2}{\left(\sin^{3}{\left(\frac{\cos^{2}{\left(x_{0} \right)}}{-0.0598} \right)} \right)} 1.11} \end{dmath*} \end{minipage} & $10$ & $0.0372$ & $0.0520$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,37 @@
+PROVENANCE
+generated_utc: 2026-08-21T21:19:17+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0**1.65198)**2 + 4.0079474
+
+LATEX
+\cos^{2}{\left(x_{0}^{1.65} \right)} + 4.01
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.45$ & $1$ & $0.247$ & $0.0$ \\
+$y = 4.44 + \frac{1}{x_{0}}$ & $4$ & $0.247$ & $9.01 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} \right)} + 84.5 \right)} \end{dmath*} \end{minipage} & $5$ & $0.245$ & $0.00814$ \\
+$y = \cos^{2}{\left(x_{0}^{1.65} \right)} + 4.01$ & $6$ & $0.0531$ & $1.53$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(x_{0}^{1.65} - 2.15 \cdot 10^{5} \right)} + 4.02 \end{dmath*} \end{minipage} & $8$ & $0.0470$ & $0.0608$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\cos^{2}{\left(x_{0}^{1.65} + 2.56 \cdot 10^{5} \right)}}{0.905} + 4.01 \end{dmath*} \end{minipage} & $10$ & $0.0416$ & $0.0617$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

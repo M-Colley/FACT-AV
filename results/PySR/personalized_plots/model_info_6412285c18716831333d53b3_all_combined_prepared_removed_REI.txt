@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T09:33:21+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+exp(cos(x0**4)**256) - 1*(-3.0000405)
+
+LATEX
+e^{\cos^{256}{\left(x_{0}^{4} \right)}} - -3.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.05$ & $1$ & $0.0499$ & $0.0$ \\
+$y = e^{x_{0}^{0.0775}}$ & $4$ & $0.0492$ & $0.00446$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.44\right) - \frac{29.2}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $0.0491$ & $0.00257$ \\
+$y = \cos^{8}{\left(x_{0}^{4} \right)} - -3.85$ & $6$ & $0.0450$ & $0.0875$ \\
+$y = \cos^{32}{\left(x_{0}^{4} \right)} - -3.97$ & $7$ & $0.00991$ & $1.51$ \\
+$y = \cos^{96}{\left(x_{0}^{4} \right)} - -4.00$ & $8$ & $0.00126$ & $2.06$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{24}{\left(\left(- x_{0} - 1.05\right)^{4} \right)} - -4.00 \end{dmath*} \end{minipage} & $9$ & $4.66 \cdot 10^{-5}$ & $3.30$ \\
+$y = e^{\cos^{256}{\left(x_{0}^{4} \right)}} - -3.00$ & $10$ & $3.70 \cdot 10^{-7}$ & $4.83$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

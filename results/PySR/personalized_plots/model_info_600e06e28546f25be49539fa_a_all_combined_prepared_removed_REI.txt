@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:33:32+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 + tan((x0 + 0.7447243)**3))**0.25773248
+
+LATEX
+\left(x_{0} + \tan{\left(\left(x_{0} + 0.745\right)^{3} \right)}\right)^{0.258}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.11$ & $1$ & $0.0710$ & $0.0$ \\
+$y = x_{0}^{0.262}$ & $3$ & $0.0634$ & $0.0567$ \\
+$y = 0.355 \sqrt{x_{0}}$ & $4$ & $0.0622$ & $0.0191$ \\
+$y = 4.48 - \frac{105.}{x_{0}}$ & $5$ & $0.0618$ & $0.00679$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.260} \end{dmath*} \end{minipage} & $6$ & $0.0592$ & $0.0416$ \\
+$y = \sqrt{0.126 x_{0} + \cos{\left(x_{0} \right)}}$ & $7$ & $0.0572$ & $0.0346$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} - 0.867 \right)}\right)^{0.258} \end{dmath*} \end{minipage} & $8$ & $0.0201$ & $1.05$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\left(x_{0} + 0.745\right)^{3} \right)}\right)^{0.258} \end{dmath*} \end{minipage} & $9$ & $0.0124$ & $0.484$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan^{2}{\left(x_{0}^{2} + 2.02 \right)}\right)^{0.255} \end{dmath*} \end{minipage} & $10$ & $0.0105$ & $0.162$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-21T19:49:17+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.377958 - cos(x0/0.76729953)**2
+
+LATEX
+4.38 - \cos^{2}{\left(\frac{x_{0}}{0.767} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.90$ & $1$ & $0.365$ & $0.0$ \\
+$y = x_{0}^{0.314}$ & $3$ & $0.346$ & $0.0262$ \\
+$y = \log{\left(x_{0} - 27.2 \right)}$ & $4$ & $0.343$ & $0.00988$ \\
+$y = 4.37 - \cos^{2}{\left(x_{0}^{4} \right)}$ & $5$ & $0.256$ & $0.292$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.38 - \cos^{2}{\left(\frac{x_{0}}{0.767} \right)} \end{dmath*} \end{minipage} & $6$ & $0.181$ & $0.345$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.48 - \tan{\left(\cos^{2}{\left(\frac{x_{0}}{0.767} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.165$ & $0.0970$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.58 - \frac{\cos^{2}{\left(\frac{x_{0}}{0.767} \right)}}{0.704} \end{dmath*} \end{minipage} & $8$ & $0.163$ & $0.00939$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.27 - \left(\sin{\left(x_{0} \left(-175.\right) \right)} + 0.0935\right)^{4} \end{dmath*} \end{minipage} & $9$ & $0.145$ & $0.120$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.26 - \left(\sin{\left(x_{0} \left(-175.\right) \right)} + 0.0813\right)^{6} \end{dmath*} \end{minipage} & $10$ & $0.144$ & $0.00379$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

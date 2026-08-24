@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T09:14:02+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(tan(x0/0.13247733))) - 1*(-1.0313885)
+
+LATEX
+\cos{\left(\tan{\left(\tan{\left(\frac{x_{0}}{0.132} \right)} \right)} \right)} - -1.03
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 1.75$ & $1$ & $0.163$ & $0.0$ \\
+$y = 1.74 + \frac{1}{x_{0}}$ & $4$ & $0.163$ & $1.19 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \right)} \right)} - -1.26 \end{dmath*} \end{minipage} & $5$ & $0.142$ & $0.133$ \\
+$y = \cos^{2}{\left(x_{0}^{1.15} \right)} - -1.08$ & $6$ & $0.0804$ & $0.570$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.132} \right)} \right)} - -1.01 \end{dmath*} \end{minipage} & $7$ & $0.0279$ & $1.06$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\tan{\left(\frac{x_{0}}{0.132} \right)} \right)} \right)} - -1.03 \end{dmath*} \end{minipage} & $8$ & $0.0155$ & $0.588$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\tan{\left(\frac{x_{0}}{0.132} \right)} \right)} + 0.132 \right)} - -1.07 \end{dmath*} \end{minipage} & $10$ & $0.0109$ & $0.178$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,37 @@
+PROVENANCE
+generated_utc: 2026-08-22T17:12:21+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(149.18031 - Abs(tan(1.7007549*x0)))
+
+LATEX
+\log{\left(149. - \left|{\tan{\left(1.70 x_{0} \right)}}\right| \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.95$ & $1$ & $0.0475$ & $0.0$ \\
+$y = \log{\left(x_{0} + 64.6 \right)}$ & $4$ & $0.0451$ & $0.0171$ \\
+$y = x_{0} \cdot 0.00896 + 4.26$ & $5$ & $0.0450$ & $0.00244$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(148. - \tan{\left(1.70 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $5.99 \cdot 10^{-5}$ & $3.31$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(149. - \left|{\tan{\left(1.70 x_{0} \right)}}\right| \right)} \end{dmath*} \end{minipage} & $8$ & $2.66 \cdot 10^{-5}$ & $0.810$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(149. - \left|{\tan{\left(1.70 x_{0} \right)}}\right| \right)} + 0.00382 \end{dmath*} \end{minipage} & $10$ & $2.19 \cdot 10^{-5}$ & $0.0974$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

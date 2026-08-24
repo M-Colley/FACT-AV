@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T11:02:31+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0**1.6836364)**24 + 1.9305291
+
+LATEX
+\cos^{24}{\left(x_{0}^{1.68} \right)} + 1.93
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.06$ & $1$ & $0.136$ & $0.0$ \\
+$y = \frac{157.}{x_{0}}$ & $3$ & $0.108$ & $0.114$ \\
+$y = \frac{135.}{x_{0} - 10.6}$ & $5$ & $0.108$ & $0.00255$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0} \right)}\right)^{x_{0}} + 2.00 \end{dmath*} \end{minipage} & $6$ & $0.0833$ & $0.255$ \\
+$y = \cos^{8}{\left(x_{0}^{1.68} \right)} + 1.85$ & $7$ & $0.0411$ & $0.707$ \\
+$y = \cos^{24}{\left(x_{0}^{1.68} \right)} + 1.93$ & $8$ & $0.0243$ & $0.526$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{32}{\left(\sin{\left(x_{0}^{1.68} \right)} \right)} + 1.94 \end{dmath*} \end{minipage} & $9$ & $0.0242$ & $0.00236$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{\left(\cos^{2}{\left(x_{0} \left(-3.09\right) \right)}\right)^{x_{0}}}{0.896} + 1.93 \end{dmath*} \end{minipage} & $10$ & $0.0239$ & $0.0124$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

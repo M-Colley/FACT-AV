@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T07:28:50+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+2.7638035 - tan(cos(x0**2))
+
+LATEX
+2.76 - \tan{\left(\cos{\left(x_{0}^{2} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.13$ & $1$ & $2.45$ & $0.0$ \\
+$y = \tan{\left(\log{\left(x_{0} \right)} \right)}$ & $3$ & $2.07$ & $0.0849$ \\
+$y = \sqrt{x_{0} - 66.2}$ & $4$ & $1.90$ & $0.0857$ \\
+$y = 2.88 - \cos{\left(x_{0}^{2} \right)}$ & $5$ & $1.40$ & $0.303$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.76 - \tan{\left(\cos{\left(x_{0}^{2} \right)} \right)} \end{dmath*} \end{minipage} & $6$ & $1.19$ & $0.169$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(1.92 - \cos{\left(x_{0}^{2} \right)}\right)^{1.44} \end{dmath*} \end{minipage} & $7$ & $1.06$ & $0.116$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.53 - \tan{\left(\cos{\left(x_{0}^{2} \right)} 1.23 \right)} \end{dmath*} \end{minipage} & $8$ & $0.996$ & $0.0577$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{0.517 - \cos{\left(x_{0}^{2} \right)}} + \cos^{2}{\left(x_{0} \right)} \end{dmath*} \end{minipage} & $9$ & $0.933$ & $0.0652$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{- \cos{\left(x_{0}^{2} \right)} + \cos{\left(\cos{\left(\frac{x_{0}}{0.133} \right)} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.791$ & $0.165$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

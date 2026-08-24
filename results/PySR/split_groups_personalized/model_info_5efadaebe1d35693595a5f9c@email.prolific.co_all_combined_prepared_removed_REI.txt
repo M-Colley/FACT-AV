@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-22T02:50:58+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+exp(cos(x0/0.012986984)**2) + cos(x0/(-0.009025839))**2
+
+LATEX
+e^{\cos^{2}{\left(\frac{x_{0}}{0.0130} \right)}} + \cos^{2}{\left(\frac{x_{0}}{-0.00903} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.63$ & $1$ & $0.839$ & $0.0$ \\
+$y = x_{0} \cdot 0.0339$ & $3$ & $0.831$ & $0.00466$ \\
+$y = 3.08 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.677$ & $0.205$ \\
+$y = e^{\cos^{2}{\left(\frac{x_{0}}{-0.0139} \right)}}$ & $5$ & $0.515$ & $0.274$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{1}{\cos^{2}{\left(\sin{\left(x_{0}^{1.32} \right)} \right)}} \end{dmath*} \end{minipage} & $6$ & $0.247$ & $0.735$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\cos^{2}{\left(\frac{x_{0}}{0.0130} \right)} + 0.239} \end{dmath*} \end{minipage} & $7$ & $0.183$ & $0.296$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{e^{\cos^{2}{\left(\tan{\left(\frac{x_{0}}{0.403} \right)} \right)}}}{0.720} \end{dmath*} \end{minipage} & $8$ & $0.156$ & $0.163$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{1.29 \sqrt{\cos^{2}{\left(\tan{\left(2.48 x_{0} \right)} \right)}}} \end{dmath*} \end{minipage} & $9$ & $0.123$ & $0.241$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\cos^{2}{\left(\frac{x_{0}}{0.0130} \right)}} + \cos^{2}{\left(\frac{x_{0}}{-0.00903} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0603$ & $0.709$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

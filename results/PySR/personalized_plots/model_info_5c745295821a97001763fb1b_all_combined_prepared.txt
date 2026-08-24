@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T19:11:36+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(tan(x0*(-3.4738958)) + 79.877884)**0.31529754
+
+LATEX
+\left(\tan{\left(x_{0} \left(-3.47\right) \right)} + 79.9\right)^{0.315}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.90$ & $1$ & $0.0900$ & $0.0$ \\
+$y = x_{0}^{0.314}$ & $3$ & $0.0869$ & $0.0173$ \\
+$y = \log{\left(x_{0} \right)}^{0.928}$ & $4$ & $0.0862$ & $0.00888$ \\
+$y = 4.76 - \frac{65.8}{x_{0}}$ & $5$ & $0.0861$ & $0.00122$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos{\left(x_{0} \right)}\right)^{0.314} \end{dmath*} \end{minipage} & $6$ & $0.0860$ & $0.00105$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{2} \right)}\right)^{0.315} \end{dmath*} \end{minipage} & $7$ & $0.0769$ & $0.112$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\tan{\left(x_{0} \left(-3.47\right) \right)} + 79.9\right)^{0.315} \end{dmath*} \end{minipage} & $8$ & $0.00803$ & $2.26$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\left(x_{0} - \tan{\left(3.47 x_{0} \right)}\right)^{0.919} \right)} \end{dmath*} \end{minipage} & $9$ & $0.00744$ & $0.0773$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T22:01:55+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+3.5165966 - cos(x0**3.4503784)**8
+
+LATEX
+3.52 - \cos^{8}{\left(x_{0}^{3.45} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.30$ & $1$ & $0.110$ & $0.0$ \\
+$y = 3.29 + \frac{1}{x_{0}}$ & $4$ & $0.110$ & $4.80 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.09 - \cos{\left(\cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.102$ & $0.0783$ \\
+$y = 3.77 - \cos^{2}{\left(x_{0}^{3.45} \right)}$ & $6$ & $0.0448$ & $0.819$ \\
+$y = 3.52 - \cos^{8}{\left(x_{0}^{3.45} \right)}$ & $7$ & $0.0218$ & $0.721$ \\
+$y = 3.47 - \cos^{12}{\left(x_{0}^{3.45} \right)}$ & $8$ & $0.0207$ & $0.0496$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.48 - \cos^{12}{\left(\sin{\left(x_{0}^{3.45} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0202$ & $0.0259$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.49 - \cos^{12}{\left(\sin{\left(\sin{\left(x_{0}^{3.45} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0201$ & $0.00736$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

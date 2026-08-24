@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T08:20:34+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+-sin((1.4104987 - x0)**4) + tan(log(x0))
+
+LATEX
+- \sin{\left(\left(1.41 - x_{0}\right)^{4} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.90$ & $1$ & $1.01$ & $0.0$ \\
+$y = \tan{\left(\log{\left(x_{0} \right)} \right)}$ & $3$ & $0.746$ & $0.150$ \\
+$y = \sqrt{x_{0}} - 5.87$ & $4$ & $0.740$ & $0.00774$ \\
+$y = 2.79 - \sin{\left(x_{0}^{4} \right)}$ & $5$ & $0.485$ & $0.421$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.77 - \tan{\left(\sin{\left(x_{0}^{4} \right)} \right)} \end{dmath*} \end{minipage} & $6$ & $0.435$ & $0.111$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \sin{\left(x_{0}^{4} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.343$ & $0.235$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{x_{0}} - \sin{\left(x_{0}^{4} \right)} - 5.98 \end{dmath*} \end{minipage} & $8$ & $0.310$ & $0.101$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - \sin{\left(\left(1.41 - x_{0}\right)^{4} \right)} + \tan{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.193$ & $0.477$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

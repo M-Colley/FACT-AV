@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T06:12:19+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(54.259033 - tan(5.1606603*x0))
+
+LATEX
+\log{\left(54.3 - \tan{\left(5.16 x_{0} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.89$ & $1$ & $0.0988$ & $0.0$ \\
+$y = x_{0}^{0.314}$ & $3$ & $0.0951$ & $0.0190$ \\
+$y = 0.898 \log{\left(x_{0} \right)}$ & $4$ & $0.0946$ & $0.00550$ \\
+$y = 4.82 - \frac{70.7}{x_{0}}$ & $5$ & $0.0944$ & $0.00178$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos{\left(x_{0} \right)}\right)^{0.314} \end{dmath*} \end{minipage} & $6$ & $0.0935$ & $0.00967$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(54.3 - \tan{\left(5.16 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.00522$ & $2.89$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(54.3 - \tan{\left(5.16 x_{0} \right)} \right)} + 0.000766 \end{dmath*} \end{minipage} & $9$ & $0.00522$ & $5.45 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\sin{\left(x_{0} \right)} - \tan{\left(5.16 x_{0} \right)} + 54.3 \right)} \end{dmath*} \end{minipage} & $10$ & $0.00396$ & $0.276$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

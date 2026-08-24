@@ -1,0 +1,36 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:57:35+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(1.0739652**x0)**2 + 3.8853781
+
+LATEX
+\cos^{2}{\left({1.07}^{x_{0}} \right)} + 3.89
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.33$ & $1$ & $0.182$ & $0.0$ \\
+$y = 4.31 + \frac{1}{x_{0}}$ & $4$ & $0.182$ & $9.81 \cdot 10^{-5}$ \\
+$y = \frac{x_{0}}{-133.} + 4.90$ & $5$ & $0.180$ & $0.00939$ \\
+$y = \cos^{2}{\left({1.07}^{x_{0}} \right)} + 3.89$ & $6$ & $0.0656$ & $1.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left({1.07}^{x_{0}} - 7.96 \cdot 10^{6} \right)} + 3.87 \end{dmath*} \end{minipage} & $8$ & $0.0473$ & $0.164$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

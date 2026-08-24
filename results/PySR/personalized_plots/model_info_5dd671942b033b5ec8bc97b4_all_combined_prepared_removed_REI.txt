@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T04:45:48+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0*11.204229)**2 + 3.0746918
+
+LATEX
+\cos^{2}{\left(x_{0} \cdot 11.2 \right)} + 3.07
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.50$ & $1$ & $0.227$ & $0.0$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 3.09$ & $4$ & $0.177$ & $0.0840$ \\
+$y = \cos^{6}{\left(x_{0} \right)} + 3.28$ & $5$ & $0.148$ & $0.175$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 11.2 \right)} + 3.07$ & $6$ & $0.0430$ & $1.24$ \\
+$y = \cos^{4}{\left(x_{0} \cdot 11.2 \right)} + 3.16$ & $7$ & $0.0370$ & $0.152$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left|{\cos{\left(x_{0} \cdot 11.2 \right)}}\right|^{3} + 3.13 \end{dmath*} \end{minipage} & $8$ & $0.0363$ & $0.0179$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(- \cos{\left(x_{0} \cdot 1.26 \right)} - 0.0751\right)^{4} + 3.13 \end{dmath*} \end{minipage} & $9$ & $0.0294$ & $0.212$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

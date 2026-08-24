@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T01:51:30+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+Abs(8.69674233821483e-5*tan(x0**2)**4 - 5.011794)
+
+LATEX
+\left|{8.70 \cdot 10^{-5} \tan^{4}{\left(x_{0}^{2} \right)} - 5.01}\right|
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.88$ & $1$ & $0.197$ & $0.0$ \\
+$y = 4.86 + \frac{1}{x_{0}}$ & $4$ & $0.197$ & $0.000306$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0} \right)} \right)} + 4.03 \end{dmath*} \end{minipage} & $5$ & $0.169$ & $0.154$ \\
+$y = \sqrt{\tan{\left(x_{0}^{2} \right)} + 25.7}$ & $6$ & $0.0580$ & $1.07$ \\
+$y = \tan{\left(x_{0}^{2} \right)} 0.0810 + 5.00$ & $7$ & $0.0536$ & $0.0796$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.98 - - 0.000379 \tan^{3}{\left(x_{0}^{2} \right)} \end{dmath*} \end{minipage} & $8$ & $0.00424$ & $2.54$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left|{8.70 \cdot 10^{-5} \tan^{4}{\left(x_{0}^{2} \right)} - 5.01}\right| \end{dmath*} \end{minipage} & $9$ & $0.00237$ & $0.582$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.02 - \left(\tan{\left(x_{0}^{2} \right)} \left(-0.0595\right) - -0.229\right)^{3} \end{dmath*} \end{minipage} & $10$ & $0.00174$ & $0.307$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

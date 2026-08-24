@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T17:35:45+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+tanh(exp(tan(x0))*(-11.859085)) + 3.502985
+
+LATEX
+\tanh{\left(e^{\tan{\left(x_{0} \right)}} \left(-11.9\right) \right)} + 3.50
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 2.63$ & $1$ & $0.122$ & $0.0$ \\
+$y = 6.96 - \log{\left(x_{0} \right)}$ & $4$ & $0.120$ & $0.00384$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos{\left(x_{0} \right)} \right)} - -1.83 \end{dmath*} \end{minipage} & $5$ & $0.114$ & $0.0586$ \\
+$y = 2.66 - \frac{\tan{\left(x_{0} \right)}}{57.8}$ & $6$ & $0.0858$ & $0.281$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 2.63 - \tan{\left(\frac{\tan{\left(x_{0} \right)}}{13.1} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0566$ & $0.416$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(e^{\tan{\left(x_{0} \right)}} \left(-11.9\right) \right)} + 3.50 \end{dmath*} \end{minipage} & $8$ & $0.0309$ & $0.606$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(0.0194 e^{- \tan{\left(x_{0} \right)}} \right)} + 2.47 \end{dmath*} \end{minipage} & $9$ & $0.0282$ & $0.0909$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(3.95 \cdot 10^{-6} e^{- 4 \tan{\left(x_{0} \right)}} \right)} + 2.50 \end{dmath*} \end{minipage} & $10$ & $0.0251$ & $0.117$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

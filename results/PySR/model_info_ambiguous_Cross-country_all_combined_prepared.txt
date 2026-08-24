@@ -1,8 +1,17 @@
+PROVENANCE
+generated_utc: 2026-08-21T12:13:06+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 300
+maxsize: 10
+reproducible: yes
 SYMPY
-log(x0**0.8864201 - tan(x0**0.88274634))
+(x0 + tan(x0*(-0.5175801)))**0.30930454
 
 LATEX
-\log{\left(x_{0}^{0.886} - \tan{\left(x_{0}^{0.883} \right)} \right)}
+\left(x_{0} + \tan{\left(x_{0} \left(-0.518\right) \right)}\right)^{0.309}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -19,11 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 3.82$ & $1$ & $1.08$ & $0.0$ \\
 $y = x_{0}^{0.309}$ & $3$ & $1.08$ & $0.00256$ \\
 $y = \log{\left(x_{0} \right)} - 0.513$ & $4$ & $1.08$ & $0.000168$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \sin{\left(x_{0} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $6$ & $1.08$ & $0.000479$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $7$ & $1.08$ & $0.000978$ \\
-$y = x_{0}^{0.310} + \sin{\left(x_{0} \right)} 0.0793$ & $8$ & $1.08$ & $0.00111$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.886} - \tan{\left(x_{0}^{0.883} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.07$ & $0.00288$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.877} - \frac{1}{\cos{\left(x_{0} + 0.812 \right)}} \right)} \end{dmath*} \end{minipage} & $10$ & $1.07$ & $9.66 \cdot 10^{-5}$ \\
+$y = 4.87 - \frac{80.2}{x_{0}}$ & $5$ & $1.08$ & $0.000237$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \sin{\left(x_{0} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $6$ & $1.08$ & $0.000721$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $7$ & $1.08$ & $0.000979$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \left(-0.518\right) \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $8$ & $1.07$ & $0.00268$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(\frac{x_{0}}{-15.5} \right)} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $9$ & $1.07$ & $0.00149$ \\
 \bottomrule
 \end{tabular}
 \end{center}

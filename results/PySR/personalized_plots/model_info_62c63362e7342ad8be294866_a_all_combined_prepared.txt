@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T18:30:25+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.9995565 - cos(cos(tan(x0/10.997066)))**133.41946
+
+LATEX
+5.00 - \cos^{133.}{\left(\cos{\left(\tan{\left(\frac{x_{0}}{11.0} \right)} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.90$ & $1$ & $0.0900$ & $0.0$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.89\right) + \frac{1}{x_{0}} \end{dmath*} \end{minipage} & $4$ & $0.0898$ & $0.000793$ \\
+$y = 6.99 - {1.01}^{x_{0}}$ & $5$ & $0.0759$ & $0.168$ \\
+$y = \frac{\tan{\left(x_{0} \right)}}{-48.8} + 4.94$ & $6$ & $0.0394$ & $0.655$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.94 - \tanh{\left(\frac{\tan{\left(x_{0} \right)}}{26.5} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0372$ & $0.0588$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.99 - \left(\cos^{2}{\left(x_{0} - 1.49 \right)}\right)^{52.1} \end{dmath*} \end{minipage} & $8$ & $0.0208$ & $0.582$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.99 - \cos^{68.6}{\left(\cos{\left(\frac{x_{0}}{0.217} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.00121$ & $2.84$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 5.00 - \cos^{133.}{\left(\cos{\left(\tan{\left(\frac{x_{0}}{11.0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $1.10 \cdot 10^{-5}$ & $4.70$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

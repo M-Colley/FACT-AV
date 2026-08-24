@@ -1,8 +1,17 @@
+PROVENANCE
+generated_utc: 2026-08-21T14:04:03+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 300
+maxsize: 10
+reproducible: yes
 SYMPY
-3.9103947 + tan(tan(x0**2))*(-0.033054117)
+exp((74.85601 - exp(1/cos(x0)))**0.07272344)
 
 LATEX
-3.91 + \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \left(-0.0331\right)
+e^{\left(74.9 - e^{\frac{1}{\cos{\left(x_{0} \right)}}}\right)^{0.0727}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -18,12 +27,11 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.90$ & $1$ & $1.18$ & $0.0$ \\
 $y = e^{x_{0}^{0.0709}}$ & $4$ & $1.18$ & $0.000311$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(-1\right) \left(-4.37\right) - \frac{35.8}{x_{0}} \end{dmath*} \end{minipage} & $5$ & $1.18$ & $4.04 \cdot 10^{-5}$ \\
-$y = \tan{\left(x_{0} \right)} 0.00397 + 3.89$ & $6$ & $1.18$ & $0.000709$ \\
-$y = \tan{\left(x_{0}^{3} \right)} 0.0166 + 3.87$ & $7$ & $1.18$ & $0.00162$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 + \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \left(-0.0331\right) \end{dmath*} \end{minipage} & $8$ & $1.17$ & $0.00488$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.91 - 0.0330 \tan{\left(\tan{\left(x_{0}^{2} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $1.17$ & $8.88 \cdot 10^{-6}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.89 + \tan{\left(\tan{\left(x_{0}^{2} - 0.00907 \right)} \right)} \left(-0.0404\right) \end{dmath*} \end{minipage} & $10$ & $1.17$ & $0.000846$ \\
+$y = x_{0}^{0.199} + 1.53$ & $5$ & $1.18$ & $3.83 \cdot 10^{-5}$ \\
+$y = \frac{\tan{\left(x_{0} \right)}}{251.} + 3.89$ & $6$ & $1.18$ & $0.000711$ \\
+$y = \frac{\tan{\left(x_{0}^{3} \right)}}{61.6} + 3.87$ & $7$ & $1.18$ & $0.00162$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.0203 \left|{\tan{\left(x_{0}^{3} \right)}}\right| + 3.86 \end{dmath*} \end{minipage} & $8$ & $1.18$ & $0.000797$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(74.9 - e^{\frac{1}{\cos{\left(x_{0} \right)}}}\right)^{0.0727}} \end{dmath*} \end{minipage} & $9$ & $1.17$ & $0.00185$ \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T00:55:13+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(tan(x0*79.18223))**3)**2 + 2.4989326
+
+LATEX
+\cos^{2}{\left(\tan^{3}{\left(\tan{\left(x_{0} \cdot 79.2 \right)} \right)} \right)} + 2.50
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.17$ & $1$ & $0.307$ & $0.0$ \\
+$y = \cos^{2}{\left(x_{0} \right)} + 2.73$ & $4$ & $0.276$ & $0.0347$ \\
+$y = \sqrt{\cos^{2}{\left(x_{0} \right)}} + 2.59$ & $5$ & $0.250$ & $0.101$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 45.6 \right)} + 2.73$ & $6$ & $0.139$ & $0.589$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(x_{0} \cdot 0.340 \right)} \right)} + 2.65 \end{dmath*} \end{minipage} & $7$ & $0.106$ & $0.265$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\cos^{2}{\left(\tan{\left(0.340 x_{0} \right)} \right)}} + 2.54 \end{dmath*} \end{minipage} & $8$ & $0.0925$ & $0.140$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan^{3}{\left(\tan{\left(x_{0} \cdot 79.2 \right)} \right)} \right)} + 2.50 \end{dmath*} \end{minipage} & $9$ & $0.0686$ & $0.299$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{4}{\left(\tan^{3}{\left(\tan{\left(x_{0} \cdot 79.2 \right)} \right)} \right)} + 2.55 \end{dmath*} \end{minipage} & $10$ & $0.0556$ & $0.209$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

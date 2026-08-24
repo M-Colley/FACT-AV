@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T06:45:34+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(x0/(-3.506009))**512 + 4.0000014
+
+LATEX
+\cos^{512}{\left(\frac{x_{0}}{-3.51} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.05$ & $1$ & $0.0475$ & $0.0$ \\
+$y = 4.06 - \frac{1}{x_{0}}$ & $4$ & $0.0475$ & $9.68 \cdot 10^{-5}$ \\
+$y = 4.16 - \frac{8.10}{x_{0}}$ & $5$ & $0.0474$ & $0.000957$ \\
+$y = 4.06 - \frac{\sin{\left(x_{0} \right)}}{-10.2}$ & $6$ & $0.0422$ & $0.116$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.03 - \tan{\left(\frac{\tan{\left(x_{0} \right)}}{15.5} \right)} \end{dmath*} \end{minipage} & $7$ & $0.0295$ & $0.359$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 - \frac{\tan{\left(x_{0} - 0.118 \right)}}{x_{0}} \end{dmath*} \end{minipage} & $8$ & $0.00145$ & $3.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.00 + \frac{\tan^{4}{\left(x_{0} - 0.118 \right)}}{x_{0}^{4}} \end{dmath*} \end{minipage} & $9$ & $1.27 \cdot 10^{-7}$ & $9.34$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{512}{\left(\frac{x_{0}}{-3.51} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $2.13 \cdot 10^{-12}$ & $11.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

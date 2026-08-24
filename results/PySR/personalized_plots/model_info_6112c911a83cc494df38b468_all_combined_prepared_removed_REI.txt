@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T12:27:30+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(cos((22.039242 - x0)**2)**8))**2 + 4.004349
+
+LATEX
+\cos^{2}{\left(\tan{\left(\cos^{8}{\left(\left(22.0 - x_{0}\right)^{2} \right)} \right)} \right)} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.89$ & $1$ & $0.0942$ & $0.0$ \\
+$y = 4.88 + \frac{1}{x_{0}}$ & $4$ & $0.0941$ & $0.000191$ \\
+$y = \sqrt{\cos{\left(x_{0} \right)} + 23.9}$ & $5$ & $0.0862$ & $0.0878$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\cos^{2}{\left(x_{0}^{4} \right)} \right)} + 4.04 \end{dmath*} \end{minipage} & $6$ & $0.0729$ & $0.167$ \\
+$y = \sqrt{\tan{\left(1.49 x_{0} \right)} + 24.2}$ & $7$ & $0.0462$ & $0.456$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos^{2}{\left(\left(x_{0} - 23.7\right)^{2} \right)} \right)} + 4.06 \end{dmath*} \end{minipage} & $8$ & $0.0318$ & $0.375$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\cos^{8}{\left(\left(22.0 - x_{0}\right)^{2} \right)} \right)} + 3.98 \end{dmath*} \end{minipage} & $9$ & $0.00974$ & $1.18$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\tan{\left(\cos^{8}{\left(\left(22.0 - x_{0}\right)^{2} \right)} \right)} \right)} + 4.00 \end{dmath*} \end{minipage} & $10$ & $0.000162$ & $4.10$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

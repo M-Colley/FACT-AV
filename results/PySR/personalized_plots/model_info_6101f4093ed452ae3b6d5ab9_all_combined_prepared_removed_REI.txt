@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T11:19:42+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(tan(x0 - 1*(-0.24648036))*0.32117328)**(-0.23878199)
+
+LATEX
+\cos^{-0.239}{\left(\tan{\left(x_{0} - -0.246 \right)} 0.321 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 1.14$ & $1$ & $0.106$ & $0.0$ \\
+$y = \frac{87.2}{x_{0}}$ & $3$ & $0.0991$ & $0.0323$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0} \right)}\right)^{-0.0590} \end{dmath*} \end{minipage} & $4$ & $0.0916$ & $0.0789$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\tan{\left(x_{0} \right)} \right)}\right)^{-0.116} \end{dmath*} \end{minipage} & $5$ & $0.0748$ & $0.202$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0} \cdot 1.86 \right)}\right)^{-0.0610} \end{dmath*} \end{minipage} & $6$ & $0.0176$ & $1.45$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(\tan{\left(x_{0} \cdot 0.328 \right)} \right)}\right)^{-0.110} \end{dmath*} \end{minipage} & $7$ & $0.0129$ & $0.315$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{-0.239}{\left(\tan{\left(x_{0} - -0.246 \right)} 0.321 \right)} \end{dmath*} \end{minipage} & $9$ & $0.00119$ & $1.19$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T04:41:07+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos(1.02958165337563e-6*exp(-4*tan(x0))) - 1*(-4.0004916)
+
+LATEX
+\cos{\left(1.03 \cdot 10^{-6} e^{- 4 \tan{\left(x_{0} \right)}} \right)} - -4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.82$ & $1$ & $0.295$ & $0.0$ \\
+$y = \cos^{2}{\left(x_{0} \right)} - -4.35$ & $4$ & $0.269$ & $0.0313$ \\
+$y = \sqrt{\cos^{2}{\left(x_{0} \right)}} + 4.21$ & $5$ & $0.245$ & $0.0939$ \\
+$y = \cos^{2}{\left(x_{0} \cdot 28.0 \right)} - -4.13$ & $6$ & $0.157$ & $0.441$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\tan{\left(x_{0} \right)} - -3.34 \right)} - -4.05 \end{dmath*} \end{minipage} & $7$ & $0.0572$ & $1.01$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(e^{- \tan{\left(x_{0} \right)} - 2.90} \right)} - -4.03 \end{dmath*} \end{minipage} & $8$ & $0.0218$ & $0.963$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(1.03 \cdot 10^{-6} e^{- 4 \tan{\left(x_{0} \right)}} \right)} - -4.00 \end{dmath*} \end{minipage} & $9$ & $1.73 \cdot 10^{-5}$ & $7.14$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

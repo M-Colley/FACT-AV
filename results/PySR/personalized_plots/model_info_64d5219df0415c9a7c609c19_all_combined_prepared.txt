@@ -1,0 +1,37 @@
+PROVENANCE
+generated_utc: 2026-08-22T23:23:53+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.5519056 - cos(x0*33.35889)**2
+
+LATEX
+4.55 - \cos^{2}{\left(x_{0} \cdot 33.4 \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.10$ & $1$ & $0.290$ & $0.0$ \\
+$y = 4.09 + \frac{1}{x_{0}}$ & $4$ & $0.290$ & $2.58 \cdot 10^{-5}$ \\
+$y = \cos^{2}{\left(x_{0}^{2} \right)} + 3.64$ & $5$ & $0.286$ & $0.0143$ \\
+$y = 4.55 - \cos^{2}{\left(x_{0} \cdot 33.4 \right)}$ & $6$ & $0.127$ & $0.811$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.66 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 33.4 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.101$ & $0.234$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.67 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 33.4 + 0.681 \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0969$ & $0.0185$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

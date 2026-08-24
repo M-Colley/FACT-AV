@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-23T06:40:40+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(cos(x0*(-4.4009542) - x0)**2)**x0 + 3.9999256
+
+LATEX
+\left(\cos^{2}{\left(x_{0} \left(-4.40\right) - x_{0} \right)}\right)^{x_{0}} + 4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.05$ & $1$ & $0.0225$ & $0.0$ \\
+$y = e^{x_{0}^{0.0774}}$ & $4$ & $0.0211$ & $0.0217$ \\
+$y = 4.58 - \frac{40.7}{x_{0}}$ & $5$ & $0.0210$ & $0.00398$ \\
+$y = \tan{\left(- \frac{33.5}{x_{0}} \right)} + 4.52$ & $6$ & $0.0210$ & $0.000493$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0}^{4} \right)}\right)^{x_{0}} + 4.01 \end{dmath*} \end{minipage} & $7$ & $0.0169$ & $0.219$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0}^{1.90} \right)}\right)^{x_{0}} + 4.00 \end{dmath*} \end{minipage} & $8$ & $0.000975$ & $2.85$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tanh{\left(\left(\cos^{2}{\left(x_{0}^{1.90} \right)}\right)^{x_{0}} \right)} + 4.00 \end{dmath*} \end{minipage} & $9$ & $0.000522$ & $0.624$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\cos^{2}{\left(x_{0} \left(-4.40\right) - x_{0} \right)}\right)^{x_{0}} + 4.00 \end{dmath*} \end{minipage} & $10$ & $4.82 \cdot 10^{-5}$ & $2.38$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

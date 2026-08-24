@@ -1,0 +1,32 @@
+PROVENANCE
+generated_utc: 2026-08-23T07:43:35+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+4.00000000000000
+
+LATEX
+4.00
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.00$ & $1$ & $0.0$ & $0.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

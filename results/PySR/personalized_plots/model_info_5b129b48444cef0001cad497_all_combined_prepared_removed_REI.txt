@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T08:40:43+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(tan(tan(x0 + 0.7874677)) + 148.11456)
+
+LATEX
+\log{\left(\tan{\left(\tan{\left(x_{0} + 0.787 \right)} \right)} + 148. \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.94$ & $1$ & $0.0554$ & $0.0$ \\
+$y = \log{\left(x_{0} + 64.4 \right)}$ & $4$ & $0.0550$ & $0.00213$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\sin{\left(x_{0} \right)} + 140. \right)} \end{dmath*} \end{minipage} & $5$ & $0.0546$ & $0.00680$ \\
+$y = 0.0970 \sin{\left(x_{0} \right)} + 4.95$ & $6$ & $0.0503$ & $0.0835$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0} + 0.228 \right)} + 149. \right)} \end{dmath*} \end{minipage} & $7$ & $0.000178$ & $5.64$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(\tan{\left(x_{0} + 0.787 \right)} \right)} + 148. \right)} \end{dmath*} \end{minipage} & $8$ & $6.29 \cdot 10^{-5}$ & $1.04$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(\tan{\left(x_{0} + 0.787 \right)} \right)} + 148. \right)} + 0.00262 \end{dmath*} \end{minipage} & $10$ & $5.57 \cdot 10^{-5}$ & $0.0612$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

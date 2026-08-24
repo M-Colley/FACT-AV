@@ -1,0 +1,38 @@
+PROVENANCE
+generated_utc: 2026-08-23T05:14:35+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+log(148.16768 - tan(10.870899*x0))
+
+LATEX
+\log{\left(148. - \tan{\left(10.9 x_{0} \right)} \right)}
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.95$ & $1$ & $0.0499$ & $0.0$ \\
+$y = \log{\left(217. - x_{0} \right)}$ & $4$ & $0.0476$ & $0.0156$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\log{\left(x_{0} \right)} \right)} + 4.81 \end{dmath*} \end{minipage} & $5$ & $0.0474$ & $0.00469$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(\tan{\left(x_{0}^{2} \right)} + 142. \right)} \end{dmath*} \end{minipage} & $6$ & $0.0386$ & $0.206$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(148. - \tan{\left(10.9 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $5.81 \cdot 10^{-5}$ & $6.50$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(149. - \tan{\left(10.9 x_{0} \right)} \right)}^{0.999} \end{dmath*} \end{minipage} & $9$ & $5.70 \cdot 10^{-5}$ & $0.00986$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(- \sin{\left(x_{0} \right)} - \tan{\left(10.9 x_{0} \right)} + 148. \right)} \end{dmath*} \end{minipage} & $10$ & $5.61 \cdot 10^{-5}$ & $0.0158$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

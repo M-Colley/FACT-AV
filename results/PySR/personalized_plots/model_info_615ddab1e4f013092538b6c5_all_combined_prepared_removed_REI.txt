@@ -1,0 +1,40 @@
+PROVENANCE
+generated_utc: 2026-08-23T03:58:41+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+(x0 - tan(x0*(-0.25535446)))*0.06271207
+
+LATEX
+\left(x_{0} - \tan{\left(x_{0} \left(-0.255\right) \right)}\right) 0.0627
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 4.63$ & $1$ & $0.422$ & $0.0$ \\
+$y = x_{0} \cdot 0.0603$ & $3$ & $0.372$ & $0.0627$ \\
+$y = \log{\left(\log{\left(x_{0} \right)} \right)}^{4}$ & $4$ & $0.363$ & $0.0262$ \\
+$y = 8.11 - \frac{266.}{x_{0}}$ & $5$ & $0.357$ & $0.0141$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.357} \end{dmath*} \end{minipage} & $6$ & $0.241$ & $0.396$ \\
+$y = 0.538 \sqrt{x_{0} - \tan{\left(x_{0} \right)}}$ & $7$ & $0.219$ & $0.0926$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(x_{0} \left(-0.255\right) \right)}\right) 0.0627 \end{dmath*} \end{minipage} & $8$ & $0.122$ & $0.585$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(- \frac{0.255}{\frac{1}{x_{0}}} \right)}\right) 0.0627 \end{dmath*} \end{minipage} & $9$ & $0.122$ & $1.64 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(x_{0} \left(-0.255\right) \right)}\right) 0.0602 + 0.201 \end{dmath*} \end{minipage} & $10$ & $0.118$ & $0.0389$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}

@@ -1,0 +1,39 @@
+PROVENANCE
+generated_utc: 2026-08-22T10:29:21+00:00
+pysr_version: 2.0.0b2
+random_state: 0
+deterministic: True
+parallelism: serial
+niterations: 500
+maxsize: 10
+reproducible: yes
+SYMPY
+cos((x0 - tan(x0))**0.6292928)*(-5.1257715)
+
+LATEX
+\cos{\left(\left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.629} \right)} \left(-5.13\right)
+
+LATEX TABLE
+\usepackage{breqn}
+\usepackage{booktabs}
+
+...
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Equation & Complexity & Loss & Score \\
+\midrule
+$y = 3.56$ & $1$ & $2.36$ & $0.0$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $1.82$ & $0.128$ \\
+$y = \sqrt{x_{0} - 63.4}$ & $4$ & $1.28$ & $0.351$ \\
+$y = - 5.02 \cos{\left(\sqrt{x_{0}} \right)}$ & $5$ & $1.10$ & $0.156$ \\
+$y = \cos^{2}{\left(x_{0}^{0.579} \right)} 4.87$ & $6$ & $0.784$ & $0.338$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\tan{\left(\cos^{2}{\left(\cos^{2}{\left(x_{0}^{0.605} \right)} \right)} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.774$ & $0.0139$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos{\left(\cos^{2}{\left(x_{0}^{0.605} \right)} \right)} + 0.363 \right)} \end{dmath*} \end{minipage} & $8$ & $0.764$ & $0.0128$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.629} \right)} \left(-5.13\right) \end{dmath*} \end{minipage} & $9$ & $0.452$ & $0.524$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
