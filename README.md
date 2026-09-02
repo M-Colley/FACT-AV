@@ -70,7 +70,7 @@ This matters for the analysis: mIoU is the only factor that varies *within* a pa
 | GPU | Optional; CUDA-enabled GPU speeds up MLP training and some models |
 | OS | Windows, macOS, or Linux |
 
-> **PySR dependency on Julia:** PySR uses Julia under the hood for symbolic regression. On the first run, PySR will automatically download and install a bundled Julia runtime — no manual Julia installation is needed. This repository pins **PySR 2.0.0b2** (SymbolicRegression.jl 2.0.0-beta.8); `tests/test_pysr_api_compat.py` guards the parts of the PySR API the pipelines depend on, so a beta bump fails in seconds instead of hours into a search.
+> **PySR dependency on Julia:** PySR uses Julia under the hood for symbolic regression. On the first run, PySR will automatically download and install a bundled Julia runtime — no manual Julia installation is needed. This repository pins **PySR 2.2.0** (SymbolicRegression.jl 2.2.0); `tests/test_pysr_api_compat.py` guards the parts of the PySR API the pipelines depend on.
 
 ---
 
@@ -264,7 +264,7 @@ states its own status:
 
 ```
 PROVENANCE
-pysr_version: 2.0.0b2
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial

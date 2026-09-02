@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T13:59:49+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T13:46:16+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -28,10 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.03$ & $1$ & $0.913$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.903$ & $0.00522$ \\
 $y = \log{\left(x_{0} - 19.9 \right)}$ & $4$ & $0.903$ & $0.000238$ \\
-$y = 5.39 - \frac{104.}{x_{0}}$ & $5$ & $0.903$ & $0.000209$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.320} \end{dmath*} \end{minipage} & $7$ & $0.901$ & $0.00111$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = - 4.35 \sin{\left(\log{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.903$ & $0.000401$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.320} \end{dmath*} \end{minipage} & $7$ & $0.901$ & $0.00102$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 21.2 \right)} \end{dmath*} \end{minipage} & $8$ & $0.901$ & $0.000145$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(- 3.50 x_{0}^{3} \right)}\right)^{0.320} \end{dmath*} \end{minipage} & $9$ & $0.899$ & $0.00224$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\left(x_{0} - 28.6\right)^{3} \right)}\right)^{0.322} \end{dmath*} \end{minipage} & $9$ & $0.899$ & $0.00172$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(\left(x_{0} - 28.6\right)^{3} \right)} - 19.6 \right)} \end{dmath*} \end{minipage} & $10$ & $0.899$ & $0.000233$ \\
 \bottomrule
 \end{tabular}
 \end{center}

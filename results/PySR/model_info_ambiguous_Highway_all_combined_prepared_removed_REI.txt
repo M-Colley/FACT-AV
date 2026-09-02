@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T13:47:17+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T13:15:27+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-exp((x0 - tan(x0))**0.081459105)
+log(x0 + tan(1.3930154*x0))**0.968879
 
 LATEX
-e^{\left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.0815}}
+\log{\left(x_{0} + \tan{\left(1.39 x_{0} \right)} \right)}^{0.969}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -26,12 +26,11 @@ LATEX TABLE
 Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.14$ & $1$ & $0.656$ & $0.0$ \\
-$y = e^{x_{0}^{0.0809}}$ & $4$ & $0.654$ & $0.00101$ \\
-$y = x_{0} \cdot 0.00857 - -3.48$ & $5$ & $0.653$ & $0.000382$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.0815}} \end{dmath*} \end{minipage} & $7$ & $0.651$ & $0.00212$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\frac{x_{0}}{0.387} - \tan{\left(x_{0} \right)}\right)^{0.269} \end{dmath*} \end{minipage} & $8$ & $0.650$ & $0.00123$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\frac{x_{0}}{0.0137} - \frac{1}{\cos^{2}{\left(x_{0} \right)}}\right)^{0.165} \end{dmath*} \end{minipage} & $9$ & $0.649$ & $0.00103$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(\frac{x_{0}}{0.292} - \tan{\left(x_{0} \cdot 0.255 \right)}\right)^{0.255} \end{dmath*} \end{minipage} & $10$ & $0.648$ & $0.00126$ \\
+$y = \log{\left(x_{0} \right)}^{0.968}$ & $4$ & $0.654$ & $0.000855$ \\
+$y = {1.01}^{x_{0}} + 2.61$ & $5$ & $0.653$ & $0.000937$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(- x_{0} + \tan{\left(x_{0} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.651$ & $0.00143$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \tan{\left(x_{0} \right)}\right)^{0.177} + 2.00 \end{dmath*} \end{minipage} & $8$ & $0.650$ & $0.00185$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(1.39 x_{0} \right)} \right)}^{0.969} \end{dmath*} \end{minipage} & $9$ & $0.647$ & $0.00420$ \\
 \bottomrule
 \end{tabular}
 \end{center}

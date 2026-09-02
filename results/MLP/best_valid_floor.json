@@ -17,9 +17,9 @@
     "n_parameters": 4485
   },
   "environment": {
-    "git_commit": "55d16c5",
-    "python": "3.13.12",
-    "torch": "2.13.0+cu132",
+    "git_commit": "1794595",
+    "python": "3.12.9",
+    "torch": "2.13.0+cu126",
     "device": "cuda",
     "command": "train.py --seed 0"
   },
@@ -54,7 +54,7 @@
     "mae_class": 1.073076923076923,
     "mae_trust": 1.073076923076923,
     "qwk": -0.4692148760330579,
-    "loss": 1.7426660684438853
+    "loss": 1.742666066609896
   },
   "test_metrics": {
     "acc": 0.43014705882352944,

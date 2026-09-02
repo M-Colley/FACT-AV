@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T15:26:34+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T17:46:05+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-4.117817 - tan(cos(x0/(-0.5673797))**2)
+3.9549313 - cos(x0/(-0.5670189))**2
 
 LATEX
-4.12 - \tan{\left(\cos^{2}{\left(\frac{x_{0}}{-0.567} \right)} \right)}
+3.96 - \cos^{2}{\left(\frac{x_{0}}{-0.567} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -28,10 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 3.48$ & $1$ & $0.362$ & $0.0$ \\
 $y = x_{0} \cdot 0.0453$ & $3$ & $0.342$ & $0.0280$ \\
 $y = \log{\left(x_{0} - 43.9 \right)}$ & $4$ & $0.334$ & $0.0256$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.96 - \cos^{2}{\left(\frac{x_{0}}{0.567} \right)} \end{dmath*} \end{minipage} & $6$ & $0.149$ & $0.403$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.96 - \cos^{2}{\left(\frac{x_{0}}{-0.567} \right)} \end{dmath*} \end{minipage} & $6$ & $0.149$ & $0.403$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.12 - \tan{\left(\cos^{2}{\left(\frac{x_{0}}{-0.567} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.123$ & $0.196$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.95 - \tan{\left(\cos^{4}{\left(\frac{x_{0}}{0.568} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.108$ & $0.131$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.98 - \left|{\tan{\left(\cos^{2}{\left(\frac{x_{0}}{-0.567} \right)} \right)} - 0.224}\right| \end{dmath*} \end{minipage} & $10$ & $0.0950$ & $0.0620$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.92 - \left(\cos^{2}{\left(\frac{x_{0}}{0.567} \right)} + 0.110\right)^{3} \end{dmath*} \end{minipage} & $9$ & $0.107$ & $0.00418$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 3.94 - \tan{\left(\left(\cos^{2}{\left(\frac{x_{0}}{0.567} \right)} - 0.00863\right)^{2} \right)} \end{dmath*} \end{minipage} & $10$ & $0.107$ & $0.00325$ \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T12:31:10+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T11:23:15+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,7 +8,7 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-x0/19.746853
+x0/19.744541
 
 LATEX
 \frac{x_{0}}{19.7}
@@ -27,10 +27,11 @@ Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.89$ & $1$ & $1.08$ & $0.0$ \\
 $y = \frac{x_{0}}{19.7}$ & $3$ & $1.04$ & $0.0217$ \\
-$y = {1.01}^{x_{0}} + 1.14$ & $5$ & $1.03$ & $0.00189$ \\
-$y = 3.09 - x_{0}^{4} \left(-2.25 \cdot 10^{-8}\right)$ & $6$ & $1.03$ & $0.00223$ \\
+$y = {1.01}^{x_{0}} + 0.950$ & $5$ & $1.03$ & $0.00219$ \\
+$y = 3.09 - x_{0}^{4} \left(-2.25 \cdot 10^{-8}\right)$ & $6$ & $1.03$ & $0.00164$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{19.7 - \sin{\left(x_{0}^{4} \right)}} \end{dmath*} \end{minipage} & $7$ & $1.02$ & $0.0112$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{19.8 - \sin{\left(\left(x_{0} + 0.177\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $1.01$ & $0.00705$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{19.8 - \sin{\left(x_{0} \cdot 60.4 \right)}} \end{dmath*} \end{minipage} & $8$ & $1.00$ & $0.0151$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \frac{x_{0}}{19.8 - \tan{\left(\sin{\left(x_{0} \cdot 60.4 \right)} \right)}} \end{dmath*} \end{minipage} & $9$ & $1.00$ & $0.00188$ \\
 \bottomrule
 \end{tabular}
 \end{center}

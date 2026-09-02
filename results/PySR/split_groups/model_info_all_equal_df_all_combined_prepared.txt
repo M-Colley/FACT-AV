@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T14:32:40+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T15:19:48+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-sqrt(log(x0**4))
+exp(x0**0.081592545)
 
 LATEX
-\sqrt{\log{\left(x_{0}^{4} \right)}}
+e^{x_{0}^{0.0816}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -26,13 +26,13 @@ LATEX TABLE
 Equation & Complexity & Loss & Score \\
 \midrule
 $y = 4.16$ & $1$ & $0.931$ & $0.0$ \\
-$y = \sqrt{\log{\left(x_{0}^{4} \right)}}$ & $4$ & $0.930$ & $0.000232$ \\
-$y = x_{0} \cdot 0.00504 + 3.77$ & $5$ & $0.930$ & $0.000146$ \\
-$y = x_{0}^{4} \cdot 2.73 \cdot 10^{-9} + 4.06$ & $6$ & $0.930$ & $3.43 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.0498 \tan{\left(\log{\left(x_{0} \right)} \right)} + 4.02 \end{dmath*} \end{minipage} & $7$ & $0.930$ & $1.83 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000201$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(- x_{0} + \left(\cos^{2}{\left(x_{0} \right)}\right)^{-0.345}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.930$ & $0.000117$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(2.14 x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.929$ & $0.000111$ \\
+$y = e^{x_{0}^{0.0816}}$ & $4$ & $0.930$ & $0.000259$ \\
+$y = x_{0} \cdot 0.00506 + 3.77$ & $5$ & $0.930$ & $6.78 \cdot 10^{-5}$ \\
+$y = x_{0}^{4} \cdot 2.80 \cdot 10^{-9} + 4.06$ & $6$ & $0.930$ & $3.46 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(x_{0}^{4} \cdot 2.80 \cdot 10^{-9} \right)} + 4.06 \end{dmath*} \end{minipage} & $7$ & $0.930$ & $1.40 \cdot 10^{-6}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.930$ & $0.000218$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} - \frac{0.0616}{\cos^{2}{\left(x_{0} \right)}}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $9$ & $0.930$ & $0.000187$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sqrt{\log{\left(\left(x_{0} + \log{\left(\cos^{2}{\left(7.39 x_{0} \right)} \right)}\right)^{4} \right)}} \end{dmath*} \end{minipage} & $10$ & $0.929$ & $0.000154$ \\
 \bottomrule
 \end{tabular}
 \end{center}

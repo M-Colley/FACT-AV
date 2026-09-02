@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T15:08:33+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T16:58:43+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-1.0152618**x0 - cos(x0*(-12.57761))
+1.0170287**x0 - sin(x0*0.9456187)
 
 LATEX
-{1.02}^{x_{0}} - \cos{\left(x_{0} \left(-12.6\right) \right)}
+{1.02}^{x_{0}} - \sin{\left(x_{0} \cdot 0.946 \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -26,14 +26,14 @@ LATEX TABLE
 Equation & Complexity & Loss & Score \\
 \midrule
 $y = 3.58$ & $1$ & $0.982$ & $0.0$ \\
-$y = 3.58$ & $2$ & $0.982$ & $4.07 \cdot 10^{-8}$ \\
-$y = {1.02}^{x_{0}}$ & $3$ & $0.675$ & $0.374$ \\
+$y = {1.02}^{x_{0}}$ & $3$ & $0.675$ & $0.187$ \\
 $y = 0.000608 x_{0}^{2}$ & $4$ & $0.601$ & $0.116$ \\
 $y = 12.2 - \frac{659.}{x_{0}}$ & $5$ & $0.586$ & $0.0247$ \\
 $y = {1.02}^{x_{0}} - \cos{\left(x_{0} \right)}$ & $6$ & $0.456$ & $0.251$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \tanh{\left(\cos{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.429$ & $0.0614$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \cos{\left(x_{0} \left(-12.6\right) \right)} \end{dmath*} \end{minipage} & $8$ & $0.237$ & $0.593$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.000538 x_{0}^{2} - \cos{\left(x_{0} \left(-12.6\right) \right)} \end{dmath*} \end{minipage} & $9$ & $0.176$ & $0.296$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = {1.02}^{x_{0}} - \sin{\left(x_{0} \cdot 0.946 \right)} \end{dmath*} \end{minipage} & $8$ & $0.278$ & $0.435$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.000616 x_{0}^{2} - \sin{\left(x_{0} \cdot 0.947 \right)} \end{dmath*} \end{minipage} & $9$ & $0.258$ & $0.0715$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.000613 x_{0}^{2} - \tanh{\left(\sin{\left(x_{0} \cdot 0.946 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.246$ & $0.0503$ \\
 \bottomrule
 \end{tabular}
 \end{center}

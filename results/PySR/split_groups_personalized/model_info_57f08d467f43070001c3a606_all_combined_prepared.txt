@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T14:55:08+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T16:23:27+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-x0*0.041498072 + cos(x0/0.13448985)**2
+x0*0.041501738 + cos(x0/(-0.13448957))**2
 
 LATEX
-x_{0} \cdot 0.0415 + \cos^{2}{\left(\frac{x_{0}}{0.134} \right)}
+x_{0} \cdot 0.0415 + \cos^{2}{\left(\frac{x_{0}}{-0.134} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -28,10 +28,10 @@ Equation & Complexity & Loss & Score \\
 $y = 3.55$ & $1$ & $0.448$ & $0.0$ \\
 $y = {1.02}^{x_{0}}$ & $3$ & $0.317$ & $0.172$ \\
 $y = e^{x_{0} \cdot 0.0165}$ & $4$ & $0.317$ & $2.52 \cdot 10^{-7}$ \\
-$y = {1.02}^{x_{0}} - 0.165$ & $5$ & $0.316$ & $0.00471$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.134} \right)} + 3.17 \end{dmath*} \end{minipage} & $6$ & $0.215$ & $0.385$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\frac{x_{0}}{0.134} \right)} \right)} + 3.07 \end{dmath*} \end{minipage} & $7$ & $0.174$ & $0.209$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0415 + \cos^{2}{\left(\frac{x_{0}}{0.134} \right)} \end{dmath*} \end{minipage} & $8$ & $0.124$ & $0.336$ \\
+$y = \frac{{1.02}^{x_{0}}}{1.21}$ & $5$ & $0.315$ & $0.00699$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.134} \right)} + 3.18 \end{dmath*} \end{minipage} & $6$ & $0.215$ & $0.383$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \tan{\left(\cos^{2}{\left(\frac{x_{0}}{0.134} \right)} \right)} + 3.06 \end{dmath*} \end{minipage} & $7$ & $0.174$ & $0.209$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0415 + \cos^{2}{\left(\frac{x_{0}}{-0.134} \right)} \end{dmath*} \end{minipage} & $8$ & $0.124$ & $0.336$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = x_{0} \cdot 0.0401 + \tan{\left(\cos^{2}{\left(\frac{x_{0}}{0.134} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.108$ & $0.140$ \\
 \bottomrule
 \end{tabular}

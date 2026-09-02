@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T12:51:20+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T11:45:20+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -28,11 +28,10 @@ Equation & Complexity & Loss & Score \\
 $y = 4.05$ & $1$ & $0.901$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.892$ & $0.00540$ \\
 $y = \log{\left(x_{0} - 19.2 \right)}$ & $4$ & $0.891$ & $0.000252$ \\
-$y = 5.43 - \frac{106.}{x_{0}}$ & $5$ & $0.891$ & $0.000240$ \\
+$y = 5.43 - \frac{105.}{x_{0}}$ & $5$ & $0.891$ & $0.000240$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $7$ & $0.890$ & $0.000729$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} \cos^{2}{\left(x_{0}^{0.423} \right)}\right)^{0.325} \end{dmath*} \end{minipage} & $8$ & $0.889$ & $0.000885$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{1.98} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.888$ & $0.00129$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{1.98} \right)} - 20.2 \right)} \end{dmath*} \end{minipage} & $10$ & $0.888$ & $0.000326$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(x_{0}^{3} \right)} - 20.5 \right)} \end{dmath*} \end{minipage} & $8$ & $0.890$ & $0.000284$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\left(x_{0} + 0.000185\right)^{3} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $9$ & $0.888$ & $0.00139$ \\
 \bottomrule
 \end{tabular}
 \end{center}

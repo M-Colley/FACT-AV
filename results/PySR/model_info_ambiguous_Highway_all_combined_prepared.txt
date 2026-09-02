@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T12:23:41+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T11:14:58+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,7 +8,7 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-(x0 + 0.34781456/cos(x0))**0.32533973
+(x0 + 0.34757498/cos(x0))**0.325326
 
 LATEX
 \left(x_{0} + \frac{0.348}{\cos{\left(x_{0} \right)}}\right)^{0.325}
@@ -28,12 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.08$ & $1$ & $0.711$ & $0.0$ \\
 $y = x_{0}^{0.324}$ & $3$ & $0.708$ & $0.00208$ \\
 $y = \log{\left(x_{0} \right)}^{0.959}$ & $4$ & $0.707$ & $0.00149$ \\
-$y = x_{0} \cdot 0.0114 - -3.21$ & $5$ & $0.707$ & $5.17 \cdot 10^{-5}$ \\
-$y = x_{0}^{2} \cdot 7.48 \cdot 10^{-5} - -3.64$ & $6$ & $0.707$ & $4.26 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.942} + \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.707$ & $0.000601$ \\
+$y = x_{0} \cdot 0.0115 + 3.21$ & $5$ & $0.707$ & $5.18 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.942} + \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.707$ & $0.000322$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \frac{0.348}{\cos{\left(x_{0} \right)}}\right)^{0.325} \end{dmath*} \end{minipage} & $8$ & $0.703$ & $0.00447$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{1}{\sin{\left(x_{0}^{2} \right)}} \right)}\right)^{0.324} \end{dmath*} \end{minipage} & $9$ & $0.702$ & $0.00224$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.943} + \tan{\left(\frac{1}{\sin{\left(x_{0}^{2} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.701$ & $0.00118$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 0.945 \log{\left(x_{0} + \frac{0.449}{\cos{\left(x_{0} \right)}} \right)} \end{dmath*} \end{minipage} & $9$ & $0.703$ & $0.000405$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0}^{0.943} + \tan{\left(\frac{1}{\sin{\left(x_{0}^{2} \right)}} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.701$ & $0.00302$ \\
 \bottomrule
 \end{tabular}
 \end{center}

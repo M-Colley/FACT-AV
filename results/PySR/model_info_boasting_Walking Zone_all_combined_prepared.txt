@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T13:08:43+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T12:04:43+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-log(x0 - tan(102.414189199154*x0))
+log(x0 + tan(62.6505649702648*x0))
 
 LATEX
-\log{\left(x_{0} - \tan{\left(102. x_{0} \right)} \right)}
+\log{\left(x_{0} + \tan{\left(62.6 x_{0} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -28,9 +28,9 @@ Equation & Complexity & Loss & Score \\
 $y = 4.38$ & $1$ & $0.635$ & $0.0$ \\
 $y = \log{\left(x_{0} \right)}$ & $2$ & $0.635$ & $0.000874$ \\
 $y = e^{x_{0}^{0.0899}}$ & $4$ & $0.633$ & $0.00165$ \\
-$y = x_{0} \cdot 0.00958 + 3.64$ & $5$ & $0.632$ & $0.000270$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(102. x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.629$ & $0.00309$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(102. x_{0} \right)} \right)}^{1.01} \end{dmath*} \end{minipage} & $9$ & $0.627$ & $0.00118$ \\
+$y = 0.00956 x_{0} + 3.65$ & $5$ & $0.632$ & $0.000269$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(62.6 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.626$ & $0.00502$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} + \tan{\left(62.6 x_{0} \right)} \right)} + 0.0407 \end{dmath*} \end{minipage} & $9$ & $0.624$ & $0.00146$ \\
 \bottomrule
 \end{tabular}
 \end{center}

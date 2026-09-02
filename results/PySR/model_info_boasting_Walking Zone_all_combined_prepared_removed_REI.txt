@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T14:07:28+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T14:04:05+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-log(x0 - tan(39.877903430393*x0))
+log(x0 - tan(4.51354134620523*x0))
 
 LATEX
-\log{\left(x_{0} - \tan{\left(39.9 x_{0} \right)} \right)}
+\log{\left(x_{0} - \tan{\left(4.51 x_{0} \right)} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -30,10 +30,10 @@ $y = \log{\left(x_{0} \right)}$ & $2$ & $0.689$ & $0.00238$ \\
 $y = e^{x_{0}^{0.0892}}$ & $4$ & $0.688$ & $0.000683$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \sin{\left(x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $5$ & $0.688$ & $0.00130$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(\sin{\left(x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $6$ & $0.687$ & $0.000955$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(39.9 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.676$ & $0.0157$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(39.9 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.676$ & $2.22 \cdot 10^{-6}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - 1.41 \tan{\left(39.9 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.676$ & $0.000813$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \sin{\left(x_{0} \right)} - \tan{\left(39.9 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.675$ & $0.000997$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(4.51 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.679$ & $0.0122$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(4.51 x_{0} \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.679$ & $3.83 \cdot 10^{-7}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(\tan{\left(4.51 \cos{\left(x_{0} \right)} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $9$ & $0.677$ & $0.00226$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \log{\left(x_{0} - \tan{\left(2 x_{0} - \sin{\left(x_{0} \right)} \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.676$ & $0.00114$ \\
 \bottomrule
 \end{tabular}
 \end{center}

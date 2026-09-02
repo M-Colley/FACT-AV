@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T12:13:06+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T11:03:25+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-(x0 + tan(x0*(-0.5175801)))**0.30930454
+x0**0.30919096
 
 LATEX
-\left(x_{0} + \tan{\left(x_{0} \left(-0.518\right) \right)}\right)^{0.309}
+x_{0}^{0.309}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -28,11 +28,12 @@ Equation & Complexity & Loss & Score \\
 $y = 3.82$ & $1$ & $1.08$ & $0.0$ \\
 $y = x_{0}^{0.309}$ & $3$ & $1.08$ & $0.00256$ \\
 $y = \log{\left(x_{0} \right)} - 0.513$ & $4$ & $1.08$ & $0.000168$ \\
-$y = 4.87 - \frac{80.2}{x_{0}}$ & $5$ & $1.08$ & $0.000237$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \sin{\left(x_{0} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $6$ & $1.08$ & $0.000721$ \\
+$y = 4.95 - \frac{85.6}{x_{0}}$ & $5$ & $1.08$ & $0.000220$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \sin{\left(x_{0} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $6$ & $1.08$ & $0.000738$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0}^{3} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $7$ & $1.08$ & $0.000979$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \left(-0.518\right) \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $8$ & $1.07$ & $0.00268$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(\frac{x_{0}}{-15.5} \right)} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $9$ & $1.07$ & $0.00149$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\frac{x_{0}}{0.305} \right)}\right)^{0.309} \end{dmath*} \end{minipage} & $8$ & $1.08$ & $0.00182$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(\tan{\left(- x_{0} - 0.163 \right)} \right)}\right)^{0.308} \end{dmath*} \end{minipage} & $9$ & $1.07$ & $0.000835$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \frac{\sin{\left(x_{0}^{0.853} \right)}}{0.147}\right)^{0.310} \end{dmath*} \end{minipage} & $10$ & $1.07$ & $0.000240$ \\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T15:17:30+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T17:22:27+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-4.50279 - tan(cos(x0*42.242428)**2)
+cos(log(cos(10.0120696925452*x0**2)**2)) + 3.2598126
 
 LATEX
-4.50 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 42.2 \right)} \right)}
+\cos{\left(\log{\left(\cos^{2}{\left(10.0 x_{0}^{2} \right)} \right)} \right)} + 3.26
 
 LATEX TABLE
 \usepackage{breqn}
@@ -28,11 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 3.80$ & $1$ & $0.660$ & $0.0$ \\
 $y = 4.24 - \cos^{2}{\left(x_{0} \right)}$ & $4$ & $0.615$ & $0.0238$ \\
 $y = \cos^{2}{\left(x_{0}^{2} \right)} + 3.34$ & $5$ & $0.522$ & $0.163$ \\
-$y = 4.33 - \cos^{2}{\left(x_{0} \cdot 42.2 \right)}$ & $6$ & $0.370$ & $0.345$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.50 - \tan{\left(\cos^{2}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $7$ & $0.276$ & $0.293$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.18 - \tan{\left(\cos^{8}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $8$ & $0.236$ & $0.155$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.33 - 1.83 \cos^{8}{\left(x_{0} \cdot 42.2 \right)} \end{dmath*} \end{minipage} & $9$ & $0.232$ & $0.0190$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.27 - \tan{\left(1.11 \cos^{8}{\left(x_{0} \cdot 42.2 \right)} \right)} \end{dmath*} \end{minipage} & $10$ & $0.215$ & $0.0765$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos^{2}{\left(\frac{x_{0}}{0.156} \right)} + 3.15 \end{dmath*} \end{minipage} & $6$ & $0.386$ & $0.301$ \\
+$y = \cos^{2}{\left(822. x_{0}^{2} \right)} + 3.23$ & $7$ & $0.359$ & $0.0743$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\log{\left(\cos^{2}{\left(6.39 x_{0} \right)} \right)} \right)} + 3.18 \end{dmath*} \end{minipage} & $8$ & $0.317$ & $0.125$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\log{\left(\cos^{2}{\left(10.0 x_{0}^{2} \right)} \right)} \right)} + 3.26 \end{dmath*} \end{minipage} & $9$ & $0.168$ & $0.634$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\log{\left(\tan{\left(\cos^{2}{\left(10.0 x_{0}^{2} \right)} \right)} \right)} \right)} + 3.26 \end{dmath*} \end{minipage} & $10$ & $0.163$ & $0.0321$ \\
 \bottomrule
 \end{tabular}
 \end{center}

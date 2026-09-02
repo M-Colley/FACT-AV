@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T13:00:46+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T11:55:39+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 300
 maxsize: 10
 reproducible: yes
 SYMPY
-exp((x0 + tan(x0/2.7719631))**0.07110151)
+exp((x0 + tan(x0*(-0.8265381)))**0.07152235)
 
 LATEX
-e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{2.77} \right)}\right)^{0.0711}}
+e^{\left(x_{0} + \tan{\left(x_{0} \left(-0.827\right) \right)}\right)^{0.0715}}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -29,8 +29,8 @@ $y = 3.89$ & $1$ & $1.20$ & $0.0$ \\
 $y = e^{x_{0}^{0.0708}}$ & $4$ & $1.20$ & $0.000444$ \\
 $y = x_{0} \cdot 0.00783 + 3.29$ & $5$ & $1.20$ & $0.000242$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0704}} \end{dmath*} \end{minipage} & $7$ & $1.20$ & $0.000532$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{2.77} \right)}\right)^{0.0711}} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.00156$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(\frac{x_{0}}{0.0957} \right)}\right)^{0.0711}} \end{dmath*} \end{minipage} & $10$ & $1.20$ & $0.000108$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \tan{\left(x_{0} \right)}\right)^{0.0993} \cdot 2.53 \end{dmath*} \end{minipage} & $8$ & $1.20$ & $1.88 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = e^{\left(x_{0} + \tan{\left(x_{0} \left(-0.827\right) \right)}\right)^{0.0715}} \end{dmath*} \end{minipage} & $9$ & $1.20$ & $0.00334$ \\
 \bottomrule
 \end{tabular}
 \end{center}

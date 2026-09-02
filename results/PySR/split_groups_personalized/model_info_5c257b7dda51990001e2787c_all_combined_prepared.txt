@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T14:46:13+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T15:59:53+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-cos(x0**2*0.6236365) + 4.218411
+cos(tan((tan(x0) + 8.0973215)**2)) + 4.1409354
 
 LATEX
-\cos{\left(x_{0}^{2} \cdot 0.624 \right)} + 4.22
+\cos{\left(\tan{\left(\left(\tan{\left(x_{0} \right)} + 8.10\right)^{2} \right)} \right)} + 4.14
 
 LATEX TABLE
 \usepackage{breqn}
@@ -29,9 +29,10 @@ $y = 4.45$ & $1$ & $0.547$ & $0.0$ \\
 $y = \cos^{2}{\left(x_{0} \right)} + 4.01$ & $4$ & $0.539$ & $0.00532$ \\
 $y = \cos^{8}{\left(x_{0} \right)} + 4.22$ & $5$ & $0.496$ & $0.0824$ \\
 $y = \cos^{2}{\left(x_{0} \cdot 25.7 \right)} + 3.90$ & $6$ & $0.276$ & $0.585$ \\
-$y = \cos{\left(x_{0}^{2} \cdot 0.624 \right)} + 4.22$ & $7$ & $0.183$ & $0.415$ \\
-$y = \cos{\left(0.624 x_{0}^{2} \right)} + 4.22$ & $8$ & $0.182$ & $0.00105$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\tan{\left(\tan{\left(x_{0} - 3.08 \right)} \right)} \right)} \right)} + 3.85 \end{dmath*} \end{minipage} & $9$ & $0.128$ & $0.350$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(x_{0} \left(-25.7\right) \right)} \right)} + 4.06 \end{dmath*} \end{minipage} & $7$ & $0.226$ & $0.200$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{3}{\left(x_{0} - 9.57 \right)} \right)} + 4.01 \end{dmath*} \end{minipage} & $8$ & $0.187$ & $0.191$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\left(\tan{\left(x_{0} \right)} + 8.10\right)^{2} \right)} \right)} + 4.14 \end{dmath*} \end{minipage} & $9$ & $0.132$ & $0.347$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos{\left(\tan{\left(\left(\tan{\left(x_{0} \right)} + 8.10\right)^{2} \right)} \right)} \right)} + 4.19 \end{dmath*} \end{minipage} & $10$ & $0.130$ & $0.0147$ \\
 \bottomrule
 \end{tabular}
 \end{center}

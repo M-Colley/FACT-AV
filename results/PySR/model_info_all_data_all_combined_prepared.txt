@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T13:35:15+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T12:45:55+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -28,11 +28,11 @@ Equation & Complexity & Loss & Score \\
 $y = 4.04$ & $1$ & $0.960$ & $0.0$ \\
 $y = x_{0}^{0.322}$ & $3$ & $0.953$ & $0.00372$ \\
 $y = x_{0} \cdot 0.0153 - -2.86$ & $5$ & $0.953$ & $5.09 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos^{2}{\left(x_{0} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $6$ & $0.953$ & $9.69 \cdot 10^{-5}$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \cos^{2}{\left(x_{0} \right)}\right)^{0.321} \end{dmath*} \end{minipage} & $6$ & $0.953$ & $9.71 \cdot 10^{-5}$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\cos^{2}{\left(x_{0} \right)} \right)}\right)^{0.323} \end{dmath*} \end{minipage} & $7$ & $0.953$ & $0.000502$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \frac{0.147}{\cos{\left(x_{0} \right)}}\right)^{0.322} \end{dmath*} \end{minipage} & $8$ & $0.953$ & $5.58 \cdot 10^{-5}$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\cos^{2}{\left(2.22 x_{0} \right)} \right)}\right)^{0.322} \end{dmath*} \end{minipage} & $9$ & $0.952$ & $0.000567$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\tan{\left(\cos^{2}{\left(2.22 x_{0} \right)} \right)} \right)}\right)^{0.322} \end{dmath*} \end{minipage} & $10$ & $0.952$ & $0.000107$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} - \left(\cos^{2}{\left(x_{0} \right)}\right)^{-0.279}\right)^{0.323} \end{dmath*} \end{minipage} & $8$ & $0.952$ & $0.000135$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\cos^{2}{\left(2.22 x_{0} \right)} \right)}\right)^{0.322} \end{dmath*} \end{minipage} & $9$ & $0.952$ & $0.000488$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \left(x_{0} + \log{\left(\tan{\left(\cos^{2}{\left(2.22 x_{0} \right)} \right)} \right)}\right)^{0.322} \end{dmath*} \end{minipage} & $10$ & $0.952$ & $0.000106$ \\
 \bottomrule
 \end{tabular}
 \end{center}

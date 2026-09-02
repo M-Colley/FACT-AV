@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T15:31:05+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T17:57:48+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-4.864572 - 0.11049299*exp(-tan(tan(tan(x0))))
+cos(tan(0.3033039 - x0)) + 4.1651063
 
 LATEX
-4.86 - \frac{0.110}{e^{\tan{\left(\tan{\left(\tan{\left(x_{0} \right)} \right)} \right)}}}
+\cos{\left(\tan{\left(0.303 - x_{0} \right)} \right)} + 4.17
 
 LATEX TABLE
 \usepackage{breqn}
@@ -29,10 +29,10 @@ $y = 4.58$ & $1$ & $0.432$ & $0.0$ \\
 $y = \cos^{2}{\left(x_{0} \right)} - -4.13$ & $4$ & $0.380$ & $0.0422$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\tan{\left(x_{0} \right)} \right)} + 4.75 \end{dmath*} \end{minipage} & $5$ & $0.337$ & $0.122$ \\
 $y = 4.70 + \frac{0.0454}{\cos{\left(x_{0} \right)}}$ & $6$ & $0.189$ & $0.578$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.71 + \frac{0.0456}{\tan{\left(\cos{\left(x_{0} \right)} \right)}} \end{dmath*} \end{minipage} & $7$ & $0.189$ & $0.00209$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.70 + \frac{3.63}{x_{0} \cos{\left(x_{0} \right)}} \end{dmath*} \end{minipage} & $8$ & $0.188$ & $0.00504$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.86 - \frac{0.110}{e^{\tan{\left(\tan{\left(\tan{\left(x_{0} \right)} \right)} \right)}}} \end{dmath*} \end{minipage} & $9$ & $0.145$ & $0.256$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.81 - \frac{0.146}{\cos{\left(\tan{\left(\tan{\left(x_{0} \right)} \right)} - 0.254 \right)}} \end{dmath*} \end{minipage} & $10$ & $0.114$ & $0.242$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(0.303 - x_{0} \right)} \right)} + 4.17 \end{dmath*} \end{minipage} & $7$ & $0.127$ & $0.398$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan^{2}{\left(0.526 - x_{0} \right)} \right)} + 4.12 \end{dmath*} \end{minipage} & $8$ & $0.114$ & $0.105$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \cos{\left(\tan{\left(\tan{\left(\sin{\left(x_{0} - 13.0 \right)} \right)} \right)} \right)} + 4.15 \end{dmath*} \end{minipage} & $9$ & $0.0954$ & $0.181$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = \sin{\left(\cos{\left(\tan{\left(\tan{\left(\sin{\left(13.0 - x_{0} \right)} \right)} \right)} \right)} \right)} + 4.20 \end{dmath*} \end{minipage} & $10$ & $0.0918$ & $0.0390$ \\
 \bottomrule
 \end{tabular}
 \end{center}

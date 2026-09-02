@@ -1,6 +1,6 @@
 PROVENANCE
-generated_utc: 2026-08-21T14:41:39+00:00
-pysr_version: 2.0.0b2
+generated_utc: 2026-09-02T15:47:41+00:00
+pysr_version: 2.2.0
 random_state: 0
 deterministic: True
 parallelism: serial
@@ -8,10 +8,10 @@ niterations: 500
 maxsize: 10
 reproducible: yes
 SYMPY
-4.7543306 - cos(7.031693/tan(tan(x0 - 0.0013166972)))**2
+4.5882215 - cos(x0/0.07290749)**2
 
 LATEX
-4.75 - \cos^{2}{\left(\frac{7.03}{\tan{\left(\tan{\left(x_{0} - 0.00132 \right)} \right)}} \right)}
+4.59 - \cos^{2}{\left(\frac{x_{0}}{0.0729} \right)}
 
 LATEX TABLE
 \usepackage{breqn}
@@ -29,9 +29,9 @@ $y = 4.28$ & $1$ & $0.237$ & $0.0$ \\
 $y = 4.26 + \frac{1}{x_{0}}$ & $4$ & $0.237$ & $2.96 \cdot 10^{-5}$ \\
 $y = 4.54 + x_{0} \left(-0.00350\right)$ & $5$ & $0.237$ & $0.00151$ \\
 \begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.59 - \cos^{2}{\left(\frac{x_{0}}{0.0729} \right)} \end{dmath*} \end{minipage} & $6$ & $0.0989$ & $0.872$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.75 - \cos^{2}{\left(\frac{7.01}{\tan{\left(\tan{\left(x_{0} \right)} \right)}} \right)} \end{dmath*} \end{minipage} & $8$ & $0.0802$ & $0.105$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.66 - \cos^{4}{\left(\frac{7.01}{\tan{\left(\tan{\left(x_{0} \right)} \right)}} \right)} \end{dmath*} \end{minipage} & $9$ & $0.0767$ & $0.0442$ \\
-\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.75 - \cos^{2}{\left(\frac{7.03}{\tan{\left(\tan{\left(x_{0} - 0.00132 \right)} \right)}} \right)} \end{dmath*} \end{minipage} & $10$ & $0.0547$ & $0.339$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.59 - \cos^{2}{\left(\frac{x_{0} - -10.0}{0.0729} \right)} \end{dmath*} \end{minipage} & $8$ & $0.0982$ & $0.00365$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.60 - \left(\cos{\left(\frac{x_{0}}{-0.0729} \right)} + 0.0786\right)^{2} \end{dmath*} \end{minipage} & $9$ & $0.0922$ & $0.0631$ \\
+\begin{minipage}{0.8\linewidth} \vspace{-1em} \begin{dmath*} y = 4.62 - \cos^{2}{\left(\tan{\left(\cos{\left(\frac{x_{0}}{-0.0729} \right)} \right)} + 4.89 \right)} \end{dmath*} \end{minipage} & $10$ & $0.0899$ & $0.0249$ \\
 \bottomrule
 \end{tabular}
 \end{center}
