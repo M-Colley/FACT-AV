@@ -1,6 +1,6 @@
 openpyxl>=3.1.5
 python-dotenv>=1.1.1
-pysr==2.0.0b2
+pysr>=2.2.0
 sympy>=1.14.0
 seaborn>=0.13.2
 matplotlib>=3.11.1
@@ -15,9 +15,9 @@ torch>=2.13.0
 torchmetrics>=1.9.0
 tqdm>=4.70.0
 numpy>=2.5.2
-tabpfn>=8.4.0
-statsmodels>=0.14.6
-scipy>=1.18.0
+tabpfn>=8.5.0
+statsmodels>=0.15.0
+scipy>=1.18.1
 dice-ml>=0.12
 # Optional: alibi enables canonical Anchors explanations; otherwise a surrogate
 # decision tree is used as a fallback. ``alibi`` does not build cleanly on all
